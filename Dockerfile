@@ -18,8 +18,8 @@ RUN npm config set loglevel warn \
   && npm set progress=false
 
 # install dependencies
-COPY package.json /tmp/package.json
-RUN cd /tmp && npm install
+COPY package*.json /tmp/
+RUN cd /tmp && npm ci
 RUN mkdir -p /usr/src/app && cp -a /tmp/node_modules /usr/src/app/
 RUN rm -rf /tmp/node_modules
 
@@ -38,7 +38,7 @@ FROM nginx:alpine as web
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
-COPY --from=builder /usr/src/app/build /usr/share/nginx/html
+COPY --from=builder /usr/src/app /usr/share/nginx/html
 
 EXPOSE 8080
 EXPOSE 8888
