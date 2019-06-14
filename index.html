@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-		<title>reveal.js</title>
+		<title>Cloud Native OCI - MuShop</title>
 
 		<link rel="stylesheet" href="css/reset.css">
 		<link rel="stylesheet" href="css/reveal.css">
@@ -30,10 +30,13 @@
 					<!-- landing -->
 					<section>
 						<h1>Cloud Native OCI</h1>
-						<img class="plain" data-src="images/logo.png" alt="MuShop"/>
-						<h4>A Holistic demo application</h4>
+						<h4>Holistic microservices demo</h4>
+						<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+							<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure"/>
+							<span>+</span>
+							<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop"/>
+						</div>
 						<p>
-
 							<small>Created with ❤ by Oracle A-Team </small>
 							<br/>
 							<a class="navigate-down">Contributors</a>
@@ -45,36 +48,77 @@
 						<h2>Primary Contributors</h2>
 						<table>
 							<tbody>
-								<tr>
-									<td>Jeevan Joseph</td>
-									<td>Oracle A-Team</td>
-								</tr>
-								<tr>
-									<td>Adao Oliveira Junior</td>
-									<td>Oracle A-Team</td>
-								</tr>
-								<tr>
-									<td>Julio Camara</td>
-									<td>Oracle A-Team</td>
-								</tr>
-								<tr>
-									<td>Sumit Kumar</td>
-									<td>Oracle A-Team</td>
-								</tr>
-								<tr>
-									<td>Sherwood Zern</td>
-									<td>Oracle A-Team</td>
-								</tr>
-								<tr>
-									<td>Matt Vander Vliet</td>
-									<td>Oracle A-Team</td>
-								</tr>
+								<tr><td>Jeevan Joseph</td><td>Oracle A-Team</td></tr>
+								<tr><td>Adao Oliveira Junior</td><td>Oracle A-Team</td></tr>
+								<tr><td>Julio Camara</td><td>Oracle A-Team</td></tr>
+								<tr><td>Sumit Kumar</td><td>Oracle A-Team</td></tr>
+								<tr><td>Sherwood Zern</td><td>Oracle A-Team</td></tr>
+								<tr><td>Matt Vander Vliet</td><td>Oracle A-Team</td></tr>
 							</tbody>
 						</table>
 					</section>
 				</section>
 
-				<section>Slide 2...</section>
+				<section>
+					<h2>Workshop Overview</h2>
+					<ul>
+						<li>Learn to utilize Cloud Native OCI services</li>
+						<li>Build and deploy microservices with OKE</li>
+						<li>Demonstrate a fully-functional polyglot application on OCI</li>
+						<li>Exhibit benefits of Cloud Native services</li>
+						<li class="mu-muted"><em>Complete CI/CD tools and application lifecycle*</em></li>
+					</ul>
+				</section>
+	
+				<section data-background-image="images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
+					<h2>Prepare K8S</h2>
+
+					<div class="fragment-set">
+						<div class="fragment fade-out">
+							<p class="mu-left">
+								Many exercises in this workshop require the use of Kubernetes.
+								In order to run commands in a local cluster, please follow these
+								instructions to setup your environment.
+							</p>
+						</div>
+						<div class="fragment fade-in">
+							<p>Enable Kubernetes (Mac)</p>
+							<img class="plain" data-src="images/help/enable_k8s.png" alt="Enable K8S"/>
+						</div>
+						<div class="fragment fade-in">
+							<p>Enable Kubernetes (Windows)</p>
+							<img class="plain" data-src="images/help/enable_k8s_win.png" alt="Enable K8S"/>
+						</div>
+						<div class="fragment fade-in">
+							<p>Create namespace</p>
+							<pre><code class="hljs text">kubectl create namespace mushop</code></pre>
+						</div>
+						<div class="fragment fade-in">
+							<p>Install an ingress controller</p>
+							<pre><code class="hljs text">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml</code></pre>
+						
+							<small>
+								<blockquote>
+									<b>NOTE:</b> There are several options for ingress controllers in K8S. This demo
+									uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites" target="_blank">ingress-nginx</a>
+								</blockquote>
+							</small>
+						</div>
+					</div>
+				</section>
+
+				<section data-markdown>
+					<script type="text/template">
+						## markdown
+					</script>
+				</section>
+
+
+				<section>
+					Next...
+				</section>
+
 			</div>
 		</div>
 

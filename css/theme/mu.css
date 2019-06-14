@@ -277,3 +277,55 @@ body {
 @media print {
   .backgrounds {
     background-color: #fff; } }
+
+.reveal section img {
+  box-shadow: none; }
+
+.reveal blockquote {
+  width: auto; }
+
+.mu-margin {
+  margin-bottom: 15px; }
+
+.reveal section .no-margin {
+  margin: 0; }
+
+.mu-left {
+  text-align: left; }
+
+.inline-block {
+  display: inline-block; }
+
+.mu-muted {
+  opacity: 0.5; }
+
+.mu-flex {
+  display: flex; }
+  .mu-flex.mu-flex-left {
+    justify-content: flex-start; }
+  .mu-flex.mu-flex-right {
+    justify-content: flex-end; }
+  .mu-flex.mu-flex-between {
+    justify-content: space-between; }
+  .mu-flex.mu-flex-around {
+    justify-content: space-between; }
+  .mu-flex.mu-flex-center {
+    justify-content: center; }
+  .mu-flex.mu-flex-stretch {
+    align-items: stretch; }
+  .mu-flex.mu-flex-top {
+    align-items: flex-start; }
+  .mu-flex.mu-flex-bottom {
+    align-items: flex-end; }
+  .mu-flex.mu-flex-middle {
+    align-items: center; }
+
+.fragment-set {
+  position: relative; }
+  .fragment-set .fragment {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0; }
+    .fragment-set .fragment.visible:not(.current-fragment) {
+      opacity: 0 !important; }

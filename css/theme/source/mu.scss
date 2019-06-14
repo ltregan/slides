@@ -51,3 +51,85 @@ section.has-dark-background {
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
+
+// Overrides
+.reveal section img {
+	box-shadow: none;
+}
+
+.reveal blockquote {
+	width: auto;
+}
+
+// Margin
+.mu-margin {
+	margin-bottom: 15px;
+}
+
+.no-margin {
+	.reveal section & {
+		margin: 0;
+	}
+}
+
+// Text
+.mu-left {
+	text-align: left;
+}
+
+// Basic
+.inline-block {
+	display: inline-block;
+}
+.mu-muted {
+	opacity: 0.5;
+}
+
+// FLEX
+.mu-flex {
+	display: flex;
+	// horizontal
+	&.mu-flex-left {
+		justify-content: flex-start;
+	}
+	&.mu-flex-right {
+		justify-content: flex-end;
+	}
+	&.mu-flex-between {
+		justify-content: space-between;
+	}
+	&.mu-flex-around {
+		justify-content: space-between;
+	}
+	&.mu-flex-center {
+		justify-content: center;
+	}
+	// vertical
+	&.mu-flex-stretch {
+		align-items: stretch;
+	}
+	&.mu-flex-top {
+		align-items: flex-start;
+	}
+	&.mu-flex-bottom {
+		align-items: flex-end;
+	}
+	&.mu-flex-middle {
+		align-items: center;
+	}
+}
+
+// Fragment
+
+.fragment-set {
+	position: relative;
+	.fragment {
+		position: absolute;
+		top: 0;
+    left: 0;
+		right: 0;
+		&.visible:not(.current-fragment) {
+			opacity:0!important;
+		}
+	}
+}
