@@ -278,8 +278,11 @@ body {
   .backgrounds {
     background-color: #fff; } }
 
+a {
+  cursor: pointer; }
+
 .reveal section img {
-  box-shadow: none; }
+  background: none; }
 
 .reveal blockquote {
   width: auto; }

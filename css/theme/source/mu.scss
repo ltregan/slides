@@ -53,8 +53,12 @@ section.has-dark-background {
 // ---------------------------------------------
 
 // Overrides
+a {
+	cursor: pointer;
+}
+
 .reveal section img {
-	box-shadow: none;
+	background: none;
 }
 
 .reveal blockquote {

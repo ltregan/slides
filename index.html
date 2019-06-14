@@ -36,13 +36,9 @@
 							<span>+</span>
 							<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop"/>
 						</div>
-						<p>
-							<small>Created with ❤ by Oracle A-Team </small>
-							<br/>
-							<a class="navigate-down">Contributors</a>
-						</p>
-						
+						<small>Created with ❤ by <a class="navigate-down">Oracle A-Team</a></small>
 					</section>
+
 					<!-- Contributors -->
 					<section>
 						<h2>Primary Contributors</h2>
@@ -59,17 +55,36 @@
 					</section>
 				</section>
 
+				<!-- TOC -->
 				<section>
 					<h2>Workshop Overview</h2>
 					<ul>
 						<li>Learn to utilize Cloud Native OCI services</li>
 						<li>Build and deploy microservices with OKE</li>
-						<li>Demonstrate a fully-functional polyglot application on OCI</li>
+						<li>Demo a complete polyglot application on OCI</li>
 						<li>Exhibit benefits of Cloud Native services</li>
-						<li class="mu-muted"><em>Complete CI/CD tools and application lifecycle*</em></li>
+						<li class="mu-muted"><em>Use of CI/CD*</em></li>
+					</ul>
+				</section>
+
+				<!-- Background -->
+				<section>
+					<h2>Background</h2>
+					<p>
+						...
+					</p>
+				</section>
+				<!-- Prerequisites -->
+				<section>
+					<h2>Prerequisites</h2>
+					<ul>
+						<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" _target="blank">OCI Access</a></li>
+						<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" _target="blank">Installed <code>oci</code> command line</a></li>
+						<li><a href="https://www.docker.com/products/docker-desktop" _target="blank">Docker Desktop</a></li>
 					</ul>
 				</section>
 	
+				<!-- K8S Setup -->
 				<section data-background-image="images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
 					<h2>Prepare K8S</h2>
 
@@ -90,8 +105,12 @@
 							<img class="plain" data-src="images/help/enable_k8s_win.png" alt="Enable K8S"/>
 						</div>
 						<div class="fragment fade-in">
+							<p>Check <code>kubectl</code> context</p>
+							<pre><code class="hljs text">kubectl config current-context</code></pre>
 							<p>Create namespace</p>
 							<pre><code class="hljs text">kubectl create namespace mushop</code></pre>
+							<p>Set as default <em>(Optional)</em></p>
+							<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=mushop</code></pre>
 						</div>
 						<div class="fragment fade-in">
 							<p>Install an ingress controller</p>
@@ -108,11 +127,11 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 					</div>
 				</section>
 
-				<section data-markdown>
+				<!-- <section data-markdown>
 					<script type="text/template">
 						## markdown
 					</script>
-				</section>
+				</section> -->
 
 
 				<section>
