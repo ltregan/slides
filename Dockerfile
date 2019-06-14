@@ -41,4 +41,3 @@ COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /usr/src/app /usr/share/nginx/html
 
 EXPOSE 8080
-EXPOSE 8888

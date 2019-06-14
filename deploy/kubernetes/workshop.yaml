@@ -1,0 +1,81 @@
+---
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: mushop-slides
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: workshop
+  labels:
+    name: workshop
+    layer: demo
+  namespace: mushop-slides
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: workshop
+        layer: demo
+    spec:
+      imagePullSecrets:
+        - name: ocirsecret
+      containers:
+      - name: workshop
+        image: phx.ocir.io/intvravipati/mushop/workshop:1
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 8080
+        resources:
+          limits:
+            cpu: 50m
+            memory: 500Mi
+          requests:
+            cpu: 20m
+            memory: 100Mi
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - all
+            add:
+              - NET_BIND_SERVICE
+              - CHOWN
+              - SETGID
+              - SETUID
+          readOnlyRootFilesystem: true
+        livenessProbe:
+          httpGet:
+            path: /
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /
+            port: http
+        volumeMounts:
+        - mountPath: /tmp
+          name: tmp-volume
+      volumes:
+        - name: tmp-volume
+          emptyDir:
+            medium: Memory
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: workshop
+  labels:
+    name: workshop
+    layer: demo
+  namespace: mushop-slides
+spec:
+  selector:
+    name: workshop
+    layer: demo
+  ports:
+  - port: 80
+    targetPort: 8080
