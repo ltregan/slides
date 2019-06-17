@@ -332,3 +332,11 @@ a {
     right: 0; }
     .fragment-set .fragment.visible:not(.current-fragment) {
       opacity: 0 !important; }
+
+.mu-ateam-water {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  height: 60px;
+  filter: drop-shadow(5px 5px 30px rgba(0, 0, 0, 0.5));
+  opacity: 0.4; }
