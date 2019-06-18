@@ -32,20 +32,21 @@
 				<!-- landing -->
 				<section id="home-title">
 					<h1>Cloud Native OCI</h1>
-					<h4>Holistic microservices demo</h4>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
 						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
 						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
 					</div>
+					<hr/>
+					<!-- <h4>Microservices on Oracle Cloud</h4> -->
 					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
 				</section>
 
 				<!-- TOC -->
-				<section id="home-toc">
+				<section id="toc">
 					<h2>Table of Contents</h2>
-					<div class="mu-flex">
-						<ul>
+					<div class="mu-flex mu-gutter">
+						<ul class="plain mu-w-1-4">
 							<!-- add a line for each main TOC item  -->
 							<li><a href="#overview">Overview</a></li>
 							<li><a href="#background">Background</a></li>
@@ -57,34 +58,19 @@
 				<!-- Contributors -->
 				<section id="contributors">
 					<h2>Primary Contributors</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>Jeevan Joseph</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Adao Oliveira Junior</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Julio Camara</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Sumit Kumar</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Sherwood Zern</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Matt Vander Vliet</td>
-								<td>Oracle A-Team</td>
-							</tr>
-						</tbody>
-					</table>
+
+					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+						<div>
+							<div>Adao Oliveira Junior</div>
+							<div>Jeevan Joseph</div>
+							<div>Julio Camara</div>
+						</div>
+						<div>
+							<div>Matt Vander Vliet</div>
+							<div>Sherwood Zern</div>
+							<div>Sumit Kumar</div>
+						</div>
+					</div>
 				</section>
 			</section>
 
@@ -110,7 +96,11 @@
 			<!-- Prerequisites -->
 			<section id="prerequisites">
 				<h2>Prerequisites</h2>
-				<ul>
+				<p class="mu-small">
+					The following applications are required for the workshop.
+					Please ensure access and/or installation ahead of time 🙏.
+				</p>
+				<ul class="plain">
 					<li><a href="https://www.docker.com/products/docker-desktop" _target="blank">Docker Desktop</a></li>
 					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" _target="blank">OCI Access</a></li>
 					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" _target="blank">Installed <code>oci</code> command line</a></li>
@@ -156,7 +146,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 								uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites" target="_blank">ingress-nginx</a>
 							</blockquote>
 							<p>
-								&#9757; More on this later...
+								☝️ More on this later...
 							</p>
 						</small>
 					</div>
@@ -240,7 +230,7 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
   "ipAddr": "129.146.192.154"
 }</code></pre>
 							<small>
-								<p><b>NOTE</b> the same <code>EXTERNAL-IP</code> from before &#129304;</p>
+								<p><b>NOTE</b> the same <code>EXTERNAL-IP</code> from before 🤘</p>
 							</small>
 						</div>
 					</div>
@@ -255,12 +245,30 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
 
 
 			<section>
-				Next...
+				(placeholder)
+			</section>
+
+			<section id="resources">
+				<section id="downloads">
+					<h2>Downloads</h2>
+					<p>Any workshop related downloads may be found here. </p>
+					<blockquote class="mu-small">
+						🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
+					</blockquote>
+					<div class="mu-flex mu-small">
+						<ul>
+							<li><a href="/downloads/k8s/mu-secret.yaml">K8S Secrets (Dev)</a></li>
+						</ul>
+					</div>
+				</section>
 			</section>
 
 		</div>
 	</div>
-	<img class="mu-ateam-water" src="images/ateam.png" />
+	<!-- ateam stamp / home -->
+	<a href="#home" class="mu-ateam-water">
+		<img src="images/ateam.png" />
+	</a>
 
 	<script src="js/reveal.js"></script>
 

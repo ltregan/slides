@@ -295,14 +295,35 @@ a {
 .reveal section .no-margin {
   margin: 0; }
 
+hr {
+  background: linear-gradient(to right, rgba(147, 150, 153, 0.15), #939699, rgba(147, 150, 153, 0.15));
+  height: 1px;
+  border: none; }
+
+h1::after, h2::after {
+  content: "";
+  display: block;
+  background: linear-gradient(to right, rgba(147, 150, 153, 0.15), #939699, rgba(147, 150, 153, 0.15));
+  height: 1px;
+  border: none; }
+
 .mu-left {
   text-align: left; }
+
+.mu-small {
+  font-size: 0.6em;
+  line-height: 1.1; }
 
 .inline-block {
   display: inline-block; }
 
 .mu-muted {
   opacity: 0.5; }
+
+ul.plain {
+  margin-left: 0; }
+  ul.plain li {
+    list-style: none; }
 
 .mu-flex {
   display: flex; }
@@ -324,6 +345,22 @@ a {
     align-items: flex-end; }
   .mu-flex.mu-flex-middle {
     align-items: center; }
+  .mu-flex.mu-gutter {
+    margin: 0 20px; }
+    .mu-flex.mu-gutter > * {
+      margin: 0 20px; }
+  .mu-flex .col-1-1 {
+    width: 100%; }
+  .mu-flex .col-1-2 {
+    width: 50%; }
+  .mu-flex .col-1-3 {
+    width: 33.3333333333%; }
+  .mu-flex .col-2-3 {
+    width: 66.6666666667%; }
+  .mu-flex .col-1-4 {
+    width: 25%; }
+  .mu-flex .col-3-4 {
+    width: 75%; }
   .mu-flex .mu-flex-connector {
     border-top: 4px dashed #939699;
     height: 0;
@@ -371,8 +408,10 @@ a {
 
 .mu-ateam-water {
   position: fixed;
+  display: block;
   top: 20px;
-  right: 20px;
-  height: 60px;
-  filter: drop-shadow(5px 5px 30px rgba(0, 0, 0, 0.5));
-  opacity: 0.25; }
+  right: 20px; }
+  .mu-ateam-water img {
+    height: 60px;
+    filter: drop-shadow(5px 5px 30px rgba(0, 0, 0, 0.5));
+    opacity: 0.4; }

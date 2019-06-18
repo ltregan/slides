@@ -75,6 +75,12 @@ section.has-dark-background {
 	// background-position: 100% 100%;
 }
 
+@mixin divider() {
+	background: linear-gradient(to right, $o-color-grey-alpha, $o-color-grey, $o-color-grey-alpha);
+	height: 1px;
+	border: none;
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
@@ -105,9 +111,23 @@ a {
 	}
 }
 
+hr {
+	@include divider();
+}
+
+h1::after, h2::after {
+	content: "";
+	display: block;
+	@include divider();
+}
+
 // Text
 .mu-left {
 	text-align: left;
+}
+.mu-small {
+	font-size: 0.6em;
+	line-height: 1.1;
 }
 
 // Basic
@@ -116,6 +136,13 @@ a {
 }
 .mu-muted {
 	opacity: 0.5;
+}
+
+ul.plain {
+	margin-left: 0;
+	li {
+		list-style: none;
+	}
 }
 
 // FLEX
@@ -152,7 +179,34 @@ a {
 		align-items: center;
 	}
 
+	// gutter
+	&.mu-gutter {
+		margin: 0  $blockMargin;
+		> * {
+			margin: 0 $blockMargin;
+		}
+	}
+
 	// elements
+	.col-1-1 {
+		width: percentage(1);
+	}
+	.col-1-2 {
+		width: percentage(1/2);
+	}
+	.col-1-3 {
+		width: percentage(1/3);
+	}
+	.col-2-3 {
+		width: percentage(2/3);
+	}
+	.col-1-4 {
+		width: percentage(1/4);
+	}
+	.col-3-4 {
+		width: percentage(3/4);
+	}
+
 
 	$connectorSize: 4px;
 	$connectorArrowSize: 10px;
@@ -219,9 +273,12 @@ a {
 
 .mu-ateam-water {
 	position: fixed;
+	display: block;
 	top: $blockMargin;
 	right: $blockMargin;
-	height: 60px;
-	filter: drop-shadow(5px 5px 30px rgba(0,0,0,0.5));
-	opacity: 0.25;
+	img {
+		height: 60px;
+		filter: drop-shadow(5px 5px 30px rgba(0,0,0,0.5));
+		opacity: 0.4;
+	}
 }
