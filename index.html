@@ -34,7 +34,8 @@
 					<h1>Cloud Native OCI</h1>
 					<h4>Holistic microservices demo</h4>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<img height="100" class="plain no-margin" data-src="images/tech/oci.png"
+							alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
 						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
 					</div>
@@ -112,13 +113,16 @@
 				<h2>Prerequisites</h2>
 				<ul>
 					<li><a href="https://www.docker.com/products/docker-desktop" _target="blank">Docker Desktop</a></li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" _target="blank">OCI Access</a></li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" _target="blank">Installed <code>oci</code> command line</a></li>
+					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" _target="blank">OCI
+							Access</a></li>
+					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm"
+							_target="blank">Installed <code>oci</code> command line</a></li>
 				</ul>
 			</section>
 
 			<!-- K8S Setup -->
-			<section data-background-image="images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
+			<section data-background-image="images/tech/k8s.png" data-background-size="100px"
+				data-background-position="20px 20px">
 				<h2>Prepare K8S</h2>
 
 				<div class="fragment-set">
@@ -153,7 +157,9 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 						<small>
 							<blockquote>
 								<b>NOTE:</b> There are several options for ingress controllers in K8S. This demo
-								uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites" target="_blank">ingress-nginx</a>
+								uses the common <a
+									href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites"
+									target="_blank">ingress-nginx</a>
 							</blockquote>
 							<p>
 								&#9757; More on this later...
@@ -252,6 +258,30 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
 						## markdown
 					</script>
 				</section> -->
+
+			<!-- Intro -->
+			<section id="introduction">
+				<section id="why-microservices">
+					<img src="images/tech/intro/logos.png" class="mu-muted">
+					<h2>The Goal</h2>
+					<ul>
+						<li>Enables us to build and run scalable apps in dynamic environments</li>
+						<li>Enables distributed system design that can be realized as resilient, manageable and
+							observable systems</li>
+					</ul>
+				</section>
+
+				<section id="petsvcattle">
+					<h2>Pets Vs. Cattle</h2>
+					<img src="images/tech/intro/petsvcattle.gif"/>
+				</section>
+
+				<section id="landscape">
+						<h2>Landscape</h2>
+						<iframe src="https://landscape.cncf.io/fullscreen=yes" class="mu-flex"></iframe>
+				</section>
+			</section>
+
 
 
 			<section>
