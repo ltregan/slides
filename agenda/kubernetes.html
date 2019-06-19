@@ -41,7 +41,7 @@
 					<hr/>
 					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
 				</section>
-
+				
 				<!-- TOC -->
 				<section id="toc">
 					<h2>Table of Contents</h2>
@@ -68,6 +68,12 @@
 						</div>
 					</div>
 				</section>
+			</section>
+
+			<section id="lab">
+				
+					Manifest overview
+				
 			</section>
 
 			<!-- Kubernetes -->
@@ -227,8 +233,48 @@
 					<img class="plain" data-src="images/helm/helm.png" alt="Helm"/>
 				</section>
 				<section>
+						<h2>Hands-on Practice</h2>
+						You will need to create a namespace so that other users' resources don't have name conflict with yours. 
+						Run this command:
+						<pre><code class="hljs text">kubectl create namespace your_namespace</code></pre>
+						where your_namespace is the namespace of your choice.
+						Now Check if your namespace was created:
+						<pre><code class="hljs text">kubectl get namespaces</code></pre>
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						Change the default namespace. Remember to change the your_namespace with your actual namespace
+						<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=your_namespace</code></pre>
+						To validate it:
+						<pre><code class="hljs text">kubectl config view | grep namespace:</code></pre>
+				</section>
+				<section>
 					<h2>Hands-on Practice</h2>
-					<p>Fixing a deployment descriptor</p>
+					Next you will have to modify the mushop deployment descriptor, which been altered for this lab. 
+					Your job is to restore these so the service will deploy without errors.
+					Checkout branch workshop/k8s-lab
+					<pre><code class="hljs text">git clone -b workshop/k8s-lab git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
+cd mushop/deploy/kubernetes</code></pre>
+					Open file mushop.yaml in an editor of your choice.
+					Look for the deployment section for catalogue. The commented lines (start with #) have instruction to create environment variables. 
+					
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						Repeat the same procedure for the shipping and stream deployments.
+						When finished, save and exit the file.
+						Now it's time to deploy the services and pods needed to run the mushop store.
+						Run this command:
+						<pre><code class="hljs text">kubectl create -f mushop.yaml</code></pre>
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						To check that all resources have been created run this:
+						<pre><code class="hljs text">kubectl get all</code></pre>
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						<p>[add instructions to proxy to the services on OKE]</p>
 				</section>
 
 		</div>
