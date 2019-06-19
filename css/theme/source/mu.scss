@@ -37,6 +37,30 @@ $heading2Size: 1.6em;
 $heading3Size: 1.3em;
 $heading4Size: 1.0em;
 
+$o-color-slate: #8aadbf;
+$o-color-dark-slate: #324b5c;
+$o-color-grey: #939699;
+$o-color-light-grey: #dee0e0;
+$o-color-dark-grey: #4e5052;
+$o-color-text: #333;
+
+$o-color-red: #F80000;
+$o-color-burgundy: #942645;
+$o-color-green: #3a913f;
+$o-color-orange: #f29111;
+$o-color-blue: #00758f;
+
+$o-color-white: #FFFFFF;
+$o-color-black: #000000;
+$o-color-light: #FFFFFF;
+$o-color-field: #efefef;
+$o-color-tint: $o-color-light-grey;
+$o-color-dark: $o-color-dark-grey;
+$o-color-darkish: lighten($o-color-dark, 10%);
+$o-color-darker: darken($o-color-dark, 10%);
+$o-color-grey-alpha: rgba($o-color-grey, 0.15);
+$o-color-light-alpha: rgba($o-color-light-grey, 0.15);
+
 section.has-dark-background {
 	&, h1, h2, h3, h4, h5, h6 {
 		color: $backgroundColor;
@@ -51,6 +75,12 @@ section.has-dark-background {
 	// background-position: 100% 100%;
 }
 
+@mixin divider() {
+	background: linear-gradient(to right, $o-color-grey-alpha, $o-color-grey, $o-color-grey-alpha);
+	height: 1px;
+	border: none;
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
@@ -62,6 +92,8 @@ a {
 
 .reveal section img {
 	background: none;
+	box-shadow: none;
+	border: 0;
 }
 
 .reveal blockquote {
@@ -70,7 +102,7 @@ a {
 
 // Margin
 .mu-margin {
-	margin-bottom: 15px;
+	margin-bottom: $blockMargin;
 }
 
 .no-margin {
@@ -79,20 +111,62 @@ a {
 	}
 }
 
+hr, .mu-divider {
+	@include divider();
+}
+
+// headings
+h2::after {
+	content: "";
+	display: block;
+	@include divider();
+}
+section > h2 > img {
+	height: 1em;
+	margin: 0 !important;
+}
+
 // Text
 .mu-left {
 	text-align: left;
+}
+
+.mu-small {
+	font-size: 0.6em;
+	line-height: 1.1;
+}
+
+.mu-normal {
+	text-transform: none !important;
+	font-style: normal !important;
+	font-weight: inherit !important;
+}
+
+.mu-muted {
+	opacity: 0.5;
 }
 
 // Basic
 .inline-block {
 	display: inline-block;
 }
-.mu-muted {
-	opacity: 0.5;
+
+ul {
+	&.plain {
+		margin-left: 0;
+		li {
+			list-style: none;
+		}
+	}
+
+	li.mu-divider {
+		list-style: none;
+		margin: $blockMargin 0;
+	}
 }
 
 // FLEX
+
 .mu-flex {
 	display: flex;
 	// horizontal
@@ -124,6 +198,63 @@ a {
 	&.mu-flex-middle {
 		align-items: center;
 	}
+
+	// gutter
+	&.mu-gutter {
+		margin-left: $blockMargin;
+		margin-right: $blockMargin;
+		> * {
+			margin: 0 $blockMargin;
+		}
+	}
+
+	// elements
+	.col-1-1 {
+		width: percentage(1);
+	}
+	.col-1-2 {
+		width: percentage(1/2);
+	}
+	.col-1-3 {
+		width: percentage(1/3);
+	}
+	.col-2-3 {
+		width: percentage(2/3);
+	}
+	.col-1-4 {
+		width: percentage(1/4);
+	}
+	.col-3-4 {
+		width: percentage(3/4);
+	}
+
+
+	$connectorSize: 4px;
+	$connectorArrowSize: 10px;
+	$connectorColor: $o-color-grey;
+	.mu-flex-connector {
+		border-top: $connectorSize dashed $connectorColor;
+		height: 0;
+		margin: 0 (2 * $connectorSize);
+		flex: 1 1 0%;
+		position: relative;
+		font-size: 0.5em;
+		line-height: 2;
+		color: darken($connectorColor, 10%);
+		&.arrow::after {
+			content: "";
+			display: block;
+			width: 0; 
+			height: 0; 
+			border-top: $connectorArrowSize solid transparent;
+			border-bottom: $connectorArrowSize solid transparent;
+			border-left: $connectorArrowSize solid $connectorColor;
+			position: absolute;
+			top: 0;
+			right: -$connectorSize;
+			transform: translateY(-($connectorArrowSize + $connectorSize / 2));
+		}
+	}
 }
 
 // Fragment
@@ -138,6 +269,24 @@ a {
 		&.visible:not(.current-fragment) {
 			opacity:0!important;
 		}
+		&.current-fragment[data-fragment-index="0"] {
+			opacity: 1!important;
+			visibility: inherit!important;
+		}
+	}
+}
+
+// services
+.mu-svc {
+	text-align: center;
+	font-size: 0.5em;
+	line-height: 1em;
+	img {
+		display: block;
+		height: 50px;
+	}
+	+ .mu-flex-connector {
+		margin-top: -2%;
 	}
 }
 
@@ -145,9 +294,12 @@ a {
 
 .mu-ateam-water {
 	position: fixed;
+	display: block;
 	top: $blockMargin;
 	right: $blockMargin;
-	height: 60px;
-	filter: drop-shadow(5px 5px 30px rgba(0,0,0,0.5));
-	opacity: 0.4;
+	img {
+		height: 60px;
+		filter: drop-shadow(5px 5px 30px rgba(0,0,0,0.5));
+		opacity: 0.4;
+	}
 }

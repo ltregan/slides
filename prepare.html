@@ -1,0 +1,167 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Cloud Native OCI - Prepare</title>
+	<base href="/">
+
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/mu.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- title -->
+			<section id="home">
+
+				<!-- landing -->
+				<section id="home-title">
+					<h1>Cloud Native OCI</h1>
+					<h2>💻 Workshop Preparation</h2>
+					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<span>+</span>
+						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
+					</div>
+					<hr/>
+					<!-- <h4>Microservices on Oracle Cloud</h4> -->
+					<small>Created with ❤ by Oracle A-Team</small>
+				</section>
+
+				<!-- TOC -->
+				<section id="toc">
+					<h2>Table of Contents</h2>
+					<ul class="plain">
+						<!-- add a line for each main TOC item  -->
+						<li><a href="#prerequisites">Prerequisites</a></li>
+						<li><a href="#k8s">Kubernetes</a></li>
+						<li><a href="#downloads">Downloads</a></li>
+					</ul>
+				</section>
+			</section>
+
+			<!-- Prerequisites -->
+			<section id="prerequisites">
+				<h2>Prerequisites</h2>
+				<p class="mu-left">
+					The following applications are required for the workshop.
+					Please ensure access and/or installation ahead of time 🙏
+				</p>
+				<ul class="plain">
+					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" _target="blank">OCI Tenancy Access<sup>*</sup></a></li>
+					<li><a href="https://www.docker.com/products/docker-desktop" _target="blank">Docker Desktop</a> ~2.x</li>
+					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" _target="blank">OCI Command Line</a> ~2.5.x</li>
+					<li><a href="https://stedolan.github.io/jq/" _target="blank">JSON CLI Processor</a> ~1.6<em class="mu-muted">(optional)</em></li>
+				</ul>
+				<blockquote class="mu-small mu-left">
+					<sup>*</sup>Tenancy access may be provided, or you may use an existing tenancy
+				</blockquote>
+			</section>
+
+			<!-- K8S Setup -->
+			<section id="k8s" data-background-image="images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
+				<h2>Prepare K8S</h2>
+
+				<div class="fragment-set">
+					<div class="fragment fade-out">
+						<p class="mu-left">
+							Several exercises in the workshop require the use of Kubernetes.
+							In order to run commands in a local cluster, please follow these
+							instructions to setup your environment.
+						</p>
+					</div>
+					<div class="fragment fade-in">
+						<p>Enable Kubernetes (Mac)</p>
+						<img class="plain" data-src="images/help/enable_k8s.png" alt="Enable K8S" />
+					</div>
+					<div class="fragment fade-in">
+						<p>Enable Kubernetes (Windows)</p>
+						<img class="plain" data-src="images/help/enable_k8s_win.png" alt="Enable K8S" />
+					</div>
+					<div class="fragment fade-in">
+						<p>Check <code>kubectl</code> context</p>
+						<pre><code class="hljs text">kubectl config current-context</code></pre>
+						<p>Create namespace</p>
+						<pre><code class="hljs text">kubectl create namespace mushop</code></pre>
+						<p>Set default namespace <em class="mu-muted">(optional)</em></p>
+						<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=mushop</code></pre>
+					</div>
+					<div class="fragment fade-in">
+						<p>Install an ingress controller</p>
+						<pre><code class="hljs text">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml</code></pre>
+
+						<small>
+							<blockquote>
+								<b>NOTE:</b> There are several options for ingress controllers in K8S. This demo
+								uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites" target="_blank">ingress-nginx</a>
+							</blockquote>
+							<p>
+								☝️ More on this later...
+							</p>
+						</small>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				...
+			</section>
+
+			<section id="resources">
+				<section id="downloads">
+					<h2>Downloads</h2>
+					<p>Any workshop related downloads may be found here. </p>
+					<blockquote class="mu-small">
+						🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
+					</blockquote>
+					<div class="mu-flex mu-small">
+						<ul>
+							<li><a href="/downloads/k8s/mu-secret.yaml">K8S Secrets (Dev)</a></li>
+						</ul>
+					</div>
+				</section>
+			</section>
+
+		</div>
+	</div>
+	<!-- ateam stamp / home -->
+	<a href="#home" class="mu-ateam-water">
+		<img src="images/ateam.png" />
+	</a>
+
+	<script src="js/reveal.js"></script>
+
+	<script>
+		Reveal.initialize({
+			history: true,
+			fragmentInURL: true,
+			transition: 'slide',
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>

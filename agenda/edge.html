@@ -1,0 +1,203 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Cloud Native OCI - MuShop</title>
+	<base href="/">
+	<link rel="stylesheet" href="css/reset.css">
+	<link rel="stylesheet" href="css/reveal.css">
+	<link rel="stylesheet" href="css/theme/mu.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- title -->
+			<section id="home">
+				<!-- landing -->
+				<section id="home-title">
+					<h1>Cloud Native OCI</h1>
+					<h2>Storefront + Edge</h2>
+					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<span>+</span>
+						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
+					</div>
+					<hr/>
+					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+				</section>
+
+				<!-- TOC -->
+				<section id="toc">
+					<h2>Table of Contents</h2>
+					<ul class="plain">
+						<!-- add a line for each <section id="slideId">...</section>  -->
+						<li><a href="#home">Home</a></li>
+						<li><a href="#lab">Lab Overview</a></li>
+						<li><a href="#ingress">Ingress</a></li>
+					</ul>
+				</section>
+
+				<!-- Contributors -->
+				<section id="contributors">
+					<h2>Primary Contributors</h2>
+					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+						<div>
+							<div>Adao Oliveira Junior</div>
+							<div>Jeevan Joseph</div>
+							<div>Julio Camara</div>
+						</div>
+						<div>
+							<div>Matt Vander Vliet</div>
+							<div>Sherwood Zern</div>
+							<div>Sumit Kumar</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- Overview -->
+			<section id="lab">
+				<h2>Lab Overview</h2>
+				<ul>
+					<li>We'll do this...</li>
+					<li>And this...</li>
+					<li>Then that...</li>
+				</ul>
+			</section>
+
+			<section id="ingress">
+				<section id="ingress-overview">
+					<h2>Ingress</h2>
+					<p>
+						Here is a basic service diagram for the way traffic flows to the application.
+					</p>
+					<div class="mu-flex mu-flex-middle">
+						<div class="mu-svc">
+							<img data-src="images/tech/dns.svg" />
+							<span>DNS</span>
+						</div>
+						<!-- <div class="mu-flex-connector arrow"></div>
+							<div class="mu-svc">
+								<img data-src="images/tech/waf.svg" />
+								<span>WAF</span>
+							</div> -->
+						<div class="mu-flex-connector arrow"></div>
+						<div class="mu-svc">
+							<img data-src="images/tech/lb.svg" />
+							<span>LB</span>
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="mu-svc">
+							<img data-src="images/tech/vcn.svg" />
+							<span>VCN</span>
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="mu-svc">
+							<img data-src="images/tech/k8s.icon.png" />
+							<span>OKE</span>
+						</div>
+					</div>
+				</section>
+
+				<section>
+					<h2>K8S Ingress</h2>
+					<div class="mu-flex mu-flex-middle">
+						<div class="mu-svc">
+							<img data-src="images/tech/lb.svg" />
+							<span>LB</span>
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="mu-svc">
+							<img data-src="images/tech/vcn.svg" />
+							<span>VCN</span>
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="mu-svc">
+							<img data-src="images/tech/k8s.icon.png" />
+							<span>OKE</span>
+						</div>
+					</div>
+
+					<div class="fragment-set">
+						<div class="fragment fade-out">
+							<p>Install ingress controller with <code>helm</code></p>
+							<pre><code class="hljs text">helm install \
+--name nginx-ingress \
+--namespace nginx-ingress \
+stable/nginx-ingress</code></pre>
+							<pre><code class="hljs text">kubectl get svc -n nginx-ingress</code></pre>
+							<pre><code class="hljs text">NAME                       TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
+nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:32491/TCP,443:31240/TCP   5m</code></pre>
+							<small>
+								<p>Note an <code>EXTERNAL-IP</code> is assigned after a few seconds</p>
+							</small>
+						</div>
+						<div class="fragment fade-in">
+							<p>Verify the load balancer in OCI</p>
+							<pre><code class="hljs text">oci lb load-balancer list \
+| jq '.data[] | {id: .id, name: .["display-name"], ipAddr: .["ip-addresses"][]["ip-address"]}'</code></pre>
+							<pre><code>{
+	"id": "ocid1.loadbalancer.oc1.phx.aaaaaaaaucgamttt3piveonxw5d6ssirzxprcbrcv7vf6tgswna7qxdnvnfa",
+	"name": "097f5359-9165-11e9-bfe8-0a580aed21e9",
+	"ipAddr": "129.146.192.154"
+}</code></pre>
+							<small>
+								<p><b>NOTE</b> the same <code>EXTERNAL-IP</code> from before 🤘</p>
+							</small>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- Use this for markdown slides
+			<section data-markdown>
+				<script type="text/template">
+					## markdown
+				</script>
+			</section>
+			-->
+
+		</div>
+	</div>
+	<!-- ateam stamp / home -->
+	<a href="#home" class="mu-ateam-water">
+		<img src="images/ateam.png" />
+	</a>
+
+	<script src="js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			fragmentInURL: true,
+			transition: 'slide',
+			dependencies: [
+				{ src: 'plugin/markdown/marked.js' },
+				{ src: 'plugin/markdown/markdown.js' },
+				{ src: 'plugin/notes/notes.js', async: true },
+				{ src: 'plugin/highlight/highlight.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>
