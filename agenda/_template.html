@@ -6,20 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<title>Cloud Native OCI - MuShop</title>
-	<base href="/">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/mu.css">
+
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/reveal.css">
+	<link rel="stylesheet" href="/css/theme/mu.css">
 
 	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="lib/css/monokai.css">
+	<link rel="stylesheet" href="/lib/css/monokai.css">
 
 	<!-- Printing and PDF exports -->
 	<script>
 		var link = document.createElement('link');
 		link.rel = 'stylesheet';
 		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
 		document.getElementsByTagName('head')[0].appendChild(link);
 	</script>
 </head>
@@ -34,9 +34,9 @@
 					<h1>Cloud Native OCI</h1>
 					<h2>{{placeholder}}</h2>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
 					</div>
 					<hr/>
 					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
@@ -96,10 +96,10 @@
 	</div>
 	<!-- ateam stamp / home -->
 	<a href="#home" class="mu-ateam-water">
-		<img src="images/ateam.png" />
+		<img src="/images/ateam.png" />
 	</a>
 
-	<script src="js/reveal.js"></script>
+	<script src="/js/reveal.js"></script>
 
 	<script>
 		// More info about config & dependencies:
@@ -110,10 +110,10 @@
 			fragmentInURL: true,
 			transition: 'slide',
 			dependencies: [
-				{ src: 'plugin/markdown/marked.js' },
-				{ src: 'plugin/markdown/markdown.js' },
-				{ src: 'plugin/notes/notes.js', async: true },
-				{ src: 'plugin/highlight/highlight.js', async: true }
+				{ src: '/plugin/markdown/marked.js' },
+				{ src: '/plugin/markdown/markdown.js' },
+				{ src: '/plugin/notes/notes.js', async: true },
+				{ src: '/plugin/highlight/highlight.js', async: true }
 			]
 		});
 	</script>
