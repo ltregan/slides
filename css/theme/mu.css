@@ -318,6 +318,9 @@ section > h2 > img {
   font-size: 0.6em;
   line-height: 1.1; }
 
+pre.mu-small {
+  font-size: 0.4em; }
+
 .mu-normal {
   text-transform: none !important;
   font-style: normal !important;
@@ -325,6 +328,9 @@ section > h2 > img {
 
 .mu-muted {
   opacity: 0.5; }
+
+.reveal .block {
+  display: block; }
 
 .inline-block {
   display: inline-block; }
@@ -404,7 +410,7 @@ ul li.mu-divider {
     top: 0;
     left: 0;
     right: 0; }
-    .fragment-set .fragment.visible:not(.current-fragment) {
+    .fragment-set .fragment.visible:not(.current-fragment):not(:last-child) {
       opacity: 0 !important; }
     .fragment-set .fragment.current-fragment[data-fragment-index="0"] {
       opacity: 1 !important;

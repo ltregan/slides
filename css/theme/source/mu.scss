@@ -135,6 +135,11 @@ section > h2 > img {
 	font-size: 0.6em;
 	line-height: 1.1;
 }
+pre {
+	&.mu-small {
+		font-size: 0.4em;
+	}
+}
 
 .mu-normal {
 	text-transform: none !important;
@@ -147,6 +152,11 @@ section > h2 > img {
 }
 
 // Basic
+.block {
+	.reveal & {
+		display: block;
+	}
+}
 .inline-block {
 	display: inline-block;
 }
@@ -266,7 +276,7 @@ ul {
 		top: 0;
     left: 0;
 		right: 0;
-		&.visible:not(.current-fragment) {
+		&.visible:not(.current-fragment):not(:last-child) {
 			opacity:0!important;
 		}
 		&.current-fragment[data-fragment-index="0"] {
