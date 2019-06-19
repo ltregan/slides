@@ -115,7 +115,7 @@ hr {
 	@include divider();
 }
 
-h1::after, h2::after {
+h2::after {
 	content: "";
 	display: block;
 	@include divider();

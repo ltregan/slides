@@ -32,6 +32,7 @@
 				<!-- landing -->
 				<section id="home-title">
 					<h1>Cloud Native OCI</h1>
+					<hr/>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
 						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
@@ -48,9 +49,7 @@
 					<div class="mu-flex mu-gutter">
 						<ul class="plain mu-w-1-4">
 							<!-- add a line for each main TOC item  -->
-							<li><a href="#overview">Overview</a></li>
-							<li><a href="#background">Background</a></li>
-							<li><a href="#prerequisites">Prerequisites</a></li>
+							<li><a href="#overview">Table of Contents</a></li>
 						</ul>
 					</div>
 				</section>
@@ -75,82 +74,26 @@
 			</section>
 
 			<!-- TOC -->
-			<section id="overview">
-				<h2>Workshop Overview</h2>
-				<ul>
-					<li>Learn to utilize Cloud Native OCI services</li>
-					<li>Build and deploy microservices with OKE</li>
-					<li>Demo a complete polyglot application on OCI</li>
-					<li>Exhibit benefits of Cloud Native services</li>
-					<li class="mu-muted"><em>Use of CI/CD*</em></li>
-				</ul>
-			</section>
-
-			<!-- Background -->
-			<section id="background">
-				<h2>Background</h2>
-				<p>
-					...
-				</p>
-			</section>
-			<!-- Prerequisites -->
-			<section id="prerequisites">
-				<h2>Prerequisites</h2>
-				<p class="mu-small">
-					The following applications are required for the workshop.
-					Please ensure access and/or installation ahead of time 🙏.
-				</p>
-				<ul class="plain">
-					<li><a href="https://www.docker.com/products/docker-desktop" _target="blank">Docker Desktop</a></li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" _target="blank">OCI Access</a></li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" _target="blank">Installed <code>oci</code> command line</a></li>
-				</ul>
-			</section>
-
-			<!-- K8S Setup -->
-			<section data-background-image="images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
-				<h2>Prepare K8S</h2>
-
-				<div class="fragment-set">
-					<div class="fragment fade-out">
-						<p class="mu-left">
-							Many exercises in this workshop require the use of Kubernetes.
-							In order to run commands in a local cluster, please follow these
-							instructions to setup your environment.
-						</p>
-					</div>
-					<div class="fragment fade-in">
-						<p>Enable Kubernetes (Mac)</p>
-						<img class="plain" data-src="images/help/enable_k8s.png" alt="Enable K8S" />
-					</div>
-					<div class="fragment fade-in">
-						<p>Enable Kubernetes (Windows)</p>
-						<img class="plain" data-src="images/help/enable_k8s_win.png" alt="Enable K8S" />
-					</div>
-					<div class="fragment fade-in">
-						<p>Check <code>kubectl</code> context</p>
-						<pre><code class="hljs text">kubectl config current-context</code></pre>
-						<p>Create namespace</p>
-						<pre><code class="hljs text">kubectl create namespace mushop</code></pre>
-						<p>Set as default <em class="mu-muted">(Optional)</em></p>
-						<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=mushop</code></pre>
-					</div>
-					<div class="fragment fade-in">
-						<p>Install an ingress controller</p>
-						<pre><code class="hljs text">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml</code></pre>
-
-						<small>
-							<blockquote>
-								<b>NOTE:</b> There are several options for ingress controllers in K8S. This demo
-								uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites" target="_blank">ingress-nginx</a>
-							</blockquote>
-							<p>
-								☝️ More on this later...
-							</p>
-						</small>
-					</div>
-				</div>
+			<section id="toc">
+				<!-- overview -->
+				<section id="overview">
+					<h2>Workshop Overview</h2>
+					<ul>
+						<li>Learn to utilize Cloud Native OCI services</li>
+						<li>Build and deploy microservices with OKE</li>
+						<li>Demo a complete polyglot application on OCI</li>
+						<li>Exhibit benefits of Cloud Native services</li>
+						<li class="mu-muted"><em>Use of CI/CD*</em></li>
+					</ul>
+				</section>
+				
+				<!-- Background -->
+				<section id="background">
+					<h2>Background</h2>
+					<p>
+						...
+					</p>
+				</section>
 			</section>
 
 			<section id="ingress">
@@ -237,30 +180,8 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
 				</section>
 			</section>
 
-			<!-- <section data-markdown>
-					<script type="text/template">
-						## markdown
-					</script>
-				</section> -->
-
-
 			<section>
-				(placeholder)
-			</section>
-
-			<section id="resources">
-				<section id="downloads">
-					<h2>Downloads</h2>
-					<p>Any workshop related downloads may be found here. </p>
-					<blockquote class="mu-small">
-						🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
-					</blockquote>
-					<div class="mu-flex mu-small">
-						<ul>
-							<li><a href="/downloads/k8s/mu-secret.yaml">K8S Secrets (Dev)</a></li>
-						</ul>
-					</div>
-				</section>
+				...
 			</section>
 
 		</div>
@@ -277,6 +198,9 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
 		// - https://github.com/hakimel/reveal.js#configuration
 		// - https://github.com/hakimel/reveal.js#dependencies
 		Reveal.initialize({
+			history: true,
+			fragmentInURL: true,
+			transition: 'slide',
 			dependencies: [
 				{ src: 'plugin/markdown/marked.js' },
 				{ src: 'plugin/markdown/markdown.js' },
