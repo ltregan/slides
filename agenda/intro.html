@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<title>Cloud Native OCI - MuShop</title>
-
+	<base href="/">
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/reveal.css">
 	<link rel="stylesheet" href="css/theme/mu.css">
@@ -32,7 +32,7 @@
 				<!-- landing -->
 				<section id="home-title">
 					<h1>Cloud Native OCI</h1>
-					<h2>{{placeholder}}</h2>
+					<h2>Introduction</h2>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
 						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
@@ -46,10 +46,12 @@
 				<section id="toc">
 					<h2>Table of Contents</h2>
 					<div class="mu-flex mu-gutter">
-						<ul class="plain mu-w-1-4">
+						<ul class="plain">
 							<!-- add a line for each <section id="slideId">...</section>  -->
 							<li><a href="#home">Home</a></li>
-							<li><a href="#lab">Lab Overview</a></li>
+							<li><a href="#intro">Introduction</a></li>
+							<li><a href="#background">Background</a></li>
+							<li><a href="#services">Services</a></li>
 						</ul>
 					</div>
 				</section>
@@ -72,27 +74,79 @@
 				</section>
 			</section>
 
-			<!-- Overview -->
-			<section id="lab">
-				<h2>Lab Overview</h2>
+			<!-- About -->
+			<section id="intro">
+				<h2>Workshop Overview</h2>
 				<ul>
-					<li>We'll do this...</li>
-					<li>And this...</li>
-					<li>Then that...</li>
+					<li>Learn to utilize Cloud Native OCI services</li>
+					<li>Build and deploy microservices with OKE</li>
+					<li>Demo a complete polyglot application on OCI</li>
+					<li>Exhibit benefits of Cloud Native services</li>
 				</ul>
+			</section>
+			
+			<!-- Background -->
+			<section id="background">
+				<h2>
+					<img data-src="images/logo.png" alt="MuShop" />
+					Background
+				</h2>
+				<p>
+					MuShop is a polyglot microservices application concept based on the popular
+					Weaveworks <a href="https://microservices-demo.github.io" target="_blank"><em>Sock Shop</em></a>
+				</p>
+				<h3 class="fragment fade-in mu-normal">Why <em>Mu</em> Shop?</h3>
+				<div class="mu-flex mu-flex-middle mu-small fragment">
+					<div><b><em>Micro</em></b>services</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div>μ</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div>Mu</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div>Mew 🐱</span>
+				</div>
 			</section>
 
 			<section>
-				...
-			</section>
+				<!-- services -->
+				<section id="services">
+					<h2>Service Showcase</h2>
+					<div class="mu-flex mu-margin mu-gutter mu-small">
+						<div class="col-1-2">
+							<h3>Application</h3>
+							<ul>
+								<li>DNS</li>
+								<li>Firewall (WAF)</li>
+								<li>Object Storage</li>
+								<li class="mu-divider"></li>
+								<li>Load Balancer</li>
+								<li>Virtual Cloud Network (VCN)</li>
+								<li class="mu-divider"></li>
+								<li>Autonomous Transaction Database</li>
+								<li>Streaming</li>
+								<li>OKE + Service Broker</li>
+								<li class="mu-muted">Functions*</li>
+							</ul>
+						</div>
+						<div class="col-1-2">
+							<h3>Ops</h3>
+							<ul>
+								<li class="mu-muted">Terraform, Resource Manager*</li>
+								<li class="mu-muted">Monitoring*</li>
+								<li class="mu-muted">CI/CD*</li>
+								<li class="mu-muted">HA/DR*</li>
+							</ul>
+						</div>
+					</div>
+					<blockquote class="mu-small">
+						*Indicates future/planned material
+					</blockquote>
+				</section>
 
-			<!-- Use this for markdown slides
-			<section data-markdown>
-				<script type="text/template">
-					## markdown
-				</script>
+				<section id="diagram">
+					<h2>Service Diagram</h2>
+				</section>
 			</section>
-			-->
 
 		</div>
 	</div>

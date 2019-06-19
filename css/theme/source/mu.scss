@@ -102,7 +102,7 @@ a {
 
 // Margin
 .mu-margin {
-	margin-bottom: 15px;
+	margin-bottom: $blockMargin;
 }
 
 .no-margin {
@@ -111,37 +111,57 @@ a {
 	}
 }
 
-hr {
+hr, .mu-divider {
 	@include divider();
 }
 
+// headings
 h2::after {
 	content: "";
 	display: block;
 	@include divider();
+}
+section > h2 > img {
+	height: 1em;
+	margin: 0 !important;
 }
 
 // Text
 .mu-left {
 	text-align: left;
 }
+
 .mu-small {
 	font-size: 0.6em;
 	line-height: 1.1;
+}
+
+.mu-normal {
+	text-transform: none !important;
+	font-style: normal !important;
+	font-weight: inherit !important;
+}
+
+.mu-muted {
+	opacity: 0.5;
 }
 
 // Basic
 .inline-block {
 	display: inline-block;
 }
-.mu-muted {
-	opacity: 0.5;
-}
 
-ul.plain {
-	margin-left: 0;
-	li {
+ul {
+	&.plain {
+		margin-left: 0;
+		li {
+			list-style: none;
+		}
+	}
+
+	li.mu-divider {
 		list-style: none;
+		margin: $blockMargin 0;
 	}
 }
 
@@ -181,7 +201,8 @@ ul.plain {
 
 	// gutter
 	&.mu-gutter {
-		margin: 0  $blockMargin;
+		margin-left: $blockMargin;
+		margin-right: $blockMargin;
 		> * {
 			margin: 0 $blockMargin;
 		}
