@@ -124,6 +124,7 @@ h2::after {
 section > h2 > img {
 	height: 1em;
 	margin: 0 !important;
+	vertical-align: middle;
 }
 
 // Text
@@ -161,7 +162,9 @@ pre {
 	display: inline-block;
 }
 
-ul {
+.reveal ul, .reveal ol {
+	display: block;
+	margin-left: 2em;
 	&.plain {
 		margin-left: 0;
 		li {
