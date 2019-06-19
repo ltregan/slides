@@ -1,0 +1,181 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Cloud Native OCI - MuShop</title>
+
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/reveal.css">
+	<link rel="stylesheet" href="/css/theme/mu.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="/lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- title -->
+			<section id="home">
+				<!-- landing -->
+				<section id="home-title">
+					<h1>Cloud Native OCI</h1>
+					<h2>Developer Setup</h2>
+					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<span>+</span>
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
+					</div>
+					<hr/>
+					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+				</section>
+
+				<!-- TOC -->
+				<section id="toc">
+					<h2>Table of Contents</h2>
+					<ul class="plain">
+						<!-- add a line for each <section id="slideId">...</section>  -->
+						<li><a href="#home">Home</a></li>
+						<li><a href="#lab">Setup</a></li>
+					</ul>
+				</section>
+
+				<!-- Contributors -->
+				<section id="contributors">
+					<h2>Primary Contributors</h2>
+					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+						<div>
+							<div>Adao Oliveira Junior</div>
+							<div>Jeevan Joseph</div>
+							<div>Julio Camara</div>
+						</div>
+						<div>
+							<div>Matt Vander Vliet</div>
+							<div>Sherwood Zern</div>
+							<div>Sumit Kumar</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- exercise -->
+			<section>
+				<section id="lab">
+					<h2>MuShop Development</h2>
+					<ol>
+						<li><a href="#clone">Clone</a></li>
+						<li><a href="#credentials">Install Credentials</a></li>
+						<li><a href="#start">Start</a></li>
+					</ol>
+				</section>
+
+				<section id="clone">
+					<h2>Clone MuShop</h2>
+					<p>
+						Begin by cloning the workshop project. By default, the <code>develop</code>
+						branch will be checked out
+					</p>
+					<div class="fragment-set">
+						<div class="fragment fade-out">
+								<pre><code class="hljs sh">#clone
+git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
+cd mushop-oci-demo</code></pre>
+						</div>
+						<div class="fragment fade-in">
+							<pre class="mu-small">.
+├── LICENSE
+├── README.md
+├── deploy
+│   ├── docker-compose
+│   ├── helm-chart
+│   └── kubernetes
+├── src
+│   ├── api
+│   ├── carts
+│   ├── catalogue
+│   ├── edge-router
+│   ├── load
+│   ├── orders
+│   ├── payment
+│   ├── queue
+│   ├── shipping
+│   ├── storefront
+│   ├── stream
+│   └── user
+└── wercker.yml</pre>
+						</div>
+						<div class="fragment fade-in">
+								<pre><code class="hljs sh">#check branch
+git branch
+* develop</code></pre>
+							Next: <a class="navigate-down">Install Credentials</a>
+						</div>
+					</div>
+				</section>
+
+				<section id="credentials">
+					<h2>🔒 Install Credentials</h2>
+					<p>
+						The application runtime requires connectivity to an OCI Tenancy.
+						A credential file for the development environment is provided.
+					</p>
+					<hr/>
+					<ol class="block">
+						<li>Download K8S <a href="/downloads/k8s/secrets.yaml">secrets.yaml</a></li>
+						<li>Install Secrets</li>
+					</ol>
+					<pre><code class="hljs text">kubectl create -f path/to/secrets.yaml</code></pre>
+					Next: <a class="navigate-down">Start</a>
+				</section>
+
+				<section id="start">
+					<h2>Run <img data-src="/images/logo.png" alt="MuShop" /></h2>
+					<ol class="block">
+						<li>Change directory to <code>mushop-oci-demo</code></li>
+						<li>Deploy in K8S</li>
+					</ol>
+					<pre><code class="hljs text">kubectl apply -f deploy/kubernetes/mushop.yaml</code></pre>
+				</section>
+
+			</section>
+
+		</div>
+	</div>
+	<!-- ateam stamp / home -->
+	<a href="#home" class="mu-ateam-water">
+		<img src="/images/ateam.png" />
+	</a>
+
+	<script src="/js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			fragmentInURL: true,
+			transition: 'slide',
+			dependencies: [
+				{ src: '/plugin/markdown/marked.js' },
+				{ src: '/plugin/markdown/markdown.js' },
+				{ src: '/plugin/notes/notes.js', async: true },
+				{ src: '/plugin/highlight/highlight.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>

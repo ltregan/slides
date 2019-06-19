@@ -6,6 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<title>Cloud Native OCI - MuShop</title>
+	<base href="/">
 
 	<link rel="stylesheet" href="css/reset.css">
 	<link rel="stylesheet" href="css/reveal.css">
@@ -32,297 +33,114 @@
 				<!-- landing -->
 				<section id="home-title">
 					<h1>Cloud Native OCI</h1>
-					<h4>Holistic microservices demo</h4>
+					<hr/>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="images/tech/oci.png"
-							alt="Oracle Cloud Infrastructure" />
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
 					</div>
+					<hr/>
+					<!-- <h4>Microservices on Oracle Cloud</h4> -->
 					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
 				</section>
 
 				<!-- TOC -->
-				<section id="home-toc">
+				<section id="toc">
 					<h2>Table of Contents</h2>
-					<div class="mu-flex">
-						<ul>
-							<!-- add a line for each main TOC item  -->
-							<li><a href="#overview">Overview</a></li>
-							<li><a href="#background">Background</a></li>
-							<li><a href="#prerequisites">Prerequisites</a></li>
-						</ul>
-					</div>
+					<ul class="plain">
+						<!-- add a line for each main TOC item  -->
+						<li><a href="#agenda">Agenda</a></li>
+					</ul>
 				</section>
 
 				<!-- Contributors -->
 				<section id="contributors">
 					<h2>Primary Contributors</h2>
-					<table>
-						<tbody>
-							<tr>
-								<td>Jeevan Joseph</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Adao Oliveira Junior</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Julio Camara</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Sumit Kumar</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Sherwood Zern</td>
-								<td>Oracle A-Team</td>
-							</tr>
-							<tr>
-								<td>Matt Vander Vliet</td>
-								<td>Oracle A-Team</td>
-							</tr>
-						</tbody>
-					</table>
+
+					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+						<div>
+							<div>Adao Oliveira Junior</div>
+							<div>Jeevan Joseph</div>
+							<div>Julio Camara</div>
+						</div>
+						<div>
+							<div>Matt Vander Vliet</div>
+							<div>Sherwood Zern</div>
+							<div>Sumit Kumar</div>
+						</div>
+					</div>
 				</section>
 			</section>
 
-			<!-- TOC -->
-			<section id="overview">
-				<h2>Workshop Overview</h2>
-				<ul>
-					<li>Learn to utilize Cloud Native OCI services</li>
-					<li>Build and deploy microservices with OKE</li>
-					<li>Demo a complete polyglot application on OCI</li>
-					<li>Exhibit benefits of Cloud Native services</li>
-					<li class="mu-muted"><em>Use of CI/CD*</em></li>
-				</ul>
-			</section>
-
-			<!-- Background -->
-			<section id="background">
-				<h2>Background</h2>
-				<p>
-					...
+			<section id="agenda">
+				<h2>Agenda</h2>
+				<p class="mu-small">
+					This workshop covers a variety of topics, each designed to highlight 
+					its own, or common high-level subjects within OCI in the context of
+					the demo application - MuShop
 				</p>
-			</section>
-			<!-- Prerequisites -->
-			<section id="prerequisites">
-				<h2>Prerequisites</h2>
-				<ul>
-					<li><a href="https://www.docker.com/products/docker-desktop" _target="blank">Docker Desktop</a></li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" _target="blank">OCI
-							Access</a></li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm"
-							_target="blank">Installed <code>oci</code> command line</a></li>
-				</ul>
-			</section>
-
-			<!-- K8S Setup -->
-			<section data-background-image="images/tech/k8s.png" data-background-size="100px"
-				data-background-position="20px 20px">
-				<h2>Prepare K8S</h2>
-
-				<div class="fragment-set">
-					<div class="fragment fade-out">
-						<p class="mu-left">
-							Many exercises in this workshop require the use of Kubernetes.
-							In order to run commands in a local cluster, please follow these
-							instructions to setup your environment.
-						</p>
-					</div>
-					<div class="fragment fade-in">
-						<p>Enable Kubernetes (Mac)</p>
-						<img class="plain" data-src="images/help/enable_k8s.png" alt="Enable K8S" />
-					</div>
-					<div class="fragment fade-in">
-						<p>Enable Kubernetes (Windows)</p>
-						<img class="plain" data-src="images/help/enable_k8s_win.png" alt="Enable K8S" />
-					</div>
-					<div class="fragment fade-in">
-						<p>Check <code>kubectl</code> context</p>
-						<pre><code class="hljs text">kubectl config current-context</code></pre>
-						<p>Create namespace</p>
-						<pre><code class="hljs text">kubectl create namespace mushop</code></pre>
-						<p>Set as default <em class="mu-muted">(Optional)</em></p>
-						<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=mushop</code></pre>
-					</div>
-					<div class="fragment fade-in">
-						<p>Install an ingress controller</p>
-						<pre><code class="hljs text">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml</code></pre>
-
-						<small>
-							<blockquote>
-								<b>NOTE:</b> There are several options for ingress controllers in K8S. This demo
-								uses the common <a
-									href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites"
-									target="_blank">ingress-nginx</a>
-							</blockquote>
-							<p>
-								&#9757; More on this later...
-							</p>
-						</small>
-					</div>
-				</div>
+				<table class="agenda mu-small">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Title</th>
+							<th>Subject</th>
+							<th>Concepts</th>
+							<th>Duration</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>1</td>
+							<td><a href="agenda/intro.html" target="_blank">Introduction</a></td>
+							<td>Workshop background, design, and demo</td>
+							<td>OCI, CloudNative</td>
+							<td>30 minutes</td>
+						</tr>
+						<tr>
+							<td>2</td>
+							<td><a href="agenda/setup.html" target="_blank">Setup</a></td>
+							<td>Setup to run in development environment</td>
+							<td>Docker, K8S, Microservices</td>
+							<td>1 hour</td>
+						</tr>
+						<tr>
+							<td>3</td>
+							<td><a href="agenda/orders.html" target="_blank">Design: Carts/Orders</a></td>
+							<td>Orders and Carts services</td>
+							<td>ATP</td>
+							<td>1 hour</td>
+						</tr>
+						<tr>
+							<td>4</td>
+							<td><a href="agenda/streaming.html" target="_blank">Design: Shipping Stream</a></td>
+							<td>Shipping service with OCI Streaming</td>
+							<td>OCI Streaming</td>
+							<td>1 hour</td>
+						</tr>
+						<tr>
+							<td>5</td>
+							<td><a href="agenda/_template.html" target="_blank">...</a></td>
+							<td></td>
+							<td></td>
+							<td>1 hour</td>
+						</tr>
+					</tbody>
+				</table>
 			</section>
 
-			<section id="ingress">
-				<section id="ingress-overview">
-					<h2>Ingress</h2>
-					<p>
-						Here is a basic service diagram for the way traffic flows to the application.
-					</p>
-					<div class="mu-flex mu-flex-middle">
-						<div class="mu-svc">
-							<img data-src="images/tech/dns.svg" />
-							<span>DNS</span>
-						</div>
-						<!-- <div class="mu-flex-connector arrow"></div>
-							<div class="mu-svc">
-								<img data-src="images/tech/waf.svg" />
-								<span>WAF</span>
-							</div> -->
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
-							<img data-src="images/tech/lb.svg" />
-							<span>LB</span>
-						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
-							<img data-src="images/tech/vcn.svg" />
-							<span>VCN</span>
-						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
-							<img data-src="images/tech/k8s.icon.png" />
-							<span>OKE</span>
-						</div>
-					</div>
-				</section>
-
-				<section>
-					<h2>K8S Ingress</h2>
-					<div class="mu-flex mu-flex-middle">
-						<div class="mu-svc">
-							<img data-src="images/tech/lb.svg" />
-							<span>LB</span>
-						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
-							<img data-src="images/tech/vcn.svg" />
-							<span>VCN</span>
-						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
-							<img data-src="images/tech/k8s.icon.png" />
-							<span>OKE</span>
-						</div>
-					</div>
-
-					<div class="fragment-set">
-						<div class="fragment fade-out">
-							<p>Install ingress controller with <code>helm</code></p>
-							<pre><code class="hljs text">helm install \
---name nginx-ingress \
---namespace nginx-ingress \
-stable/nginx-ingress</code></pre>
-							<pre><code class="hljs text">kubectl get svc -n nginx-ingress</code></pre>
-							<pre><code class="hljs text">NAME                       TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
-nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:32491/TCP,443:31240/TCP   5m</code></pre>
-							<small>
-								<p>Note an <code>EXTERNAL-IP</code> is assigned after a few seconds</p>
-							</small>
-						</div>
-						<div class="fragment fade-in">
-							<p>Verify the load balancer in OCI</p>
-							<pre><code class="hljs text">oci lb load-balancer list \
-| jq '.data[] | {id: .id, name: .["display-name"], ipAddr: .["ip-addresses"][]["ip-address"]}'</code></pre>
-							<pre><code>{
-  "id": "ocid1.loadbalancer.oc1.phx.aaaaaaaaucgamttt3piveonxw5d6ssirzxprcbrcv7vf6tgswna7qxdnvnfa",
-  "name": "097f5359-9165-11e9-bfe8-0a580aed21e9",
-  "ipAddr": "129.146.192.154"
-}</code></pre>
-							<small>
-								<p><b>NOTE</b> the same <code>EXTERNAL-IP</code> from before &#129304;</p>
-							</small>
-						</div>
-					</div>
-				</section>
-			</section>
-
-			<!-- <section data-markdown>
-					<script type="text/template">
-						## markdown
-					</script>
-				</section> -->
-
-			<!-- Intro -->
-			<section id="introduction">
-				<section id="why-microservices">
-					<img src="images/tech/intro/logos.png" class="mu-muted">
-					<h2>The Goal</h2>
-					<ul>
-						<li>Enables us to build and run scalable apps in dynamic environments</li>
-						<li>Enables distributed system design that can be realized as resilient, manageable and
-							observable systems</li>
-					</ul>
-				</section>
-
-				<section id="petsvcattle">
-					<h2>Pets Vs. Cattle</h2>
-					<div class="fragment-set">
-						<small>
-								<div class="fragment fade-out">
-										<p class="mu-left">
-											<b>Pets</b> : Servers or server pairs that are treated as indispensable or unique systems that
-											can never be down.
-											Typically they are manually built, managed, and “hand fed”.
-										</p>
-										<p class="mu-left">
-											<b>Cattle</b> : Arrays of more than two servers, that are built using automated tools, and are
-											designed for failure, where no one, two, or even three servers are irreplaceable. Typically,
-											during failure events no human intervention is required as the array exhibits attributes
-											of “routing around failures” by restarting failed servers or replicating data.
-										</p>
-										<br>
-										<p>See
-											<a href="http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/">
-												Pets vs. Cattle</a>
-										</p>
-									</div>
-						</small>
-						<div class="fragment fade-in">
-							<p>Persistent Infrastructure has a high overhead compared to Ephemeral Infrastructure</p>
-							<img src="images/tech/intro/petsvcattle.gif" />
-						</div>
-					</div>
-
-				</section>
-
-				<section id="landscape">
-					<h2>Landscape</h2>
-					<iframe src="https://landscape.cncf.io/fullscreen=yes"
-						style="height: 500px; width:inherit"></iframe>
-				</section>
-			</section>
-
-			<section id="MuShop">
-					<h2>MuShop Architecture</h2>
-					<iframe src="https://landscape.cncf.io/fullscreen=yes"
-						style="height: 500px; width:inherit"></iframe>
-			</section>
-
+			
 
 			<section>
-				Next...
+				...
 			</section>
 
 		</div>
 	</div>
-	<img class="mu-ateam-water" src="images/ateam.png" />
+	<!-- ateam stamp / home -->
+	<a href="#home" class="mu-ateam-water">
+		<img src="images/ateam.png" />
+	</a>
 
 	<script src="js/reveal.js"></script>
 
@@ -331,6 +149,9 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
 		// - https://github.com/hakimel/reveal.js#configuration
 		// - https://github.com/hakimel/reveal.js#dependencies
 		Reveal.initialize({
+			history: true,
+			fragmentInURL: true,
+			transition: 'slide',
 			dependencies: [
 				{ src: 'plugin/markdown/marked.js' },
 				{ src: 'plugin/markdown/markdown.js' },
