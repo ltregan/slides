@@ -478,3 +478,8 @@ pre.mu-small {
     height: 60px;
     filter: drop-shadow(5px 5px 30px rgba(0, 0, 0, 0.5));
     opacity: 0.4; }
+
+table.agenda {
+  font-size: 0.5em; }
+  table.agenda td {
+    white-space: nowrap; }
