@@ -72,7 +72,7 @@
 
 			<!-- Shipping/Streams App -->
 			<section id="shippingApp">
-				<h3>Producer - OSS - Consumer</h3>
+				<h3>Shipping Microservice</h3>
 				<div class="mu-flex mu-flex-middle mu-margin">
 					<div class="mu-svc">
 						<img data-src="/images/tech/java.png" /> Order
@@ -91,7 +91,7 @@
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="/images/tech/erp.png" /> ERP Cloud
+						<img data-src="/images/streams/shipping-2.png" /> Fulfillment
 					</div>
 				</div>
 				<div class="fragment mu-flex mu-flex-middle mu-margin">
@@ -112,11 +112,9 @@
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="/images/tech/erp.png" /> ERP Cloud
+						<img data-src="/images/streams/shipping-2.png" /> Fulfillment
 					</div>
 				</div>
-
-				
 			</section>
 
 			<!-- Streams -->
@@ -142,7 +140,6 @@
 			<section>
 				<h2>Use cases</h2>
 				<ul>
-					
 					<li>Metric and log ingestion</li>
 					<div class=fragment><li>Messaging</li></div>
 					<div class=fragment><li>Web/Module activity data ingestion</li></div>
@@ -151,30 +148,9 @@
 				<img class="plain" data-src="/images/streams/stream1.png" alt="Producer -> Stream -> Consumer"/>
 			</section>
 			<section>
-				<h2>How it works</h2>
-				<ul>
-					<div class=fragment><li>A producer publishes a messages to a stream (append-only log)</li></div>
-					<div class=fragment><li>Streams can be divided into a number of partitions for scalability.</li></div>
-					<div class=fragment><li>A consumer reads messages from one or more streams.</li></div>
-				</ul>
-				<img class="plain" data-src="/images/streams/partitions.png" alt="Producer -> Partitions -> Consumer"/>
-			</section>
-			<section>
-				<h2>Limits</h2>
-				<ul>
-					<div class=fragment><li>Message retention: up to 7 days</li></div>
-					<div class=fragment><li>Throughput: 1 MB/sec per partition</li></div>
-					<div class=fragment><li>Message size: 1 MB maximum</li></div>
-					<div class=fragment><li>API calls per second: 5 getMessages per partition</li></div>
-					<div class=fragment><li>Max Total Data Write per second: 1 MB per partition</li></div>
-					<div class=fragment><li>Number of partitions: Enterprise tenancy: 5, Non-Enterprise: 0</li>
-				</ul>
-				<img class="plain" data-src="/images/streams/partitions.png" alt="Producer -> Partitions -> Consumer"/>
-			</section>
-			<section>
 				<h2>Concepts</h2>
 				<ul>
-					<div class=fragment><li>Stream: a partitioned, append-only log of messages</li></div>
+					<li>Stream: a partitioned, append-only log of messages</li>
 					<div class=fragment><li>Message: base64-encoded record that is published to the stream</li></div>
 					<div class=fragment><li>Offset: the location of a message within a partition.</li></div>
 				</ul>
@@ -209,6 +185,33 @@
 					<img class="plain" data-src="/images/streams/cursor.png" alt="Producer"/>
 			</section>
 			<section>
+					<h2>Concepts</h2>
+					<h3>Cursor Type: TRIM_HORIZON</h3>
+					<img class="plain" data-src="/images/streams/trim_horizon.png" alt="trim_horizon cursor"/>
+			</section>
+			<section>
+					<h2>Concepts</h2>
+					<h3>Cursor Type: AT_OFFSET</h3>
+					<img class="plain" data-src="/images/streams/at_offset.png" alt="at_offset cursor"/>
+			</section>
+			<section>
+					<h2>Concepts</h2>
+					<h3>Cursor Type: AFTER_OFFSET</h3>
+					<img class="plain" data-src="/images/streams/after_offset.png" alt="after_offset cursor"/>
+			</section>
+			<section>
+					<h2>Concepts</h2>
+					<h3>Cursor Type: AT_TIME</h3>
+					Consume after given time. Timestamp of the message >= supplied time.
+					<img class="plain" data-src="/images/streams/at_time.png" alt="at_time cursor"/>
+			</section>
+			<section>
+					<h2>Concepts</h2>
+					<h3>Cursor Type: LATEST</h3>
+					<p>Consume messages published after the cursor creation.</p>
+					<img class="plain" data-src="/images/streams/latest.png" alt="latest cursor"/>
+			</section>
+			<section>
 				<h2>Concepts</h2>
 				<ul>
 					<li>Producer: an entity that writes/publishes messages to a stream.</li>
@@ -222,12 +225,41 @@
 				</ul>
 				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
 			</section>
-			
 			<section>
-				<h2>Mushop Shipping Service - Producer</h2>
+					<h2>Limits</h2>
+					<ul>
+						<div class=fragment><li>Message retention: up to 7 days</li></div>
+						<div class=fragment><li>Throughput: 1 MB/sec per partition</li></div>
+						<div class=fragment><li>Message size: 1 MB maximum</li></div>
+						<div class=fragment><li>API calls per second: 5 getMessages per partition</li></div>
+						<div class=fragment><li>Max Total Data Write per second: 1 MB per partition</li></div>
+						<div class=fragment><li>Number of partitions: Enterprise tenancy: 5, Non-Enterprise: 0</li>
+					</ul>
+				</section>
+			<section>
+				<h2>Mushop Shipping and Stream Service</h2>
 				
-				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
-				<!-- add image order>producer>stream>consumer>erp -->
+				<div class="mu-flex mu-flex-middle mu-margin">
+						<div class="mu-svc">
+							<img data-src="/images/tech/java.png" /> Order
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="fragment mu-svc">
+							<img data-src="/images/tech/java.png" /> Shipping
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="fragment mu-svc">
+							<img data-src="/images/tech/streaming.svg" /> OSS
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="fragment mu-svc">
+							<img data-src="/images/tech/java.png" /> Stream
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="fragment mu-svc">
+							<img data-src="/images/streams/shipping-2.png" /> Fulfillment
+						</div>
+					</div>
 			</section>
 			<section>
 				<h2>Connecting to OSS</h2>
@@ -235,13 +267,14 @@
 					<div class=fragment><li>Generate API signing key and public key</li></div>
 					<div class=fragment><li>Upload public key to OCI</li></div>
 				</ul>
-				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
 			</section>
 			<section>
 					<h2>Connecting to OSS</h2>
-					<ul>
-						<div class=fragment><li>Add credentials/IDs to Kubernetes secret</li></div>
-					</ul>
+					<p>Create a secret that has all IDs and API key needed for authentication</p>
+					<img data-src="/images/k8s/secret.png" />
+				</section>
+			<section>
+					<h2>Connecting to OSS</h2>
 					<pre><code class="hljs text">env:
 	- name: OCI_TENANT_ID
 		valueFrom:
@@ -304,6 +337,103 @@ final String region = env.getProperty(“OCI_REGION”);</code></pre>
 	streamsConfig.getStreamClient().
 	putMessages(putRequest);
 					</code></pre>
+			</section>
+
+			<section>
+					<h2>Consuming message from OSS</h2>
+					[Still need to add content here]
+			</section>
+
+			<!-- Lab -->
+			<section>
+					<h2>Hands-on Practice</h2>
+					For this hands-on practice lab you will need to fix the source code which has missing functionality.
+					But first you need to checkout a branch. 
+					<pre><code class="hljs text">git clone -b workshop/shipping-lab git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git</code></pre>
+			</section>
+			<section>
+					<h2>Shipping Service Code Changes</h2>
+					First you need to make changes to the producer, Shipping microservice. Edit the following file:
+					<pre><code class="hljs text">mushop/src/shipping/src/main/java/mushop/shipping/configuration/OciStreamsConfiguration.java</code></pre>
+					Modify the initConnection method. Instruction are found as inline comments. 
+			</section>
+			<section>
+					<h2>Shipping Service Code Changes</h2>
+					Next edit the following file:
+					<pre><code class="hljs text">mushop/src/shipping/src/main/java/mushop/shipping/streams/StreamsPublisher.java</code></pre>
+					Modify the publishMessages method. Instruction are found as inline comments. 
+			</section>
+			<section>
+					<h2>Stream Service Code Changes</h2>
+					Now you need to make changes to the consumer, Stream microservice. Edit the following file:
+					<pre><code class="hljs text">mushop/src/stream/src/main/java/mushop/stream/configuration/OciStreamsConfiguration.java</code></pre>
+					Modify the initConnection method. Instruction are found as inline comments. 
+			</section>
+			<section>
+					<h2>Stream Service Code Changes</h2>
+					Next edit the following file:
+					<pre><code class="hljs text">mushop/src/stream/src/main/java/mushop/stream/AppStartupRunner.java</code></pre>
+					Modify the forEverMessageLoop and getCursorByPartition methods. Instruction are found as inline comments. 
+			</section>
+			<section>
+					<h2>Test and Build</h2>
+					Using you preferred IDE, run the application. 
+					You can check if your message is being published by looking at the OSS stream in the OCI console for intvravipati, mushop compartment. 
+					<pre><code class="hljs text">https://console.us-phoenix-1.oraclecloud.com/?tenant=intvravipati</code></pre>
+					The stream name is shipping-stream. 
+					Click the “Refresh” button in Recent Messages to see the latest messages.
+			</section>
+			<section>
+					<h2>Build docker image</h2>
+					Now that you have checked that application runs fine and messages are being published to the stream, it's time to build the docker image. 
+					Make sure you are in the correct folder. You will see a Dockerfile there.
+					<pre><code class="hljs text">mushop/src/shipping</code></pre>
+					Build the image. 
+					<pre><code class="hljs text">docker build . --tag shipping:0.0.1</code></pre>
+			</section>
+			<section>
+					<h2>Update deployment descriptor</h2>
+					Edit shipping.yaml and update the correct image name. It should look like this:
+					<pre><code class="hljs text">- image: shipping:0.0.1</code></pre>
+					Also remove the following line:
+					<pre><code class="hljs text">imagePullPolicy: Always</code></pre>
+			</section>
+			<section>
+					<h2>Create a deployment</h2>
+					Run this command:
+					<pre><code class="hljs text">kubectl create -f shipping.yaml -n mushop</code></pre>
+					This creates a deployment called shipping and a service
+			</section>
+			<section>
+					<h2>Verify resources were created</h2>
+					To list all pods in the namespace mushop run this:
+					<pre><code class="hljs text">kubectl get po -n mushop</code></pre>
+					Note that you can use shortcuts for several commands (po = pods, -n = namespace)
+					Repeat the same series of steps (begining at building an image) for the stream application.
+			</section>
+			<section>
+					<h2>Prepare to watch the logs</h2>
+					To tail the application logs first you need to find the pod name of shipping and stream apps. 
+					Then in two separate terminal windows (one for shipping, one for stream) run the following but replace pod_name with the actual pod name that you saved: 
+					<pre><code class="hljs text">kubectl logs -f pod_name -n mushop</code></pre>
+			</section>
+			<section>
+					<h2>Send message to shipping</h2>
+					Open another terminal and run the following command which sends a test message to the shipping microservice running as a pod in your local Kubernetes cluster.
+					<pre><code class="hljs text">curl -X POST \
+http://localhost/shipping \
+-H 'Content-Type: application/json' \
+-H 'cache-control: no-cache' \
+-d '{ 
+	"id": "123-45-8876",
+	"name": "shipment 500" 
+}’
+						  </code></pre>
+			</section>
+			<section>
+					<h2>Watch the logs</h2>
+					Look at the terminal windows and observe messages being created in the shipping and consumed in the stream. 
+					You should also look at the OCI console. Refresh the table and watch your message being published to the stream.
 			</section>
 		</div>
 	</div>
