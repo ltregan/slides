@@ -6,20 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<title>Cloud Native OCI - MuShop</title>
-	<base href="/">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/mu.css">
+	
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/reveal.css">
+	<link rel="stylesheet" href="/css/theme/mu.css">
 
 	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="lib/css/monokai.css">
+	<link rel="stylesheet" href="/lib/css/monokai.css">
 
 	<!-- Printing and PDF exports -->
 	<script>
 		var link = document.createElement('link');
 		link.rel = 'stylesheet';
 		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
 		document.getElementsByTagName('head')[0].appendChild(link);
 	</script>
 </head>
@@ -34,9 +34,9 @@
 					<h1>Cloud Native OCI</h1>
 					<h2>Kubernetes/OKE</h2>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
 					</div>
 					<hr/>
 					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
@@ -79,11 +79,11 @@
 			<!-- Kubernetes -->
 			<section id="kubernetes">
 					<h2>Monolithic vs Microservices</h2>
-					<img class="plain" data-src="images/k8s/mono_x_ms.png" alt="Monolithic vs Microservices"/>
+					<img class="plain" data-src="/images/k8s/mono_x_ms.png" alt="Monolithic vs Microservices"/>
 				</section>
 				<section>
 					<h2>Scaling Microservices</h2>
-					<img class="plain" data-src="images/k8s/scaling.png" alt="Scaling Microservices"/>
+					<img class="plain" data-src="/images/k8s/scaling.png" alt="Scaling Microservices"/>
 				</section>
 				<section>
 					<h2>Imperative vs Declarative Mode</h2>
@@ -98,113 +98,113 @@
 					<div>
 						<ul>
 							<li>Node</li>
-							<li>Pod</ul>
+							<li>Pod</li>
 						</ul>
 					</div>
-					<img class="plain" data-src="images/k8s/scaling.png" alt="Scaling Microservices"/>
+					<img class="plain" data-src="/images/k8s/scaling.png" alt="Scaling Microservices"/>
 				</section>
 				<section>
 					<h2>Basic Resources</h2>
 					<ul>
-						<li>Configmaps</ul>
+						<li>Configmaps</li>
 						<li>Secrets</li>
 					</ul>
-					<img class="plain" data-src="images/k8s/configmap_secret.png" alt="Configmaps and Secrets"/>
+					<img class="plain" data-src="/images/k8s/configmap_secret.png" alt="Configmaps and Secrets"/>
 				</section>
 				<section>
 					<h2>Basic Resources</h2>
 					<ul>
-						<li>Namespace</ul>
+						<li>Namespace</li>
 					</ul>
-					<img class="plain" data-src="images/k8s/namespace.png" alt="Namespace"/>
+					<img class="plain" data-src="/images/k8s/namespace.png" alt="Namespace"/>
 				</section>
 				<section>
 					<h2>Basic Resources</h2>
 					<ul>
-						<li>Replicaset</ul>
+						<li>Replicaset</li>
 					</ul>
-					<img class="plain" data-src="images/k8s/replicaset.png" alt="Replicaset"/>
+					<img class="plain" data-src="/images/k8s/replicaset.png" alt="Replicaset"/>
 				</section>
 				<section>
 					<h2>Basic Resources</h2>
 					<ul>
-						<li>Services</ul>
+						<li>Services</li>
 					</ul>
-					<img class="plain" data-src="images/k8s/service.png" alt="Service"/>
+					<img class="plain" data-src="/images/k8s/service.png" alt="Service"/>
 				</section>
 				<section>
 					<h2>Basic Resources</h2>
 					<ul>
-						<li>Deployment</ul>
+						<li>Deployment</li>
 					</ul>
-					<img class="plain" data-src="images/k8s/deployment1.png" alt="Deployment"/>
+					<img class="plain" data-src="/images/k8s/deployment1.png" alt="Deployment"/>
 				</section>
 				<section>
 					<h2>Basic Resources</h2>
 					<ul>
-						<li>Ingress</ul>
+						<li>Ingress</li>
 					</ul>
-					<img class="plain" data-src="images/k8s/ingress.png" alt="Ingress"/>
+					<img class="plain" data-src="/images/k8s/ingress.png" alt="Ingress"/>
 				</section>
 				<section>
 					<h2>Architecture</h2>
-					<img class="plain" data-src="images/k8s/arch.png" alt="Architecture"/>
+					<img class="plain" data-src="/images/k8s/arch.png" alt="Architecture"/>
 				</section>
 				<section>
 					<h2>Architecture - High Availability Cluster</h2>
-					<img class="plain" data-src="images/k8s/arch_HAC.png" alt="Architecture"/>
+					<img class="plain" data-src="/images/k8s/arch_HAC.png" alt="Architecture"/>
 				</section>
 				<section>
 					<h2>API Server</h2>
-					<img class="plain" data-src="images/k8s/api.png" alt="API Server"/>
+					<img class="plain" data-src="/images/k8s/api.png" alt="API Server"/>
 				</section>
 				<section>
 					<h2>Watcher Pattern</h2>
-					<img class="plain" data-src="images/k8s/watcher.png" alt="Watcher"/>
+					<img class="plain" data-src="/images/k8s/watcher.png" alt="Watcher"/>
 				</section>
 				<section>
 					<h2>Scheduler</h2>
-					<img class="plain" data-src="images/k8s/scheduler.png" alt="Scheduler"/>
+					<img class="plain" data-src="/images/k8s/scheduler.png" alt="Scheduler"/>
 				</section>
 				<section>
 					<h2>Controller Manager</h2>
-					<img class="plain" data-src="images/k8s/controller_mgr.png" alt="Controller Manager"/>
+					<img class="plain" data-src="/images/k8s/controller_mgr.png" alt="Controller Manager"/>
 				</section>
 				<section>
 					<h2>Controller Manager</h2>
 					<ul>
-						<li>Replication Manager (a controller for ReplicationController resources)</ul>
-						<li>ReplicaSet, DaemonSet, and Job controllers</ul>
-						<li>Deployment controller</ul>
-						<li>StatefulSet controller</ul>
-						<li>Node controller</ul>
-						<li>Service controller</ul>
-						<li>Endpoints controller</ul>
-						<li>Namespace controller</ul>
-						<li>PersistentVolume controller</ul>
-						<li>Others</ul>
+						<li>Replication Manager (a controller for ReplicationController resources)</li>
+						<li>ReplicaSet, DaemonSet, and Job controllers</li>
+						<li>Deployment controller</li>
+						<li>StatefulSet controller</li>
+						<li>Node controller</li>
+						<li>Service controller</li>
+						<li>Endpoints controller</li>
+						<li>Namespace controller</li>
+						<li>PersistentVolume controller</li>
+						<li>Others</li>
 					</ul>
 				
 				</section>
 				<section>
 					<h2>Kublet</h2>
-					<img class="plain" data-src="images/k8s/kublet.png" alt="Kublet"/>
+					<img class="plain" data-src="/images/k8s/kublet.png" alt="Kublet"/>
 				</section>
 				<section>
 					<h2>Kube-proxy</h2>
-					<img class="plain" data-src="images/k8s/kubeproxy.png" alt="Kube-proxy"/>
+					<img class="plain" data-src="/images/k8s/kubeproxy.png" alt="Kube-proxy"/>
 				</section>
 				<section>
 					<h2>How Controllers Cooperate</h2>
-					<img class="plain" data-src="images/k8s/controllers_coop.png" alt="Comtrollers Cooperation"/>
+					<img class="plain" data-src="/images/k8s/controllers_coop.png" alt="Comtrollers Cooperation"/>
 				</section>
 				<section>
 					<h2>Chain of Events</h2>
-					<img class="plain" data-src="images/k8s/chain_events.png" alt="Chain of Events"/>
+					<img class="plain" data-src="/images/k8s/chain_events.png" alt="Chain of Events"/>
 				</section>
 				<section> 
 					<h2>Manifests</h2>
-					<img class="plain" data-src="images/k8s/manifest.png" alt="Manifest"/>
+					<img class="plain" data-src="/images/k8s/manifest.png" alt="Manifest"/>
 				</section>
 				<section>
 					<h2>The Problem</h2>
@@ -230,7 +230,7 @@
 				</section>
 				<section>
 					<h2>Helm</h2>
-					<img class="plain" data-src="images/helm/helm.png" alt="Helm"/>
+					<img class="plain" data-src="/images/helm/helm.png" alt="Helm"/>
 				</section>
 				<section>
 						<h2>Hands-on Practice</h2>
@@ -281,10 +281,10 @@ cd mushop/deploy/kubernetes</code></pre>
 	</div>
 	<!-- ateam stamp / home -->
 	<a href="#home" class="mu-ateam-water">
-		<img src="images/ateam.png" />
+		<img src="/images/ateam.png" />
 	</a>
 
-	<script src="js/reveal.js"></script>
+	<script src="/js/reveal.js"></script>
 
 	<script>
 		// More info about config & dependencies:
@@ -295,10 +295,10 @@ cd mushop/deploy/kubernetes</code></pre>
 			fragmentInURL: true,
 			transition: 'slide',
 			dependencies: [
-				{ src: 'plugin/markdown/marked.js' },
-				{ src: 'plugin/markdown/markdown.js' },
-				{ src: 'plugin/notes/notes.js', async: true },
-				{ src: 'plugin/highlight/highlight.js', async: true }
+				{ src: '/plugin/markdown/marked.js' },
+				{ src: '/plugin/markdown/markdown.js' },
+				{ src: '/plugin/notes/notes.js', async: true },
+				{ src: '/plugin/highlight/highlight.js', async: true }
 			]
 		});
 	</script>
