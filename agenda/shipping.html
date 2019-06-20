@@ -1,0 +1,335 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Cloud Native OCI - MuShop</title>
+	
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/reveal.css">
+	<link rel="stylesheet" href="/css/theme/mu.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="/lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- title -->
+			<section id="home">
+				<!-- landing -->
+				<section id="home-title">
+					<h1>Cloud Native OCI</h1>
+					<h2>Shipping and Stream Services</h2>
+					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<span>+</span>
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
+					</div>
+					<hr/>
+					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+				</section>
+
+				<!-- TOC -->
+				<section id="toc">
+					<h2>Table of Contents</h2>
+					<ul class="plain">
+						<!-- add a line for each <section id="slideId">...</section>  -->
+						<li><a href="#home">Home</a></li>
+						<li><a href="#lab">Lab Overview</a></li>
+					</ul>
+				</section>
+
+				<!-- Contributors -->
+				<section id="contributors">
+					<h2>Primary Contributors</h2>
+					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+						<div>
+							<div>Adao Oliveira Junior</div>
+							<div>Jeevan Joseph</div>
+							<div>Julio Camara</div>
+						</div>
+						<div>
+							<div>Matt Vander Vliet</div>
+							<div>Sherwood Zern</div>
+							<div>Sumit Kumar</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- Shipping/Streams App -->
+			<section id="shippingApp">
+				<h3>Producer - OSS - Consumer</h3>
+				<div class="mu-flex mu-flex-middle mu-margin">
+					<div class="mu-svc">
+						<img data-src="/images/tech/java.png" /> Order
+					</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div class="mu-svc">
+						<img data-src="/images/tech/java.png" /> Shipping
+					</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div class="mu-svc">
+						<img data-src="/images/tech/docker.svg" /> RabbitMQ
+					</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div class="mu-svc">
+						<img data-src="/images/tech/java.png" /> Queue
+					</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div class="mu-svc">
+						<img data-src="/images/tech/erp.png" /> ERP Cloud
+					</div>
+				</div>
+				<div class="fragment mu-flex mu-flex-middle mu-margin">
+					<div class="mu-svc">
+						<img data-src="/images/tech/java.png" /> Order
+					</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div class="mu-svc">
+						<img data-src="/images/tech/java.png" /> Shipping
+					</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div class="mu-svc">
+						<img data-src="/images/tech/streaming.svg" /> OSS
+					</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div class="mu-svc">
+						<img data-src="/images/tech/java.png" /> Stream
+					</div>
+					<div class="mu-flex-connector arrow"></div>
+					<div class="mu-svc">
+						<img data-src="/images/tech/erp.png" /> ERP Cloud
+					</div>
+				</div>
+
+				
+			</section>
+
+			<!-- Streams -->
+			<section id="oss">
+				<h2>Oracle Streaming Service</h2>
+				<ul>
+					<li>What is OSS?</li>
+					<li>Use cases</li>
+					<li>Concepts</li>
+					<li>How it works</li>
+					<li>Limits</li>
+				</ul>
+			</section>
+			<section>
+				<h2>What is OSS?</h2>
+				<ul>
+					<li>The OCI Streaming Service provides a fully managed, scalable, and durable storage solution for ingesting continuous, high-volume streams of data that you can consume and process in real time</li>
+					<li>OSS is a distributed even-log</li>
+					<li>Messages are written to partitions and can be referenced via partition/offset</li>
+				</ul>
+				<img class="plain" data-src="/images/streams/stream1.png" alt="Producer -> Stream -> Consumer"/>
+			</section>
+			<section>
+				<h2>Use cases</h2>
+				<ul>
+					
+					<li>Metric and log ingestion</li>
+					<div class=fragment><li>Messaging</li></div>
+					<div class=fragment><li>Web/Module activity data ingestion</li></div>
+					<div class=fragment><li>Infrastructure and apps event processing</li></div>
+				</ul>
+				<img class="plain" data-src="/images/streams/stream1.png" alt="Producer -> Stream -> Consumer"/>
+			</section>
+			<section>
+				<h2>How it works</h2>
+				<ul>
+					<div class=fragment><li>A producer publishes a messages to a stream (append-only log)</li></div>
+					<div class=fragment><li>Streams can be divided into a number of partitions for scalability.</li></div>
+					<div class=fragment><li>A consumer reads messages from one or more streams.</li></div>
+				</ul>
+				<img class="plain" data-src="/images/streams/partitions.png" alt="Producer -> Partitions -> Consumer"/>
+			</section>
+			<section>
+				<h2>Limits</h2>
+				<ul>
+					<div class=fragment><li>Message retention: up to 7 days</li></div>
+					<div class=fragment><li>Throughput: 1 MB/sec per partition</li></div>
+					<div class=fragment><li>Message size: 1 MB maximum</li></div>
+					<div class=fragment><li>API calls per second: 5 getMessages per partition</li></div>
+					<div class=fragment><li>Max Total Data Write per second: 1 MB per partition</li></div>
+					<div class=fragment><li>Number of partitions: Enterprise tenancy: 5, Non-Enterprise: 0</li>
+				</ul>
+				<img class="plain" data-src="/images/streams/partitions.png" alt="Producer -> Partitions -> Consumer"/>
+			</section>
+			<section>
+				<h2>Concepts</h2>
+				<ul>
+					<div class=fragment><li>Stream: a partitioned, append-only log of messages</li></div>
+					<div class=fragment><li>Message: base64-encoded record that is published to the stream</li></div>
+					<div class=fragment><li>Offset: the location of a message within a partition.</li></div>
+				</ul>
+				<img class="plain" data-src="/images/streams/stream.png" alt="Producer -> Partitions -> Consumer"/>
+			</section>
+			<section>
+				<h2>Concepts</h2>
+				<ul>
+					<li>Partition: a section of a stream. It allows you to distribute a stream by splitting messages across multiple nodes. Each partition can be placed on a separate machine to allow for multiple consumers to read from a stream in parallel.</li>
+				</ul>
+				<img class="plain" data-src="/images/streams/3partitions.png" alt="Example of 3 partitions"/>
+			</section>
+			<section>
+				<h2>Concepts</h2>
+				<ul>
+					<li>Cursor: a pointer to a location (offset or time) in a stream.</li>
+				</ul>
+				<img class="plain" data-src="/images/streams/cursor.png" alt="Cursor"/>
+			</section>
+			<section>
+					<h2>Concepts</h2>
+					<h3>Cursor Types</h3>
+					<div>
+						<ul>
+							<li>TRIM_HORIZON</li>
+							<li>AT_OFFSET</li>
+							<li>AFTER_OFFSET</li>
+							<li>AT_TIME</li>
+							<li>LATEST</li>
+						</ul>
+					</div>
+					<img class="plain" data-src="/images/streams/cursor.png" alt="Producer"/>
+			</section>
+			<section>
+				<h2>Concepts</h2>
+				<ul>
+					<li>Producer: an entity that writes/publishes messages to a stream.</li>
+				</ul>
+				<img class="plain" data-src="/images/streams/producer.png" alt="Producer"/>
+			</section>
+			<section>
+				<h2>Concepts</h2>
+				<ul>
+					<li>Consumer: an entity that reads messages from one or more streams.</li>
+				</ul>
+				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
+			</section>
+			
+			<section>
+				<h2>Mushop Shipping Service - Producer</h2>
+				
+				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
+				<!-- add image order>producer>stream>consumer>erp -->
+			</section>
+			<section>
+				<h2>Connecting to OSS</h2>
+				<ul>
+					<div class=fragment><li>Generate API signing key and public key</li></div>
+					<div class=fragment><li>Upload public key to OCI</li></div>
+				</ul>
+				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
+			</section>
+			<section>
+					<h2>Connecting to OSS</h2>
+					<ul>
+						<div class=fragment><li>Add credentials/IDs to Kubernetes secret</li></div>
+					</ul>
+					<pre><code class="hljs text">env:
+	- name: OCI_TENANT_ID
+		valueFrom:
+		secretKeyRef:
+		name: streams-secret
+		key: oci_tenant_id
+	- name: OCI_USER_ID
+		valueFrom:
+		secretKeyRef:
+		name: streams-secret
+		key: oci_user_id
+	- name: OCI_FINGERPRINT
+		valueFrom:
+		secretKeyRef:
+		name: streams-secret
+		key: oci_fingerprint
+					</code></pre>			
+			</section>
+			<section>
+					<h2>Connecting to OSS</h2>
+					<ul>
+						<li>In Java get credentials/IDs from environment</li>
+					</ul>
+					<pre><code class="hljs text">final String tenantId = env.getProperty("OCI_TENANT_ID");
+final String userId = env.getProperty("OCI_USER_ID");
+final String fingerprint = env.getProperty("OCI_FINGERPRINT");
+final String privateKey = env.getProperty("OCI_API_KEY");
+final String passPhrase = env.getProperty("OCI_PASS_PHRASE");
+final String region = env.getProperty(“OCI_REGION”);</code></pre>
+			</section>
+			<section>
+				<h2>Connecting to OSS</h2>
+				<ul>
+					<li>Create an authentication object</li>
+				</ul>
+				<pre><code class="hljs text">AuthenticationDetailsProvider provider =  
+	SimpleAuthenticationDetailsProvider.builder()
+		tenantId(tenantId)
+		userId(userId)
+		fingerprint(fingerprint)
+		privateKeySupplier(
+		new StringPrivateKeySupplier(privateKey))
+		region(Region.fromRegionId(region))
+		build();
+				</code></pre>
+			</section>
+			<section>
+					<h2>Publishing message to OSS</h2>
+					<pre><code class="hljs text">PutMessagesDetails messagesDetails =
+	PutMessagesDetails.builder()
+	.messages(messages).build();
+					</code></pre>
+					<pre><code class="hljs text">PutMessagesRequest putRequest =
+	PutMessagesRequest.builder()
+	.streamId(streamsConfig.getStreamId())
+	.putMessagesDetails(messagesDetails)
+	.build();
+					</code></pre>
+					<pre><code class="hljs text">PutMessagesResponse putResponse = 
+	streamsConfig.getStreamClient().
+	putMessages(putRequest);
+					</code></pre>
+			</section>
+		</div>
+	</div>
+	<!-- ateam stamp / home -->
+	<a href="#home" class="mu-ateam-water">
+		<img src="/images/ateam.png" />
+	</a>
+
+	<script src="/js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			fragmentInURL: true,
+			transition: 'slide',
+			dependencies: [
+				{ src: '/plugin/markdown/marked.js' },
+				{ src: '/plugin/markdown/markdown.js' },
+				{ src: '/plugin/notes/notes.js', async: true },
+				{ src: '/plugin/highlight/highlight.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>
