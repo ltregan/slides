@@ -1,0 +1,307 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Cloud Native OCI - MuShop</title>
+	
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/reveal.css">
+	<link rel="stylesheet" href="/css/theme/mu.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="/lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- title -->
+			<section id="home">
+				<!-- landing -->
+				<section id="home-title">
+					<h1>Cloud Native OCI</h1>
+					<h2>Kubernetes/OKE</h2>
+					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<span>+</span>
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
+					</div>
+					<hr/>
+					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+				</section>
+				
+				<!-- TOC -->
+				<section id="toc">
+					<h2>Table of Contents</h2>
+					<ul class="plain">
+						<!-- add a line for each <section id="slideId">...</section>  -->
+						<li><a href="#home">Home</a></li>
+						<li><a href="#lab">Lab Overview</a></li>
+					</ul>
+				</section>
+
+				<!-- Contributors -->
+				<section id="contributors">
+					<h2>Primary Contributors</h2>
+					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+						<div>
+							<div>Adao Oliveira Junior</div>
+							<div>Jeevan Joseph</div>
+							<div>Julio Camara</div>
+						</div>
+						<div>
+							<div>Matt Vander Vliet</div>
+							<div>Sherwood Zern</div>
+							<div>Sumit Kumar</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<section id="lab">
+				
+					Manifest overview
+				
+			</section>
+
+			<!-- Kubernetes -->
+			<section id="kubernetes">
+					<h2>Monolithic vs Microservices</h2>
+					<img class="plain" data-src="/images/k8s/mono_x_ms.png" alt="Monolithic vs Microservices"/>
+				</section>
+				<section>
+					<h2>Scaling Microservices</h2>
+					<img class="plain" data-src="/images/k8s/scaling.png" alt="Scaling Microservices"/>
+				</section>
+				<section>
+					<h2>Imperative vs Declarative Mode</h2>
+					Modes for managing objects in Kubernetes
+					<p>Imperative Mode</p>
+					<pre><code class="hljs text">kubectl create namespace mushop</code></pre>
+					<p>Declarative Mode</p>
+					<pre><code class="hljs text">kubectl apply -f orders.yaml</code></pre>
+				</section>
+				<section>
+					<h2>Basic Resources</h2>
+					<div>
+						<ul>
+							<li>Node</li>
+							<li>Pod</li>
+						</ul>
+					</div>
+					<img class="plain" data-src="/images/k8s/scaling.png" alt="Scaling Microservices"/>
+				</section>
+				<section>
+					<h2>Basic Resources</h2>
+					<ul>
+						<li>Configmaps</li>
+						<li>Secrets</li>
+					</ul>
+					<img class="plain" data-src="/images/k8s/configmap_secret.png" alt="Configmaps and Secrets"/>
+				</section>
+				<section>
+					<h2>Basic Resources</h2>
+					<ul>
+						<li>Namespace</li>
+					</ul>
+					<img class="plain" data-src="/images/k8s/namespace.png" alt="Namespace"/>
+				</section>
+				<section>
+					<h2>Basic Resources</h2>
+					<ul>
+						<li>Replicaset</li>
+					</ul>
+					<img class="plain" data-src="/images/k8s/replicaset.png" alt="Replicaset"/>
+				</section>
+				<section>
+					<h2>Basic Resources</h2>
+					<ul>
+						<li>Services</li>
+					</ul>
+					<img class="plain" data-src="/images/k8s/service.png" alt="Service"/>
+				</section>
+				<section>
+					<h2>Basic Resources</h2>
+					<ul>
+						<li>Deployment</li>
+					</ul>
+					<img class="plain" data-src="/images/k8s/deployment1.png" alt="Deployment"/>
+				</section>
+				<section>
+					<h2>Basic Resources</h2>
+					<ul>
+						<li>Ingress</li>
+					</ul>
+					<img class="plain" data-src="/images/k8s/ingress.png" alt="Ingress"/>
+				</section>
+				<section>
+					<h2>Architecture</h2>
+					<img class="plain" data-src="/images/k8s/arch.png" alt="Architecture"/>
+				</section>
+				<section>
+					<h2>Architecture - High Availability Cluster</h2>
+					<img class="plain" data-src="/images/k8s/arch_HAC.png" alt="Architecture"/>
+				</section>
+				<section>
+					<h2>API Server</h2>
+					<img class="plain" data-src="/images/k8s/api.png" alt="API Server"/>
+				</section>
+				<section>
+					<h2>Watcher Pattern</h2>
+					<img class="plain" data-src="/images/k8s/watcher.png" alt="Watcher"/>
+				</section>
+				<section>
+					<h2>Scheduler</h2>
+					<img class="plain" data-src="/images/k8s/scheduler.png" alt="Scheduler"/>
+				</section>
+				<section>
+					<h2>Controller Manager</h2>
+					<img class="plain" data-src="/images/k8s/controller_mgr.png" alt="Controller Manager"/>
+				</section>
+				<section>
+					<h2>Controller Manager</h2>
+					<ul>
+						<li>Replication Manager (a controller for ReplicationController resources)</li>
+						<li>ReplicaSet, DaemonSet, and Job controllers</li>
+						<li>Deployment controller</li>
+						<li>StatefulSet controller</li>
+						<li>Node controller</li>
+						<li>Service controller</li>
+						<li>Endpoints controller</li>
+						<li>Namespace controller</li>
+						<li>PersistentVolume controller</li>
+						<li>Others</li>
+					</ul>
+				
+				</section>
+				<section>
+					<h2>Kublet</h2>
+					<img class="plain" data-src="/images/k8s/kublet.png" alt="Kublet"/>
+				</section>
+				<section>
+					<h2>Kube-proxy</h2>
+					<img class="plain" data-src="/images/k8s/kubeproxy.png" alt="Kube-proxy"/>
+				</section>
+				<section>
+					<h2>How Controllers Cooperate</h2>
+					<img class="plain" data-src="/images/k8s/controllers_coop.png" alt="Comtrollers Cooperation"/>
+				</section>
+				<section>
+					<h2>Chain of Events</h2>
+					<img class="plain" data-src="/images/k8s/chain_events.png" alt="Chain of Events"/>
+				</section>
+				<section> 
+					<h2>Manifests</h2>
+					<img class="plain" data-src="/images/k8s/manifest.png" alt="Manifest"/>
+				</section>
+				<section>
+					<h2>The Problem</h2>
+					<ul>
+						<li>Steep learning curve when implementing Kubernetes</li>
+						<li>Increased complexity of microservice environments</li>
+						<li>Manually application deployment using kubectl</li>
+						<li>Kubernetes treats your application as a number of decoupled resources</li>
+						<li>More deployment steps means more chances for human error</li>
+						<li>Hard to share and distribute microservice applications</li>
+						<li>Hard to manage application releases</li>
+					</ul>
+				</section>
+				<section>
+					<h2>The Solution: Helm</h2>
+					<ul>
+						<li>Helm is a package management tool for Kubernetes</li>
+						<li>A CNCF project</li>
+						<li>A package manager similar to yum, brew, apt-get, choco, etc., but specifically for Kubernetes</li>
+						<li>Method for repeatable application installation, configuration, and versioning through the use of charts, repositories, and releases</li>
+						<li>Repository of existing templates for standard software</li>
+					</ul>	
+				</section>
+				<section>
+					<h2>Helm</h2>
+					<img class="plain" data-src="/images/helm/helm.png" alt="Helm"/>
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						You will need to create a namespace so that other users' resources don't have name conflict with yours. 
+						Run this command:
+						<pre><code class="hljs text">kubectl create namespace your_namespace</code></pre>
+						where your_namespace is the namespace of your choice.
+						Now Check if your namespace was created:
+						<pre><code class="hljs text">kubectl get namespaces</code></pre>
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						Change the default namespace. Remember to change the your_namespace with your actual namespace
+						<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=your_namespace</code></pre>
+						To validate it:
+						<pre><code class="hljs text">kubectl config view | grep namespace:</code></pre>
+				</section>
+				<section>
+					<h2>Hands-on Practice</h2>
+					Next you will have to modify the mushop deployment descriptor, which been altered for this lab. 
+					Your job is to restore these so the service will deploy without errors.
+					Checkout branch workshop/k8s-lab
+					<pre><code class="hljs text">git clone -b workshop/k8s-lab git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
+cd mushop/deploy/kubernetes</code></pre>
+					Open file mushop.yaml in an editor of your choice.
+					Look for the deployment section for catalogue. The commented lines (start with #) have instruction to create environment variables. 
+					
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						Repeat the same procedure for the shipping and stream deployments.
+						When finished, save and exit the file.
+						Now it's time to deploy the services and pods needed to run the mushop store.
+						Run this command:
+						<pre><code class="hljs text">kubectl create -f mushop.yaml</code></pre>
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						To check that all resources have been created run this:
+						<pre><code class="hljs text">kubectl get all</code></pre>
+				</section>
+				<section>
+						<h2>Hands-on Practice</h2>
+						<p>[add instructions to proxy to the services on OKE]</p>
+				</section>
+
+		</div>
+	</div>
+	<!-- ateam stamp / home -->
+	<a href="#home" class="mu-ateam-water">
+		<img src="/images/ateam.png" />
+	</a>
+
+	<script src="/js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			fragmentInURL: true,
+			transition: 'slide',
+			dependencies: [
+				{ src: '/plugin/markdown/marked.js' },
+				{ src: '/plugin/markdown/markdown.js' },
+				{ src: '/plugin/notes/notes.js', async: true },
+				{ src: '/plugin/highlight/highlight.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>

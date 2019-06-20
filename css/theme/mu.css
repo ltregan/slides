@@ -425,7 +425,8 @@ pre.mu-small {
   line-height: 1em; }
   .mu-svc img {
     display: block;
-    height: 50px; }
+    height: 50px;
+    margin: 0 auto !important; }
   .mu-svc + .mu-flex-connector {
     margin-top: -2%; }
 
