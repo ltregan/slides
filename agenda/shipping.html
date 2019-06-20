@@ -6,20 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<title>Cloud Native OCI - MuShop</title>
-	<base href="/">
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/mu.css">
+	
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/reveal.css">
+	<link rel="stylesheet" href="/css/theme/mu.css">
 
 	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="lib/css/monokai.css">
+	<link rel="stylesheet" href="/lib/css/monokai.css">
 
 	<!-- Printing and PDF exports -->
 	<script>
 		var link = document.createElement('link');
 		link.rel = 'stylesheet';
 		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
 		document.getElementsByTagName('head')[0].appendChild(link);
 	</script>
 </head>
@@ -34,9 +34,9 @@
 					<h1>Cloud Native OCI</h1>
 					<h2>Shipping and Stream Services</h2>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
 					</div>
 					<hr/>
 					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
@@ -73,46 +73,46 @@
 			<!-- Shipping/Streams App -->
 			<section id="shippingApp">
 				<h3>Producer - OSS - Consumer</h3>
-				<div class="mu-flex mu-flex-middle">
+				<div class="mu-flex mu-flex-middle mu-margin">
 					<div class="mu-svc">
-						<img data-src="images/tech/java.png" /> Order
+						<img data-src="/images/tech/java.png" /> Order
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="images/tech/java.png" /> Shipping
+						<img data-src="/images/tech/java.png" /> Shipping
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="images/tech/docker.svg" /> RabbitMQ
+						<img data-src="/images/tech/docker.svg" /> RabbitMQ
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="images/tech/java.png" /> Queue
+						<img data-src="/images/tech/java.png" /> Queue
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="images/tech/erp.png" /> ERP Cloud
+						<img data-src="/images/tech/erp.png" /> ERP Cloud
 					</div>
 				</div>
-				<div class="fragment mu-flex mu-flex-middle">
+				<div class="fragment mu-flex mu-flex-middle mu-margin">
 					<div class="mu-svc">
-						<img data-src="images/tech/java.png" /> Order
+						<img data-src="/images/tech/java.png" /> Order
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="images/tech/java.png" /> Shipping
+						<img data-src="/images/tech/java.png" /> Shipping
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="images/tech/streaming.svg" /> OSS
+						<img data-src="/images/tech/streaming.svg" /> OSS
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="images/tech/java.png" /> Stream
+						<img data-src="/images/tech/java.png" /> Stream
 					</div>
 					<div class="mu-flex-connector arrow"></div>
 					<div class="mu-svc">
-						<img data-src="images/tech/erp.png" /> ERP Cloud
+						<img data-src="/images/tech/erp.png" /> ERP Cloud
 					</div>
 				</div>
 
@@ -137,7 +137,7 @@
 					<li>OSS is a distributed even-log</li>
 					<li>Messages are written to partitions and can be referenced via partition/offset</li>
 				</ul>
-				<img class="plain" data-src="images/streams/stream1.png" alt="Producer -> Stream -> Consumer"/>
+				<img class="plain" data-src="/images/streams/stream1.png" alt="Producer -> Stream -> Consumer"/>
 			</section>
 			<section>
 				<h2>Use cases</h2>
@@ -148,7 +148,7 @@
 					<div class=fragment><li>Web/Module activity data ingestion</li></div>
 					<div class=fragment><li>Infrastructure and apps event processing</li></div>
 				</ul>
-				<img class="plain" data-src="images/streams/stream1.png" alt="Producer -> Stream -> Consumer"/>
+				<img class="plain" data-src="/images/streams/stream1.png" alt="Producer -> Stream -> Consumer"/>
 			</section>
 			<section>
 				<h2>How it works</h2>
@@ -157,7 +157,7 @@
 					<div class=fragment><li>Streams can be divided into a number of partitions for scalability.</li></div>
 					<div class=fragment><li>A consumer reads messages from one or more streams.</li></div>
 				</ul>
-				<img class="plain" data-src="images/streams/partitions.png" alt="Producer -> Partitions -> Consumer"/>
+				<img class="plain" data-src="/images/streams/partitions.png" alt="Producer -> Partitions -> Consumer"/>
 			</section>
 			<section>
 				<h2>Limits</h2>
@@ -169,7 +169,7 @@
 					<div class=fragment><li>Max Total Data Write per second: 1 MB per partition</li></div>
 					<div class=fragment><li>Number of partitions: Enterprise tenancy: 5, Non-Enterprise: 0</li>
 				</ul>
-				<img class="plain" data-src="images/streams/partitions.png" alt="Producer -> Partitions -> Consumer"/>
+				<img class="plain" data-src="/images/streams/partitions.png" alt="Producer -> Partitions -> Consumer"/>
 			</section>
 			<section>
 				<h2>Concepts</h2>
@@ -178,21 +178,21 @@
 					<div class=fragment><li>Message: base64-encoded record that is published to the stream</li></div>
 					<div class=fragment><li>Offset: the location of a message within a partition.</li></div>
 				</ul>
-				<img class="plain" data-src="images/streams/stream.png" alt="Producer -> Partitions -> Consumer"/>
+				<img class="plain" data-src="/images/streams/stream.png" alt="Producer -> Partitions -> Consumer"/>
 			</section>
 			<section>
 				<h2>Concepts</h2>
 				<ul>
 					<li>Partition: a section of a stream. It allows you to distribute a stream by splitting messages across multiple nodes. Each partition can be placed on a separate machine to allow for multiple consumers to read from a stream in parallel.</li>
 				</ul>
-				<img class="plain" data-src="images/streams/3partitions.png" alt="Example of 3 partitions"/>
+				<img class="plain" data-src="/images/streams/3partitions.png" alt="Example of 3 partitions"/>
 			</section>
 			<section>
 				<h2>Concepts</h2>
 				<ul>
 					<li>Cursor: a pointer to a location (offset or time) in a stream.</li>
 				</ul>
-				<img class="plain" data-src="images/streams/cursor.png" alt="Cursor"/>
+				<img class="plain" data-src="/images/streams/cursor.png" alt="Cursor"/>
 			</section>
 			<section>
 					<h2>Concepts</h2>
@@ -206,27 +206,27 @@
 							<li>LATEST</li>
 						</ul>
 					</div>
-					<img class="plain" data-src="images/streams/cursor.png" alt="Producer"/>
+					<img class="plain" data-src="/images/streams/cursor.png" alt="Producer"/>
 			</section>
 			<section>
 				<h2>Concepts</h2>
 				<ul>
 					<li>Producer: an entity that writes/publishes messages to a stream.</li>
 				</ul>
-				<img class="plain" data-src="images/streams/producer.png" alt="Producer"/>
+				<img class="plain" data-src="/images/streams/producer.png" alt="Producer"/>
 			</section>
 			<section>
 				<h2>Concepts</h2>
 				<ul>
 					<li>Consumer: an entity that reads messages from one or more streams.</li>
 				</ul>
-				<img class="plain" data-src="images/streams/consumer.png" alt="Producer"/>
+				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
 			</section>
 			
 			<section>
 				<h2>Mushop Shipping Service - Producer</h2>
 				
-				<img class="plain" data-src="images/streams/consumer.png" alt="Producer"/>
+				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
 				<!-- add image order>producer>stream>consumer>erp -->
 			</section>
 			<section>
@@ -235,7 +235,7 @@
 					<div class=fragment><li>Generate API signing key and public key</li></div>
 					<div class=fragment><li>Upload public key to OCI</li></div>
 				</ul>
-				<img class="plain" data-src="images/streams/consumer.png" alt="Producer"/>
+				<img class="plain" data-src="/images/streams/consumer.png" alt="Producer"/>
 			</section>
 			<section>
 					<h2>Connecting to OSS</h2>
@@ -309,10 +309,10 @@ final String region = env.getProperty(“OCI_REGION”);</code></pre>
 	</div>
 	<!-- ateam stamp / home -->
 	<a href="#home" class="mu-ateam-water">
-		<img src="images/ateam.png" />
+		<img src="/images/ateam.png" />
 	</a>
 
-	<script src="js/reveal.js"></script>
+	<script src="/js/reveal.js"></script>
 
 	<script>
 		// More info about config & dependencies:
@@ -323,10 +323,10 @@ final String region = env.getProperty(“OCI_REGION”);</code></pre>
 			fragmentInURL: true,
 			transition: 'slide',
 			dependencies: [
-				{ src: 'plugin/markdown/marked.js' },
-				{ src: 'plugin/markdown/markdown.js' },
-				{ src: 'plugin/notes/notes.js', async: true },
-				{ src: 'plugin/highlight/highlight.js', async: true }
+				{ src: '/plugin/markdown/marked.js' },
+				{ src: '/plugin/markdown/markdown.js' },
+				{ src: '/plugin/notes/notes.js', async: true },
+				{ src: '/plugin/highlight/highlight.js', async: true }
 			]
 		});
 	</script>
