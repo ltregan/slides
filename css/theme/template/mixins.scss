@@ -18,12 +18,12 @@
 	background: linear-gradient( left, $top 0%, $bottom 100% );
 }
 
-@mixin radial-gradient( $outer, $inner, $type: circle ) {
+@mixin radial-gradient( $outer, $inner, $start: 0%, $type: circle ) {
 	background: $outer;
-	background: -moz-radial-gradient( center, $type cover,  $inner 0%, $outer 100% );
-	background: -webkit-gradient( radial, center center, 0px, center center, 100%, color-stop(0%,$inner), color-stop(100%,$outer) );
-	background: -webkit-radial-gradient( center, $type cover,  $inner 0%, $outer 100% );
-	background: -o-radial-gradient( center, $type cover,  $inner 0%, $outer 100% );
-	background: -ms-radial-gradient( center, $type cover,  $inner 0%, $outer 100% );
-	background: radial-gradient( center, $type cover,  $inner 0%, $outer 100% );
+	background: -moz-radial-gradient( center, $type cover,  $inner $start, $outer 100% );
+	background: -webkit-gradient( radial, center center, 0px, center center, 100%, color-stop($start, $inner), color-stop(100%, $outer) );
+	background: -webkit-radial-gradient( center, $type cover,  $inner $start, $outer 100% );
+	background: -o-radial-gradient( center, $type cover,  $inner $start, $outer 100% );
+	background: -ms-radial-gradient( center, $type cover,  $inner $start, $outer 100% );
+	background: radial-gradient( center, $type cover,  $inner $start, $outer 100% );
 }

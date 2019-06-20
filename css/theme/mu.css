@@ -12,12 +12,12 @@ section.has-dark-background, section.has-dark-background h1, section.has-dark-ba
  *********************************************/
 body {
   background: #c5c5c5;
-  background: -moz-radial-gradient(center, circle cover, white 0%, #c5c5c5 100%);
-  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(0%, white), color-stop(100%, #c5c5c5));
-  background: -webkit-radial-gradient(center, circle cover, white 0%, #c5c5c5 100%);
-  background: -o-radial-gradient(center, circle cover, white 0%, #c5c5c5 100%);
-  background: -ms-radial-gradient(center, circle cover, white 0%, #c5c5c5 100%);
-  background: radial-gradient(center, circle cover, white 0%, #c5c5c5 100%);
+  background: -moz-radial-gradient(center, circle cover, white 25%, #c5c5c5 100%);
+  background: -webkit-gradient(radial, center center, 0px, center center, 100%, color-stop(25%, white), color-stop(100%, #c5c5c5));
+  background: -webkit-radial-gradient(center, circle cover, white 25%, #c5c5c5 100%);
+  background: -o-radial-gradient(center, circle cover, white 25%, #c5c5c5 100%);
+  background: -ms-radial-gradient(center, circle cover, white 25%, #c5c5c5 100%);
+  background: radial-gradient(center, circle cover, white 25%, #c5c5c5 100%);
   background-color: #fff; }
 
 .reveal {
@@ -286,6 +286,9 @@ a {
   box-shadow: none;
   border: 0; }
 
+.reveal section iframe {
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.25); }
+
 .reveal blockquote {
   width: auto; }
 
@@ -317,6 +320,10 @@ section > h2 > img {
 
 .mu-small {
   font-size: 0.6em;
+  line-height: 1.1; }
+
+.mu-medium {
+  font-size: 0.8em;
   line-height: 1.1; }
 
 pre.mu-small {
@@ -405,6 +412,38 @@ pre.mu-small {
       top: 0;
       right: -4px;
       transform: translateY(-12px); }
+
+.mu-ratio {
+  position: relative; }
+  .mu-ratio::before {
+    content: "";
+    display: block;
+    width: 100%; }
+  .mu-ratio > * {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100%;
+    height: 100%; }
+
+.mu-ratio-1-1::before {
+  padding-top: 100%; }
+
+.mu-ratio-3-2::before {
+  padding-top: 66.66%; }
+
+.mu-ratio-4-3::before {
+  padding-top: 75%; }
+
+.mu-ratio-16-9::before {
+  padding-top: 56.25%; }
+
+.mu-ratio-2-1::before {
+  padding-top: 50%; }
 
 .fragment-set {
   position: relative; }
