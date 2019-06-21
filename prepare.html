@@ -6,21 +6,20 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<title>Cloud Native OCI - Prepare</title>
-	<base href="/">
 
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/mu.css">
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/reveal.css">
+	<link rel="stylesheet" href="/css/theme/mu.css">
 
 	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="lib/css/monokai.css">
+	<link rel="stylesheet" href="/lib/css/monokai.css">
 
 	<!-- Printing and PDF exports -->
 	<script>
 		var link = document.createElement('link');
 		link.rel = 'stylesheet';
 		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
 		document.getElementsByTagName('head')[0].appendChild(link);
 	</script>
 </head>
@@ -36,9 +35,9 @@
 					<h1>Cloud Native OCI</h1>
 					<h2>💻 Workshop Preparation</h2>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="images/logo.png" alt="MuShop" />
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
 					</div>
 					<hr/>
 					<!-- <h4>Microservices on Oracle Cloud</h4> -->
@@ -67,9 +66,9 @@
 				<ul class="plain">
 					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" _target="blank">OCI Tenancy Access<sup>*</sup></a></li>
 					<li><a href="https://www.docker.com/products/docker-desktop" _target="blank">Docker Desktop</a> ~2.x</li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" _target="blank">OCI Command Line</a> ~2.5.x</li>
+					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" _target="blank">OCI Command Line</a> ~2.5.x <em class="mu-muted">(optional)</em></li>
 					<li><a href="https://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" _target="blank">Oracle SQL Developer</a> ~2.5.x</li>
-					<li><a href="https://stedolan.github.io/jq/" _target="blank">JSON CLI Processor</a> ~1.6<em class="mu-muted">(optional)</em></li>
+					<li><a href="https://stedolan.github.io/jq/" _target="blank">JSON CLI Processor</a> ~1.6 <em class="mu-muted">(optional)</em></li>
 				</ul>
 				<blockquote class="mu-small mu-left">
 					<sup>*</sup>Tenancy access may be provided, or you may use an existing tenancy

@@ -83,7 +83,7 @@
 
 				<section id="clone">
 					<h2>Clone MuShop</h2>
-					<p>
+					<p class="mu-small">
 						Begin by cloning the workshop project. By default, the <code>develop</code>
 						branch will be checked out
 					</p>
@@ -127,16 +127,16 @@ git branch
 
 				<section id="credentials">
 					<h2>🔒 Install Credentials</h2>
-					<p>
+					<p class="mu-small">
 						The application runtime requires connectivity to an OCI Tenancy.
 						A credential file for the development environment is provided.
 					</p>
 					<hr/>
 					<ol class="block">
 						<li>Download K8S <a href="/downloads/k8s/secrets.yaml">secrets.yaml</a></li>
-						<li>Install Secrets</li>
+						<li>Create a namespace <pre><code class="hljs text">kubectl create namespace your-name</code></pre></li>
+						<li>Install Secrets <pre><code class="hljs text">kubectl create -f secrets.yaml -n your-name</code></pre></li>
 					</ol>
-					<pre><code class="hljs text">kubectl create -f path/to/secrets.yaml</code></pre>
 					Next: <a class="navigate-down">Start</a>
 				</section>
 
@@ -147,6 +147,8 @@ git branch
 						<li>Deploy in K8S</li>
 					</ol>
 					<pre><code class="hljs text">kubectl apply -f deploy/kubernetes/mushop.yaml</code></pre>
+					<pre class="fragment"><code class="hljs text">kubectl get pod --watch</code></pre>
+					<pre class="fragment"><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
 				</section>
 
 			</section>
