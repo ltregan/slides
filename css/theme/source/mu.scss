@@ -61,6 +61,13 @@ $o-color-darker: darken($o-color-dark, 10%);
 $o-color-grey-alpha: rgba($o-color-grey, 0.15);
 $o-color-light-alpha: rgba($o-color-light-grey, 0.15);
 
+// ratios
+$ratio-1-1:                                     100%;
+$ratio-3-2:                                     66.66%;
+$ratio-4-3:                                     75%;
+$ratio-16-9:                                    56.25%;
+$ratio-2-1:                                     50%;
+
 section.has-dark-background {
 	&, h1, h2, h3, h4, h5, h6 {
 		color: $backgroundColor;
@@ -69,10 +76,7 @@ section.has-dark-background {
 
 // Background generator
 @mixin bodyBackground() {
-	@include radial-gradient( rgb(197, 197, 197), rgba(255,255,255,1) );
-	// background-image: url(../../../images/ateam.png);
-	// background-repeat: no-repeat;
-	// background-position: 100% 100%;
+	@include radial-gradient( rgb(197, 197, 197), rgba(255,255,255,1), 25% );
 }
 
 @mixin divider() {
@@ -94,6 +98,9 @@ a {
 	background: none;
 	box-shadow: none;
 	border: 0;
+}
+.reveal section iframe {
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
 
 .reveal blockquote {
@@ -131,9 +138,12 @@ section > h2 > img {
 .mu-left {
 	text-align: left;
 }
-
 .mu-small {
 	font-size: 0.6em;
+	line-height: 1.1;
+}
+.mu-medium {
+	font-size: 0.8em;
 	line-height: 1.1;
 }
 pre {
@@ -270,6 +280,50 @@ pre {
 	}
 }
 
+// Aspect
+.mu-ratio {
+  position: relative;
+
+  &::before {
+    content: "";
+    display: block;
+    width: 100%;
+  }
+
+  & > * {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    max-width: 100% !important;
+    max-height: 100% !important;
+    width: 100%;
+    height: 100%;
+  }
+}
+
+
+.mu-ratio-1-1::before {
+  padding-top: $ratio-1-1;
+}
+
+.mu-ratio-3-2::before {
+  padding-top: $ratio-3-2;
+}
+
+.mu-ratio-4-3::before {
+  padding-top: $ratio-4-3;
+}
+
+.mu-ratio-16-9::before {
+  padding-top: $ratio-16-9;
+}
+
+.mu-ratio-2-1::before {
+  padding-top: $ratio-2-1;
+}
+
 // Fragment
 
 .fragment-set {
@@ -315,5 +369,14 @@ pre {
 		height: 60px;
 		filter: drop-shadow(5px 5px 30px rgba(0,0,0,0.5));
 		opacity: 0.4;
+	}
+}
+
+// agenda
+
+table.agenda {
+	font-size: 0.5em;
+	td {
+		white-space: nowrap;
 	}
 }
