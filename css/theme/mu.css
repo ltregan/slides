@@ -292,6 +292,9 @@ a {
 .reveal blockquote {
   width: auto; }
 
+.reveal pre {
+  font-size: 0.4em; }
+
 .mu-margin {
   margin-bottom: 20px; }
 
@@ -326,9 +329,6 @@ section > h2 > img {
   font-size: 0.8em;
   line-height: 1.1; }
 
-pre.mu-small {
-  font-size: 0.4em; }
-
 .mu-normal {
   text-transform: none !important;
   font-style: normal !important;
@@ -336,6 +336,9 @@ pre.mu-small {
 
 .mu-muted {
   opacity: 0.5; }
+
+.mu-grayscale {
+  filter: grayscale(100%) opacity(50%); }
 
 .reveal .block {
   display: block; }
@@ -447,14 +450,14 @@ pre.mu-small {
 
 .fragment-set {
   position: relative; }
-  .fragment-set .fragment {
+  .fragment-set > .fragment {
     position: absolute;
     top: 0;
     left: 0;
     right: 0; }
-    .fragment-set .fragment.visible:not(.current-fragment):not(:last-child) {
+    .fragment-set > .fragment.visible:not(.current-fragment):not(:last-child) {
       opacity: 0 !important; }
-    .fragment-set .fragment.current-fragment[data-fragment-index="0"] {
+    .fragment-set > .fragment.current-fragment[data-fragment-index="0"] {
       opacity: 1 !important;
       visibility: inherit !important; }
 

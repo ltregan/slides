@@ -32,7 +32,7 @@
 				<!-- landing -->
 				<section id="home-title">
 					<h1>Cloud Native OCI</h1>
-					<h2>Storefront + Edge</h2>
+					<h2>UI + Edge</h2>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
 						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
@@ -45,10 +45,10 @@
 				<!-- TOC -->
 				<section id="toc">
 					<h2>Table of Contents</h2>
-					<ul class="plain">
+					<ul>
 						<!-- add a line for each <section id="slideId">...</section>  -->
 						<li><a href="#home">Home</a></li>
-						<li><a href="#lab">Lab Overview</a></li>
+						<li><a href="#lab">Overview</a></li>
 						<li><a href="#ingress">Ingress</a></li>
 					</ul>
 				</section>
@@ -75,20 +75,21 @@
 			<section id="lab">
 				<h2>Lab Overview</h2>
 				<ul>
-					<li>We'll do this...</li>
-					<li>And this...</li>
-					<li>Then that...</li>
+					<li>Exposing the application</li>
+					<li>DNS Configuration</li>
+					<li>Securing with WAF</li>
 				</ul>
 			</section>
 
-			<section id="ingress">
-				<section id="ingress-overview">
+			<section>
+				<section id="ingress">
 					<h2>Ingress</h2>
 					<p>
-						Here is a basic service diagram for the way traffic flows to the application.
+						Shown here is a basic service diagram for the way traffic flows to
+						an application deployed on OKE
 					</p>
 					<div class="mu-flex mu-flex-middle">
-						<div class="mu-svc">
+						<div class="mu-svc fragment">
 							<img data-src="/images/tech/dns.svg" />
 							<span>DNS</span>
 						</div>
@@ -97,26 +98,36 @@
 								<img data-src="/images/tech/waf.svg" />
 								<span>WAF</span>
 							</div> -->
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
+						<div class="mu-flex-connector arrow fragment fade-in">public-ip</div>
+						<div class="mu-svc fragment fade-in">
 							<img data-src="/images/tech/lb.svg" />
 							<span>LB</span>
 						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
+						<div class="mu-flex-connector arrow fragment fade-in">subnets</div>
+						<div class="mu-svc fragment fade-in">
 							<img data-src="/images/tech/vcn.svg" />
 							<span>VCN</span>
 						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
+						<div class="mu-flex-connector arrow fragment fade-in">backends</div>
+						<div class="mu-svc fragment fade-in">
 							<img data-src="/images/tech/k8s.icon.png" />
 							<span>OKE</span>
 						</div>
 					</div>
 				</section>
 
-				<section>
+				<section id="k8s-ingress">
 					<h2>K8S Ingress</h2>
+					
+				 	<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+						<img data-src="/images/tech/k8s.png" style="width:10%"/>
+						<blockquote class="mu-small">
+							Ingress exposes HTTP and HTTPS routes from outside the cluster to
+							services within the cluster. Traffic routing is controlled by rules
+							defined on the Ingress resource
+						</blockquote>
+					</div>
+
 					<div class="mu-flex mu-flex-middle">
 						<div class="mu-svc">
 							<img data-src="/images/tech/lb.svg" />
@@ -136,7 +147,10 @@
 
 					<div class="fragment-set">
 						<div class="fragment fade-out">
-							<p>Install ingress controller with <code>helm</code></p>
+							<p>An ingress controller is installed using <code>helm</code></p>
+						</div>
+						<div class="fragment fade-in">
+							<p>An ingress controller is installed using <code>helm</code></p>
 							<pre><code class="hljs text">helm install \
 --name nginx-ingress \
 --namespace nginx-ingress \
@@ -144,22 +158,74 @@ stable/nginx-ingress</code></pre>
 							<pre><code class="hljs text">kubectl get svc -n nginx-ingress</code></pre>
 							<pre><code class="hljs text">NAME                       TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
 nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:32491/TCP,443:31240/TCP   5m</code></pre>
-							<small>
-								<p>Note an <code>EXTERNAL-IP</code> is assigned after a few seconds</p>
-							</small>
+							<p class="mu-small">An <b><code>EXTERNAL-IP</code></b> is assigned after a few seconds</p>
 						</div>
 						<div class="fragment fade-in">
 							<p>Verify the load balancer in OCI</p>
 							<pre><code class="hljs text">oci lb load-balancer list \
 | jq '.data[] | {id: .id, name: .["display-name"], ipAddr: .["ip-addresses"][]["ip-address"]}'</code></pre>
 							<pre><code>{
-	"id": "ocid1.loadbalancer.oc1.phx.aaaaaaaaucgamttt3piveonxw5d6ssirzxprcbrcv7vf6tgswna7qxdnvnfa",
-	"name": "097f5359-9165-11e9-bfe8-0a580aed21e9",
-	"ipAddr": "129.146.192.154"
+  "id": "ocid1.loadbalancer.oc1.phx.aaaaaaaaucgamttt3piveonxw5d6ssirzxprcbrcv7vf6tgswna7qxdnvnfa",
+  "name": "097f5359-9165-11e9-bfe8-0a580aed21e9",
+  "ipAddr": "129.146.192.154"
 }</code></pre>
-							<small>
-								<p><b>NOTE</b> the same <code>EXTERNAL-IP</code> from before 🤘</p>
-							</small>
+							<p class="mu-small">Notice <b><code>ipAddr</code></b> matches <b><code>EXTERNAL-IP</code></b> assigned to the controller 🤘</p>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<section id="dns">
+				<h2>
+					<img data-src="/images/tech/dns.svg" alt="DNS" />
+					DNS
+				</h2>
+				...
+			</section>
+
+			<section>
+				<section id="waf">
+					<h2>🔒 Web Application Firewall</h2>
+					<blockquote class="mu-small">
+							The WAF service uses a layered approach to protect web applications
+							against cyberattacks. This release includes over 250 predefined
+							Open Web Access Security Project (OWASP), application, and
+							compliance-specific rules.
+					</blockquote>
+					<div class="fragment fade-in">
+						<img data-src="/images/about/waf.png" alt="WAF" style="width: 80%;"/>
+					</div>
+				</section>
+
+				<section id="waf-ingress">
+					<h2>🔒 Ingress with WAF</h2>
+					<p>
+						Apply WAF security between your DNS and the public load balancer
+					</p>
+					<div class="mu-flex mu-flex-middle">
+						<div class="mu-svc mu-grayscale">
+							<img data-src="/images/tech/dns.svg" />
+							<span>DNS</span>
+						</div>
+						<div class="mu-flex-connector arrow">CNAME</div>
+						<div class="mu-svc">
+							<img data-src="/images/tech/waf.svg" />
+							<span>WAF</span>
+						</div>
+						<div class="mu-flex-connector arrow">public-ip</div>
+						<div class="mu-svc mu-grayscale">
+							<img data-src="/images/tech/lb.svg" />
+							<span>LB</span>
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="mu-svc mu-grayscale">
+							<img data-src="/images/tech/vcn.svg" />
+							<span>VCN</span>
+						</div>
+						<div class="mu-flex-connector arrow"></div>
+						<div class="mu-svc mu-grayscale">
+							<img data-src="/images/tech/k8s.icon.png" />
+							<span>OKE</span>
 						</div>
 					</div>
 				</section>
