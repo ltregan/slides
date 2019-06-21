@@ -2,268 +2,404 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Cloud Native OCI - MuShop</title>
-	
-	<link rel="stylesheet" href="/css/reset.css">
-	<link rel="stylesheet" href="/css/reveal.css">
-	<link rel="stylesheet" href="/css/theme/mu.css">
+  <title>Cloud Native OCI - MuShop</title>
+  
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/reveal.css">
+  <link rel="stylesheet" href="/css/theme/mu.css">
 
-	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="/lib/css/monokai.css">
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="/lib/css/monokai.css">
 
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement('link');
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
-		document.getElementsByTagName('head')[0].appendChild(link);
-	</script>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
 </head>
 
 <body>
-	<div class="reveal">
-		<div class="slides">
-			<!-- title -->
-			<section id="home">
-				<!-- landing -->
-				<section id="home-title">
-					<h1>Cloud Native OCI</h1>
-					<h2>UI + Edge</h2>
-					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
-						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
-					</div>
-					<hr/>
-					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
-				</section>
+  <div class="reveal">
+    <div class="slides">
+      <!-- title -->
+      <section id="home">
+        <!-- landing -->
+        <section id="home-title">
+          <h1>Cloud Native OCI</h1>
+          <h2>Storefront + Edge</h2>
+          <div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+            <img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+            <span>+</span>
+            <img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
+          </div>
+          <hr/>
+          <small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+        </section>
 
-				<!-- TOC -->
-				<section id="toc">
-					<h2>Table of Contents</h2>
-					<ul>
-						<!-- add a line for each <section id="slideId">...</section>  -->
-						<li><a href="#home">Home</a></li>
-						<li><a href="#lab">Overview</a></li>
-						<li><a href="#ingress">Ingress</a></li>
-					</ul>
-				</section>
+        <!-- TOC -->
+        <section id="toc">
+          <h2>Table of Contents</h2>
+          <ul>
+            <!-- add a line for each <section id="slideId">...</section>  -->
+            <li><a href="#home">Home</a></li>
+            <li><a href="#lab">Overview</a></li>
+            <li><a href="#ingress">Ingress</a></li>
+            <li><a href="#dns">DNS</a></li>
+            <li><a href="#waf">WAF</a></li>
+            <li><a href="#other">Additional</a></li>
+            <li><a href="#resources">Resources</a></li>
+          </ul>
+        </section>
 
-				<!-- Contributors -->
-				<section id="contributors">
-					<h2>Primary Contributors</h2>
-					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
-						<div>
-							<div>Adao Oliveira Junior</div>
-							<div>Jeevan Joseph</div>
-							<div>Julio Camara</div>
-						</div>
-						<div>
-							<div>Matt Vander Vliet</div>
-							<div>Sherwood Zern</div>
-							<div>Sumit Kumar</div>
-						</div>
-					</div>
-				</section>
-			</section>
+        <!-- Contributors -->
+        <section id="contributors">
+          <h2>Primary Contributors</h2>
+          <div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+            <div>
+              <div>Adao Oliveira Junior</div>
+              <div>Jeevan Joseph</div>
+              <div>Julio Camara</div>
+            </div>
+            <div>
+              <div>Matt Vander Vliet</div>
+              <div>Sherwood Zern</div>
+              <div>Sumit Kumar</div>
+            </div>
+          </div>
+        </section>
+      </section>
 
-			<!-- Overview -->
-			<section id="lab">
-				<h2>Lab Overview</h2>
-				<ul>
-					<li>Exposing the application</li>
-					<li>DNS Configuration</li>
-					<li>Securing with WAF</li>
-				</ul>
-			</section>
+      <!-- Overview -->
+      <section id="lab">
+        <h2>Lab Overview</h2>
+        <ul>
+          <li>Exposing the application</li>
+          <li>DNS Configuration</li>
+          <li>OKE Ingress</li>
+          <li>Securing with WAF</li>
+        </ul>
+      </section>
 
-			<section>
-				<section id="ingress">
-					<h2>Ingress</h2>
-					<p>
-						Shown here is a basic service diagram for the way traffic flows to
-						an application deployed on OKE
-					</p>
-					<div class="mu-flex mu-flex-middle">
-						<div class="mu-svc fragment">
-							<img data-src="/images/tech/dns.svg" />
-							<span>DNS</span>
-						</div>
-						<!-- <div class="mu-flex-connector arrow"></div>
-							<div class="mu-svc">
-								<img data-src="/images/tech/waf.svg" />
-								<span>WAF</span>
-							</div> -->
-						<div class="mu-flex-connector arrow fragment fade-in">public-ip</div>
-						<div class="mu-svc fragment fade-in">
-							<img data-src="/images/tech/lb.svg" />
-							<span>LB</span>
-						</div>
-						<div class="mu-flex-connector arrow fragment fade-in">subnets</div>
-						<div class="mu-svc fragment fade-in">
-							<img data-src="/images/tech/vcn.svg" />
-							<span>VCN</span>
-						</div>
-						<div class="mu-flex-connector arrow fragment fade-in">backends</div>
-						<div class="mu-svc fragment fade-in">
-							<img data-src="/images/tech/k8s.icon.png" />
-							<span>OKE</span>
-						</div>
-					</div>
-				</section>
+      <section id="ingress">
+        <h2>Ingress</h2>
+        <p>
+          Shown here is a basic service diagram for the way traffic flows to
+          an application deployed on OKE
+        </p>
+        <div class="mu-flex mu-flex-middle">
+          <div class="mu-svc fragment">
+            <img data-src="/images/tech/dns.svg" />
+            <span>DNS</span>
+          </div>
+          <!-- <div class="mu-flex-connector arrow"></div>
+            <div class="mu-svc">
+              <img data-src="/images/tech/waf.svg" />
+              <span>WAF</span>
+            </div> -->
+          <div class="mu-flex-connector arrow fragment fade-in">public-ip</div>
+          <div class="mu-svc fragment fade-in">
+            <img data-src="/images/tech/lb.svg" />
+            <span>LB</span>
+          </div>
+          <div class="mu-flex-connector arrow fragment fade-in">subnets</div>
+          <div class="mu-svc fragment fade-in">
+            <img data-src="/images/tech/vcn.svg" />
+            <span>VCN</span>
+          </div>
+          <div class="mu-flex-connector arrow fragment fade-in">backends</div>
+          <div class="mu-svc fragment fade-in">
+            <img data-src="/images/tech/k8s.icon.png" />
+            <span>OKE</span>
+          </div>
+        </div>
+      </section>
 
-				<section id="k8s-ingress">
-					<h2>K8S Ingress</h2>
-					
-				 	<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
-						<img data-src="/images/tech/k8s.png" style="width:10%"/>
-						<blockquote class="mu-small">
-							Ingress exposes HTTP and HTTPS routes from outside the cluster to
-							services within the cluster. Traffic routing is controlled by rules
-							defined on the Ingress resource
-						</blockquote>
-					</div>
 
-					<div class="mu-flex mu-flex-middle">
-						<div class="mu-svc">
-							<img data-src="/images/tech/lb.svg" />
-							<span>LB</span>
-						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
-							<img data-src="/images/tech/vcn.svg" />
-							<span>VCN</span>
-						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc">
-							<img data-src="/images/tech/k8s.icon.png" />
-							<span>OKE</span>
-						</div>
-					</div>
+      <section id="dns">
+        <h2>
+          <img data-src="/images/tech/dns.svg" alt="DNS" />
+          DNS
+        </h2>
+        <blockquote class="mu-small">
+          The Oracle Cloud Infrastructure Domain Name System (DNS) service lets
+          you create and manage your DNS zones. You can create zones, add records
+          to zones, and allow Oracle Cloud Infrastructure's edge network to handle
+          your domain's DNS queries.
+        </blockquote>
+        <div class="fragment">
+          <div>
+            <img class="shadow no-margin" data-src="/images/edge/dns.console.png" style="width: 80%;"/>
+          </div>
+          <p class="mu-small">✏️ DNS Zone may also be used as part of <b>Traffic Steering Policies</b></p>
+        </div>
+        <!-- <pre class="fragment"><code class="hljs text">oci dns zone list</code></pre> -->
+      </section>
 
-					<div class="fragment-set">
-						<div class="fragment fade-out">
-							<p>An ingress controller is installed using <code>helm</code></p>
-						</div>
-						<div class="fragment fade-in">
-							<p>An ingress controller is installed using <code>helm</code></p>
-							<pre><code class="hljs text">helm install \
+      <section>
+        <section id="k8s-ingress">
+          <h2>OKE Ingress</h2>
+          
+           <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+            <img data-src="/images/tech/k8s.png" style="width:10%"/>
+            <blockquote class="mu-small">
+              Ingress exposes HTTP and HTTPS routes from outside the cluster to
+              services within the cluster. Traffic routing is controlled by rules
+              defined on the <b>Ingress</b> resource
+            </blockquote>
+          </div>
+
+          <div class="mu-flex mu-flex-middle">
+            <div class="mu-svc">
+              <img data-src="/images/tech/lb.svg" /> LB
+            </div>
+            <div class="mu-flex-connector arrow"></div>
+            <div class="mu-svc">
+              <img data-src="/images/tech/vcn.svg" /> VCN
+            </div>
+            <div class="mu-flex-connector arrow"></div>
+            <div class="mu-svc">
+              <img data-src="/images/tech/k8s.icon.png" /> OKE
+            </div>
+          </div>
+
+          <div class="fragment-set">
+            <div class="fragment fade-out">
+              <p>Explore how this works...</p>
+            </div>
+            <div class="fragment fade-in">
+              <p>First an ingress controller is installed</p>
+              <pre><code class="hljs text">helm install \
 --name nginx-ingress \
 --namespace nginx-ingress \
 stable/nginx-ingress</code></pre>
-							<pre><code class="hljs text">kubectl get svc -n nginx-ingress</code></pre>
-							<pre><code class="hljs text">NAME                       TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
+              <pre><code class="hljs text">kubectl get svc -n nginx-ingress</code></pre>
+              <pre><code class="hljs text">NAME                       TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
 nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:32491/TCP,443:31240/TCP   5m</code></pre>
-							<p class="mu-small">An <b><code>EXTERNAL-IP</code></b> is assigned after a few seconds</p>
-						</div>
-						<div class="fragment fade-in">
-							<p>Verify the load balancer in OCI</p>
-							<pre><code class="hljs text">oci lb load-balancer list \
+              <p class="mu-small">An <b><code>EXTERNAL-IP</code></b> is assigned after a few seconds</p>
+            </div>
+            <div class="fragment fade-in">
+              <p>Next verify the load balancer in OCI</p>
+              <pre><code class="hljs text">oci lb load-balancer list \
 | jq '.data[] | {id: .id, name: .["display-name"], ipAddr: .["ip-addresses"][]["ip-address"]}'</code></pre>
-							<pre><code>{
+              <pre><code>{
   "id": "ocid1.loadbalancer.oc1.phx.aaaaaaaaucgamttt3piveonxw5d6ssirzxprcbrcv7vf6tgswna7qxdnvnfa",
   "name": "097f5359-9165-11e9-bfe8-0a580aed21e9",
   "ipAddr": "129.146.192.154"
 }</code></pre>
-							<p class="mu-small">Notice <b><code>ipAddr</code></b> matches <b><code>EXTERNAL-IP</code></b> assigned to the controller 🤘</p>
-						</div>
-					</div>
-				</section>
-			</section>
+              <p class="mu-small">Notice 👀 <b><code>ipAddr</code></b> matches <b><code>EXTERNAL-IP</code></b> assigned to the controller 🤘</p>
+            </div>
+            <div class="fragment fade-in">
+              <p>
+                Then deploy ingress on the cluster
+              </p>
+              <pre><code class="hljs text">kubectl apply -f deploy/kubernetes/ingress/mushop-dev.yaml</code></pre>
+              <pre class="mu-xsmall"><code class="hljs yaml">apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: mushop-dev
+  annotations:
+    kubernetes.io/ingress.class: nginx
+spec:
+  rules:
+  - http:
+      paths:
+      - path: /
+        backend:
+          serviceName: edge
+          servicePort: 80</code></pre>
+              <pre><code class="hljs text">kubectl get ingress mushop-dev</code></pre>
+            </div>
+          </div>
+        </section>
+      </section>
 
-			<section id="dns">
-				<h2>
-					<img data-src="/images/tech/dns.svg" alt="DNS" />
-					DNS
-				</h2>
-				...
-			</section>
+      <!-- WAF -->
+      <section>
+        <section id="waf">
+          <h2>🔒 Web Application Firewall</h2>
+          <blockquote class="mu-small">
+              The WAF service uses a layered approach to protect web applications
+              against cyberattacks. This release includes over 250 predefined
+              Open Web Access Security Project (OWASP), application, and
+              compliance-specific rules.
+          </blockquote>
+          <div class="fragment fade-in">
+            <img class="no-margin" data-src="/images/edge/waf.png" alt="WAF" style="width: 75%;"/>
+            <p class="mu-xsmall no-margin">OCI Web Application Acceleration and Security Services</p>
+          </div>
+        </section>
 
-			<section>
-				<section id="waf">
-					<h2>🔒 Web Application Firewall</h2>
-					<blockquote class="mu-small">
-							The WAF service uses a layered approach to protect web applications
-							against cyberattacks. This release includes over 250 predefined
-							Open Web Access Security Project (OWASP), application, and
-							compliance-specific rules.
-					</blockquote>
-					<div class="fragment fade-in">
-						<img data-src="/images/about/waf.png" alt="WAF" style="width: 80%;"/>
-					</div>
-				</section>
+        <section id="waf-ingress">
+          <h2>Ingress with WAF</h2>
+          <p>
+            WAF security added between DNS and load balancer
+          </p>
+          <div class="mu-flex mu-flex-middle">
+            <div class="mu-svc mu-grayscale">
+              <img data-src="/images/tech/dns.svg" /> DNS
+            </div>
+            <div class="mu-flex-connector arrow">CNAME</div>
+            <div class="mu-svc">
+              <img data-src="/images/tech/waf.svg" /> 🔒WAF
+            </div>
+            <div class="mu-flex-connector arrow">public-ip</div>
+            <div class="mu-svc mu-grayscale">
+              <img data-src="/images/tech/lb.svg" /> LB
+            </div>
+            <div class="mu-flex-connector arrow"></div>
+            <div class="mu-svc mu-grayscale">
+              <img data-src="/images/tech/vcn.svg" /> VCN
+            </div>
+            <div class="mu-flex-connector arrow"></div>
+            <div class="mu-svc mu-grayscale">
+              <img data-src="/images/tech/k8s.icon.png" /> OKE
+            </div>
+          </div>
+        </section>
 
-				<section id="waf-ingress">
-					<h2>🔒 Ingress with WAF</h2>
-					<p>
-						Apply WAF security between your DNS and the public load balancer
-					</p>
-					<div class="mu-flex mu-flex-middle">
-						<div class="mu-svc mu-grayscale">
-							<img data-src="/images/tech/dns.svg" />
-							<span>DNS</span>
-						</div>
-						<div class="mu-flex-connector arrow">CNAME</div>
-						<div class="mu-svc">
-							<img data-src="/images/tech/waf.svg" />
-							<span>WAF</span>
-						</div>
-						<div class="mu-flex-connector arrow">public-ip</div>
-						<div class="mu-svc mu-grayscale">
-							<img data-src="/images/tech/lb.svg" />
-							<span>LB</span>
-						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc mu-grayscale">
-							<img data-src="/images/tech/vcn.svg" />
-							<span>VCN</span>
-						</div>
-						<div class="mu-flex-connector arrow"></div>
-						<div class="mu-svc mu-grayscale">
-							<img data-src="/images/tech/k8s.icon.png" />
-							<span>OKE</span>
-						</div>
-					</div>
-				</section>
-			</section>
+        <section id="waf-console">
+          <h2>WAF in OCI Console</h2>
+          <!-- <p></p> -->
+          <img class="shadow no-margin" data-src="/images/edge/waf.console.png"/>
+          <pre clas="fragment"><code class="hljs text">oci waas waas-policy list</code></pre>
+        </section>
 
-			<!-- Use this for markdown slides
-			<section data-markdown>
-				<script type="text/template">
-					## markdown
-				</script>
-			</section>
-			-->
+        <section id="waf-console-rules">
+          <h2>WAF Protection Rules</h2>
+          <p class="mu-small">
+            Applying protection to a WAF origin is done by choosing specific rules
+            from <b>OWASP <em>Core Rule Set (CRS)</em></b>, where the action can be set
+            to <span class="mu-danger">Detect</span>,
+            <span class="mu-warning">Block</span>, or
+            <span class="mu-muted">Off</span>
+          </p>
+          <img class="shadow no-margin fragment" data-src="/images/edge/waf.protection.rules.png"/>
+        </section>
 
-		</div>
-	</div>
-	<!-- ateam stamp / home -->
-	<a href="#home" class="mu-ateam-water">
-		<img src="/images/ateam.png" />
-	</a>
+        <section id="waf-console-access">
+          <h2>WAF Access Rules </h2>
+          <p class="mu-small">
+            Custom access rules can also be defined based on a set of specified
+            condition(s). Choosing the associative action, error code, and handling
+            are defined as well
+          </p>
+          <div class="fragment-set">
+            <div class="fragment">
+              <img class="shadow no-margin" data-src="/images/edge/waf.access.region.png"/>
+              <p class="mu-small no-margin">
+                ☝️ Here access from Ireland is <span class="mu-danger">blocked</span>
+                <span class="mu-muted">(sorry 🍀, demo purposes)</span>
+              </p>
+            </div>
+            <div class="fragment fade-in">
+              <img class="shadow no-margin" data-src="/images/edge/waf.block.geo.png"/>
+              <p class="mu-small no-margin">
+                👿 <a href="https://geopeeker.com/fetch/?url=https%3A%2F%2Fsecure.mushop.ateam.cloud" target="_blank">Try It</a>
+              </p>
+            </div>
+          </div>
+        </section>
+        
+        <section id="waf-demo">
+          <h2>WAF Demo</h2>
+          <div class="mu-flex mu-flex-middle">
+            <div class="mu-svc">
+              <span class="mu-svc-icon">👿</span>
+            </div>
+            <div class="mu-flex-connector arrow">attacker</div>
+            <div class="mu-svc">
+              <img data-src="/images/tech/dns.svg" /> DNS
+            </div>
+            <div class="mu-flex-connector arrow">CNAME</div>
+            <div class="mu-svc">
+              <img data-src="/images/tech/waf.svg" /> WAF
+            </div>
+          </div>
 
-	<script src="/js/reveal.js"></script>
+          <a href="https://secure.mushop.ateam.cloud" target="_blank">
+            <img data-src="/images/logo.png" />
+          </a>
+        </section>
 
-	<script>
-		// More info about config & dependencies:
-		// - https://github.com/hakimel/reveal.js#configuration
-		// - https://github.com/hakimel/reveal.js#dependencies
-		Reveal.initialize({
-			history: true,
-			fragmentInURL: true,
-			transition: 'slide',
-			dependencies: [
-				{ src: '/plugin/markdown/marked.js' },
-				{ src: '/plugin/markdown/markdown.js' },
-				{ src: '/plugin/notes/notes.js', async: true },
-				{ src: '/plugin/highlight/highlight.js', async: true }
-			]
-		});
-	</script>
+      </section>
+
+      <section id="other">
+        <h2>Other Edge Services</h2>
+        <div class="mu-flex mu-gutter">
+          <div class="col-1-2 fragment">
+            <h4>Health Checks</h4>
+            <p class="mu-small">
+              Provides users with high frequency external monitoring to determine
+              the availability and performance of any publicly facing service,
+              including hosted websites, API endpoints, or externally facing load balancers
+            </p>
+            <img class="shadow no-margin" data-src="/images/edge/health.history.png" />
+          </div>
+          <div class="col-1-2 fragment">
+            <h4 class="no-wrap">Traffic Steering</h4>
+            <p class="mu-small">
+              Configure policies to serve intelligent responses to DNS queries,
+              meaning <b>different answers (endpoints)</b> may be served for the query
+              depending on the logic the customer defines in the policy.
+            </p>
+            <hr/>
+            <p class="mu-small no-margin">
+              ☝️ Is directly connected to <b>DNS</b> and <b>Health Check</b>
+              services!
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section>
+        <h2>Resources</h2>
+        <ul>
+          <li><a href="https://docs.cloud.oracle.com/iaas/Content/Balance/Concepts/balanceoverview.htm">Load Balancer Overview</a></li>
+          <li><a href="https://docs.cloud.oracle.com/iaas/Content/WAF/Concepts/gettingstarted.htm">Getting Started with WAF</a></li>
+          <li><a href="https://docs.cloud.oracle.com/iaas/Content/HealthChecks/Concepts/healthchecks.htm">Health Checks Overview</a></li>
+          <li><a href="https://docs.cloud.oracle.com/iaas/Content/TrafficManagement/Concepts/overview.htm">Traffic Steering Policies Service</a></li>
+        </ul>
+      </section>
+
+      <!-- Use this for markdown slides
+      <section data-markdown>
+        <script type="text/template">
+          ## markdown
+        </script>
+      </section>
+      -->
+
+    </div>
+  </div>
+  <!-- ateam stamp / home -->
+  <a href="#home" class="mu-ateam-water">
+    <img src="/images/ateam.png" />
+  </a>
+
+  <script src="/js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      history: true,
+      fragmentInURL: true,
+      transition: 'slide',
+      dependencies: [
+        { src: '/plugin/markdown/marked.js' },
+        { src: '/plugin/markdown/markdown.js' },
+        { src: '/plugin/notes/notes.js', async: true },
+        { src: '/plugin/highlight/highlight.js', async: true }
+      ]
+    });
+  </script>
 </body>
 
 </html>
