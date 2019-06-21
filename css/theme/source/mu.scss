@@ -85,6 +85,10 @@ section.has-dark-background {
 	border: none;
 }
 
+@mixin shadow() {
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
@@ -99,9 +103,12 @@ a {
 		background: none;
 		box-shadow: none;
 		border: 0;
+		&.shadow {			
+			@include shadow();
+		}
 	}
 	section iframe {
-		box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+		@include shadow();
 	}
 	blockquote {
 		width: auto;
@@ -146,19 +153,31 @@ section > h2 > img {
 	font-size: 0.6em;
 	line-height: 1.1;
 }
+.mu-xsmall {
+	font-size: 0.3em !important;
+	line-height: 1;
+}
 .mu-medium {
 	font-size: 0.8em;
 	line-height: 1.1;
 }
-
 .mu-normal {
 	text-transform: none !important;
 	font-style: normal !important;
 	font-weight: inherit !important;
 }
 
+.mu-danger {
+	color: $o-color-red;
+}
+.mu-warning {
+	color: $o-color-orange;
+}
 .mu-muted {
 	opacity: 0.5;
+}
+.no-wrap {
+	white-space: nowrap;
 }
 
 .mu-grayscale {
@@ -188,6 +207,16 @@ section > h2 > img {
 	li.mu-divider {
 		list-style: none;
 		margin: $blockMargin 0;
+	}
+}
+
+// Sequence
+.mu-sequence {
+	text-align: left;
+	width: 90%;
+	margin: 0 auto;
+	pre {
+		width: 100%!important;
 	}
 }
 
@@ -351,10 +380,12 @@ section > h2 > img {
 	text-align: center;
 	font-size: 0.5em;
 	line-height: 1em;
-	img {
+	img, .mu-svc-icon {
 		display: block;
 		height: 50px;
     margin: 0 auto !important;
+		font-size: 2.5em;
+		line-height: 1;
 	}
 	+ .mu-flex-connector {
 		margin-top: -2%;
