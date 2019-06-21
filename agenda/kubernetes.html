@@ -174,18 +174,169 @@
 					<h2>In-place upgrade - worker nodes</h2>
 					<img class="plain" data-src="/images/k8s/oke_ad_nodepools.png" alt="Service"/>
 				</section>
-
+				<section>
+					<h2>Deployment Manifests</h2>
+					<pre><code class="fragment hljs sql mu-small">
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+	name: api
+	labels:
+	name: api
+	layer: client
+spec:
+	replicas: 1
+	template:
+	metadata:
+		labels:
+		name: api
+		layer: client
+	spec:
+		containers:
+		- name: api
+		image: phx.ocir.io/intvravipati/mushop/api:1
+		imagePullPolicy: Always
+		ports:
+		- name: http
+			containerPort: 3000
+		env:
+		- name: SESSION_REDIS
+			value: session
+		resources:
+			limits:
+			cpu: 300m
+			memory: 1000Mi
+			requests:
+			cpu: 100m
+			memory: 300Mi
+		securityContext:
+			runAsNonRoot: true
+			runAsUser: 10001
+			capabilities:
+			drop:
+			  - all
+			add:
+			  - NET_BIND_SERVICE
+			readOnlyRootFilesystem: true
+		livenessProbe:
+			httpGet:
+			path: /health
+			port: http
+		readinessProbe:
+			httpGet:
+			path: /health
+			port: http
+					</code></pre>
+				</section>
+				<section>
+					<h2>The Problem</h2>
+					<ul>
+						<li>Steep learning curve when implementing Kubernetes</li>
+						<li>Increased complexity of microservice environments</li>
+						<li>Manually application deployment using kubectl</li>
+						<li>Kubernetes treats your application as a number of decoupled resources</li>
+						<li>More deployment steps means more chances for human error</li>
+						<li>Hard to share and distribute microservice applications</li>
+						<li>Hard to manage application releases</li>
+					</ul>
+				</section>
+				<section>
+					<h2>The Solution: Helm</h2>
+					<ul>
+						<li>Helm is a package management tool for Kubernetes</li>
+						<li>A CNCF project</li>
+						<li>A package manager similar to yum, brew, apt-get, npm, choco, etc., but specifically for Kubernetes</li>
+						<li>Method for repeatable application installation, configuration, and versioning through the use of charts, repositories, and releases</li>
+						<li>Repository of existing templates for standard software</li>
+					</ul>	
+				</section>
+				<section>
+					<h2>Helm</h2>
+					<img class="plain" data-src="/images/helm/helm.png" alt="Helm"/>
+				</section>
 			</section>
 
-			<!-- Overview -->
+			<!-- Lab -->
 			<section id="lab">
-				<h2>Lab Overview</h2>
-				<ul>
-					<li>Intriducing the orders application</li>
-					<li>ATP setup</li>
-					<li>Connecting to ATP</li>
-					<li>Build & Validation</li>
-				</ul>
+				<section>
+					<h2>Lab Overview</h2>
+					<ul>
+						<li>Switch context</li>
+						<li>Create namespace and secrets</li>
+						<li>Checkout code</li>
+						<li>Modify deployment file</li>
+						<li>Deploy</li>
+						<li>Verify</li>
+					</ul>
+				</section>
+				<section>
+					<h3>Step 1: switch context</h3>
+					<p class="mu-left">
+						You will perform the tasks for the lab in the OKE cluster mushop-test. 
+						To switch to that cluster use docker desktop 
+					</p>
+					<img class="plain" width=40% data-src="/images/k8s/switch_context.png" alt="Helm"/>
+				</section>
+				<section>
+					<h3>Step 2: install credentials in OKE</h3>
+					<p class="mu-left">
+						You already got the secrets.yaml and created a namespace and installed the secrets
+						in your local cluster. Now you are going to do the same in the OKE cluster mushop-test
+					</p>
+					<ol class="block">
+						<li>Create a namespace <pre><code class="hljs text">kubectl create namespace your-name</code></pre></li>
+						<li>Install Secrets <pre><code class="hljs text">kubectl create -f secrets.yaml -n your-name</code></pre></li>
+					</ol>
+				</section>
+				<section>
+					<h3>Step 3: change default namespace</h3>
+					<p class="mu-left">
+						Change the your default namespace to your name to avoid having to add 
+						<strong>--namespace your-name</strong> to every kubectl command.
+					</p>
+					<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=your-name</code></pre>
+					<p class="mu-left">To validate it:</p>
+					<pre><code class="hljs text">kubectl config view | grep namespace:</code></pre>
+				</section>
+				<section>
+					<h3>Step 4: modify deployment</h3>
+					<p class="mu-left">
+						Next you will have to modify an incomplete deployment descriptor.
+						Your job is to add what is missing so the service will deploy without errors.
+						Checkout branch workshop/k8s-lab
+					</p>
+					<pre><code class="hljs text">git clone -b workshop/k8s-lab git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
+cd mushop/deploy/kubernetes</code></pre>
+					<p class="mu-left">
+							Open file mushop.yaml in an editor of your choice.
+							Look for the deployment section for catalogue. 
+							The commented lines (start with #) have instruction to create environment variables. 
+					</p>
+				</section>
+				<section>
+					<h3>Step 5: modify the deployment</h3>
+					<p class="mu-left">
+						Repeat the same procedure for the shipping and stream deployments.
+						When finished, save and exit the file.
+						Now it's time to deploy the services and pods needed to run the mushop store.
+						Run this command:
+					</p>
+					<pre><code class="hljs text">kubectl apply -f mushop.yaml</code></pre>
+				</section>
+				<section>
+					<h3>Step 6: Verify</h3>
+					<p class="mu-left">
+						To check that all resources have been created run this:
+					</p>
+					<pre><code class="hljs text">kubectl get pod --watch</code></pre>
+					<p class="mu-left">
+						Proxy from your machine to the services running in OKE:
+					</p>
+					<pre><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
+					<p class="mu-left">
+							You are done! To access the store click <a href="https://localhost">here</a>
+						</p>
+				</section>
 			</section>
 		</div>
 	</div>
