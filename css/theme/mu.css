@@ -416,7 +416,8 @@ pre.mu-small {
   overflow: auto;
   -webkit-overflow-scrolling: touch; }
   .mu-overflow > img {
-    max-height: none !important; }
+    max-height: none !important;
+    margin: 0 !important; }
 
 .mu-ratio {
   position: relative; }
