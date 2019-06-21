@@ -374,11 +374,10 @@ pre.mu-small {
     align-items: flex-end; }
   .mu-flex.mu-flex-middle {
     align-items: center; }
-  .mu-flex.mu-gutter {
-    margin-left: 20px;
-    margin-right: 20px; }
-    .mu-flex.mu-gutter > * {
-      margin: 0 20px; }
+  .mu-flex.mu-gutter > * {
+    margin-left: 20px; }
+    .mu-flex.mu-gutter > *:last-child {
+      margin-right: 20px; }
   .mu-flex .col-1-1 {
     width: 100%; }
   .mu-flex .col-1-2 {
@@ -412,6 +411,12 @@ pre.mu-small {
       top: 0;
       right: -4px;
       transform: translateY(-12px); }
+
+.mu-overflow {
+  overflow: auto;
+  -webkit-overflow-scrolling: touch; }
+  .mu-overflow > img {
+    max-height: none !important; }
 
 .mu-ratio {
   position: relative; }

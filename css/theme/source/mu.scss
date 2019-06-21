@@ -224,10 +224,11 @@ pre {
 
 	// gutter
 	&.mu-gutter {
-		margin-left: $blockMargin;
-		margin-right: $blockMargin;
 		> * {
-			margin: 0 $blockMargin;
+			margin-left: $blockMargin;
+			&:last-child {
+				margin-right: $blockMargin;
+			}
 		}
 	}
 
@@ -277,6 +278,15 @@ pre {
 			right: -$connectorSize;
 			transform: translateY(-($connectorArrowSize + $connectorSize / 2));
 		}
+	}
+}
+
+// Overflow
+.mu-overflow {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	> img {
+		max-height: none !important;
 	}
 }
 
