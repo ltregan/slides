@@ -227,10 +227,11 @@ section > h2 > img {
 
 	// gutter
 	&.mu-gutter {
-		margin-left: $blockMargin;
-		margin-right: $blockMargin;
 		> * {
-			margin: 0 $blockMargin;
+			margin-left: $blockMargin;
+			&:last-child {
+				margin-right: $blockMargin;
+			}
 		}
 	}
 
@@ -280,6 +281,16 @@ section > h2 > img {
 			right: -$connectorSize;
 			transform: translateY(-($connectorArrowSize + $connectorSize / 2));
 		}
+	}
+}
+
+// Overflow
+.mu-overflow {
+	overflow: auto;
+	-webkit-overflow-scrolling: touch;
+	> img {
+		max-height: none !important;
+		margin: 0 !important;
 	}
 }
 
