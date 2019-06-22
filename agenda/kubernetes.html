@@ -121,7 +121,8 @@
 				</section>
 				<section>
 					<h2>Kubernetes on OCI</h2>
-					<ul>
+					<img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service"/>
+					<ul class="mu-small">
 						<li class="fragment">Manage upgrades of master and worker nodes</li>
 						<li class="fragment">Figure out container networking and storage</li>
 						<li class="fragment">Manage access to cluster</li>
@@ -138,13 +139,14 @@
 				</section>
 				<section>
 					<h2>How to create an OKE Cluster</h2>
-					<!-- <pre><code class="hljs sql mu-small"> -->
-					<div class="mu-ratio mu-ratio-2-1">
-						<div class="mu-overflow">
-							<img class="plain" data-src="/images/k8s/create_simple_oke1.png" alt="Service"/>
-						</div>
+					<div class="mu-flex mu-gutter">
+						<div><img class="plain" width="100%" data-src="/images/k8s/console1.png" alt="Helm"/></div>
+						<div><img class="plain" width="100%" data-src="/images/k8s/console2.png" alt="Helm"/></div>
 					</div>
-					<!-- </code> -->
+				</section>
+				<section>
+					<h2>How to create an OKE Cluster</h2>
+					<img class="plain" data-src="/images/k8s/create_simple_oke1.png" alt="Service"/>
 				</section>
 				<section>
 					<h2>How to create an OKE Cluster</h2>
@@ -158,25 +160,25 @@
 				</section>
 				<section>
 					<h2>How to manage an OKE Cluster</h2>
-					<div class="mu-small mu-left mu-margin">
-						<ul>
-							<li>Kubectl - Command line tool</li>
-							<li>Dashboard</li>
-						</ul>
+					<ul>
+						<li class="mu-small fragment">Kubectl - Command Line Tool</li>
+					</ul>
+					<div class="mu-flex mu-gutter">
+						<div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig1.png" alt="Service"/></div>
+						<div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig2.png" alt="Service"/></div>
 					</div>
-					<div class="mu-ratio mu-ratio-2-1">
-						<div class="mu-overflow">
-							<img class="plain fragment" data-src="/images/k8s/access_kubeconfig.png" alt="Service"/>
-						</div>
-					</div>
+					<pre><code class="hljs text fragment">mkdir -p $HOME/.kube</code></pre>
+					<pre><code class="hljs text fragment">oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae3dgnlgmqzgczjsg4zgeyjzhfsggmrvmi3ggobwgczgezlcgrsg --file $HOME/.kube/config --region us-phoenix-1</code></pre>
+					<pre><code class="hljs text fragment">export KUBECONFIG=$HOME/.kube/config</code></pre>
 				</section>
 				<section>
 					<h2>How to manage an OKE Cluster</h2>
-					<img class="plain" data-src="/images/k8s/kubeconfig.png" alt="Service"/>
-				</section>
-				<section>
-					<h2>How to manage an OKE Cluster</h2>
-					<img class="plain" data-src="/images/k8s/dashboard.png" alt="Service"/>
+					<ul>
+						<li class="mu-small fragment">Dashboard - UI Tool</li>
+					</ul>
+					<img class="plain fragment" data-src="/images/k8s/dashboard.png" alt="Service"/>
+					<pre><code class="hljs text fragment">kubectl proxy</code></pre>
+					<p class="mu-small">Then click <a href="http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/" target="_blank">here</a> to access the dashboard.</p>
 				</section>
 				<section>
 					<h2>In-place upgrade - master nodes</h2>
