@@ -74,8 +74,8 @@
 			<section id="lab">
 				<h2>Lab Overview</h2>
 				<ul>
-					<li>Intriducing the orders application</li>
-					<li>ATP setup</li>
+					<li>Introducing the orders application</li>
+					<li>Oracle Autonomous Transaction Processing (ATP) setup</li>
 					<li>Connecting to ATP</li>
 					<li>Build & Validation</li>
 				</ul>
@@ -85,34 +85,30 @@
 				<section>
 					<h2>Orders</h2>
 					<p class="mu-small mu-left">
-						Orders is a micro service built using Spring Boot, 
-						using Oracle Autonomous Transaction Processing (ATP) as its data store. 
+						Orders is a Java micro service built using
+						<a href="https://spring.io/projects/spring-boot">Spring Boot</a>, and
+						uses Oracle Autonomous Transaction Processing (ATP) as its data store.
 					</p>
 					<p class="mu-small mu-left">
-						The services are exposed over HTTP, and when deployed over Kubernetes, 
-						can be scaled horizontally while other services discover and interact 
+						The services are exposed over HTTP, and when deployed over Kubernetes,
+						can be scaled horizontally while other services discover and interact
 						with this micro service over it's Service abstraction.
 					</p>
 				</section>
 
-				<section >
-					<h2>Prerequisites</h2>
-					<ul>
-						<li>Access to OCI Console</li>
-						<li>Download SQL Developer.</li>
-					</ul>	
-				</section>
-
 				<section>
 					<h2>Step 1 - Provision ATP</h2>
-					<ul>
-						<li><b>Provision ATP</b></li>
-					</ul>
-					<br>
-					<p class="mu-small mu-left">
-							Sign in with your cloud credentials at <a href="cloud.oracle.com">cloud.oracle.com</a> and create an ATP database by filling in few details.
-							to "Provisioning an Autonomous Transaction Processing" video for more details.
+					<p class="mu-small">
+						Create your Oracle ATP Database instance, using the steps below.
+						<a
+							href="https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/tutorial-getting-started-autonomous-db/">Read
+							More...</a>
 					</p>
+					<video width="640" height="440" controls>
+						<source
+							src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/2yE4roHC3N2-CdVgx0wSWzLafj0-2bpcE1E3ff41zBs/n/intvravipati/b/demo-assets/o/dem-ord-create_atp.mp4"
+							type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+					</video>
 				</section>
 
 				<section data-markdown>
@@ -121,7 +117,7 @@
 							Clone the repository and switch to the branch `orders-start`. 
 	
 							```
-							git clone  https://github.com/junior/mushop.git
+							git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
 							git checkout workshop/orders-start
 							```
 						</script>
@@ -129,65 +125,78 @@
 
 				<section>
 					<h2>Step 3 - Prepare your Cloud Database</h2>
-					<div class="mu-small">
-					<ul>
-						<li>Download the database client credentials. 
-							<a href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-download-wallet.html#GUID-B06202D2-0597-41AA-9481-3B174F75D4B1">Read More..</a>	
-						</li>
-						<li>Connect to you cloud database with SQL developer
-							<a href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-preparing.html#GUID-96CD75E8-7105-4239-BDD7-88C5A2362A7D">Read More...</a>
-						</li>
-						<li>Create a limited use application user. 
-							The script in included in the codebase under <pre>mushop/src/orders/config/MuShop-Orders.sql</pre>  </li>
-					</ul>
-				</div>	
+					<div class="fragment-set">
+						<div class="fragment fade-out">
+							<div class="mu-small">
+								<p>Download the database client credentials.
+										<a href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-download-wallet.html#GUID-B06202D2-0597-41AA-9481-3B174F75D4B1">Read
+											More..</a></p>
+								<video width="640" height="440" controls>
+										<source
+											src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/s8mME6K8vR_3ZQeYZzDmz6K2ZzKfAJjYKLMZKvNGF7c/n/intvravipati/b/demo-assets/o/dem-ord-atp_cred_download.mp4"
+											type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+								</video>
+							</div>
+						</div>
+						<div class="fragment fade-in">
+								<div class="mu-small">
+									<p>Connect to you cloud database with SQL developer
+											<a
+												href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-preparing.html#GUID-96CD75E8-7105-4239-BDD7-88C5A2362A7D">Read
+												More...</a></p>
+								</div>
+							</div>
+							<div class="fragment fade-in">
+									<div class="mu-small">
+										<p>Create a limited use application user.
+												The script in included in the codebase under
+												<code>mushop/src/orders/config/MuShop-Orders.sql</code></p>
+										<pre><code class="hljs sql mu-small">
+-- create user and roles
+CREATE USER orders_user IDENTIFIED BY Default_Password123#;
+CREATE ROLE orders_role;
+
+-- grant permissions.
+GRANT dwrole TO orders_user;
+GRANT
+	CREATE SESSION
+TO orders_user;
+-- Do not use in production, can be exploited for SQL injection attacks.
+GRANT
+	CREATE TABLE,
+	CREATE VIEW,
+	CREATE PROCEDURE,
+	CREATE SEQUENCE
+TO orders_role;
+
+GRANT
+	UNLIMITED TABLESPACE
+TO orders_role;
+
+GRANT orders_role TO orders_user;
+
+-- unlock account.
+ALTER USER orders_user
+	ACCOUNT UNLOCK;							
+																	</code></pre>
+									</div>
+								</div>
+					</div>
 				</section>
 
 				<section>
-						<h2>Step 3.1 - Prepare your Cloud Database</h2>
-						<pre><code class="hljs sql mu-small">
-	-- create user and roles
-	CREATE USER orders_user IDENTIFIED BY Default_Password123#;
-	CREATE ROLE orders_role;
-	
-	-- grant permissions.
-	GRANT dwrole TO orders_user;
-	GRANT
-		CREATE SESSION
-	TO orders_user;
-	-- Do not use in production, can be exploited for SQL injection attacks.
-	GRANT
-		CREATE TABLE,
-		CREATE VIEW,
-		CREATE PROCEDURE,
-		CREATE SEQUENCE
-	TO orders_role;
-	
-	GRANT
-		UNLIMITED TABLESPACE
-	TO orders_role;
-	
-	GRANT orders_role TO orders_user;
-	
-	-- unlock account.
-	ALTER USER orders_user
-		ACCOUNT UNLOCK;							
-						</code></pre>
-							
-					</section>
-
-				<section>
 					<h2>Step 4 - Prepare the application</h2>
-						<div class="mu-small">
-							<p>Copy the following files from the credential package to </p>
-							<pre>mushop/src/orders/config/</pre>
-							<ul >
-								<li> <b>tnsnames.ora</b>  - Provides aliases for the connection information</li>
-								<li> <b>ojdbc.properties</b> - File to configure the connection properties</li>
-								<li> <b>keystore.jks</b> - The Java Keystore with keys pre-populated </li>
-								<li> <b>truststore.jks</b> - The Java Truststore with trusted certificates pre-populated</li>
-							</ul>
-						</div>
+					<div class="mu-small">
+						<p>Copy the following files from the credential package to </p>
+						<pre>mushop/src/orders/config/</pre>
+						<ul>
+							<li> <b>tnsnames.ora</b> - Provides aliases for the connection information</li>
+							<li> <b>ojdbc.properties</b> - File to configure the connection properties</li>
+							<li> <b>keystore.jks</b> - The Java Keystore with keys pre-populated </li>
+							<li> <b>truststore.jks</b> - The Java Truststore with trusted certificates pre-populated
+							</li>
+						</ul>
+					</div>
 				</section>
 
 
@@ -195,31 +204,37 @@
 				<section>
 					<h2>Step 4 - JDBC DataSource configuration</h2>
 					<div class="mu-small">
-						<p>Begin configuring the application by opening <pre>mushop/src/orders/src/main/resources/application.properties</pre></p>
-					
+						<p>Begin configuring the application by opening
+							<pre>mushop/src/orders/src/main/resources/application.properties</pre>
+						</p>
 
 
-					<pre><code class="hljs properties">
+
+						<pre><code class="hljs sh">
 spring.datasource.url=jdbc:oracle:thin:@${OADB_SERVICE}?TNS_ADMIN=./config
 spring.datasource.username=${OADB_USER}
 spring.datasource.password=${OADB_PW}
 spring.datasource.driver.class=oracle.jdbc.driver.OracleDriver
 spring.jpa.hibernate.ddl-auto=update
 					</code></pre>
-					<br>
-						The ${VARIABLE} construct defers configuration to the runtime environment, and are sourced from environment variables at runtime. This prevents information from being baked in to the docker image, making it more versatile.
+						<br>
+						The ${VARIABLE} construct defers configuration to the runtime environment, and are sourced from
+						environment variables at runtime. This prevents information from being baked in to the docker
+						image, making it more versatile.
 					</div>
 				</section>
 
 				<section>
 					<h2>Step 5 - Build & Validate</h2>
 					<div class="mu-small mu-left">
-						<p>The repo contains a Dockerfile that sets up a build environment, builds the application and generates a docker container with the built application.</p>
+						<p>The repo contains a Dockerfile that sets up a build environment, builds the application and
+							generates a docker container with the built application.</p>
 						<p>The build can be triggered with the following commands.</p>
 						<pre><code class="hljs sh">
 docker build -t orders:local .
 						</code></pre>
-						<p>This builds the application and produces a docker image that contains the required artifacts to run the orders application. </p>
+						<p>This builds the application and produces a docker image that contains the required artifacts
+							to run the orders application. </p>
 						<p>You can verify the local image using :</p>
 						<pre><code class="hljs sh">
 docker images
