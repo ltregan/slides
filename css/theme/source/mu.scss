@@ -93,6 +93,28 @@ section.has-dark-background {
 @import "../template/theme";
 // ---------------------------------------------
 
+// Copier
+pre {
+	a.copier {
+		display: none;
+		cursor: pointer;
+		position: absolute;
+		bottom: 100%;
+		right: 0;
+		font-size: 14px;
+		padding: 5px 10px;
+    background: #272822;
+    color: white;
+    border-top-left-radius: 4px;
+    border-top-right-radius: 4px;
+	}
+	&:hover {
+		a.copier {
+			display: block;
+		}
+	}
+}
+
 // Overrides
 a {
 	cursor: pointer;
