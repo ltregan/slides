@@ -10,17 +10,19 @@ var SnippetCopy = (function() {
     area.select();
     document.execCommand("copy");
     document.body.removeChild(area);
+    link.innerHTML = 'Copied';
   }
 
   return {
     init: function() {
-      const nodes = Reveal.getRevealElement().querySelectorAll('pre > code');
-      const iter = Array.apply(null, nodes);
+      var nodes = Reveal.getRevealElement().querySelectorAll('pre > code');
+      var iter = Array.apply(null, nodes);
+      var text = 'Copy';
       for (var i=0; i < iter.length; i++) {
         var code = iter[i];
         var copy = document.createElement('a');
         copy.classList = 'copier';
-        copy.innerText = 'Copy'
+        copy.innerHTML = text;
         copy.addEventListener('click', clipboard.bind(code, copy));
         code.parentNode.appendChild(copy);
       }
