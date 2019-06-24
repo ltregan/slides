@@ -58,23 +58,70 @@
 
 			<!-- Prerequisites -->
 			<section id="prerequisites">
-				<h2>Prerequisites</h2>
-				<p class="mu-left">
-					The following applications are required for the workshop.
-					Please ensure access and/or installation ahead of time 🙏
-				</p>
-				<ul class="plain" style="font-size:35px;text-indent: 80px;";>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" target="_blank">OCI Tenancy Access<sup>*</sup></a></li>
-					<li><a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop (Includes local K8s and kubectl)</a> ~2.x</li>
-					<li><a href="https://github.com/helm/helm" target="_blank">Helm (K8s Package Manager)<sup></sup></a></li>
-					<li><a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat (K8s Service Catalog CLI)</a> <em class="mu-muted">(optional)</em></li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a> ~2.5.x <em class="mu-muted">(optional)</em></li>
-					<li><a href="https://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank">Oracle SQL Developer</a> ~2.5.x</li>
-					<li><a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor</a> ~1.6 <em class="mu-muted">(optional)</em></li>
-				</ul>
-				<blockquote class="mu-small mu-left">
-					<sup>*</sup>Tenancy access may be provided, or you may use an existing tenancy
-				</blockquote>
+				<section id="prerequisites-main">
+					<h2>Prerequisites</h2>
+					<p class="mu-left">
+						The following applications are required for the workshop.
+						Please ensure access and/or installation ahead of time 🙏
+					</p>
+					<ul class="plain" style="font-size:35px;text-indent: 80px;";>
+						<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" target="_blank">OCI Tenancy Access<sup>*</sup></a></li>
+						<li><a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop (Includes local K8s and kubectl)</a> ~2.x</li>
+						<li><a href="https://github.com/helm/helm" target="_blank">Helm (K8s Package Manager)<sup></sup></a><a style="font-size:15px" href="#prerequisites-quickinstall-helm">Quick Install</a></li>
+						<li><a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat (K8s Service Catalog CLI)</a> <em class="mu-muted">(optional)</em></li>
+						<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a> ~2.5.x <em class="mu-muted">(optional)</em></li>
+						<li><a href="https://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank">Oracle SQL Developer</a> ~2.5.x</li>
+						<li><a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor</a> ~1.6 <em class="mu-muted">(optional)</em></li>
+					</ul>
+					<blockquote class="mu-small mu-left">
+						<sup>*</sup>Tenancy access may be provided, or you may use an existing tenancy
+					</blockquote>
+				</section>
+				<section id="prerequisites-quickinstall-helm">
+					<h2>Quick Install - Helm</h2>
+					<div class="fragment-set">
+						<div class="fragment fade-out">
+								<p class="mu-small">MacOS or Linux</p>
+								<p class="mu-small">Install Homebrew, a MacOS package manager, if not yet installed</p>
+								<pre><code class="hljs shell">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
+								<p class="mu-small">Install Helm using this command. Will also install the optional svcat cli</p>
+								<pre><code class="hljs shell">brew update && brew install kubernetes-helm kubernetes-service-catalog-client</code></pre>
+								<p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
+								<pre><code class="hljs text">helm version</code></pre>
+								<p class="mu-small">The Helm version command should give result similar to this:</p>
+								<pre><code class="hljs shell">> helm version
+Client: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}</code></pre>
+								<p class="mu-small">If you receive an error tha could not find tiller pod on the server, do this:</p>
+								<pre><code class="hljs text">helm init --history-max 200</code></pre>
+						</div>
+						<div class="fragment fade-in">
+								<p class="mu-small">Windows</p>
+								<p class="mu-small">Install Chocolatey, a Windows package manager, if not yet installed</p>
+								<a href="https://chocolatey.org/install" target="_blank">Chocolatey Install instructions</a>
+								<p class="mu-small">Install Helm using this command. Will also install the optional svcat cli</p>
+								<pre><code class="hljs shell">choco install kubernetes-helm</code></pre>
+								<p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
+								<pre><code class="hljs text">helm version</code></pre>
+								<p class="mu-small">The Helm version command should give result similar to this:</p>
+								<pre><code class="hljs shell">c:\ helm version
+Client: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}</code></pre>
+								<p class="mu-small">If you receive an error tha could not find tiller pod on the server, do this:</p>
+								<pre><code class="hljs text">helm init --history-max 200</code></pre>
+						</div>
+						<div class="fragment fade-in">
+								<p class="mu-small">Windows</p>
+								<p class="mu-small">Install the svcat cli:</p>
+								<pre><code class="hljs shell">iwr 'https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe' -UseBasicParsing -OutFile svcat.exe
+mkdir -f ~\bin
+$env:PATH += ";${pwd}\bin"
+svcat version --client</code></pre>
+								<p class="mu-small">Or download the binary directly and make executable</p>
+								<a href="https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe" target="_blank">svcat.exe download</a>
+						</div>
+					</div>
+				</section>
 			</section>
 
 			<!-- K8S Setup -->
