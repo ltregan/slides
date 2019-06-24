@@ -183,6 +183,9 @@ section > h2 > img {
 	font-size: 0.8em;
 	line-height: 1.1;
 }
+.mu-large {
+	font-size: 2em;
+}
 .mu-normal {
 	text-transform: none !important;
 	font-style: normal !important;
@@ -395,6 +398,11 @@ section > h2 > img {
 			visibility: inherit!important;
 		}
 	}
+}
+
+// icon
+.mu-icon {
+	display: inline-block;
 }
 
 // services
