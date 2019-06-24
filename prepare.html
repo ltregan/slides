@@ -28,32 +28,18 @@
 	<div class="reveal">
 		<div class="slides">
 			<!-- title -->
+		
 			<section id="home">
-
-				<!-- landing -->
-				<section id="home-title">
-					<h1>Cloud Native OCI</h1>
-					<h2>💻 Workshop Preparation</h2>
-					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
-						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
-					</div>
-					<hr/>
-					<!-- <h4>Microservices on Oracle Cloud</h4> -->
-					<small>Created with ❤ by Oracle A-Team</small>
-				</section>
-
-				<!-- TOC -->
-				<section id="toc">
-					<h2>Table of Contents</h2>
-					<ul class="plain">
-						<!-- add a line for each main TOC item  -->
-						<li><a href="#prerequisites">Prerequisites</a></li>
-						<li><a href="#k8s">Kubernetes</a></li>
-						<li><a href="#downloads">Downloads</a></li>
-					</ul>
-				</section>
+				<h1>Cloud Native OCI</h1>
+				<h2>💻 Workshop Preparation</h2>
+				<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+					<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+					<span>+</span>
+					<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
+				</div>
+				<hr/>
+				<!-- <h4>Microservices on Oracle Cloud</h4> -->
+				<small>Created with ❤ by Oracle A-Team</small>
 			</section>
 
 			<!-- Prerequisites -->
@@ -65,12 +51,12 @@
 				</p>
 				<ul class="plain" style="font-size:35px;text-indent: 80px;";>
 					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" target="_blank">OCI Tenancy Access<sup>*</sup></a></li>
-					<li><a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop (Includes local K8s and kubectl)</a> ~2.x</li>
+					<li><a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop (Includes local K8s and kubectl)</a></li>
 					<li><a href="https://github.com/helm/helm" target="_blank">Helm (K8s Package Manager)<sup></sup></a></li>
 					<li><a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat (K8s Service Catalog CLI)</a> <em class="mu-muted">(optional)</em></li>
-					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a> ~2.5.x <em class="mu-muted">(optional)</em></li>
-					<li><a href="https://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank">Oracle SQL Developer</a> ~2.5.x</li>
-					<li><a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor</a> ~1.6 <em class="mu-muted">(optional)</em></li>
+					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a><em class="mu-muted">(optional)</em></li>
+					<li><a href="https://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank">Oracle SQL Developer</a></li>
+					<li><a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor</a><em class="mu-muted">(optional)</em></li>
 				</ul>
 				<blockquote class="mu-small mu-left">
 					<sup>*</sup>Tenancy access may be provided, or you may use an existing tenancy
@@ -105,7 +91,7 @@
 						<p>Set default namespace <em class="mu-muted">(optional)</em></p>
 						<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=mushop</code></pre>
 					</div>
-					<div class="fragment fade-in">
+					<!-- <div class="fragment fade-in">
 						<p>Install an ingress controller</p>
 						<pre><code class="hljs text">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml</code></pre>
@@ -119,12 +105,8 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 								☝️ More on this later...
 							</p>
 						</small>
-					</div>
+					</div> -->
 				</div>
-			</section>
-
-			<section>
-				...
 			</section>
 
 			<section id="resources">
@@ -133,7 +115,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 					<p>Any workshop related downloads may be found here. </p>
 					<ul class="mu-small">
 						<li><a href="/downloads/k8s/secrets.yaml">K8S Secrets (Dev)</a></li>
-						<li><a href="/downloads/k8s/kubeconfig.yaml">OKE <code>~/.kube/config</code></a></li>
+						<li><a href="/downloads/k8s/kubeconfig.yaml"><code>~/.kube/config (OKE)</code></a></li>
 					</ul>
 					<blockquote class="mu-small">
 						🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
