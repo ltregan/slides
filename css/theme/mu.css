@@ -351,6 +351,9 @@ section > h2 > img {
   font-size: 0.8em;
   line-height: 1.1; }
 
+.mu-large {
+  font-size: 2em; }
+
 .mu-normal {
   text-transform: none !important;
   font-style: normal !important;
@@ -498,6 +501,9 @@ section > h2 > img {
     .fragment-set > .fragment.current-fragment[data-fragment-index="0"] {
       opacity: 1 !important;
       visibility: inherit !important; }
+
+.mu-icon {
+  display: inline-block; }
 
 .mu-svc {
   text-align: center;
