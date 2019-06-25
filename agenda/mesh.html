@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+	<title>Cloud Native OCI - MuShop</title>
+
+	<link rel="stylesheet" href="/css/reset.css">
+	<link rel="stylesheet" href="/css/reveal.css">
+	<link rel="stylesheet" href="/css/theme/mu.css">
+
+	<!-- Theme used for syntax highlighting of code -->
+	<link rel="stylesheet" href="/lib/css/monokai.css">
+
+	<!-- Printing and PDF exports -->
+	<script>
+		var link = document.createElement('link');
+		link.rel = 'stylesheet';
+		link.type = 'text/css';
+		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
+		document.getElementsByTagName('head')[0].appendChild(link);
+	</script>
+</head>
+
+<body>
+	<div class="reveal">
+		<div class="slides">
+			<!-- title -->
+			<section id="home">
+				<!-- landing -->
+				<section id="home-title">
+					<h1>Cloud Native OCI</h1>
+					<h2>Service Mesh</h2>
+					<p class="mu-small">(Backup Slides - Need Update)</p>
+					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<span>+</span>
+						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
+					</div>
+					<hr/>
+					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+				</section>
+
+				<!-- TOC -->
+				<section id="toc">
+					<h2>Table of Contents</h2>
+					<ul class="plain">
+						<!-- add a line for each <section id="slideId">...</section>  -->
+						<li><a href="#intro">Introduction</a></li>
+						<li><a href="#whatservicemesh">What is a service mesh?</a></li>
+						<li><a href="#featuresservicemesh">Features of Istio service mesh</a></li>
+						<li><a href="#servicemeshcomponents">Service Mesh Components</a></li>
+					</ul>
+				</section>
+
+				<!-- Contributors -->
+				<section id="contributors">
+					<h2>Primary Contributors</h2>
+					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+						<div>
+							<div>Adao Oliveira Junior</div>
+							<div>Jeevan Joseph</div>
+							<div>Julio Camara</div>
+						</div>
+						<div>
+							<div>Matt Vander Vliet</div>
+							<div>Sherwood Zern</div>
+							<div>Sumit Kumar</div>
+						</div>
+					</div>
+				</section>
+			</section>
+
+			<!-- Intro to Mesh -->
+			<section id="intro">
+				<h2>Introduction to service mesh</h2>
+				
+				<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+					<img data-src="/images/tech/k8s.png" style="width:10%"/>
+				</div>
+	
+				<div class="fragment fade-in">
+					<p>In this module we will introduce you to a concept of a service mesh and its role in modern, microservices oriented software architecture.</p>
+				</div>
+			</section>
+
+			<!-- Service Mesh -->
+			<section>
+				<section id="whatservicemesh">
+						<h2>What is a service mesh?</h2>
+						
+						<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+							<img data-src="/images/tech/k8s.png" style="width:10%"/>
+						</div>
+			
+						<div class="fragment fade-in">
+							<p class="mu-small">The term service mesh is used to describe the network of microservices that make up such applications and the interactions between them. As a service mesh grows in size and complexity, it can become harder to understand and manage. Its requirements can include discovery, load balancing, failure recovery, metrics, and monitoring. A service mesh also often has more complex operational requirements, like A/B testing, canary releases, rate limiting, access control, and end-to-end authentication.</p>
+						</div>
+				</section>
+				<section id="featuresservicemesh">
+						<h2>Features of Istio service mesh:</h2>
+						
+						<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+							<img data-src="/images/tech/k8s.png" style="width:10%"/>
+						</div>
+			
+						<div class="fragment fade-in">
+							<ul>
+									<li>Traffic Management</li>
+									<li>Observability</li>
+									<li>Policy Enforcement</li>
+									<li>Service Identity and Security</li>
+							</ul>
+							<blockquote class="mu-small">
+								Decrease the coupling between application code, platform and policy. This makes services easier to imnplement and move between environments or to new policy schemes. <br/>Result = more portable applications.
+							</blockquote>			
+						</div>
+				</section>
+				<section id="servicemeshcomponents">
+						<h2>Service Mesh Components</h2>
+						
+						<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+							<img data-src="/images/tech/k8s.png" style="width:10%"/>
+						</div>
+
+						<p class="mu-small mu-left">The information here will be specific to Istio, however, most of the service meshes are generally split into two pieces:</p>
+			
+						<div class="fragment fade-in">
+							<ul>
+								<li>Data Plane:
+									<ul>
+										<li class="mu-small">bunch of proxies (Envoy) deployed as sidecars (What is a sidecar?). Purpose of these proxies is to control all communication between services and the Mixer (policy & telemetry service)</li>
+									</ul>
+								</li>
+								<li>Control Plane:
+									<ul>
+										<li class="mu-small" >manages and configures data plane (proxies) to route traffic. It also confugres Mixers to enforce policies and collect telemtry.</li>
+									</ul>
+								</li>
+							</ul>	
+						</div>
+				</section>
+			</section>
+
+
+			<section>
+				...
+			</section>
+
+			<!-- Use this for markdown slides
+			<section data-markdown>
+				<script type="text/template">
+					## markdown
+				</script>
+			</section>
+			-->
+
+		</div>
+	</div>
+	<!-- ateam stamp / home -->
+	<a href="#home" class="mu-ateam-water">
+		<img src="/images/ateam.png" />
+	</a>
+
+	<script src="/js/reveal.js"></script>
+
+	<script>
+		// More info about config & dependencies:
+		// - https://github.com/hakimel/reveal.js#configuration
+		// - https://github.com/hakimel/reveal.js#dependencies
+		Reveal.initialize({
+			history: true,
+			fragmentInURL: true,
+			transition: 'slide',
+			dependencies: [
+				{ src: '/plugin/markdown/marked.js' },
+				{ src: '/plugin/markdown/markdown.js' },
+        { src: '/plugin/clipboard/copy.js', async: true },
+				{ src: '/plugin/notes/notes.js', async: true },
+				{ src: '/plugin/highlight/highlight.js', async: true }
+			]
+		});
+	</script>
+</body>
+
+</html>
