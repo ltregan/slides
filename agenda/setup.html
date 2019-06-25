@@ -42,16 +42,6 @@
 					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
 				</section>
 
-				<!-- TOC -->
-				<section id="toc">
-					<h2>Table of Contents</h2>
-					<ul class="plain">
-						<!-- add a line for each <section id="slideId">...</section>  -->
-						<li><a href="#home">Home</a></li>
-						<li><a href="#lab">Setup</a></li>
-					</ul>
-				</section>
-
 				<!-- Contributors -->
 				<section id="contributors">
 					<h2>Primary Contributors</h2>
@@ -82,19 +72,17 @@
 				</section>
 
 				<section id="clone">
-					<h2>Clone MuShop</h2>
-					<p class="mu-small">
-						Begin by cloning the workshop project. By default, the <code>develop</code>
-						branch will be checked out
-					</p>
-					<div class="fragment-set">
-						<div class="fragment fade-out">
-								<pre><code class="hljs sh">#clone
-git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
+					<h2>Clone Repository</h2>
+					<div class="mu-sequence">
+						<p class="mu-small no-margin">
+							Begin by cloning the workshop project.
+						</p>
+						<div class="fragment">
+							<pre><code class="hljs sh">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
 cd mushop-oci-demo</code></pre>
 						</div>
-						<div class="fragment fade-in">
-							<pre class="mu-small">.
+						<div class="fragment">
+							<pre class="mu-xsmall"><code class="hljs text">.
 ├── LICENSE
 ├── README.md
 ├── deploy
@@ -114,45 +102,60 @@ cd mushop-oci-demo</code></pre>
 │   ├── storefront
 │   ├── stream
 │   └── user
-└── wercker.yml</pre>
+└── wercker.yml</code></pre>
 						</div>
-						<div class="fragment fade-in">
-								<pre><code class="hljs sh">#check branch
-git branch
-* develop</code></pre>
-							Next: <a class="navigate-down">Install Credentials</a>
-						</div>
+					</div>
+					<div class="fragment">
+						Next: <a class="navigate-down">Install Credentials</a>
 					</div>
 				</section>
 
 				<section id="credentials">
-					<h2>🔒 Install Credentials</h2>
+					<h2>🔒 Install K8S Credentials</h2>
 					<p class="mu-small">
 						The application runtime requires connectivity to an OCI Tenancy.
-						A credential file for the development environment is provided.
+						A credential file for the development environment is provided
 					</p>
 					<hr/>
-					<ol class="block">
-						<li>Download K8S <a href="/downloads/k8s/secrets.yaml">secrets.yaml</a></li>
-						<li>Create a namespace <pre><code class="hljs text">kubectl create namespace your-name</code></pre></li>
-						<li>Install Secrets <pre><code class="hljs text">kubectl create -f secrets.yaml -n your-name</code></pre></li>
-					</ol>
-					Next: <a class="navigate-down">Start</a>
+					<div class="mu-sequence">
+						<div class="fragment">
+							Check <code>kubectl</code> context:
+							<pre><code class="hljs sh">kubectl config current-context
+# docker-for-desktop</code></pre>
+						</div>
+						<div class="fragment">
+							Check <code>kubectl</code> namespace configuration:
+							<pre><code class="hljs sh">kubectl config view | grep namespace</code></pre>
+						</div>
+						<div class="fragment">
+							Download K8S <a href="/downloads/k8s/secrets.yaml">secrets.yaml</a> and install:
+							<pre><code class="hljs text">kubectl create -f secrets.yaml</code></pre>
+						</div>
+					</div>
+					
+					<div class="fragment">
+						Next: <a class="navigate-down">Start</a>
+					</div>
 				</section>
 
 				<section id="start">
 					<h2>Run <img data-src="/images/logo.png" alt="MuShop" /></h2>
-					<ol class="block">
-						<li>Change directory to <code>mushop-oci-demo</code></li>
-						<li>Deploy in K8S</li>
-					</ol>
-					<pre><code class="hljs text">kubectl apply -f deploy/kubernetes/mushop.yaml</code></pre>
-					<pre class="fragment"><code class="hljs text">kubectl get pod --watch</code></pre>
-					<pre class="fragment"><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
+					<div class="mu-sequence">
+						Deploy in local K8S cluster
+						<pre class="fragment"><code class="hljs text">kubectl apply -f deploy/kubernetes/mushop.yaml</code></pre>
+						<pre class="fragment"><code class="hljs text">kubectl get pod --watch</code></pre>
+						<pre class="fragment"><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
+					</div>
+					<div class="fragment">
+						Open Browser <span class="mu-muted">(Chrome)</span>: <a href="http://localhost:8000" target="_blank">localhost:8000</a>
+					</div>
 				</section>
 
 			</section>
 
+			<section id="ready">
+				<h2>😎 Ready!</h2>
+			</section>
 		</div>
 	</div>
 	<!-- ateam stamp / home -->
@@ -173,6 +176,7 @@ git branch
 			dependencies: [
 				{ src: '/plugin/markdown/marked.js' },
 				{ src: '/plugin/markdown/markdown.js' },
+        { src: '/plugin/clipboard/copy.js', async: true },
 				{ src: '/plugin/notes/notes.js', async: true },
 				{ src: '/plugin/highlight/highlight.js', async: true }
 			]

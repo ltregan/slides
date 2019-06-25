@@ -1,0 +1,303 @@
+<!doctype html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+  <title>Catalogue - Cloud Native OCI - MuShop</title>
+  
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/reveal.css">
+  <link rel="stylesheet" href="/css/theme/mu.css">
+
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="/lib/css/monokai.css">
+
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
+</head>
+
+<body>
+  <div class="reveal">
+    <div class="slides">
+      <!-- title -->
+      <section id="home">
+        <!-- landing -->
+        <section id="home-title">
+          <h1>Cloud Native OCI</h1>
+          <h2>Go ATP + OCI Service Broker</h2>
+          <div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+            <img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+            <span>+</span>
+            <img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
+          </div>
+          <hr/>
+          <small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+        </section>
+
+        <!-- TOC -->
+        <section id="toc">
+          <h2>Table of Contents</h2>
+          <ul>
+            <!-- add a line for each <section id="slideId">...</section>  -->
+            <li><a href="#home">Home</a></li>
+            <li><a href="#Overview">Overview</a></li>
+            <li><a href="#lab">Demo/Lab</a></li>
+            <li><a href="#dns">DNS</a></li>
+            <li><a href="#waf">WAF</a></li>
+            <li><a href="#other">Additional</a></li>
+            <li><a href="#resources">Resources</a></li>
+          </ul>
+        </section>
+
+        <!-- Contributors -->
+        <section id="contributors">
+          <h2>Primary Contributors</h2>
+          <div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+            <div>
+              <div>Adao Oliveira Junior</div>
+              <div>Jeevan Joseph</div>
+              <div>Julio Camara</div>
+            </div>
+            <div>
+              <div>Matt Vander Vliet</div>
+              <div>Sherwood Zern</div>
+              <div>Sumit Kumar</div>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Lab Requirements -->
+      <section id="labReq">
+          <section id="labReq-great">
+            <h2>Lab Requirements</h2>
+            <div class="fragment fade-out">
+                <p>Helm and svcat cli installed? </p>
+                <p><green>Yes?</green> great, go left.     <red>No?</red> go down.</p>
+            </div>
+          </section>
+          <section id="labReq-now">
+              <h2>Lab Requirements</h2>
+              <div class="fragment fade-in">
+                  <p class="mu-small">Make sure helm client installed. If not, install using this command. Will also install the optional svcat cli (MacOS)</p>
+                  <pre><code class="hljs text">brew update && brew install kubernetes-helm kubernetes-service-catalog-client</code></pre>
+                  <p class="mu-small">Check if you have helm installed on the server</p>
+                  <pre><code class="hljs text">helm version</code></pre>
+                  <p class="mu-small">The Helm version command should give result similar to this:</p>
+                  <pre><code class="hljs text">> helm version
+            Client: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}
+            Server: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}</code></pre>
+                  <p class="mu-small">If you receive an error tha could not find tiller pod on the server, you need to install to you your cluster</p>
+                  <pre><code class="hljs text">helm init --history-max 200</code></pre>
+              </div>
+          </section>
+      </section>
+
+      <!-- Lab/Overview -->
+      <section id="lab">
+        <h2>Lab Overview</h2>
+        <ul>
+          <li>Installing Service Catalog</li>
+          <li>Deploying OCI Service Broker</li>
+          <li>Provisioning ATP</li>
+          <li>Reviewing sample Go-ATP service</li>
+          <li>Biding sample service to created ATP</li>
+        </ul>
+      </section>
+
+      <!-- Lab/InstallServiceCatalog -->
+      <section>
+        <section id="InstallServiceCatalog">
+          <h2>Installing Service Catalog</h2>
+          
+          <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+            <img data-src="/images/tech/k8s.png" style="width:10%"/>
+          </div>
+
+          <div class="fragment-set">
+            <div class="fragment fade-in">
+              <p class="mu-small">Add the Kubernetes Service Catalog helm repository</p>
+              <pre><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com</code></pre>
+              <br/>
+              <p class="mu-small">Install the Kubernetes Service Catalog helm chart</p>
+              <pre><code class="hljs text">helm install svc-cat/catalog \
+            --name catalog \
+            --namespace catalog </code></pre>
+              <blockquote style="font-size:10.5px;">
+                Please note that the above command will run the Service Catalog using an embedded etcd instance.
+                It is not recommended to run the Service Catalog using an embedded etcd instance in production environments,
+                instead a separate etcd cluster should be setup and used by the Service Catalog.
+                The open source etcd operator project or a commercial offering may be used to setup a production quality etcd cluster.
+              </blockquote>
+            </div>
+            <div class="fragment fade-in">
+              <p class="mu-small">It may take a few seconds after the helm install command succeeds for the Service Catalog to start up in your cluster. To check on the status, run:</p>
+              <pre><code class="hljs text">kubectl get deployment --namespace catalog</code></pre>
+              <pre><code class="hljs text">NAME                                 READY   UP-TO-DATE   AVAILABLE   AGE
+catalog-catalog-apiserver            1/1     1            1           32s
+catalog-catalog-controller-manager   1/1     1            1           32s</code></pre>
+            </div>
+          </div>
+        </section>
+      </section>
+
+      <!-- Lab/DeployingOCIServiceBroker -->
+      <section>
+          <section id="DeployingOCIServiceBroker">
+            <h2>Deploying OCI Service Broker</h2>
+            
+            <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+              <img data-src="/images/tech/k8s.png" style="width:10%"/>
+            </div>
+  
+            <div class="fragment-set">
+              <div class="fragment fade-in">
+                <p class="mu-small mu-left">The OCI Service Broker for Kubernetes needs OCI user credentials to provision and manage services and resources
+                  in the user tenancy. <br/>
+                  You can reuse previous created OCI credentials or create a separate one just for the service broker:</p>
+                <pre><code class="hljs text">kubectl create secret generic ocicredentials \
+    --from-literal=tenancy=(CUSTOMER_TENANCY_OCID) \
+    --from-literal=user=(USER_OCID) \
+    --from-literal=fingerprint=(USER_PUBLIC_API_KEY_FINGERPRINT) \
+    --from-literal=region=(USER_OCI_REGION) \
+    --from-literal=passphrase=(PASSPHRASE_STRING) \
+    --from-file=privatekey=(PATH_OF_USER_PRIVATE_API_KEY)</code></pre>
+              </div>
+              <div class="fragment fade-in">
+                <p>This command will deploy the OCI service broker on your cluster. Note that is using the secret ocicredentials.</p>
+                <pre><code class="hljs text">helm install https://github.com/oracle/oci-service-broker/releases/download/v1.2.0/oci-service-broker-1.2.0.tgz  --name oci-service-broker \
+                    --set ociCredentials.secretName=ocicredentials \
+                    --set storage.etcd.useEmbedded=true \
+                    --set tls.enabled=false \
+                    --namespace mushop </code></pre>
+                <blockquote style="font-size:10.5px;">
+                    Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
+                    It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in production environments,
+                    instead a separate etcd cluster should be setup and used by the OCI Sevice Broker. <br/>
+                    The open source etcd operator project or a commercial offering may be used to setup a production quality etcd cluster.
+                    The recommended setup can be found <a href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup" target="_blank">here</a>
+                  </blockquote>
+              </div>
+              <div class="fragment fade-in">
+                  <p>Register OCI Service Broker</p>
+                  <pre><code class="hljs text">kubectl create -f oci-service-broker.yaml</code></pre>
+                  <pre class="mu-xsmall"><code class="hljs yaml">apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ClusterServiceBroker
+metadata:
+  name: oci-service-broker
+spec:
+  url: http://oci-service-broker.mushop:8080</code></pre>
+              </div>
+              <div class="fragment fade-in">
+                  <p>Verify that the Service Broker is available and ready</p>
+                  <pre><code class="hljs text">kubectl get clusterservicebrokers -o 'custom-columns=BROKER:.metadata.name,STATUS:.status.conditions[0].reason'</code></pre>
+                  <pre><code class="hljs text">BROKER  STATUS
+                    oci-service-broker  FetchedCatalog
+                  </code></pre>
+              </div>
+              <div class="fragment fade-in">
+                  <p>Using the svcat cli to see the status, service and plans available</p>
+                  <pre><code class="hljs text">svcat get brokers</code></pre>
+                  <pre><code class="hljs text">svcat get classes</code></pre>
+                  <pre><code class="hljs text">svcat get plans</code></pre>
+              </div>
+
+            </div>
+          </section>
+        </section>
+
+
+      <section id="provisioningATP">
+        <h2>Provisioning ATP</h2>
+        <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+            <img data-src="/images/tech/k8s.png" style="width:10%"/>
+        </div>
+        <div class="fragment-set">
+          <div class="fragment fade-in">
+              <p>Creating new ATP instance</p>
+              <pre><code class="hljs text">kubectl create -f atp-catalogue-instance-plain.yaml</code></pre>
+              <pre class="mu-xsmall"><code class="hljs yaml">apiVersion: </code></pre>
+              <pre><code class="hljs text">svcat get instances</code></pre>
+          </div>
+        </div>
+      </section>
+
+      <section id="goATPmicroservice">
+          <h2>Reviewing sample Go-ATP service</h2>
+          <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+              <img data-src="/images/tech/k8s.png" style="width:10%"/>
+          </div>
+          <div class="fragment-set">
+            <div class="fragment fade-in">
+                <p>Go App</p>
+            </div>
+          </div>
+      </section>
+
+      <section id="bidingATPtoService">
+          <h2>Biding sample service to created ATP</h2>
+          <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+              <img data-src="/images/tech/k8s.png" style="width:10%"/>
+          </div>
+          <div class="fragment-set">
+            <div class="fragment fade-in">
+                <p>Biding ATP App</p>
+            </div>
+          </div>
+      </section>
+
+      <section>
+        <h2>Resources</h2>
+        <ul>
+          <li><a href="https://svc-cat.io/">Kubernetes Service Catalog</a></li>
+          <li><a href="https://www.openservicebrokerapi.org/">Open Service Broker API</a></li>
+          <li><a href="https://github.com/oracle/oci-service-broker">Github: OCI Service Broker</a></li>
+          <li><a href="https://docs.cloud.oracle.com/iaas/Content/ContEng/Tasks/contengaddingservicebrokers.htm">Adding OCI Service Broker for Kubernetes to Clusters</a></li>
+        </ul>
+      </section>
+
+      <!-- Use this for markdown slides
+      <section data-markdown>
+        <script type="text/template">
+          ## markdown
+        </script>
+      </section>
+      -->
+
+    </div>
+  </div>
+  <!-- ateam stamp / home -->
+  <a href="#home" class="mu-ateam-water">
+    <img src="/images/ateam.png" />
+  </a>
+
+  <script src="/js/reveal.js"></script>
+
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      history: true,
+      fragmentInURL: true,
+      transition: 'slide',
+      dependencies: [
+        { src: '/plugin/markdown/marked.js' },
+        { src: '/plugin/markdown/markdown.js' },
+        { src: '/plugin/clipboard/copy.js', async: true },
+        { src: '/plugin/notes/notes.js', async: true },
+        { src: '/plugin/highlight/highlight.js', async: true }
+      ]
+    });
+  </script>
+</body>
+
+</html>
