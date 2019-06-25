@@ -6,7 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
 	<title>Cloud Native OCI - MuShop</title>
-	
+
 	<link rel="stylesheet" href="/css/reset.css">
 	<link rel="stylesheet" href="/css/reveal.css">
 	<link rel="stylesheet" href="/css/theme/mu.css">
@@ -34,14 +34,15 @@
 					<h1>Cloud Native OCI</h1>
 					<h2>Kubernetes/OKE</h2>
 					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
+						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png"
+							alt="Oracle Cloud Infrastructure" />
 						<span>+</span>
 						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
 					</div>
-					<hr/>
+					<hr />
 					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
 				</section>
-				
+
 				<!-- TOC -->
 				<section id="toc">
 					<h2>Table of Contents</h2>
@@ -70,7 +71,7 @@
 				</section>
 			</section>
 
-			
+
 
 			<!-- Kubernetes -->
 			<section id="k8s_intro">
@@ -84,15 +85,16 @@
 				</section>
 				<section>
 					<h2>Architecture</h2>
-					<p class="mu-small">Kubernetes is an open-source container-orchestration system for automating application deployment, scaling, and management.</p>
-					<img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service"/>
+					<p class="mu-small">Kubernetes is an open-source container-orchestration system for automating
+						application deployment, scaling, and management.</p>
+					<img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service" />
 					<p class="mu-small fragment">Kubernetes ensures configuration is running in the infrastructure</p>
 				</section>
 				<section>
 					<h2>Building Blocks</h2>
 					<div class="mu-flex mu-gutter">
-						<div><img class="plain" data-src="/images/k8s/node_pod.png" alt="Service"/></div>
-						<div><img class="plain fragment" data-src="/images/k8s/deployment.png" alt="Service"/></div>
+						<div><img class="plain" data-src="/images/k8s/node_pod.png" alt="Service" /></div>
+						<div><img class="plain fragment" data-src="/images/k8s/deployment.png" alt="Service" /></div>
 					</div>
 				</section>
 				<section>
@@ -103,25 +105,25 @@
 							<li class="fragment">NodePort</li>
 							<li class="fragment">LoadBalancer</li>
 						</ul>
-						<div><img class="plain" data-src="/images/k8s/service2.png" alt="Service"/></div>
+						<div><img class="plain" data-src="/images/k8s/service2.png" alt="Service" /></div>
 					</div>
 				</section>
 				<section>
 					<h2>Building Blocks</h2>
 					<div class="mu-flex mu-gutter">
-						<div><img class="plain" data-src="/images/k8s/configmap.png" alt="Service"/></div>
-						<div><img class="plain fragment" data-src="/images/k8s/secret.png" alt="Service"/></div>
+						<div><img class="plain" data-src="/images/k8s/configmap.png" alt="Service" /></div>
+						<div><img class="plain fragment" data-src="/images/k8s/secret.png" alt="Service" /></div>
 					</div>
 				</section>
 				<section>
 					<h2>Building Blocks</h2>
 					<div>
-						<div><img class="plain" data-src="/images/k8s/pv.png" alt="Service"/></div>
+						<div><img class="plain" data-src="/images/k8s/pv.png" alt="Service" /></div>
 					</div>
 				</section>
 				<section>
 					<h2>Kubernetes on OCI</h2>
-					<img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service"/>
+					<img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service" />
 					<ul class="mu-small">
 						<li class="fragment">Manage upgrades of master and worker nodes</li>
 						<li class="fragment">Figure out container networking and storage</li>
@@ -131,29 +133,29 @@
 				<section>
 					<h2>Oracle Container Engine for Kubernetes (OKE)</h2>
 					Managed Kubernetes Services (CaaS)
-					<img class="plain" data-src="/images/k8s/oracle_managed.png" alt="Service"/>
+					<img class="plain" data-src="/images/k8s/oracle_managed.png" alt="Service" />
 				</section>
 				<section>
 					<h2>Oracle Container Engine for Kubernetes (OKE)</h2>
-					<img class="plain" data-src="/images/k8s/oke_ha.png" alt="Service"/>
+					<img class="plain" data-src="/images/k8s/oke_ha.png" alt="Service" />
 				</section>
 				<section>
 					<h2>How to create an OKE Cluster</h2>
 					<div class="mu-flex mu-gutter">
-						<div><img class="plain" width="100%" data-src="/images/k8s/console1.png" alt="Helm"/></div>
-						<div><img class="plain" width="100%" data-src="/images/k8s/console2.png" alt="Helm"/></div>
+						<div><img class="plain" width="100%" data-src="/images/k8s/console1.png" alt="Helm" /></div>
+						<div><img class="plain" width="100%" data-src="/images/k8s/console2.png" alt="Helm" /></div>
 					</div>
 				</section>
 				<section>
 					<h2>How to create an OKE Cluster</h2>
-					<img class="plain" data-src="/images/k8s/create_simple_oke1.png" alt="Service"/>
+					<img class="plain" data-src="/images/k8s/create_simple_oke1.png" alt="Service" />
 				</section>
 				<section>
 					<h2>How to create an OKE Cluster</h2>
 					<!-- <pre><code class="hljs sql mu-small"> -->
 					<div class="mu-ratio mu-ratio-2-1">
 						<div class="mu-overflow">
-							<img class="plain" data-src="/images/k8s/create_simple_oke2.png" alt="Service"/>
+							<img class="plain" data-src="/images/k8s/create_simple_oke2.png" alt="Service" />
 						</div>
 					</div>
 					<!-- </code> -->
@@ -164,8 +166,10 @@
 						<li class="mu-small fragment">Kubectl - Command Line Tool</li>
 					</ul>
 					<div class="mu-flex mu-gutter">
-						<div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig1.png" alt="Service"/></div>
-						<div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig2.png" alt="Service"/></div>
+						<div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig1.png"
+								alt="Service" /></div>
+						<div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig2.png"
+								alt="Service" /></div>
 					</div>
 					<pre><code class="hljs text fragment">mkdir -p $HOME/.kube</code></pre>
 					<pre><code class="hljs text fragment">oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae3dgnlgmqzgczjsg4zgeyjzhfsggmrvmi3ggobwgczgezlcgrsg --file $HOME/.kube/config --region us-phoenix-1</code></pre>
@@ -176,17 +180,19 @@
 					<ul>
 						<li class="mu-small fragment">Dashboard - UI Tool</li>
 					</ul>
-					<img class="plain fragment" data-src="/images/k8s/dashboard.png" alt="Service"/>
+					<img class="plain fragment" data-src="/images/k8s/dashboard.png" alt="Service" />
 					<pre><code class="hljs text fragment">kubectl proxy</code></pre>
-					<p class="mu-small">Then click <a href="http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/" target="_blank">here</a> to access the dashboard.</p>
+					<p class="mu-small">Then click <a
+							href="http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/"
+							target="_blank">here</a> to access the dashboard.</p>
 				</section>
 				<section>
 					<h2>In-place upgrade - master nodes</h2>
-					<img class="plain" data-src="/images/k8s/oke_ha.png" alt="Service"/>
+					<img class="plain" data-src="/images/k8s/oke_ha.png" alt="Service" />
 				</section>
 				<section>
 					<h2>In-place upgrade - worker nodes</h2>
-					<img class="plain" data-src="/images/k8s/oke_ad_nodepools.png" alt="Service"/>
+					<img class="plain" data-src="/images/k8s/oke_ad_nodepools.png" alt="Service" />
 				</section>
 				<section>
 					<h2>Deployment Manifests</h2>
@@ -194,52 +200,52 @@
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
-	name: api
-	labels:
-	name: api
-	layer: client
+  name: api
+  labels:
+    name: api
+    layer: client
 spec:
-	replicas: 1
-	template:
-	metadata:
-		labels:
-		name: api
-		layer: client
-	spec:
-		containers:
-		- name: api
-		image: phx.ocir.io/intvravipati/mushop/api:1
-		imagePullPolicy: Always
-		ports:
-		- name: http
-			containerPort: 3000
-		env:
-		- name: SESSION_REDIS
-			value: session
-		resources:
-			limits:
-			cpu: 300m
-			memory: 1000Mi
-			requests:
-			cpu: 100m
-			memory: 300Mi
-		securityContext:
-			runAsNonRoot: true
-			runAsUser: 10001
-			capabilities:
-			drop:
-			  - all
-			add:
-			  - NET_BIND_SERVICE
-			readOnlyRootFilesystem: true
-		livenessProbe:
-			httpGet:
-			path: /health
-			port: http
-		readinessProbe:
-			httpGet:
-			path: /health
-			port: http
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        name: api
+        layer: client
+    spec:
+      containers:
+      - name: api
+        image: phx.ocir.io/intvravipati/mushop/api:1
+        imagePullPolicy: Always
+        ports:
+        - name: http
+          containerPort: 3000
+        env:
+        - name: SESSION_REDIS
+          value: session
+        resources:
+          limits:
+            cpu: 300m
+            memory: 1000Mi
+          requests:
+            cpu: 100m
+            memory: 300Mi
+        securityContext:
+          runAsNonRoot: true
+          runAsUser: 10001
+          capabilities:
+            drop:
+              - all
+            add:
+              - NET_BIND_SERVICE
+          readOnlyRootFilesystem: true
+        livenessProbe:
+          httpGet:
+            path: /health
+            port: http
+        readinessProbe:
+          httpGet:
+            path: /health
+            port: http
 					</code></pre>
 				</section>
 				<section>
@@ -259,14 +265,16 @@ spec:
 					<ul>
 						<li>Helm is a package management tool for Kubernetes</li>
 						<li>A CNCF project</li>
-						<li>A package manager similar to yum, brew, apt-get, npm, choco, etc., but specifically for Kubernetes</li>
-						<li>Method for repeatable application installation, configuration, and versioning through the use of charts, repositories, and releases</li>
+						<li>A package manager similar to yum, brew, apt-get, npm, choco, etc., but specifically for
+							Kubernetes</li>
+						<li>Method for repeatable application installation, configuration, and versioning through the
+							use of charts, repositories, and releases</li>
 						<li>Repository of existing templates for standard software</li>
-					</ul>	
+					</ul>
 				</section>
 				<section>
 					<h2>Helm</h2>
-					<img class="plain" data-src="/images/helm/helm.png" alt="Helm"/>
+					<img class="plain" data-src="/images/helm/helm.png" alt="Helm" />
 				</section>
 			</section>
 
@@ -286,10 +294,10 @@ spec:
 				<section>
 					<h3>Step 1: switch context</h3>
 					<p class="mu-left">
-						You will perform the tasks for the lab in the OKE cluster mushop-workshop. 
-						To switch to that cluster use docker desktop 
+						You will perform the tasks for the lab in the OKE cluster mushop-workshop.
+						To switch to that cluster use docker desktop
 					</p>
-					<img class="plain" width=40% data-src="/images/k8s/switch_context2.png" alt="Helm"/>
+					<img class="plain" width=40% data-src="/images/k8s/switch_context2.png" alt="Helm" />
 				</section>
 				<section>
 					<h3>Step 2: install credentials in OKE</h3>
@@ -298,14 +306,18 @@ spec:
 						in your local cluster. Now you are going to do the same in the OKE cluster mushop-workshop
 					</p>
 					<ol class="block">
-						<li>Create a namespace <pre><code class="hljs text">kubectl create namespace your-name</code></pre></li>
-						<li>Install Secrets <pre><code class="hljs text">kubectl create -f secrets.yaml -n your-name</code></pre></li>
+						<li>Create a namespace
+							<pre><code class="hljs text">kubectl create namespace your-name</code></pre>
+						</li>
+						<li>Install Secrets
+							<pre><code class="hljs text">kubectl create -f secrets.yaml -n your-name</code></pre>
+						</li>
 					</ol>
 				</section>
 				<section>
 					<h3>Step 3: change default namespace</h3>
 					<p class="mu-left">
-						Change the your default namespace to your name to avoid having to add 
+						Change the your default namespace to your name to avoid having to add
 						<strong>--namespace your-name</strong> to every kubectl command.
 					</p>
 					<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=your-name</code></pre>
@@ -322,9 +334,9 @@ spec:
 					<pre><code class="hljs text">git clone -b workshop/k8s-lab git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
 cd mushop/deploy/kubernetes</code></pre>
 					<p class="mu-left">
-							Open file mushop.yaml in an editor of your choice.
-							Look for the deployment section for catalogue. 
-							The commented lines (start with #) have instruction to create environment variables. 
+						Open file mushop.yaml in an editor of your choice.
+						Look for the deployment section for catalogue.
+						The commented lines (start with #) have instruction to create environment variables.
 					</p>
 				</section>
 				<section>
@@ -348,8 +360,8 @@ cd mushop/deploy/kubernetes</code></pre>
 					</p>
 					<pre><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
 					<p class="mu-left">
-							You are done! To access the store click <a href="https://localhost">here</a>
-						</p>
+						You are done! To access the store click <a href="https://localhost">here</a>
+					</p>
 				</section>
 			</section>
 		</div>
@@ -372,7 +384,7 @@ cd mushop/deploy/kubernetes</code></pre>
 			dependencies: [
 				{ src: '/plugin/markdown/marked.js' },
 				{ src: '/plugin/markdown/markdown.js' },
-        { src: '/plugin/clipboard/copy.js', async: true },
+				{ src: '/plugin/clipboard/copy.js', async: true },
 				{ src: '/plugin/notes/notes.js', async: true },
 				{ src: '/plugin/highlight/highlight.js', async: true }
 			]
