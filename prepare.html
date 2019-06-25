@@ -83,7 +83,8 @@
 									<div class="mu-small">(Includes local K8s and kubectl)</div>
 								</li>
 								<li>
-									<a href="https://github.com/helm/helm" target="_blank">Helm</a>
+									<a href="https://github.com/helm/helm" target="_blank">Helm</a> -  
+									<a href="#helm">quick install</a>
 									<div class="mu-small">(K8s Package Manager)</div>
 								</li>
 								<li><a href="https://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank">Oracle SQL Developer</a></li>
@@ -92,7 +93,11 @@
 						<div class="col-1-2">
 							<!-- optional -->
 							<ul class="justified">
-								<li><a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat (K8s Service Catalog CLI)</a></li>
+								<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a></li>
+								<li>
+									<a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat</a>
+									<div class="mu-small">(K8s Service Catalog CLI)</div>
+								</li>
 								<li><a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor</a></li>
 							</ul>
 						</div>
@@ -190,7 +195,7 @@ KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml kubectl config vie
 						<div class="mu-medium">
 							<p class="mu-small">Install Homebrew, a MacOS package manager, if not yet installed</p>
 							<pre><code class="hljs shell">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
-							<p class="mu-small">Install Helm using this command. Will also install the optional svcat cli</p>
+							<p class="mu-small">Install Helm using this command</p>
 							<pre><code class="hljs shell">brew update && brew install kubernetes-helm kubernetes-service-catalog-client</code></pre>
 							<p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
 							<pre><code class="hljs text">helm version</code></pre>
