@@ -231,6 +231,9 @@ section > h2 > img {
 			list-style: none;
 		}
 	}
+	&.justified {
+		margin-left: 1em;
+	}
 
 	li.mu-divider {
 		list-style: none;

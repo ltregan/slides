@@ -390,6 +390,8 @@ section > h2 > img {
     margin-left: 0; }
     .reveal ul.plain li, .reveal ol.plain li {
       list-style: none; }
+  .reveal ul.justified, .reveal ol.justified {
+    margin-left: 1em; }
   .reveal ul li.mu-divider, .reveal ol li.mu-divider {
     list-style: none;
     margin: 20px 0; }
