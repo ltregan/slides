@@ -125,8 +125,11 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 						<blockquote class="mu-small">
 							<b>⚠️ NOTE:</b> Path to Downloads/kubeconfig.yaml and change as necessary
 						</blockquote>
-						Merge kubectl context with the downloaded file
-						<pre><code class="hljs sh">KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml kubectl config view --flatten >> $HOME/.kube/config</code></pre>
+						Merge kubectl context with the downloaded configuration
+						<pre><code class="hljs sh"># create backup
+cp $HOME/.kube/config $HOME/.kube/config.bak
+# merge configuration
+KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml kubectl config view --flatten > $HOME/.kube/config</code></pre>
 					</div>
 					<div class="fragment">
 						Verify the workshop named context
