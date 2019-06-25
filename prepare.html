@@ -129,8 +129,11 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 						<pre><code class="hljs sh">KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml kubectl config view --flatten >> $HOME/.kube/config</code></pre>
 					</div>
 					<div class="fragment">
-						Verify
+						Verify the workshop named context
 						<pre><code class="hljs text">kubectl config get-contexts</code></pre>
+						<pre><code class="hljs text">CURRENT   NAME                 CLUSTER                      AUTHINFO             NAMESPACE
+*         docker-for-desktop   docker-for-desktop-cluster   docker-for-desktop   mushop
+          mushop-workshop      cluster-czgezlcgrsg          user-czgezlcgrsg     </code></pre>
 					</div>
 				</div>
 			</section>
