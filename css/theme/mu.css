@@ -339,6 +339,9 @@ section > h2 > img {
 .mu-left {
   text-align: left; }
 
+.mu-center {
+  text-align: center; }
+
 .mu-small {
   font-size: 0.6em;
   line-height: 1.1; }
