@@ -171,6 +171,9 @@ section > h2 > img {
 .mu-left {
 	text-align: left;
 }
+.mu-center {
+	text-align: center;
+}
 .mu-small {
 	font-size: 0.6em;
 	line-height: 1.1;
@@ -182,6 +185,9 @@ section > h2 > img {
 .mu-medium {
 	font-size: 0.8em;
 	line-height: 1.1;
+}
+.mu-large {
+	font-size: 2em;
 }
 .mu-normal {
 	text-transform: none !important;
@@ -224,6 +230,9 @@ section > h2 > img {
 		li {
 			list-style: none;
 		}
+	}
+	&.justified {
+		margin-left: 1em;
 	}
 
 	li.mu-divider {
@@ -395,6 +404,11 @@ section > h2 > img {
 			visibility: inherit!important;
 		}
 	}
+}
+
+// icon
+.mu-icon {
+	display: inline-block;
 }
 
 // services

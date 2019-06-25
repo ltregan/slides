@@ -339,6 +339,9 @@ section > h2 > img {
 .mu-left {
   text-align: left; }
 
+.mu-center {
+  text-align: center; }
+
 .mu-small {
   font-size: 0.6em;
   line-height: 1.1; }
@@ -350,6 +353,9 @@ section > h2 > img {
 .mu-medium {
   font-size: 0.8em;
   line-height: 1.1; }
+
+.mu-large {
+  font-size: 2em; }
 
 .mu-normal {
   text-transform: none !important;
@@ -384,6 +390,8 @@ section > h2 > img {
     margin-left: 0; }
     .reveal ul.plain li, .reveal ol.plain li {
       list-style: none; }
+  .reveal ul.justified, .reveal ol.justified {
+    margin-left: 1em; }
   .reveal ul li.mu-divider, .reveal ol li.mu-divider {
     list-style: none;
     margin: 20px 0; }
@@ -498,6 +506,9 @@ section > h2 > img {
     .fragment-set > .fragment.current-fragment[data-fragment-index="0"] {
       opacity: 1 !important;
       visibility: inherit !important; }
+
+.mu-icon {
+  display: inline-block; }
 
 .mu-svc {
   text-align: center;
