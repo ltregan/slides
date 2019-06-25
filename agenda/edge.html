@@ -172,7 +172,7 @@
             <div class="fragment fade-out">
               <p>Explore how this works...</p>
             </div>
-            <div class="fragment fade-in">
+            <div class="fragment">
               <p>First an ingress controller is installed</p>
               <pre><code class="hljs text">helm install \
 --name nginx-ingress \
@@ -183,7 +183,7 @@ stable/nginx-ingress</code></pre>
 nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:32491/TCP,443:31240/TCP   5m</code></pre>
               <p class="mu-small">An <b><code>EXTERNAL-IP</code></b> is assigned after a few seconds</p>
             </div>
-            <div class="fragment fade-in">
+            <div class="fragment">
               <p>Next verify the load balancer in OCI</p>
               <pre><code class="hljs text">oci lb load-balancer list \
 | jq '.data[] | {id: .id, name: .["display-name"], ipAddr: .["ip-addresses"][]["ip-address"]}'</code></pre>
@@ -194,12 +194,13 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
 }</code></pre>
               <p class="mu-small">Notice 👀 <b><code>ipAddr</code></b> matches <b><code>EXTERNAL-IP</code></b> assigned to the controller 🤘</p>
             </div>
-            <div class="fragment fade-in">
-              <p>
-                Then deploy ingress on the cluster
-              </p>
-              <pre><code class="hljs text">kubectl apply -f deploy/kubernetes/ingress/mushop-dev.yaml</code></pre>
-              <pre class="mu-xsmall"><code class="hljs yaml">apiVersion: extensions/v1beta1
+            <div class="fragment mu-ratio mu-ratio-2-1">
+							<div>
+								<p>
+									Then deploy ingress on the cluster
+								</p>
+								<pre><code class="hljs text">kubectl apply -f deploy/kubernetes/ingress/mushop-dev.yaml</code></pre>
+								<pre class="mu-xsmall"><code class="hljs yaml">apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: mushop-dev
@@ -213,7 +214,8 @@ spec:
         backend:
           serviceName: edge
           servicePort: 80</code></pre>
-              <pre><code class="hljs text">kubectl get ingress mushop-dev</code></pre>
+              	<pre><code class="hljs text">kubectl get ingress mushop-dev</code></pre>
+            	</div>
             </div>
           </div>
         </section>
@@ -246,7 +248,7 @@ spec:
             </div>
             <div class="mu-flex-connector arrow">CNAME</div>
             <div class="mu-svc">
-              <img data-src="/images/tech/waf.svg" /> 🔒WAF
+              <img data-src="/images/tech/waf.svg" /> 🔒 WAF
             </div>
             <div class="mu-flex-connector arrow">public-ip</div>
             <div class="mu-svc mu-grayscale">
@@ -265,7 +267,6 @@ spec:
 
         <section id="waf-console">
           <h2>WAF in OCI Console</h2>
-          <!-- <p></p> -->
           <img class="shadow no-margin" data-src="/images/edge/waf.console.png"/>
           <pre clas="fragment"><code class="hljs text">oci waas waas-policy list</code></pre>
         </section>
@@ -274,7 +275,8 @@ spec:
           <h2>WAF Protection Rules</h2>
           <p class="mu-small">
             Applying protection to a WAF origin is done by choosing specific rules
-            from <b>OWASP <em>Core Rule Set (CRS)</em></b>, where the action can be set
+						from <b>OWASP <a href="https://modsecurity.org/crs/" target="_blank">Core Rule Set (CRS)</a></b>,
+						where the action can be set
             to <span class="mu-danger">Detect</span>,
             <span class="mu-warning">Block</span>, or
             <span class="mu-muted">Off</span>
@@ -417,7 +419,7 @@ x-cdn: Served-By-Zenedge</code></pre>
         </div>
       </section>
 
-      <section>
+      <section id="resources">
         <h2>Resources</h2>
         <ul>
           <li><a href="https://docs.cloud.oracle.com/iaas/Content/Balance/Concepts/balanceoverview.htm">Load Balancer Overview</a></li>

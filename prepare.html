@@ -83,7 +83,7 @@
 						<p>Enable Kubernetes (Windows)</p>
 						<img class="plain" data-src="images/help/enable_k8s_win.png" alt="Enable K8S" />
 					</div>
-					<div class="fragment fade-in">
+					<div class="fragment mu-sequence fade-in">
 						<p>Check <code>kubectl</code> context</p>
 						<pre><code class="hljs text">kubectl config current-context</code></pre>
 						<p>Create namespace</p>
@@ -91,8 +91,8 @@
 						<p>Set default namespace <em class="mu-muted">(optional)</em></p>
 						<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=mushop</code></pre>
 					</div>
-					<!-- <div class="fragment fade-in">
-						<p>Install an ingress controller</p>
+					<div class="fragment fade-in">
+						<p>Install an ingress controller <span class="mu-muted">(optional)</span></p>
 						<pre><code class="hljs text">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
 kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml</code></pre>
 
@@ -105,7 +105,33 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 								☝️ More on this later...
 							</p>
 						</small>
-					</div> -->
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Prepare K8S Context</h2>
+				<p class="mu-small">
+					With <code>kubectl</code> it is necessary to change context at times, and we will
+					do so during this workshop. Specifically, you will need to use <code>kubectl</code>
+					on your local cluster, as well as the OKE cluster. Follow these steps to establish
+					an OKE connection
+				</p>
+				<div class="mu-sequence">
+					<div class="fragment">
+						Download <a href="/downloads/k8s/kubeconfig.yaml"><code>kubeconfig.yaml</code></a>
+					</div>
+					<div class="fragment">
+						<blockquote class="mu-small">
+							<b>⚠️ NOTE:</b> Path to Downloads/kubeconfig.yaml and change as necessary
+						</blockquote>
+						Merge kubectl context with the downloaded file
+						<pre><code class="hljs sh">KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml kubectl config view --flatten >> $HOME/.kube/config</code></pre>
+					</div>
+					<div class="fragment">
+						Verify
+						<pre><code class="hljs text">kubectl config get-contexts</code></pre>
+					</div>
 				</div>
 			</section>
 
@@ -115,7 +141,7 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
 					<p>Any workshop related downloads may be found here. </p>
 					<ul class="mu-small">
 						<li><a href="/downloads/k8s/secrets.yaml">K8S Secrets (Dev)</a></li>
-						<li><a href="/downloads/k8s/kubeconfig.yaml"><code>~/.kube/config (OKE)</code></a></li>
+						<li><a href="/downloads/k8s/kubeconfig.yaml">OKE <code>kubeconfig</code></a></li>
 					</ul>
 					<blockquote class="mu-small">
 						🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
