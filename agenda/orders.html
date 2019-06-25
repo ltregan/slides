@@ -2,156 +2,170 @@
 <html>
 
 <head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-	<title>Cloud Native OCI - MuShop</title>
+  <title>Cloud Native OCI - MuShop</title>
 
-	<link rel="stylesheet" href="/css/reset.css">
-	<link rel="stylesheet" href="/css/reveal.css">
-	<link rel="stylesheet" href="/css/theme/mu.css">
+  <link rel="stylesheet" href="/css/reset.css">
+  <link rel="stylesheet" href="/css/reveal.css">
+  <link rel="stylesheet" href="/css/theme/mu.css">
 
-	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="/lib/css/monokai.css">
+  <!-- Theme used for syntax highlighting of code -->
+  <link rel="stylesheet" href="/lib/css/monokai.css">
 
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement('link');
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
-		document.getElementsByTagName('head')[0].appendChild(link);
-	</script>
+  <!-- Printing and PDF exports -->
+  <script>
+    var link = document.createElement('link');
+    link.rel = 'stylesheet';
+    link.type = 'text/css';
+    link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
+    document.getElementsByTagName('head')[0].appendChild(link);
+  </script>
 </head>
 
 <body>
-	<div class="reveal">
-		<div class="slides">
-			<!-- title -->
-			<section id="home">
-				<!-- landing -->
-				<section id="home-title">
-					<h2>Java + Oracle ATP</h2>
-					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png"
-							alt="Oracle Cloud Infrastructure" />
-						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
-					</div>
-					<hr />
-					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
-				</section>
+  <div class="reveal">
+    <div class="slides">
+      <!-- title -->
+      <section id="home">
+        <!-- landing -->
+        <section id="home-title">
+          <h2>Java + Oracle ATP</h2>
+          <div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
+            <img height="100" class="plain no-margin" data-src="/images/tech/oci.png"
+              alt="Oracle Cloud Infrastructure" />
+            <span>+</span>
+            <img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
+          </div>
+          <hr />
+          <small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+        </section>
 
-				<!-- TOC -->
-				<section id="toc">
-					<h2>Table of Contents</h2>
-					<ul class="plain">
-						<!-- add a line for each <section id="slideId">...</section>  -->
-						<li><a href="#home">Home</a></li>
-						<li><a href="#lab">Lab Overview</a></li>
-					</ul>
-				</section>
+        <!-- TOC -->
+        <section id="toc">
+          <h2>Table of Contents</h2>
+          <ul class="plain">
+            <!-- add a line for each <section id="slideId">...</section>  -->
+            <li><a href="#home">Home</a></li>
+            <li><a href="#lab">Lab Overview</a></li>
+          </ul>
+        </section>
 
-				<!-- Contributors -->
-				<section id="contributors">
-					<h2>Primary Contributors</h2>
-					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
-						<div>
-							<div>Adao Oliveira Junior</div>
-							<div>Jeevan Joseph</div>
-							<div>Julio Camara</div>
-						</div>
-						<div>
-							<div>Matt Vander Vliet</div>
-							<div>Sherwood Zern</div>
-							<div>Sumit Kumar</div>
-						</div>
-					</div>
-				</section>
-			</section>
+        <!-- Contributors -->
+        <section id="contributors">
+          <h2>Primary Contributors</h2>
+          <div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
+            <div>
+              <div>Adao Oliveira Junior</div>
+              <div>Jeevan Joseph</div>
+              <div>Julio Camara</div>
+            </div>
+            <div>
+              <div>Matt Vander Vliet</div>
+              <div>Sherwood Zern</div>
+              <div>Sumit Kumar</div>
+            </div>
+          </div>
+        </section>
+      </section>
 
-			<!-- Overview -->
-			<section id="lab">
-				<h2>Lab Overview</h2>
-				<ul>
-					<li>Introducing the orders application</li>
-					<li>Oracle Autonomous Transaction Processing (ATP) setup</li>
-					<li>Connecting to ATP</li>
-					<li>Build & Validation</li>
-				</ul>
-			</section>
+      <!-- Overview -->
+      <section id="lab">
+        <h2>Lab Overview</h2>
+        <ul>
+          <li>Introducing the orders application</li>
+          <li>Oracle Autonomous Transaction Processing (ATP) setup</li>
+          <li>Connecting to ATP</li>
+          <li>Build & Validation</li>
+        </ul>
+      </section>
 
-			<section id="orderintro">
-				<section>
-					<h2>Orders</h2>
-					<p class="mu-small mu-left">
-						Orders is a Java micro service built using
-						<a href="https://spring.io/projects/spring-boot">Spring Boot</a>, and
-						uses Oracle Autonomous Transaction Processing (ATP) as its data store.
-					</p>
-					<p class="mu-small mu-left">
-						The services are exposed over HTTP, and when deployed over Kubernetes,
-						can be scaled horizontally while other services discover and interact
-						with this micro service over it's Service abstraction.
-					</p>
-				</section>
+      <section id="orderintro">
+        <section>
+          <h2>Orders</h2>
+          <p class="mu-small mu-left">
+            Orders is a Java micro service built using
+            <a href="https://spring.io/projects/spring-boot">Spring Boot</a>, and
+            uses Oracle Autonomous Transaction Processing (ATP) as its data store.
+          </p>
+          <p class="mu-small mu-left">
+            The services are exposed over HTTP, and when deployed over Kubernetes,
+            can be scaled horizontally while other services discover and interact
+            with this micro service over it's Service abstraction.
+          </p>
+        </section>
 
-				<section>
-					<h2>Step 1 - Provision ATP</h2>
-					<p class="mu-small">
-						Create your Oracle ATP Database instance, using the steps below.
-						<a
-							href="https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/tutorial-getting-started-autonomous-db/">Read
-							More...</a>
-					</p>
+        <section>
+          <h2>Step 1 - Provision ATP</h2>
+          <p class="mu-small">
+            Create your Oracle ATP Database instance, using the steps below.
+            <a
+              href="https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/tutorial-getting-started-autonomous-db/">Read
+              More...</a>
+          </p>
+          <video width="640" height="440" controls>
+            <source
+              src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/2yE4roHC3N2-CdVgx0wSWzLafj0-2bpcE1E3ff41zBs/n/intvravipati/b/demo-assets/o/dem-ord-create_atp.mp4"
+              type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+          </video>
+        </section>
+
+        <section data-markdown>
+          <script type="text/template">
+              ## Step 2 - Get the code
+              Clone the repository and switch to the branch `orders-start`. 
+  
+              ```
+              git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
+              git checkout workshop/orders-start
+              ```
+            </script>
+        </section>
+
+        <section>
+          <h2>Step 3 - Prepare your Cloud Database</h2>
+          <div class="fragment-set">
+            <div class="fragment fade-out mu-small">
+                <p>Download the database client credentials.
+                  <a
+                    href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-download-wallet.html#GUID-B06202D2-0597-41AA-9481-3B174F75D4B1">Read
+                    More..</a></p>
+                <video width="640" height="440" controls>
+                  <source
+                    src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/99gv74HvqmDifWRXLHWrJb0t4o-1wpHd2gu8oeznwHw/n/intvravipati/b/demo-assets/o/dem-ord-atp_cred_download.mp4"
+                    type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+                </video>
+            </div>
+            <div class="fragment fade-in">
+              <div class="mu-small">
+                <p>Connect to you cloud database with SQL developer
+                  <a
+                    href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-preparing.html#GUID-96CD75E8-7105-4239-BDD7-88C5A2362A7D">Read
+					More...</a></p>
 					<video width="640" height="440" controls>
+							<source
+							  src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/2wxMIWBOUBP3RvbxFqNkzdwXm6XLGJA66WV1xw85r28/n/intvravipati/b/demo-assets/o/dem-ordconnect_to_ATP.mp4"
+							  type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+						  </video>
+					
+              </div>
+			</div>
+			<div class="fragment fade-in">
+				<p class="mu-small mu-left">Create a limited use application user.
+						The script in included in the codebase under
+						<code>src/orders/config/MuShop-Orders.sql</code></p>
+				<video width="640" height="440" controls>
 						<source
-							src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/2yE4roHC3N2-CdVgx0wSWzLafj0-2bpcE1E3ff41zBs/n/intvravipati/b/demo-assets/o/dem-ord-create_atp.mp4"
-							type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+						src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/763Sf4w6lsHtVFiU-o0EMv6Xq1CeZ0w9BEayaI8xH8w/n/intvravipati/b/demo-assets/o/demo-ord-prepare_ATP.mp4"
+						type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
 					</video>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-							## Step 2 - Get the code
-							Clone the repository and switch to the branch `orders-start`. 
-	
-							```
-							git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
-							git checkout workshop/orders-start
-							```
-						</script>
-				</section>
-
-				<section>
-					<h2>Step 3 - Prepare your Cloud Database</h2>
-					<div class="fragment-set">
-						<div class="fragment fade-out">
-							<div class="mu-small">
-								<p>Download the database client credentials.
-										<a href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-download-wallet.html#GUID-B06202D2-0597-41AA-9481-3B174F75D4B1">Read
-											More..</a></p>
-								<video width="640" height="440" controls>
-										<source
-											src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/s8mME6K8vR_3ZQeYZzDmz6K2ZzKfAJjYKLMZKvNGF7c/n/intvravipati/b/demo-assets/o/dem-ord-atp_cred_download.mp4"
-											type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-								</video>
-							</div>
-						</div>
-						<div class="fragment fade-in">
-								<div class="mu-small">
-									<p>Connect to you cloud database with SQL developer
-											<a
-												href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-preparing.html#GUID-96CD75E8-7105-4239-BDD7-88C5A2362A7D">Read
-												More...</a></p>
-								</div>
-							</div>
-							<div class="fragment fade-in">
-									<div class="mu-small">
-										<p>Create a limited use application user.
-												The script in included in the codebase under
-												<code>mushop/src/orders/config/MuShop-Orders.sql</code></p>
-										<pre><code class="hljs sql mu-small">
+				  </div>
+            <div class="fragment fade-in">
+                <p class="mu-small mu-left">Create a limited use application user.
+                  The script in included in the codebase under
+				  <code>src/orders/config/MuShop-Orders.sql</code></p>
+                <pre><code class="hljs sql mu-small">
 -- create user and roles
 CREATE USER orders_user IDENTIFIED BY Default_Password123#;
 CREATE ROLE orders_role;
@@ -159,160 +173,178 @@ CREATE ROLE orders_role;
 -- grant permissions.
 GRANT dwrole TO orders_user;
 GRANT
-	CREATE SESSION
+  CREATE SESSION
 TO orders_user;
 -- Do not use in production, can be exploited for SQL injection attacks.
 GRANT
-	CREATE TABLE,
-	CREATE VIEW,
-	CREATE PROCEDURE,
-	CREATE SEQUENCE
+  CREATE TABLE,
+  CREATE VIEW,
+  CREATE PROCEDURE,
+  CREATE SEQUENCE
 TO orders_role;
 
 GRANT
-	UNLIMITED TABLESPACE
-TO orders_role;
+  UNLIMITED TABLESPACE
+TO orders_user;
 
 GRANT orders_role TO orders_user;
 
 -- unlock account.
 ALTER USER orders_user
-	ACCOUNT UNLOCK;							
-																	</code></pre>
-									</div>
-								</div>
-					</div>
-				</section>
+  ACCOUNT UNLOCK;              
+                </code></pre>
+            </div>
+          </div>
+        </section>
 
-				<section>
-					<h2>Step 4 - Prepare the application</h2>
-					<div class="mu-small">
-						<p>Copy the following files from the credential package to </p>
-						<pre>mushop/src/orders/config/</pre>
-						<ul>
-							<li> <b>tnsnames.ora</b> - Provides aliases for the connection information</li>
-							<li> <b>ojdbc.properties</b> - File to configure the connection properties</li>
-							<li> <b>keystore.jks</b> - The Java Keystore with keys pre-populated </li>
-							<li> <b>truststore.jks</b> - The Java Truststore with trusted certificates pre-populated
-							</li>
-						</ul>
-					</div>
-				</section>
+        <section>
+          <h2>Step 4 - Prepare the application</h2>
+          <div class="mu-small">
+            <p>Copy the following files from the credential package to </p>
+            <pre>mushop/src/orders/config/</pre>
+            <ul>
+              <li> <b>tnsnames.ora</b> - Provides aliases for the connection information</li>
+              <li> <b>keystore.jks</b> - The Java Keystore with keys pre-populated </li>
+              <li> <b>truststore.jks</b> - The Java Truststore with trusted certificates pre-populated
+              </li>
+            </ul>
+          </div>
+        </section>
 
 
 
-				<section>
-					<h2>Step 4 - JDBC DataSource configuration</h2>
-					<div class="mu-small">
-						<p>Begin configuring the application by opening
-							<pre>mushop/src/orders/src/main/resources/application.properties</pre>
-						</p>
-
-
-
-						<pre><code class="hljs sh">
+        <section>
+          <h2>Step 4 - JDBC DataSource configuration</h2>
+          <div class="mu-small">
+            <p>Begin configuring the application by opening
+              <pre>mushop/src/orders/src/main/resources/application.properties</pre>
+            </p>
+            <pre><code class="hljs sh">
 spring.datasource.url=jdbc:oracle:thin:@${OADB_SERVICE}?TNS_ADMIN=./config
 spring.datasource.username=${OADB_USER}
 spring.datasource.password=${OADB_PW}
 spring.datasource.driver.class=oracle.jdbc.driver.OracleDriver
 spring.jpa.hibernate.ddl-auto=update
-					</code></pre>
-						<br>
-						The ${VARIABLE} construct defers configuration to the runtime environment, and are sourced from
-						environment variables at runtime. This prevents information from being baked in to the docker
-						image, making it more versatile.
-					</div>
-				</section>
+          </code></pre>
+            <br>
+            <p class="mu-left">
+              The ${VARIABLE} construct defers configuration to the runtime environment, and are sourced
+              from
+              environment variables at runtime. This prevents information from being baked in to the
+              docker
+              image, making it more versatile.
+            </p>
+          </div>
+        </section>
 
-				<section>
-					<h2>Step 5 - Build & Validate</h2>
-					<div class="mu-small mu-left">
-						<p>The repo contains a Dockerfile that sets up a build environment, builds the application and
-							generates a docker container with the built application.</p>
-						<p>The build can be triggered with the following commands.</p>
-						<pre><code class="hljs sh">
+        <section>
+          <h2>Step 5 - Build & Validate</h2>
+          <div class="mu-small mu-left">
+            <p>The repo contains a Dockerfile that sets up a build environment, builds the application and
+              generates a docker container with the built application.</p>
+            <p>The build can be triggered with the following commands.</p>
+            <pre><code class="hljs sh">
 docker build -t orders:local .
-						</code></pre>
-						<p>This builds the application and produces a docker image that contains the required artifacts
-							to run the orders application. </p>
-						<p>You can verify the local image using :</p>
-						<pre><code class="hljs sh">
+            </code></pre>
+            <p>This builds the application and produces a docker image that contains the required artifacts
+              to run the orders application. </p>
+            <p>You can verify the local image using :</p>
+            <pre><code class="hljs sh">
 docker images
-						</code></pre>
-					</div>
-				</section>
+            </code></pre>
+          </div>
+        </section>
 
-				<section data-markdown>
-					<script type="text/template">
-						The provided docker-compose yaml file refers to stable images that were pre-built. We can replace the orders image in this with the image that we just built to test our application against the other stable images.
-						Open the `docker-compose.yaml` and make the following changes
+        <section>
+          <h2>Validate</h2>
+          <div class="fragment-set">
+            <div class="fragment fade-out">
+              <p class="mu-small mu-left">
+                The provided <code>deploy/kubernetes/mushop.yaml</code> deployment manifest refers to
+                stable images that were pre-built.
+                We can replace the orders service application image in this manifest with the image that
+                we just built to test our application against the other stable images.
+                Make a copy of the deployment manifest and make the following changes.
+              </p>
+              <pre><code class="hljs sh">
+cp deploy/kubernetes/mushop.yaml deploy/kubernetes/mushop-localorders.yaml
+              </code></pre>
+            </div>
+            <div class="fragment fade-in">  
+              <p class="mu-small mu-left">
+                Let's also create a new secret to hold the new passwords
+              </p>
+              <pre><code class="hljs bash">
+kubectl create secret generic db-jks-creds --from-literal=orders_trust_pass={password you provided for wallet} --from-literal=orders_key_pass={password you provided for wallet} -n mushop
+              </code></pre>
+            </div>
+            <div class="fragment fade-in">  
+              <p class="mu-small mu-left">
+                Let's now refer to this new secret from the deployment manifest.
+              </p>
+              <pre><code class="hljs yaml">
+spec: 
+containers:
+- name: orders
+  image: orders:local
+  env:
+  - name: OADB_SERVICE
+    value: _NAME_OF_YOUR_ATP_INSTANCE_
+  - name: ATP_TRUST_PASS
+    valueFrom:
+     secretKeyRef:
+        name: db-jks-creds
+        key: orders_trust_pass 
+  - name: ATP_KEY_PASS
+    valueFrom:
+     secretKeyRef:
+        name: db-jks-creds
+        key: orders_key_pass
 
-						``` yaml
-						orders:
-							image: orders:1.0.0 # Update with the image tag you used above
-							environment: # Update the values based on what you setup in the step above
-							- OADB_USER=orders_user
-							- OADB_PW=Default_Password123#
-							- OADB_SERVICE=morders_tp
-							- JAVA_OPTS=-Xms128m -Xmx256m -XX:+UseG1GC -Dlogging.level.mushop.orders=TRACE -Djavax.net.ssl.trustStorePassword=Welcome123 -Djavax.net.ssl.keyStorePassword=Welcome123 -Djava.security.egd=file:/dev/urandom -Dspring.zipkin.enabled=false
+              </code></pre>
+                <p class="mu-small mu-left">We have replaced the existing docker image with the image we
+                built, and configured the environment parameters as required.</p>
+              </div>
+              <div class="fragment fade-in">
+                <p class="mu-small mu-left">
+                  Now we can bring up all our services
+                </p>
+                <pre><code class="hljs sh">
+kubectl apply -f deploy/kubernetes/mushop-localorders.yaml
+                </code></pre>
+                <p class="mu-left">Try creating an order and check the tables on your ATP instance using SQL Developer</p>
+              </div>
+          </div>
+        </section>
 
-						```
-						We have replaced the existing docker image with the image we built, and configured the environment parameters like `JDBC_URL`, `DB_USER`, `DB_PASSWORD` and `JAVA_OPTS` as required.
+      </section>
 
-					</script>
-				</section>
+    </div>
+  </div>
+  <!-- ateam stamp / home -->
+  <a href="#home" class="mu-ateam-water">
+    <img src="/images/ateam.png" />
+  </a>
 
-				<section data-markdown>
-					<script type="text/template">
-						Now we can bring up all our services using docker compose
-						``` bash
-						docker-compose up -d
-						docker-compose logs -f orders # to see the logs from from our application
-						```
-						We can navigate to `localhost` to bring up the UI and place an order, or send http requests to localhost:8085 to directly hit the REST end point in our application (since we bound the application to 8085 on localhost, this is optional and useful only for testing)
-					</script>
-				</section>
+  <script src="/js/reveal.js"></script>
 
-				<section data-markdown>
-					<script type="text/template">
-									...
-								</script>
-				</section>
-
-				<section data-markdown>
-					<script type="text/template">
-										...
-									</script>
-				</section>
-
-			</section>
-
-		</div>
-	</div>
-	<!-- ateam stamp / home -->
-	<a href="#home" class="mu-ateam-water">
-		<img src="/images/ateam.png" />
-	</a>
-
-	<script src="/js/reveal.js"></script>
-
-	<script>
-		// More info about config & dependencies:
-		// - https://github.com/hakimel/reveal.js#configuration
-		// - https://github.com/hakimel/reveal.js#dependencies
-		Reveal.initialize({
-			history: true,
-			fragmentInURL: true,
-			transition: 'slide',
-			dependencies: [
-				{ src: '/plugin/markdown/marked.js' },
-				{ src: '/plugin/markdown/markdown.js' },
+  <script>
+    // More info about config & dependencies:
+    // - https://github.com/hakimel/reveal.js#configuration
+    // - https://github.com/hakimel/reveal.js#dependencies
+    Reveal.initialize({
+      history: true,
+      fragmentInURL: true,
+      transition: 'slide',
+      dependencies: [
+        { src: '/plugin/markdown/marked.js' },
+        { src: '/plugin/markdown/markdown.js' },
         { src: '/plugin/clipboard/copy.js', async: true },
-				{ src: '/plugin/notes/notes.js', async: true },
-				{ src: '/plugin/highlight/highlight.js', async: true }
-			]
-		});
-	</script>
+        { src: '/plugin/notes/notes.js', async: true },
+        { src: '/plugin/highlight/highlight.js', async: true }
+      ]
+    });
+  </script>
 </body>
 
 </html>
