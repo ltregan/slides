@@ -195,7 +195,7 @@ KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml kubectl config vie
 						<div class="mu-medium">
 							<p class="mu-small">Install Homebrew, a MacOS package manager, if not yet installed</p>
 							<pre><code class="hljs shell">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
-							<p class="mu-small">Install Helm using this command</p>
+							<p class="mu-small">Install Helm using this command. Will also install the optional svcat cli</p>
 							<pre><code class="hljs shell">brew update && brew install kubernetes-helm kubernetes-service-catalog-client</code></pre>
 							<p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
 							<pre><code class="hljs text">helm version</code></pre>
@@ -214,7 +214,7 @@ Server: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002
 								<a href="https://chocolatey.org/install" target="_blank">Chocolatey</a>,
 								a Windows package manager, if not yet installed
 							</p>
-							<p class="mu-small">Install Helm using this command. Will also install the optional svcat cli</p>
+							<p class="mu-small">Install Helm using this command</p>
 							<pre><code class="hljs shell">choco install kubernetes-helm</code></pre>
 							<p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
 							<pre><code class="hljs text">helm version</code></pre>
