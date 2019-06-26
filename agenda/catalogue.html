@@ -175,6 +175,10 @@ catalog-catalog-controller-manager   1/1     1            1           32s</code>
     --from-literal=region=(USER_OCI_REGION) \
     --from-literal=passphrase=(PASSPHRASE_STRING) \
     --from-file=privatekey=(PATH_OF_USER_PRIVATE_API_KEY)</code></pre>
+              <a href="/downloads/k8s/ocicredentials-secret.yaml">K8S Secret for ocicredentials (Dev)</a>
+              <blockquote class="mu-small">
+                🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
+              </blockquote>
               </div>
               <div class="fragment fade-in">
                 <p>This command will deploy the OCI service broker on your cluster. Note that is using the secret ocicredentials.</p>
