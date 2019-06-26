@@ -114,11 +114,17 @@
         <section data-markdown>
           <script type="text/template">
               ## Step 2 - Get the code
-              Clone the repository and switch to the branch `orders-start`. 
+              Clone the repository <span class="mu-muted">optional</span> and switch
+              to the branch `orders-lab`. 
   
-              ```
+              ```text
               git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
-              git checkout workshop/orders-start
+              ```
+
+              > If not done already
+
+              ```text
+              git checkout orders-lab
               ```
             </script>
         </section>
@@ -242,10 +248,13 @@ spring.jpa.hibernate.ddl-auto=update
           <div class="mu-small mu-left">
             <p>The repo contains a Dockerfile that sets up a build environment, builds the application and
               generates a docker container with the built application.</p>
-            <p>The build can be triggered with the following commands.</p>
-            <pre><code class="hljs sh">
-docker build -t orders:local .
-            </code></pre>
+            <p>
+              The build can be triggered with the following commands from the
+              <code>src/orders</code> directory.
+            </p>
+
+            <pre><code class="hljs sh">#> src/orders
+docker build -t orders:local .</code></pre>
             <p>This builds the application and produces a docker image that contains the required artifacts
               to run the orders application. </p>
             <p>You can verify the local image using :</p>
