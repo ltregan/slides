@@ -1,0 +1,15 @@
+apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ServiceInstance
+metadata:
+  name: mushop-catalogue-demo
+spec:
+  clusterServiceClassExternalName: atp-service
+  clusterServicePlanExternalName: standard
+  parameters:
+    name: mushop-catalogue-demo
+    compartmentId: ocid1.compartment.oc1..aaaaaaaapvt5oymhhhx7y35mfsbcwbqzelv5mqdlxlvjz7q4cbgcfbb6plqq
+    dbName: mushop-catalogue-demo
+    cpuCount: 1
+    storageSizeTBs: 1
+    password: s123456789S@
+    licenseType: BYOL
