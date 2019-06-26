@@ -87,7 +87,7 @@
 					<h2>What is OSS? <img data-src="/images/tech/streaming.svg" /></h2>
 					<ul>
 						<li class=fragment>The OCI Streaming Service provides a fully managed, scalable, and durable storage solution for ingesting continuous, high-volume streams of data that you can consume and process in real time</li>
-						<li class=fragment>OSS is a distributed even-log</li>
+						<li class=fragment>OSS is a distributed event-log</li>
 						<li class=fragment>Messages are written to partitions and can be referenced via partition/offset</li>
 					</ul>
 				</section>
@@ -399,20 +399,23 @@ final String region = env.getProperty("OCI_REGION");</code></pre>
 				</section>
 				<section>
 					<h2>Send message to shipping</h2>
-					<p class="mu-small mu-left">Open another terminal and run the following command which sends a test message to the shipping microservice running as a pod in your local Kubernetes cluster.</p>
-					<pre><code class="hljs curl">curl -X POST \
-http://localhost/shipping \
+					<div class="mu-sequence mu-medium">
+						<p class="mu-small">Expose the shipping service</p>
+						<pre><code class="hljs text">kubectl port-forward svc/shipping 8000:80</code></pre>
+						<p class="mu-small">Open another terminal and run the following command which sends a test message to the shipping microservice running as a pod in your local Kubernetes cluster.</p>
+						<pre><code class="hljs curl">curl -X POST \
+http://localhost:8000/shipping \
 -H 'Content-Type: application/json' \
 -H 'cache-control: no-cache' \
 -d '{ 
   "id": "123-45-8876",
   "name": "shipment 500" 
-}'
-					</code></pre>
-					<p class="mu-small mu-left">
-						Look at the terminal windows and observe messages being created in the shipping and consumed in the stream. 
-						You should also look at the OCI console. Refresh the table and watch your message being published to the stream.
-					</p>
+}'</code></pre>
+						<p class="mu-small">
+							Look at the terminal windows and observe messages being created in the shipping and consumed in the stream. 
+							You should also look at the OCI console. Refresh the table and watch your message being published to the stream.
+						</p>
+					</div>
 				</section>
 				<section>
 						<p class="mu-small mu-left">
