@@ -150,7 +150,7 @@
             <blockquote class="mu-small">
               Ingress exposes HTTP and HTTPS routes from outside the cluster to
               services within the cluster. Traffic routing is controlled by rules
-              defined on the <b>Ingress</b> resource
+              on the <b>Ingress</b> resource
             </blockquote>
           </div>
 
@@ -196,10 +196,10 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
             </div>
             <div class="fragment mu-ratio mu-ratio-2-1">
 							<div>
-								<p>
+								<p class="no-margin">
 									Then deploy ingress on the cluster
 								</p>
-								<pre><code class="hljs text">kubectl apply -f deploy/kubernetes/ingress/mushop-dev.yaml</code></pre>
+								<pre class="mu-xsmall"><code class="hljs text">kubectl apply -f deploy/kubernetes/ingress/mushop-dev.yaml</code></pre>
 								<pre class="mu-xsmall"><code class="hljs yaml">apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
@@ -214,7 +214,7 @@ spec:
         backend:
           serviceName: edge
           servicePort: 80</code></pre>
-              	<pre><code class="hljs text">kubectl get ingress mushop-dev</code></pre>
+              	<pre class="mu-xsmall"><code class="hljs text">kubectl get ingress mushop-dev</code></pre>
             	</div>
             </div>
           </div>
