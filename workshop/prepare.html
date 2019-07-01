@@ -1,0 +1,205 @@
+
+<!-- title -->
+<section id="home">
+	<h1>Cloud Native OCI</h1>
+	<h2>💻 Workshop Preparation</h2>
+	include "partials/_titleSlide.html"
+</section>
+
+<!-- Prerequisites -->
+<section id="prerequisites">
+	<h2>Prerequisites</h2>
+	<div class="mu-sequence">
+		<p class="mu-left mu-medium">
+			The following applications are required for the workshop.
+			Please 🙏 ensure access and/or installation ahead of time
+		</p>
+		<hr/>
+		<div class="mu-flex mu-gutter">
+			<div class="col-1-2">Required</div>
+			<div class="col-1-2">Optional</div>
+		</div>
+		<div class="mu-flex mu-gutter mu-small">
+			<div class="col-1-2">
+				<!-- required -->
+				<ul class="justified">
+					<li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" target="_blank">OCI Tenancy Access<sup>1</sup></a></li>
+					<li>
+						<a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop</a>
+						<div class="mu-small">(Includes local K8s and kubectl)</div>
+					</li>
+					<li>
+						<a href="https://github.com/helm/helm" target="_blank">Helm</a> -  
+						<a href="#helm">quick install</a>
+						<div class="mu-small">(K8s Package Manager)</div>
+					</li>
+					<li><a href="https://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank">Oracle SQL Developer</a></li>
+				</ul>
+			</div>
+			<div class="col-1-2">
+				<!-- optional -->
+				<ul class="justified">
+					<li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a></li>
+					<li>
+						<a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat</a>
+						<div class="mu-small">(K8s Service Catalog CLI)</div>
+					</li>
+					<li><a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor</a></li>
+				</ul>
+			</div>
+		</div>
+		<blockquote class="mu-small mu-left">
+			<sup>1</sup>Tenancy access may be provided, or you may use an existing tenancy
+		</blockquote>
+	</div>
+</section>
+
+<!-- K8S Setup -->
+<section id="k8s" data-background-image="/images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
+	<h2>Prepare Local K8s</h2>
+
+	<div class="fragment-set">
+		<div class="fragment fade-out">
+			<p class="mu-medium">
+				Several exercises in the workshop require the use of Kubernetes.
+				In order to run commands in a local cluster, please follow these
+				instructions to setup your environment.
+			</p>
+			<hr/>
+		</div>
+		<div class="fragment fade-in">
+			<p>Enable Kubernetes (Mac)</p>
+			<img class="plain" data-src="/images/help/enable_k8s.png" alt="Enable K8S" />
+		</div>
+		<div class="fragment fade-in">
+			<p>Enable Kubernetes (Windows)</p>
+			<img class="plain" data-src="/images/help/enable_k8s_win.png" alt="Enable K8S" />
+		</div>
+		<div class="fragment mu-sequence fade-in">
+			<p>Check <code>kubectl</code> context</p>
+			<pre><code class="hljs text">kubectl config current-context</code></pre>
+			<p>Create namespace</p>
+			<pre><code class="hljs text">kubectl create namespace mushop</code></pre>
+			<p>Set default namespace <em class="mu-muted">(optional)</em></p>
+			<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=mushop</code></pre>
+		</div>
+		<div class="fragment fade-in">
+			<p>Install an ingress controller <span class="mu-muted">(optional)</span></p>
+			<pre><code class="hljs text">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
+kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml</code></pre>
+
+			<small>
+				<blockquote>
+					<b>NOTE:</b> There are several options for ingress controllers in K8S. This demo
+					uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites" target="_blank">ingress-nginx</a>
+				</blockquote>
+				<p>
+					☝️ More on this later...
+				</p>
+			</small>
+		</div>
+	</div>
+</section>
+
+<section id="k8s-context">
+	<h2>Prepare K8S Context</h2>
+	<p class="mu-small">
+		With <code>kubectl</code> it is necessary to change context at times, and we will
+		do so during this workshop. Specifically, you will need to use <code>kubectl</code>
+		on your local cluster, as well as the OKE cluster. Follow these steps to establish
+		an OKE connection
+	</p>
+	<div class="mu-sequence mu-medium">
+		<div class="fragment">
+			Download <a href="/downloads/k8s/kubeconfig.yaml"><code>kubeconfig.yaml</code></a>
+		</div>
+		<div class="fragment">
+			<blockquote class="mu-small">
+				<b>⚠️ NOTE:</b> Path to Downloads/kubeconfig.yaml and change as necessary
+			</blockquote>
+			Merge kubectl context with the downloaded configuration
+			<pre><code class="hljs sh"># create backup
+cp $HOME/.kube/config $HOME/.kube/config.bak
+# merge configuration
+KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml kubectl config view --flatten >> $HOME/.kube/config</code></pre>
+		</div>
+		<div class="fragment">
+			Verify the workshop named context
+			<pre><code class="hljs text">kubectl config get-contexts</code></pre>
+			<pre><code class="hljs text">CURRENT   NAME                 CLUSTER                      AUTHINFO             NAMESPACE
+*         docker-for-desktop   docker-for-desktop-cluster   docker-for-desktop   mushop
+		mushop-workshop      cluster-czgezlcgrsg          user-czgezlcgrsg     </code></pre>
+		</div>
+	</div>
+</section>
+
+<section id="helm">
+	<h2>Quick Install - Helm</h2>
+	<div class="fragment-set mu-sequence">
+		<div class="fragment fade-out">
+			<p class="mu-center no-margin">MacOS or Linux</p>
+			<div class="mu-medium">
+				<p class="mu-small">Install Homebrew, a MacOS package manager, if not yet installed</p>
+				<pre><code class="hljs shell">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
+				<p class="mu-small">Install Helm using this command. Will also install the optional svcat cli</p>
+				<pre><code class="hljs shell">brew update && brew install kubernetes-helm kubernetes-service-catalog-client</code></pre>
+				<p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
+				<pre><code class="hljs text">helm version</code></pre>
+				<p class="mu-small">The Helm version command should give result similar to this:</p>
+				<pre><code class="hljs shell">> helm version
+Client: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}</code></pre>
+				<p class="mu-small">If you receive an error tha could not find tiller pod on the server, do this:</p>
+				<pre><code class="hljs text">helm init --history-max 200</code></pre>
+			</div>
+		</div>
+		<div class="fragment fade-in">
+			<p class="mu-center no-margin">Windows</p>
+			<div class="mu-medium">
+				<p class="mu-small">Install
+					<a href="https://chocolatey.org/install" target="_blank">Chocolatey</a>,
+					a Windows package manager, if not yet installed
+				</p>
+				<p class="mu-small">Install Helm using this command</p>
+				<pre><code class="hljs shell">choco install kubernetes-helm</code></pre>
+				<p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
+				<pre><code class="hljs text">helm version</code></pre>
+				<p class="mu-small">The Helm version command should give result similar to this:</p>
+				<pre><code class="hljs shell">c:\ helm version
+Client: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002a73535276507c0", GitTreeState:"clean"}</code></pre>
+				<p class="mu-small">If you receive an error tha could not find tiller pod on the server, do this:</p>
+				<pre><code class="hljs text">helm init --history-max 200</code></pre>
+			</div>
+		</div>
+		<div class="fragment fade-in">
+			<p class="mu-center no-margin">Windows</p>
+			<div class="mu-medium">
+				<p class="mu-small">Install the svcat cli:</p>
+				<pre><code class="hljs shell">iwr 'https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe' -UseBasicParsing -OutFile svcat.exe
+mkdir -f ~\bin
+$env:PATH += ";${pwd}\bin"
+svcat version --client</code></pre>
+				<hr/>
+				<p class="mu-small">
+					Or download the binary directly and make executable:
+					<a href="https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe" target="_blank">svcat.exe download</a>
+				</p>
+			</div>
+		</div>
+	</div>
+</section>
+
+<section id="resources">
+	<section id="downloads">
+		<h2>Downloads</h2>
+		<p>Any workshop related downloads may be found here. </p>
+		<ul class="mu-small">
+			<li><a href="/downloads/k8s/secrets.yaml">K8S Secrets (Dev)</a></li>
+			<li><a href="/downloads/k8s/kubeconfig.yaml">OKE <code>kubeconfig</code></a></li>
+		</ul>
+		<blockquote class="mu-small">
+			🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
+		</blockquote>
+	</section>
+</section>
