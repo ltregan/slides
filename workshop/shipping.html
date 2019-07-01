@@ -1,45 +1,10 @@
-<!doctype html>
-<html>
-
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
-	<title>Cloud Native OCI - MuShop</title>
-	
-	<link rel="stylesheet" href="/css/reset.css">
-	<link rel="stylesheet" href="/css/reveal.css">
-	<link rel="stylesheet" href="/css/theme/mu.css">
-
-	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="/lib/css/monokai.css">
-
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement('link');
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
-		document.getElementsByTagName('head')[0].appendChild(link);
-	</script>
-</head>
-
-<body>
-	<div class="reveal">
-		<div class="slides">
 			<!-- title -->
 			<section id="home">
 				<!-- landing -->
 				<section id="home-title">
 					<h1>Cloud Native OCI</h1>
 					<h2>Shipping and Stream Services</h2>
-					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
-						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
-					</div>
-					<hr/>
-					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
+          include "partials/_titleSlide.html"
 				</section>
 
 				<!-- TOC -->
@@ -53,21 +18,7 @@
 				</section>
 
 				<!-- Contributors -->
-				<section id="contributors">
-					<h2>Primary Contributors</h2>
-					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
-						<div>
-							<div>Adao Oliveira Junior</div>
-							<div>Jeevan Joseph</div>
-							<div>Julio Camara</div>
-						</div>
-						<div>
-							<div>Matt Vander Vliet</div>
-							<div>Sherwood Zern</div>
-							<div>Sumit Kumar</div>
-						</div>
-					</div>
-				</section>
+        include "partials/_contributors.html"
 			</section>
 
 			
@@ -430,34 +381,3 @@ http://localhost:8000/shipping \
 					<img class="plain" width="100%" data-src="/images/streams/console3.png" alt="Helm"/>
 				</section>
 			</section>  <!-- end of lab -->
-
-
-		</div>
-	</div>
-	<!-- ateam stamp / home -->
-	<a href="#home" class="mu-ateam-water">
-		<img src="/images/ateam.png" />
-	</a>
-
-	<script src="/js/reveal.js"></script>
-
-	<script>
-		// More info about config & dependencies:
-		// - https://github.com/hakimel/reveal.js#configuration
-		// - https://github.com/hakimel/reveal.js#dependencies
-		Reveal.initialize({
-			history: true,
-			fragmentInURL: true,
-			transition: 'slide',
-			dependencies: [
-				{ src: '/plugin/markdown/marked.js' },
-				{ src: '/plugin/markdown/markdown.js' },
-        { src: '/plugin/clipboard/copy.js', async: true },
-				{ src: '/plugin/notes/notes.js', async: true },
-				{ src: '/plugin/highlight/highlight.js', async: true }
-			]
-		});
-	</script>
-</body>
-
-</html>

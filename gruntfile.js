@@ -30,7 +30,7 @@ module.exports = grunt => {
 			},
 			build: {
 				src: 'js/reveal.js',
-				dest: 'js/reveal.min.js'
+				dest: 'build/js/reveal.min.js'
 			}
 		},
 
@@ -41,14 +41,44 @@ module.exports = grunt => {
 			},
 			core: {
 				src: 'css/reveal.scss',
-				dest: 'css/reveal.css'
+				dest: 'build/css/reveal.css'
 			},
 			themes: {
 				expand: true,
 				cwd: 'css/theme/source',
 				src: ['*.sass', '*.scss'],
-				dest: 'css/theme',
+				dest: 'build/css/theme',
 				ext: '.css'
+			}
+		},
+
+		copy: {
+			main: {
+				expand: true,
+				src: [
+					'lib/**',
+					'downloads/**',
+					'images/**',
+					'plugin/**',
+					'css/**/*.css', '!css/theme',
+					'favicon.ico'
+				],
+				dest: 'build',
+			},
+		},
+
+		includes: {
+			options: {
+				wrapper: '_wrapper.html'
+			},
+			files: {
+				src: ['*.html', 'workshop/**/*.html', '!**/_*.html'],
+				dest: 'build',
+				flatten: false,
+				cwd: '.',
+				options: {
+					silent: true,
+				}
 			}
 		},
 
@@ -64,7 +94,7 @@ module.exports = grunt => {
 			},
 			compress: {
 				src: 'css/reveal.css',
-				dest: 'css/reveal.min.css'
+				dest: 'build/css/reveal.min.css'
 			}
 		},
 
@@ -100,10 +130,14 @@ module.exports = grunt => {
 			server: {
 				options: {
 					port: port,
-					base: root,
+					base: root + '/build',
 					livereload: true,
 					open: true,
-					useAvailablePort: true
+					useAvailablePort: true,
+					middleware: (connect, options, middlewares) => {
+						middlewares.unshift((req, res, next) => { console.log(req.url); next(); });
+						return middlewares;
+					}
 				}
 			}
 		},
@@ -146,7 +180,8 @@ module.exports = grunt => {
 				tasks: 'test'
 			},
 			html: {
-				files: root.map(path => path + '/*.html')
+				files: [ '**/*.html', '!build/**' ],
+				tasks: 'includes'
 			},
 			markdown: {
 				files: root.map(path => path + '/*.md')
@@ -159,7 +194,7 @@ module.exports = grunt => {
 	});
 
 	// Default task
-	grunt.registerTask( 'default', [ 'css', 'js' ] );
+	grunt.registerTask( 'default', [ 'css', 'js', 'includes', 'copy' ] );
 
 	// JS task
 	grunt.registerTask( 'js', [ 'jshint', 'uglify' ] );
@@ -177,7 +212,7 @@ module.exports = grunt => {
 	grunt.registerTask( 'package', [ 'default', 'zip' ] );
 
 	// Serve presentation locally
-	grunt.registerTask( 'serve', [ 'connect', 'watch' ] );
+	grunt.registerTask( 'serve', [ 'default', 'connect', 'watch' ] );
 
 	// Run tests
 	grunt.registerTask( 'test', [ 'jshint' ] );

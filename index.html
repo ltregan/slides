@@ -1,191 +1,112 @@
-<!doctype html>
-<html>
 
-<head>
-	<meta charset="utf-8">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<!-- title -->
+<section>
+	<!-- landing -->
+	<section id="home">
+		<h1>Cloud Native OCI</h1>
+		<hr/>
+		include "workshop/partials/_titleSlide.html"
+	</section>
 
-	<title>Cloud Native OCI - MuShop</title>
-	<base href="/">
+	<!-- Contributors -->
+	include "workshop/partials/_contributors.html"
+</section>
 
-	<link rel="stylesheet" href="css/reset.css">
-	<link rel="stylesheet" href="css/reveal.css">
-	<link rel="stylesheet" href="css/theme/mu.css">
-
-	<!-- Theme used for syntax highlighting of code -->
-	<link rel="stylesheet" href="lib/css/monokai.css">
-
-	<!-- Printing and PDF exports -->
-	<script>
-		var link = document.createElement('link');
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? 'css/print/pdf.css' : 'css/print/paper.css';
-		document.getElementsByTagName('head')[0].appendChild(link);
-	</script>
-</head>
-
-<body>
-	<div class="reveal">
-		<div class="slides">
-			<!-- title -->
-			<section>
-				<!-- landing -->
-				<section id="home">
-					<h1>Cloud Native OCI</h1>
-					<hr/>
-					<div class="mu-flex mu-flex-center mu-flex-middle mu-margin">
-						<img height="100" class="plain no-margin" data-src="/images/tech/oci.png" alt="Oracle Cloud Infrastructure" />
-						<span>+</span>
-						<img height="80" class="plain no-margin" data-src="/images/logo.png" alt="MuShop" />
-					</div>
-					<hr/>
-					<!-- <h4>Microservices on Oracle Cloud</h4> -->
-					<small>Created with ❤ by <a href="#contributors">Oracle A-Team</a></small>
-				</section>
-
-				<!-- Contributors -->
-				<section id="contributors">
-					<h2>Primary Contributors</h2>
-
-					<div class="mu-flex mu-flex-center mu-small mu-left mu-gutter">
-						<div>
-							<div>Adao Oliveira Junior</div>
-							<div>Jeevan Joseph</div>
-							<div>Julio Camara</div>
-						</div>
-						<div>
-							<div>Matt Vander Vliet</div>
-							<div>Sherwood Zern</div>
-							<div>Sumit Kumar</div>
-						</div>
-					</div>
-				</section>
-			</section>
-
-			<section id="agenda">
-				<h2>Agenda</h2>
-				<p class="mu-small">
-					This workshop covers a variety of topics, each designed to highlight 
-					its own, or common high-level subjects within OCI in the context of
-					the demo application - MuShop
-				</p>
-				<table class="agenda">
-					<thead>
-						<tr>
-							<th></th>
-							<th>Title</th>
-							<th>Subject</th>
-							<th>Concepts</th>
-							<th>Time</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td></td>
-							<td><a href="prepare.html" target="_blank">Prepare</a></td>
-							<td>Workshop Prerequisites</td>
-							<td></td>
-							<td><span class="mu-warning">BEFORE</span></td>
-						</tr>
-						<tr>
-							<td>1</td>
-							<td><a href="agenda/intro.html" target="_blank">Introduction</a></td>
-							<td>Background, design, and demo</td>
-							<td>OCI - CloudNative</td>
-							<td>9:00am</td>
-						</tr>
-						<tr>
-							<td>2</td>
-							<td><a href="agenda/setup.html" target="_blank">Setup</a></td>
-							<td>Prepare dev environment</td>
-							<td>Docker - K8S</td>
-							<td>9:30am</td>
-						</tr>
-						<tr>
-							<td>3</td>
-							<td><a href="agenda/kubernetes.html" target="_blank">Lab: Kubernetes</a></td>
-							<td>Building blocks of kubernetes</td>
-							<td>Kubernetes - Helm</td>
-							<td>10:00am</td>
-							</tr>
-						<tr>
-							<td>4</td>
-							<td><a href="agenda/orders.html" target="_blank">Lab: Orders</a></td>
-							<td>Review Orders microservice</td>
-							<td>Java - ATP</td>
-							<td>11:00am</td>
-						</tr>
-						<tr class="mu-muted">
-							<td></td>
-							<td></td>
-							<td>Lunch (in room)</td>
-							<td></td>
-							<td>12:00pm</td>
-						</tr>
-						<tr>
-							<td>5</td>
-							<td><a href="agenda/shipping.html" target="_blank">Lab: Shipping</a></td>
-							<td>Shipping service design</td>
-							<td>Java - OCI Streaming</td>
-							<td>1:00pm</td>
-						</tr>
-						<tr>
-							<td>6</td>
-							<td><a href="agenda/catalogue.html" target="_blank">Lab: Catalog</a></td>
-							<td>MuShop Catalog microservice</td>
-							<td>Service Broker - OKE - ATP</td>
-							<td>2:00pm</td>
-						</tr>
-						<tr>
-							<td>7</td>
-							<td><a href="agenda/edge.html" target="_blank">Lab: Edge</a></td>
-							<td>MuShop UI & Edge</td>
-							<td>DNS - WAF - LB - Ingress</td>
-							<td>3:00pm</td>
-						</tr>
-						<tr>
-							<td>8</td>
-							<td><a href="agenda/mesh.html" target="_blank">Lab: Service Mesh</a></td>
-							<td>Istio service mesh</td>
-							<td>OKE - Istio - Scaling</td>
-							<td>4:00pm</td>
-						</tr>
-						<tr>
-							<td>9</td>
-							<td><a href="agenda/extras.html" target="_blank">Extras</a></td>
-							<td>Additional features</td>
-							<td>Apiary - Wercker</td>
-							<td>5:00pm</td>
-						</tr>
-					</tbody>
-				</table>
-			</section>
-		</div>
-	</div>
-	<!-- ateam stamp / home -->
-	<a href="#home" class="mu-ateam-water">
-		<img src="images/ateam.png" />
-	</a>
-
-	<script src="js/reveal.js"></script>
-
-	<script>
-		// More info about config & dependencies:
-		// - https://github.com/hakimel/reveal.js#configuration
-		// - https://github.com/hakimel/reveal.js#dependencies
-		Reveal.initialize({
-			history: true,
-			fragmentInURL: true,
-			transition: 'slide',
-			dependencies: [
-				{ src: 'plugin/markdown/marked.js' },
-				{ src: 'plugin/markdown/markdown.js' },
-				{ src: 'plugin/notes/notes.js', async: true },
-				{ src: 'plugin/highlight/highlight.js', async: true }
-			]
-		});
-	</script>
-</body>
-
-</html>
+<section id="agenda">
+	<h2>Agenda</h2>
+	<p class="mu-small">
+		This workshop covers a variety of topics, each designed to highlight 
+		its own, or common high-level subjects within OCI in the context of
+		the demo application - MuShop
+	</p>
+	<table class="agenda">
+		<thead>
+			<tr>
+				<th></th>
+				<th>Title</th>
+				<th>Subject</th>
+				<th>Concepts</th>
+				<th>Time</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr>
+				<td></td>
+				<td><a href="/workshop/prepare.html" target="_blank">Prepare</a></td>
+				<td>Workshop Prerequisites</td>
+				<td></td>
+				<td><span class="mu-warning">BEFORE</span></td>
+			</tr>
+			<tr>
+				<td>1</td>
+				<td><a href="/workshop/intro.html" target="_blank">Introduction</a></td>
+				<td>Background, design, and demo</td>
+				<td>OCI - CloudNative</td>
+				<td>9:00am</td>
+			</tr>
+			<tr>
+				<td>2</td>
+				<td><a href="/workshop/setup.html" target="_blank">Setup</a></td>
+				<td>Prepare dev environment</td>
+				<td>Docker - K8S</td>
+				<td>9:30am</td>
+			</tr>
+			<tr>
+				<td>3</td>
+				<td><a href="/workshop/kubernetes.html" target="_blank">Lab: Kubernetes</a></td>
+				<td>Building blocks of kubernetes</td>
+				<td>Kubernetes - Helm</td>
+				<td>10:00am</td>
+				</tr>
+			<tr>
+				<td>4</td>
+				<td><a href="/workshop/orders.html" target="_blank">Lab: Orders</a></td>
+				<td>Review Orders microservice</td>
+				<td>Java - ATP</td>
+				<td>11:00am</td>
+			</tr>
+			<tr class="mu-muted">
+				<td></td>
+				<td></td>
+				<td>Lunch (in room)</td>
+				<td></td>
+				<td>12:00pm</td>
+			</tr>
+			<tr>
+				<td>5</td>
+				<td><a href="/workshop/shipping.html" target="_blank">Lab: Shipping</a></td>
+				<td>Shipping service design</td>
+				<td>Java - OCI Streaming</td>
+				<td>1:00pm</td>
+			</tr>
+			<tr>
+				<td>6</td>
+				<td><a href="/workshop/catalogue.html" target="_blank">Lab: Catalog</a></td>
+				<td>MuShop Catalog microservice</td>
+				<td>Service Broker - OKE - ATP</td>
+				<td>2:00pm</td>
+			</tr>
+			<tr>
+				<td>7</td>
+				<td><a href="/workshop/edge.html" target="_blank">Lab: Edge</a></td>
+				<td>MuShop UI & Edge</td>
+				<td>DNS - WAF - LB - Ingress</td>
+				<td>3:00pm</td>
+			</tr>
+			<tr>
+				<td>8</td>
+				<td><a href="/workshop/mesh.html" target="_blank">Lab: Service Mesh</a></td>
+				<td>Istio service mesh</td>
+				<td>OKE - Istio - Scaling</td>
+				<td>4:00pm</td>
+			</tr>
+			<tr>
+				<td>9</td>
+				<td><a href="/workshop/extras.html" target="_blank">Extras</a></td>
+				<td>Additional features</td>
+				<td>Apiary - Wercker</td>
+				<td>5:00pm</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
