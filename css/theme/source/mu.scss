@@ -172,7 +172,7 @@ section > h2 > img {
 	text-align: left;
 }
 .mu-center {
-	text-align: center;
+	text-align: center !important;
 }
 .mu-small {
 	font-size: 0.6em;
@@ -222,6 +222,16 @@ section > h2 > img {
 	display: inline-block;
 }
 
+.position-relative {
+	position: relative;
+	.hover-show {
+		display: none;
+	}
+	&:hover .hover-show {
+		display: block;
+	}
+}
+
 .reveal ul, .reveal ol {
 	display: block;
 	margin-left: 2em;
@@ -238,6 +248,15 @@ section > h2 > img {
 	li.mu-divider {
 		list-style: none;
 		margin: $blockMargin 0;
+	}
+}
+
+// Print
+a.title-print {
+	.position-relative & {
+		position: absolute;
+		top: 0;
+		right: 0;
 	}
 }
 

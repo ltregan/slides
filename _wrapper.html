@@ -16,11 +16,13 @@
 
 	<!-- Printing and PDF exports -->
 	<script>
-		var link = document.createElement('link');
-		link.rel = 'stylesheet';
-		link.type = 'text/css';
-		link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
-		document.getElementsByTagName('head')[0].appendChild(link);
+		(function(){
+			var link = document.createElement('link');
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match(/print-pdf/gi) ? '/css/print/pdf.css' : '/css/print/paper.css';
+			document.getElementsByTagName('head')[0].appendChild(link);
+		})();
 	</script>
 </head>
 
@@ -38,9 +40,10 @@
 	<script src="/js/reveal.min.js"></script>
 
 	<script>
-		// More info about config & dependencies:
-		// - https://github.com/hakimel/reveal.js#configuration
-		// - https://github.com/hakimel/reveal.js#dependencies
+		if (window.location.search.match(/print-pdf/gi)) {
+			Reveal.addEventListener('ready', window.print.bind(window));
+		}
+
 		Reveal.initialize({
 			history: true,
 			fragmentInURL: true,
