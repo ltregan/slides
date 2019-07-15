@@ -147,12 +147,12 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
               <p class="mu-small">Notice 👀 <b><code>ipAddr</code></b> matches <b><code>EXTERNAL-IP</code></b> assigned to the controller 🤘</p>
             </div>
             <div class="fragment mu-ratio mu-ratio-2-1">
-							<div>
-								<p class="no-margin">
-									Then deploy ingress on the cluster
-								</p>
-								<pre class="mu-xsmall"><code class="hljs text">kubectl apply -f deploy/kubernetes/ingress/mushop-dev.yaml</code></pre>
-								<pre class="mu-xsmall"><code class="hljs yaml">apiVersion: extensions/v1beta1
+              <div>
+                <p class="no-margin">
+                  Then deploy ingress on the cluster
+                </p>
+                <pre class="mu-xsmall"><code class="hljs text">kubectl apply -f deploy/kubernetes/ingress/mushop-dev.yaml</code></pre>
+                <pre class="mu-xsmall"><code class="hljs yaml">apiVersion: extensions/v1beta1
 kind: Ingress
 metadata:
   name: mushop-dev
@@ -166,8 +166,8 @@ spec:
         backend:
           serviceName: edge
           servicePort: 80</code></pre>
-              	<pre class="mu-xsmall"><code class="hljs text">kubectl get ingress mushop-dev</code></pre>
-            	</div>
+                <pre class="mu-xsmall"><code class="hljs text">kubectl get ingress mushop-dev</code></pre>
+              </div>
             </div>
           </div>
         </section>
@@ -227,8 +227,8 @@ spec:
           <h2>WAF Protection Rules</h2>
           <p class="mu-small">
             Applying protection to a WAF origin is done by choosing specific rules
-						from <b>OWASP <a href="https://modsecurity.org/crs/" target="_blank">Core Rule Set (CRS)</a></b>,
-						where the action can be set
+            from <b>OWASP <a href="https://modsecurity.org/crs/" target="_blank">Core Rule Set (CRS)</a></b>,
+            where the action can be set
             to <span class="mu-warning">Detect</span>,
             <span class="mu-danger">Block</span>, or
             <span class="mu-muted">Off</span>
@@ -259,39 +259,39 @@ spec:
             </div>
           </div>
         </section>
-			</section>
-			
-			<section>
-				<section id="waf-demo">
-					<h2>WAF Demo</h2>
-					<div class="mu-flex mu-flex-middle">
-						<div class="mu-svc">
-							<span class="mu-svc-icon">👿</span>
-						</div>
-						<div class="mu-flex-connector arrow">attacker</div>
-						<div class="mu-svc">
-							<img data-src="/images/tech/dns.svg" /> DNS
-						</div>
-						<div class="mu-flex-connector arrow">CNAME</div>
-						<div class="mu-svc">
-							<img data-src="/images/tech/waf.svg" /> WAF
-						</div>
-						<div class="mu-flex-connector arrow">403</div>
-						<div class="mu-svc">
-							<span class="mu-svc-icon">🚫</span>
-						</div>
-					</div>
+      </section>
+      
+      <section>
+        <section id="waf-demo">
+          <h2>WAF Demo</h2>
+          <div class="mu-flex mu-flex-middle">
+            <div class="mu-svc">
+              <span class="mu-svc-icon">👿</span>
+            </div>
+            <div class="mu-flex-connector arrow">attacker</div>
+            <div class="mu-svc">
+              <img data-src="/images/tech/dns.svg" /> DNS
+            </div>
+            <div class="mu-flex-connector arrow">CNAME</div>
+            <div class="mu-svc">
+              <img data-src="/images/tech/waf.svg" /> WAF
+            </div>
+            <div class="mu-flex-connector arrow">403</div>
+            <div class="mu-svc">
+              <span class="mu-svc-icon">🚫</span>
+            </div>
+          </div>
 
-					<a href="https://mushop.ateam.cloud" target="_blank">
-						<img data-src="/images/logo.png" />
-					</a>
-				</section>
+          <a href="https://mushop.ateam.cloud" target="_blank">
+            <img data-src="/images/logo.png" />
+          </a>
+        </section>
 
-				<section id="waf-verify">
-					<h2>Verify WAF Edge</h2>
+        <section id="waf-verify">
+          <h2>Verify WAF Edge</h2>
 
-					<pre><code class="hljs sh">curl -I -X GET https://mushop.ateam.cloud</code></pre>
-					<pre><code class="hljs text">content-type: text/html
+          <pre><code class="hljs sh">curl -I -X GET https://mushop.ateam.cloud</code></pre>
+          <pre><code class="hljs text">content-type: text/html
 vary: Accept-Encoding
 x-cache-status: NOTCACHED
 date: Sun, 23 Jun 2019 12:35:57 GMT
@@ -301,47 +301,47 @@ strict-transport-security: max-age=15724800; includeSubDomains
 x-zen-fury: b9c90d1625d96f0414ad23c9562ea95ef6e80ed7
 last-modified: Thu, 20 Jun 2019 14:05:52 GMT
 x-cdn: Served-By-Zenedge</code></pre>
-				<p class="mu-small fragment">We see <code>server: ZENEDGE</code> so WAF is working ✅</p>
-				</section>
+        <p class="mu-small fragment">We see <code>server: ZENEDGE</code> so WAF is working ✅</p>
+        </section>
 
-				<section id="waf-protect">
-					<h2>DEMO: OWASP Core Rule Set</h2>
-					<p class="mu-small">
-						For sake of demonstration, let's use the application search bar to 
-						attempt some attacks from the  MuShop user interface. Try the following
-						by entering text into the search field
-					</p>
-					<blockquote class="mu-small">
-						⚠️ It may also be useful to open Chrome Developer Tools Network tab
-					</blockquote>
-					<div class="mu-sequence">
-						<div class="fragment">
-							SQL injection
-							<pre><code class="hljs text">;DROP TABLE users</code></pre>
-						</div>
-						<div class="fragment">
-							XSS
-							<pre><code class="hljs text">&lt;script&gt;alert('bad');&lt;/script&gt;</code></pre>
-						</div>
-					</div>
-					<pre></pre>
-				</section>
+        <section id="waf-protect">
+          <h2>DEMO: OWASP Core Rule Set</h2>
+          <p class="mu-small">
+            For sake of demonstration, let's use the application search bar to 
+            attempt some attacks from the  MuShop user interface. Try the following
+            by entering text into the search field
+          </p>
+          <blockquote class="mu-small">
+            ⚠️ It may also be useful to open Chrome Developer Tools Network tab
+          </blockquote>
+          <div class="mu-sequence">
+            <div class="fragment">
+              SQL injection
+              <pre><code class="hljs text">;DROP TABLE users</code></pre>
+            </div>
+            <div class="fragment">
+              XSS
+              <pre><code class="hljs text">&lt;script&gt;alert('bad');&lt;/script&gt;</code></pre>
+            </div>
+          </div>
+          <pre></pre>
+        </section>
 
-				<section id="waf-access">
-					<h2>DEMO: WAF Access Control</h2>
-					<div class="mu-flex mu-small mu-margin">
-						<div class="col-1-2">
-							<span class="mu-icon mu-large block">🔐</span>
-							<a target="_blank" href="https://mushop.ateam.cloud">https://mushop.ateam.cloud</a>
-						</div>
-						<div class="col-1-2">
-							<span class="mu-icon mu-large block mu-muted">🔓</span>
-							<a class="mu-danger" target="_blank" href="https://insecure.mushop.ateam.cloud">https://insecure.mushop.ateam.cloud</a>
-						</div>
-					</div>
-					<img class="shadow no-margin fragment" data-src="/images/edge/waf.access.rules.png"/>
-				</section>
-			</section>
+        <section id="waf-access">
+          <h2>DEMO: WAF Access Control</h2>
+          <div class="mu-flex mu-small mu-margin">
+            <div class="col-1-2">
+              <span class="mu-icon mu-large block">🔐</span>
+              <a target="_blank" href="https://mushop.ateam.cloud">https://mushop.ateam.cloud</a>
+            </div>
+            <div class="col-1-2">
+              <span class="mu-icon mu-large block mu-muted">🔓</span>
+              <a class="mu-danger" target="_blank" href="https://insecure.mushop.ateam.cloud">https://insecure.mushop.ateam.cloud</a>
+            </div>
+          </div>
+          <img class="shadow no-margin fragment" data-src="/images/edge/waf.access.rules.png"/>
+        </section>
+      </section>
 
       <section id="other">
         <h2>Other Edge Services</h2>

@@ -1,153 +1,153 @@
 
-			<!-- title -->
-			<section id="home">
-				<!-- landing -->
-				<section id="home-title">
-					<h1>Cloud Native OCI</h1>
-					<h2>Kubernetes/OKE</h2>
+      <!-- title -->
+      <section id="home">
+        <!-- landing -->
+        <section id="home-title">
+          <h1>Cloud Native OCI</h1>
+          <h2>Kubernetes/OKE</h2>
           include "partials/_titleSlide.html"
-				</section>
+        </section>
 
-				<!-- TOC -->
-				<section id="toc">
-					<h2>Table of Contents</h2>
-					<ul class="plain">
-						<!-- add a line for each <section id="slideId">...</section>  -->
-						<li><a href="#home">Home</a></li>
-						<li><a href="#lab">Lab Overview</a></li>
-					</ul>
-				</section>
+        <!-- TOC -->
+        <section id="toc">
+          <h2>Table of Contents</h2>
+          <ul class="plain">
+            <!-- add a line for each <section id="slideId">...</section>  -->
+            <li><a href="#home">Home</a></li>
+            <li><a href="#lab">Lab Overview</a></li>
+          </ul>
+        </section>
 
-				<!-- Contributors -->
+        <!-- Contributors -->
         include "partials/_contributors.html"
-			</section>
+      </section>
 
 
 
-			<!-- Kubernetes -->
-			<section id="k8s_intro">
-				<section>
-					<h2>Kubernetes Overview</h2>
-					<ul>
-						<li>Architecture</li>
-						<li>Building Blocks</li>
-						<li>Kubernetes on OCI</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Architecture</h2>
-					<p class="mu-small">Kubernetes is an open-source container-orchestration system for automating
-						application deployment, scaling, and management.</p>
-					<img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service" />
-					<p class="mu-small fragment">Kubernetes ensures configuration is running in the infrastructure</p>
-				</section>
-				<section>
-					<h2>Building Blocks</h2>
-					<div class="mu-flex mu-gutter">
-						<div><img class="plain" data-src="/images/k8s/node_pod.png" alt="Service" /></div>
-						<div><img class="plain fragment" data-src="/images/k8s/deployment.png" alt="Service" /></div>
-					</div>
-				</section>
-				<section>
-					<h2>Building Blocks</h2>
-					<div class="mu-flex mu-gutter">
-						<ul>
-							<li class="fragment">ClusterIP</li>
-							<li class="fragment">NodePort</li>
-							<li class="fragment">LoadBalancer</li>
-						</ul>
-						<div><img class="plain" data-src="/images/k8s/service2.png" alt="Service" /></div>
-					</div>
-				</section>
-				<section>
-					<h2>Building Blocks</h2>
-					<div class="mu-flex mu-gutter">
-						<div><img class="plain" data-src="/images/k8s/configmap.png" alt="Service" /></div>
-						<div><img class="plain fragment" data-src="/images/k8s/secret.png" alt="Service" /></div>
-					</div>
-				</section>
-				<section>
-					<h2>Building Blocks</h2>
-					<div>
-						<div><img class="plain" data-src="/images/k8s/pv.png" alt="Service" /></div>
-					</div>
-				</section>
-				<section>
-					<h2>Kubernetes on OCI</h2>
-					<img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service" />
-					<ul class="mu-small">
-						<li class="fragment">Manage upgrades of master and worker nodes</li>
-						<li class="fragment">Figure out container networking and storage</li>
-						<li class="fragment">Manage access to cluster</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Oracle Container Engine for Kubernetes (OKE)</h2>
-					Managed Kubernetes Services (CaaS)
-					<img class="plain" data-src="/images/k8s/oracle_managed.png" alt="Service" />
-				</section>
-				<section>
-					<h2>Oracle Container Engine for Kubernetes (OKE)</h2>
-					<img class="plain" data-src="/images/k8s/oke_ha.png" alt="Service" />
-				</section>
-				<section>
-					<h2>How to create an OKE Cluster</h2>
-					<div class="mu-flex mu-gutter">
-						<div><img class="plain" width="100%" data-src="/images/k8s/console1.png" alt="Helm" /></div>
-						<div><img class="plain" width="100%" data-src="/images/k8s/console2.png" alt="Helm" /></div>
-					</div>
-				</section>
-				<section>
-					<h2>How to create an OKE Cluster</h2>
-					<img class="plain" data-src="/images/k8s/create_simple_oke1.png" alt="Service" />
-				</section>
-				<section>
-					<h2>How to create an OKE Cluster</h2>
-					<!-- <pre><code class="hljs sql mu-small"> -->
-					<div class="mu-ratio mu-ratio-2-1">
-						<div class="mu-overflow">
-							<img class="plain" data-src="/images/k8s/create_simple_oke2.png" alt="Service" />
-						</div>
-					</div>
-					<!-- </code> -->
-				</section>
-				<section>
-					<h2>How to manage an OKE Cluster</h2>
-					<ul>
-						<li class="mu-small fragment">Kubectl - Command Line Tool</li>
-					</ul>
-					<div class="mu-flex mu-gutter">
-						<div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig1.png"
-								alt="Service" /></div>
-						<div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig2.png"
-								alt="Service" /></div>
-					</div>
-					<pre><code class="hljs text fragment">mkdir -p $HOME/.kube</code></pre>
-					<pre><code class="hljs text fragment">oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae3dgnlgmqzgczjsg4zgeyjzhfsggmrvmi3ggobwgczgezlcgrsg --file $HOME/.kube/config --region us-phoenix-1</code></pre>
-					<pre><code class="hljs text fragment">export KUBECONFIG=$HOME/.kube/config</code></pre>
-				</section>
-				<section>
-					<h2>How to manage an OKE Cluster</h2>
-					<ul>
-						<li class="mu-small fragment">Dashboard - UI Tool</li>
-					</ul>
-					<img class="plain fragment" data-src="/images/k8s/dashboard.png" alt="Service" />
-					<pre><code class="hljs text fragment">kubectl proxy</code></pre>
-					<p class="mu-small">Then click <a
-							href="http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/"
-							target="_blank">here</a> to access the dashboard.</p>
-				</section>
-				<section>
-					<h2>In-place upgrade - master nodes</h2>
-					<img class="plain" data-src="/images/k8s/oke_ha.png" alt="Service" />
-				</section>
-				<section>
-					<h2>In-place upgrade - worker nodes</h2>
-					<img class="plain" data-src="/images/k8s/oke_ad_nodepools.png" alt="Service" />
-				</section>
-				<section>
-					<h2>Deployment Manifests</h2>
-					<pre><code class="fragment hljs sql mu-small">
+      <!-- Kubernetes -->
+      <section id="k8s_intro">
+        <section>
+          <h2>Kubernetes Overview</h2>
+          <ul>
+            <li>Architecture</li>
+            <li>Building Blocks</li>
+            <li>Kubernetes on OCI</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Architecture</h2>
+          <p class="mu-small">Kubernetes is an open-source container-orchestration system for automating
+            application deployment, scaling, and management.</p>
+          <img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service" />
+          <p class="mu-small fragment">Kubernetes ensures configuration is running in the infrastructure</p>
+        </section>
+        <section>
+          <h2>Building Blocks</h2>
+          <div class="mu-flex mu-gutter">
+            <div><img class="plain" data-src="/images/k8s/node_pod.png" alt="Service" /></div>
+            <div><img class="plain fragment" data-src="/images/k8s/deployment.png" alt="Service" /></div>
+          </div>
+        </section>
+        <section>
+          <h2>Building Blocks</h2>
+          <div class="mu-flex mu-gutter">
+            <ul>
+              <li class="fragment">ClusterIP</li>
+              <li class="fragment">NodePort</li>
+              <li class="fragment">LoadBalancer</li>
+            </ul>
+            <div><img class="plain" data-src="/images/k8s/service2.png" alt="Service" /></div>
+          </div>
+        </section>
+        <section>
+          <h2>Building Blocks</h2>
+          <div class="mu-flex mu-gutter">
+            <div><img class="plain" data-src="/images/k8s/configmap.png" alt="Service" /></div>
+            <div><img class="plain fragment" data-src="/images/k8s/secret.png" alt="Service" /></div>
+          </div>
+        </section>
+        <section>
+          <h2>Building Blocks</h2>
+          <div>
+            <div><img class="plain" data-src="/images/k8s/pv.png" alt="Service" /></div>
+          </div>
+        </section>
+        <section>
+          <h2>Kubernetes on OCI</h2>
+          <img class="plain" data-src="/images/k8s/k8s_architecture.png" alt="Service" />
+          <ul class="mu-small">
+            <li class="fragment">Manage upgrades of master and worker nodes</li>
+            <li class="fragment">Figure out container networking and storage</li>
+            <li class="fragment">Manage access to cluster</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Oracle Container Engine for Kubernetes (OKE)</h2>
+          Managed Kubernetes Services (CaaS)
+          <img class="plain" data-src="/images/k8s/oracle_managed.png" alt="Service" />
+        </section>
+        <section>
+          <h2>Oracle Container Engine for Kubernetes (OKE)</h2>
+          <img class="plain" data-src="/images/k8s/oke_ha.png" alt="Service" />
+        </section>
+        <section>
+          <h2>How to create an OKE Cluster</h2>
+          <div class="mu-flex mu-gutter">
+            <div><img class="plain" width="100%" data-src="/images/k8s/console1.png" alt="Helm" /></div>
+            <div><img class="plain" width="100%" data-src="/images/k8s/console2.png" alt="Helm" /></div>
+          </div>
+        </section>
+        <section>
+          <h2>How to create an OKE Cluster</h2>
+          <img class="plain" data-src="/images/k8s/create_simple_oke1.png" alt="Service" />
+        </section>
+        <section>
+          <h2>How to create an OKE Cluster</h2>
+          <!-- <pre><code class="hljs sql mu-small"> -->
+          <div class="mu-ratio mu-ratio-2-1">
+            <div class="mu-overflow">
+              <img class="plain" data-src="/images/k8s/create_simple_oke2.png" alt="Service" />
+            </div>
+          </div>
+          <!-- </code> -->
+        </section>
+        <section>
+          <h2>How to manage an OKE Cluster</h2>
+          <ul>
+            <li class="mu-small fragment">Kubectl - Command Line Tool</li>
+          </ul>
+          <div class="mu-flex mu-gutter">
+            <div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig1.png"
+                alt="Service" /></div>
+            <div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig2.png"
+                alt="Service" /></div>
+          </div>
+          <pre><code class="hljs text fragment">mkdir -p $HOME/.kube</code></pre>
+          <pre><code class="hljs text fragment">oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae3dgnlgmqzgczjsg4zgeyjzhfsggmrvmi3ggobwgczgezlcgrsg --file $HOME/.kube/config --region us-phoenix-1</code></pre>
+          <pre><code class="hljs text fragment">export KUBECONFIG=$HOME/.kube/config</code></pre>
+        </section>
+        <section>
+          <h2>How to manage an OKE Cluster</h2>
+          <ul>
+            <li class="mu-small fragment">Dashboard - UI Tool</li>
+          </ul>
+          <img class="plain fragment" data-src="/images/k8s/dashboard.png" alt="Service" />
+          <pre><code class="hljs text fragment">kubectl proxy</code></pre>
+          <p class="mu-small">Then click <a
+              href="http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/"
+              target="_blank">here</a> to access the dashboard.</p>
+        </section>
+        <section>
+          <h2>In-place upgrade - master nodes</h2>
+          <img class="plain" data-src="/images/k8s/oke_ha.png" alt="Service" />
+        </section>
+        <section>
+          <h2>In-place upgrade - worker nodes</h2>
+          <img class="plain" data-src="/images/k8s/oke_ad_nodepools.png" alt="Service" />
+        </section>
+        <section>
+          <h2>Deployment Manifests</h2>
+          <pre><code class="fragment hljs sql mu-small">
 apiVersion: extensions/v1beta1
 kind: Deployment
 metadata:
@@ -197,120 +197,120 @@ spec:
           httpGet:
             path: /health
             port: http
-					</code></pre>
-				</section>
-				<section>
-					<h2>The Problem</h2>
-					<ul>
-						<li>Steep learning curve when implementing Kubernetes</li>
-						<li>Increased complexity of microservice environments</li>
-						<li>Manual application deployment using kubectl</li>
-						<li>Kubernetes treats your application as a number of decoupled resources</li>
-						<li>More deployment steps means more chances for human error</li>
-						<li>Hard to share and distribute microservice applications</li>
-						<li>Hard to manage application releases</li>
-					</ul>
-				</section>
-				<section>
-					<h2>The Solution: Helm</h2>
-					<ul>
-						<li>Helm is a package management tool for Kubernetes</li>
-						<li>A CNCF project</li>
-						<li>A package manager similar to yum, brew, apt-get, npm, choco, etc., but specifically for
-							Kubernetes</li>
-						<li>Method for repeatable application installation, configuration, and versioning through the
-							use of charts, repositories, and releases</li>
-						<li>Repository of existing templates for standard software</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Helm</h2>
-					<img class="plain" data-src="/images/helm/helm.png" alt="Helm" />
-				</section>
-			</section>
+          </code></pre>
+        </section>
+        <section>
+          <h2>The Problem</h2>
+          <ul>
+            <li>Steep learning curve when implementing Kubernetes</li>
+            <li>Increased complexity of microservice environments</li>
+            <li>Manual application deployment using kubectl</li>
+            <li>Kubernetes treats your application as a number of decoupled resources</li>
+            <li>More deployment steps means more chances for human error</li>
+            <li>Hard to share and distribute microservice applications</li>
+            <li>Hard to manage application releases</li>
+          </ul>
+        </section>
+        <section>
+          <h2>The Solution: Helm</h2>
+          <ul>
+            <li>Helm is a package management tool for Kubernetes</li>
+            <li>A CNCF project</li>
+            <li>A package manager similar to yum, brew, apt-get, npm, choco, etc., but specifically for
+              Kubernetes</li>
+            <li>Method for repeatable application installation, configuration, and versioning through the
+              use of charts, repositories, and releases</li>
+            <li>Repository of existing templates for standard software</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Helm</h2>
+          <img class="plain" data-src="/images/helm/helm.png" alt="Helm" />
+        </section>
+      </section>
 
-			<!-- Lab -->
-			<section id="lab">
-				<section>
-					<h2>Lab Overview</h2>
-					<ul>
-						<li>Switch context</li>
-						<li>Create namespace and secrets</li>
-						<li>Checkout code</li>
-						<li>Modify deployment file</li>
-						<li>Deploy</li>
-						<li>Verify</li>
-					</ul>
-				</section>
-				<section>
-					<h3>Step 1: switch context</h3>
-					<p class="mu-left">
-						You will perform the tasks for the lab in the OKE cluster mushop-workshop.
-						To switch to that cluster use docker desktop
-					</p>
-					<img class="plain" width=40% data-src="/images/k8s/switch_context2.png" alt="Helm" />
-				</section>
-				<section>
-					<h3>Step 2: install credentials in OKE</h3>
-					<p class="mu-left">
-						You already got the secrets.yaml and created a namespace and installed the secrets
-						in your local cluster. Now you are going to do the same in the OKE cluster mushop-workshop
-					</p>
-					<ol class="block">
-						<li>Create a namespace
-							<pre><code class="hljs text">kubectl create namespace your-name</code></pre>
-						</li>
-						<li>Install Secrets
-							<pre><code class="hljs text">kubectl create -f secrets.yaml -n your-name</code></pre>
-						</li>
-					</ol>
-				</section>
-				<section>
-					<h3>Step 3: change default namespace</h3>
-					<p class="mu-left">
-						Change the your default namespace to your name to avoid having to add
-						<strong>--namespace your-name</strong> to every kubectl command.
-					</p>
-					<pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=your-name</code></pre>
-					<p class="mu-left">To validate it:</p>
-					<pre><code class="hljs text">kubectl config view | grep namespace:</code></pre>
-				</section>
-				<section>
-					<h3>Step 4: modify deployment</h3>
-					<p class="mu-left">
-						Next you will have to modify an incomplete deployment descriptor.
-						Your job is to add what is missing so the service will deploy without errors.
-						Checkout branch workshop/k8s-lab
-					</p>
-					<pre><code class="hljs text">git checkout workshop/k8s-lab</code></pre>
-					<p class="mu-left">
-						Open file mushop.yaml in an editor of your choice.
-						Look for the deployment section for catalogue.
-						The commented lines (start with #) have instruction to create environment variables.
-					</p>
-				</section>
-				<section>
-					<h3>Step 5: modify the deployment</h3>
-					<p class="mu-left">
-						Repeat the same procedure for the shipping and stream deployments.
-						When finished, save and exit the file.
-						Now it's time to deploy the services and pods needed to run the mushop store.
-						Run this command:
-					</p>
-					<pre><code class="hljs text">kubectl apply -f mushop.yaml</code></pre>
-				</section>
-				<section>
-					<h3>Step 6: Verify</h3>
-					<p class="mu-left">
-						To check that all resources have been created run this:
-					</p>
-					<pre><code class="hljs text">kubectl get pod --watch</code></pre>
-					<p class="mu-left">
-						Proxy from your machine to the services running in OKE:
-					</p>
-					<pre><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
-					<p class="mu-left">
-						You are done! To access the store click <a href="http://localhost:8000">here</a>
-					</p>
-				</section>
-			</section>
+      <!-- Lab -->
+      <section id="lab">
+        <section>
+          <h2>Lab Overview</h2>
+          <ul>
+            <li>Switch context</li>
+            <li>Create namespace and secrets</li>
+            <li>Checkout code</li>
+            <li>Modify deployment file</li>
+            <li>Deploy</li>
+            <li>Verify</li>
+          </ul>
+        </section>
+        <section>
+          <h3>Step 1: switch context</h3>
+          <p class="mu-left">
+            You will perform the tasks for the lab in the OKE cluster mushop-workshop.
+            To switch to that cluster use docker desktop
+          </p>
+          <img class="plain" width=40% data-src="/images/k8s/switch_context2.png" alt="Helm" />
+        </section>
+        <section>
+          <h3>Step 2: install credentials in OKE</h3>
+          <p class="mu-left">
+            You already got the secrets.yaml and created a namespace and installed the secrets
+            in your local cluster. Now you are going to do the same in the OKE cluster mushop-workshop
+          </p>
+          <ol class="block">
+            <li>Create a namespace
+              <pre><code class="hljs text">kubectl create namespace your-name</code></pre>
+            </li>
+            <li>Install Secrets
+              <pre><code class="hljs text">kubectl create -f secrets.yaml -n your-name</code></pre>
+            </li>
+          </ol>
+        </section>
+        <section>
+          <h3>Step 3: change default namespace</h3>
+          <p class="mu-left">
+            Change the your default namespace to your name to avoid having to add
+            <strong>--namespace your-name</strong> to every kubectl command.
+          </p>
+          <pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=your-name</code></pre>
+          <p class="mu-left">To validate it:</p>
+          <pre><code class="hljs text">kubectl config view | grep namespace:</code></pre>
+        </section>
+        <section>
+          <h3>Step 4: modify deployment</h3>
+          <p class="mu-left">
+            Next you will have to modify an incomplete deployment descriptor.
+            Your job is to add what is missing so the service will deploy without errors.
+            Checkout branch workshop/k8s-lab
+          </p>
+          <pre><code class="hljs text">git checkout workshop/k8s-lab</code></pre>
+          <p class="mu-left">
+            Open file mushop.yaml in an editor of your choice.
+            Look for the deployment section for catalogue.
+            The commented lines (start with #) have instruction to create environment variables.
+          </p>
+        </section>
+        <section>
+          <h3>Step 5: modify the deployment</h3>
+          <p class="mu-left">
+            Repeat the same procedure for the shipping and stream deployments.
+            When finished, save and exit the file.
+            Now it's time to deploy the services and pods needed to run the mushop store.
+            Run this command:
+          </p>
+          <pre><code class="hljs text">kubectl apply -f mushop.yaml</code></pre>
+        </section>
+        <section>
+          <h3>Step 6: Verify</h3>
+          <p class="mu-left">
+            To check that all resources have been created run this:
+          </p>
+          <pre><code class="hljs text">kubectl get pod --watch</code></pre>
+          <p class="mu-left">
+            Proxy from your machine to the services running in OKE:
+          </p>
+          <pre><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
+          <p class="mu-left">
+            You are done! To access the store click <a href="http://localhost:8000">here</a>
+          </p>
+        </section>
+      </section>

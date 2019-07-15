@@ -1,155 +1,155 @@
-			<!-- title -->
-			<section id="home">
-				<!-- landing -->
-				<section id="home-title">
-					<h1>Cloud Native OCI</h1>
-					<h2>Shipping and Stream Services</h2>
+      <!-- title -->
+      <section id="home">
+        <!-- landing -->
+        <section id="home-title">
+          <h1>Cloud Native OCI</h1>
+          <h2>Shipping and Stream Services</h2>
           include "partials/_titleSlide.html"
-				</section>
+        </section>
 
-				<!-- TOC -->
-				<section id="toc">
-					<h2>Table of Contents</h2>
-					<ul class="plain">
-						<!-- add a line for each <section id="slideId">...</section>  -->
-						<li><a href="#oss_intro">Home</a></li>
-						<li><a href="#lab">Lab Overview</a></li>
-					</ul>
-				</section>
+        <!-- TOC -->
+        <section id="toc">
+          <h2>Table of Contents</h2>
+          <ul class="plain">
+            <!-- add a line for each <section id="slideId">...</section>  -->
+            <li><a href="#oss_intro">Home</a></li>
+            <li><a href="#lab">Lab Overview</a></li>
+          </ul>
+        </section>
 
-				<!-- Contributors -->
+        <!-- Contributors -->
         include "partials/_contributors.html"
-			</section>
+      </section>
 
-			
-			<!-- Streams -->
-			<section id="oss_intro">
-				<section>
-					<h2>Oracle Streaming Service</h2>
-					<ul>
-						<li>What is OSS?</li>
-						<li>Use cases</li>
-						<li>Concepts</li>
-						<li>How it works</li>
-						<li>Limits</li>
-					</ul>
-				</section>
-				<section>
-					<h2>What is OSS? <img data-src="/images/tech/streaming.svg" /></h2>
-					<ul>
-						<li class=fragment>The OCI Streaming Service provides a fully managed, scalable, and durable storage solution for ingesting continuous, high-volume streams of data that you can consume and process in real time</li>
-						<li class=fragment>OSS is a distributed event-log</li>
-						<li class=fragment>Messages are written to partitions and can be referenced via partition/offset</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Use cases</h2>
-					<ul>
-						<li>Metric and log ingestion</li>
-						<div class=fragment><li>Messaging</li></div>
-						<div class=fragment><li>Web/Mobile activity data ingestion</li></div>
-						<div class=fragment><li>Infrastructure and apps event processing</li></div>
-						<div class=fragment><li>Oracle Data Cloud</li></div>
-					</ul>
-				</section>
-				<section>
-					<h2>Concepts</h2>
-					<div class="mu-flex mu-gutter">
-						<div class="col-1-2">
-							<p class="mu-left mu-small fragment"><strong>Stream</strong>: a partitioned, append-only log of messages</p>
-							<p class="mu-left mu-small fragment"><strong>Message</strong>: base64-encoded record that is published to the stream</p>
-							<p class="mu-left mu-small fragment"><strong>Offset</strong>: the location of a message within a partition.</p>
-							<p class="mu-left mu-small fragment"><strong>Producer</strong>: an entity that writes/publishes messages to a stream.</p>
-							<p class="mu-left mu-small fragment"><strong>Consumer</strong>: an entity that reads messages from one or more streams.</p>
-						</div>
-						<div class="col-1-2">
-							<p class="mu-left mu-small fragment"><strong>Partition</strong>: a section of a stream. It allows you to distribute a stream by splitting messages across multiple nodes. Each partition can be placed on a separate machine to allow for multiple consumers to read from a stream in parallel.</p>
-							<p class="mu-left mu-small fragment"><strong>Cursor</strong>: a pointer to a location (offset or time) in a stream.</p>
-						</div>
-					</div>
-				</section>
-				<section>
-					<h2>Concepts</h2>
-					<h4>Cursor Type: AT_OFFSET</h4>
-					<img class="plain" data-src="/images/streams/at_offset.png" alt="at_offset cursor"/>
-				</section>
-				<section>
-					<h2>Concepts</h2>
-					<h4>Cursor Type: AFTER_OFFSET</h4>
-					<img class="plain" data-src="/images/streams/after_offset.png" alt="after_offset cursor"/>
-				</section>
-				<section>
-					<h2>Concepts</h2>
-					<h4>Cursor Type: TRIM_HORIZON</h4>
-					<img class="plain" data-src="/images/streams/trim_horizon.png" alt="trim_horizon cursor"/>
-				</section>
-				<section>
-					<h2>Concepts</h2>
-					<h4>Cursor Type: AT_TIME</h4>
-					<p class="mu-small">Consume after given time. Timestamp of the message &ge; supplied time.</p>
-					<img class="plain" data-src="/images/streams/at_time.png" alt="at_time cursor"/>
-				</section>
-				<section>
-					<h2>Concepts</h2>
-					<h4>Cursor Type: LATEST</h4>
-					<p class="mu-small">Consume messages published after the cursor creation.</p>
-					<img class="plain" data-src="/images/streams/latest.png" alt="latest cursor"/>
-				</section>
-				<section>
-					<h2>Limits</h2>
-					<ul>
-						<li class="fragment">Message retention: up to 7 days</li>
-						<li class="fragment">Throughput: 1 MB/sec per partition</li>
-						<li class="fragment">Message size: 1 MB maximum</li>
-						<li class="fragment">API calls per second: 5 getMessages per partition</li>
-						<li class="fragment">Max Total Data Write per second: 1 MB per partition</li>
-						<li class="fragment">Number of partitions: Enterprise tenancy: 5, Non-Enterprise: 0</li>
-					</ul>
-				</section>
-				<section>
-					<h2>Mushop Shipping and Stream Service</h2>
-					
-					<div class="mu-flex mu-flex-middle mu-margin">
-						<div class="mu-svc fragment fade-in">
-							<img data-src="/images/tech/java.png" /> Order
-						</div>
-						<div class="mu-flex-connector arrow fragment fade-in"></div>
-						<div class="mu-svc fragment fade-in">
-							<img data-src="/images/tech/java.png" /> Shipping
-						</div>
-						<div class="mu-flex-connector arrow fragment fade-in"></div>
-						<div class="mu-svc fragment fade-in">
-							<img data-src="/images/tech/streaming.svg" /> OSS
-						</div>
-						<div class="mu-flex-connector arrow fragment fade-in"></div>
-						<div class="mu-svc fragment fade-in">
-							<img data-src="/images/tech/java.png" /> Stream
-						</div>
-						<div class="mu-flex-connector arrow fragment fade-in"></div>
-						<div class="mu-svc fragment fade-in">
-							<img data-src="/images/streams/shipping-2.png" /> Fulfillment
-						</div>
-					</div>
-				</section>
-				<section>
-					<h2>Connecting to OSS</h2>
-					<ol>
-						<li class="mu-left fragment">Generate API signing key and public key</li>
-						<li class="mu-left fragment">Upload public key to OCI</li>
-						<li class="mu-left fragment">Expose credentials to the application (configuration/environment/etc.)</li>
-						<li class="mu-left fragment">Using Streaming SDK connect to OSS</li>
-					</ol>
-					<br/>
-					<a href="https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdks.htm">OCI SDKs (Java, Python, Ruby and Go)</a>
-				</section>
-				<section>
-					<h2>How Shipping App Connects to OSS</h2>
-					<p class="fragment">Create a secret that has credentials needed for authentication</p>
-					<img class="fragment" data-src="/images/k8s/secret.png" />
-				</section>
-				<section>
-					<h2>In the manifest file...</h2>
-					<pre class="mu-small"><code class="hljs yaml">env:
+      
+      <!-- Streams -->
+      <section id="oss_intro">
+        <section>
+          <h2>Oracle Streaming Service</h2>
+          <ul>
+            <li>What is OSS?</li>
+            <li>Use cases</li>
+            <li>Concepts</li>
+            <li>How it works</li>
+            <li>Limits</li>
+          </ul>
+        </section>
+        <section>
+          <h2>What is OSS? <img data-src="/images/tech/streaming.svg" /></h2>
+          <ul>
+            <li class=fragment>The OCI Streaming Service provides a fully managed, scalable, and durable storage solution for ingesting continuous, high-volume streams of data that you can consume and process in real time</li>
+            <li class=fragment>OSS is a distributed event-log</li>
+            <li class=fragment>Messages are written to partitions and can be referenced via partition/offset</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Use cases</h2>
+          <ul>
+            <li>Metric and log ingestion</li>
+            <div class=fragment><li>Messaging</li></div>
+            <div class=fragment><li>Web/Mobile activity data ingestion</li></div>
+            <div class=fragment><li>Infrastructure and apps event processing</li></div>
+            <div class=fragment><li>Oracle Data Cloud</li></div>
+          </ul>
+        </section>
+        <section>
+          <h2>Concepts</h2>
+          <div class="mu-flex mu-gutter">
+            <div class="col-1-2">
+              <p class="mu-left mu-small fragment"><strong>Stream</strong>: a partitioned, append-only log of messages</p>
+              <p class="mu-left mu-small fragment"><strong>Message</strong>: base64-encoded record that is published to the stream</p>
+              <p class="mu-left mu-small fragment"><strong>Offset</strong>: the location of a message within a partition.</p>
+              <p class="mu-left mu-small fragment"><strong>Producer</strong>: an entity that writes/publishes messages to a stream.</p>
+              <p class="mu-left mu-small fragment"><strong>Consumer</strong>: an entity that reads messages from one or more streams.</p>
+            </div>
+            <div class="col-1-2">
+              <p class="mu-left mu-small fragment"><strong>Partition</strong>: a section of a stream. It allows you to distribute a stream by splitting messages across multiple nodes. Each partition can be placed on a separate machine to allow for multiple consumers to read from a stream in parallel.</p>
+              <p class="mu-left mu-small fragment"><strong>Cursor</strong>: a pointer to a location (offset or time) in a stream.</p>
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Concepts</h2>
+          <h4>Cursor Type: AT_OFFSET</h4>
+          <img class="plain" data-src="/images/streams/at_offset.png" alt="at_offset cursor"/>
+        </section>
+        <section>
+          <h2>Concepts</h2>
+          <h4>Cursor Type: AFTER_OFFSET</h4>
+          <img class="plain" data-src="/images/streams/after_offset.png" alt="after_offset cursor"/>
+        </section>
+        <section>
+          <h2>Concepts</h2>
+          <h4>Cursor Type: TRIM_HORIZON</h4>
+          <img class="plain" data-src="/images/streams/trim_horizon.png" alt="trim_horizon cursor"/>
+        </section>
+        <section>
+          <h2>Concepts</h2>
+          <h4>Cursor Type: AT_TIME</h4>
+          <p class="mu-small">Consume after given time. Timestamp of the message &ge; supplied time.</p>
+          <img class="plain" data-src="/images/streams/at_time.png" alt="at_time cursor"/>
+        </section>
+        <section>
+          <h2>Concepts</h2>
+          <h4>Cursor Type: LATEST</h4>
+          <p class="mu-small">Consume messages published after the cursor creation.</p>
+          <img class="plain" data-src="/images/streams/latest.png" alt="latest cursor"/>
+        </section>
+        <section>
+          <h2>Limits</h2>
+          <ul>
+            <li class="fragment">Message retention: up to 7 days</li>
+            <li class="fragment">Throughput: 1 MB/sec per partition</li>
+            <li class="fragment">Message size: 1 MB maximum</li>
+            <li class="fragment">API calls per second: 5 getMessages per partition</li>
+            <li class="fragment">Max Total Data Write per second: 1 MB per partition</li>
+            <li class="fragment">Number of partitions: Enterprise tenancy: 5, Non-Enterprise: 0</li>
+          </ul>
+        </section>
+        <section>
+          <h2>Mushop Shipping and Stream Service</h2>
+          
+          <div class="mu-flex mu-flex-middle mu-margin">
+            <div class="mu-svc fragment fade-in">
+              <img data-src="/images/tech/java.png" /> Order
+            </div>
+            <div class="mu-flex-connector arrow fragment fade-in"></div>
+            <div class="mu-svc fragment fade-in">
+              <img data-src="/images/tech/java.png" /> Shipping
+            </div>
+            <div class="mu-flex-connector arrow fragment fade-in"></div>
+            <div class="mu-svc fragment fade-in">
+              <img data-src="/images/tech/streaming.svg" /> OSS
+            </div>
+            <div class="mu-flex-connector arrow fragment fade-in"></div>
+            <div class="mu-svc fragment fade-in">
+              <img data-src="/images/tech/java.png" /> Stream
+            </div>
+            <div class="mu-flex-connector arrow fragment fade-in"></div>
+            <div class="mu-svc fragment fade-in">
+              <img data-src="/images/streams/shipping-2.png" /> Fulfillment
+            </div>
+          </div>
+        </section>
+        <section>
+          <h2>Connecting to OSS</h2>
+          <ol>
+            <li class="mu-left fragment">Generate API signing key and public key</li>
+            <li class="mu-left fragment">Upload public key to OCI</li>
+            <li class="mu-left fragment">Expose credentials to the application (configuration/environment/etc.)</li>
+            <li class="mu-left fragment">Using Streaming SDK connect to OSS</li>
+          </ol>
+          <br/>
+          <a href="https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdks.htm">OCI SDKs (Java, Python, Ruby and Go)</a>
+        </section>
+        <section>
+          <h2>How Shipping App Connects to OSS</h2>
+          <p class="fragment">Create a secret that has credentials needed for authentication</p>
+          <img class="fragment" data-src="/images/k8s/secret.png" />
+        </section>
+        <section>
+          <h2>In the manifest file...</h2>
+          <pre class="mu-small"><code class="hljs yaml">env:
 - name: OCI_TENANT_ID
   valueFrom:
     secretKeyRef:
@@ -186,175 +186,175 @@
     secretKeyRef:
       name: streams-secret
       key: oci_compartment_id
-					</code></pre>			
-				</section>
-				<section>
-					<h2>Connecting to OSS</h2>
-					<p>In Java get credentials/IDs from environment</p>
-					
-					<pre class="mu-small"><code class="hljs java">final String tenantId = env.getProperty("OCI_TENANT_ID");
+          </code></pre>      
+        </section>
+        <section>
+          <h2>Connecting to OSS</h2>
+          <p>In Java get credentials/IDs from environment</p>
+          
+          <pre class="mu-small"><code class="hljs java">final String tenantId = env.getProperty("OCI_TENANT_ID");
 final String userId = env.getProperty("OCI_USER_ID");
 final String fingerprint = env.getProperty("OCI_FINGERPRINT");
 final String privateKey = env.getProperty("OCI_API_KEY");
 final String passPhrase = env.getProperty("OCI_PASS_PHRASE");
 final String region = env.getProperty("OCI_REGION");</code></pre>
-				</section>
-				<section>
-					<h2>Connecting to OSS</h2>
-					<p>Create an authentication objects</p>
-					<pre class="mu-small"><code class="hljs java">AuthenticationDetailsProvider provider =  
+        </section>
+        <section>
+          <h2>Connecting to OSS</h2>
+          <p>Create an authentication objects</p>
+          <pre class="mu-small"><code class="hljs java">AuthenticationDetailsProvider provider =  
    SimpleAuthenticationDetailsProvider.builder()
       tenantId(tenantId)
       userId(userId)
       fingerprint(fingerprint)
       privateKeySupplier(new StringPrivateKeySupplier(privateKey))
-	  region(Region.fromRegionId(region))
-	  build();
-	  
+    region(Region.fromRegionId(region))
+    build();
+    
    final StreamAdminClient adminClient = new StreamAdminClient(provider);
 
    Stream stream = getStream(adminClient, env.getProperty("OCI_COMPARTMENT_ID"), 
-							 streamName, partitions);
-					
+               streamName, partitions);
+          
    streamId = stream.getId();
 
    streamClient = new StreamClient(provider);
-					</code></pre>
-					
-				</section>
-				<section>
-					<h2>Publishing message to OSS</h2>
-					<pre class="mu-small"><code class="hljs java">PutMessagesDetails messagesDetails =
-		PutMessagesDetails.builder()
-		.messages(messages).build();
-					</code></pre>
-					<pre class="mu-small"><code class="hljs java">PutMessagesRequest putRequest =
-		PutMessagesRequest.builder()
-		.streamId(streamsConfig.getStreamId())
-		.putMessagesDetails(messagesDetails)
-		.build();
-					</code></pre>
-					<pre class="mu-small"><code class="hljs java">PutMessagesResponse putResponse = 
-		streamsConfig.getStreamClient().
-		putMessages(putRequest);
-					</code></pre>
-				</section>
-				<section>
-					<h2>Consuming message from OSS</h2>
-					<p class="mu-left">Use the same steps to create a connection as in Shipping App:</p>
-					<ul>
-						<li>get credentials from environment</li>
-						<li>create authentication object</li>
-						<li>get streamClient and streamId</li>
-					</ul>
-					<p class="mu-left">Then: ...</p>
-				</section>
-				<section>
-						<h2>Create a cursor</h2>
-						<pre class="mu-small"><code class="hljs java">	CreateCursorDetails cursorDetails =
-		CreateCursorDetails
-		.builder()
-		.partition(partition)
-		.type(Type.Latest)
-		//.type(Type.TrimHorizon)
-		//.type(Type.AtOffset)
-		.build();
+          </code></pre>
+          
+        </section>
+        <section>
+          <h2>Publishing message to OSS</h2>
+          <pre class="mu-small"><code class="hljs java">PutMessagesDetails messagesDetails =
+    PutMessagesDetails.builder()
+    .messages(messages).build();
+          </code></pre>
+          <pre class="mu-small"><code class="hljs java">PutMessagesRequest putRequest =
+    PutMessagesRequest.builder()
+    .streamId(streamsConfig.getStreamId())
+    .putMessagesDetails(messagesDetails)
+    .build();
+          </code></pre>
+          <pre class="mu-small"><code class="hljs java">PutMessagesResponse putResponse = 
+    streamsConfig.getStreamClient().
+    putMessages(putRequest);
+          </code></pre>
+        </section>
+        <section>
+          <h2>Consuming message from OSS</h2>
+          <p class="mu-left">Use the same steps to create a connection as in Shipping App:</p>
+          <ul>
+            <li>get credentials from environment</li>
+            <li>create authentication object</li>
+            <li>get streamClient and streamId</li>
+          </ul>
+          <p class="mu-left">Then: ...</p>
+        </section>
+        <section>
+            <h2>Create a cursor</h2>
+            <pre class="mu-small"><code class="hljs java">  CreateCursorDetails cursorDetails =
+    CreateCursorDetails
+    .builder()
+    .partition(partition)
+    .type(Type.Latest)
+    //.type(Type.TrimHorizon)
+    //.type(Type.AtOffset)
+    .build();
 
-	CreateCursorRequest createCursorRequest =
-		CreateCursorRequest.builder()
-		.streamId(streamId)
-		.createCursorDetails(cursorDetails)
-		.build();
+  CreateCursorRequest createCursorRequest =
+    CreateCursorRequest.builder()
+    .streamId(streamId)
+    .createCursorDetails(cursorDetails)
+    .build();
 
-	CreateCursorResponse cursorResponse = 
-		streamClient.createCursor(createCursorRequest);
-		return cursorResponse.getCursor().getValue();
-						</code></pre>
-					</section>
-					<section>
-						<h2>Get messages</h2>
-						<pre class="mu-small"><code class="hljs java">for (;;) {
-	GetMessagesRequest getRequest =
-		GetMessagesRequest.builder()
-			.streamId(streamId)
-			.cursor(cursor)
-			.limit(10)
-			.build();
+  CreateCursorResponse cursorResponse = 
+    streamClient.createCursor(createCursorRequest);
+    return cursorResponse.getCursor().getValue();
+            </code></pre>
+          </section>
+          <section>
+            <h2>Get messages</h2>
+            <pre class="mu-small"><code class="hljs java">for (;;) {
+  GetMessagesRequest getRequest =
+    GetMessagesRequest.builder()
+      .streamId(streamId)
+      .cursor(cursor)
+      .limit(10)
+      .build();
 
-	GetMessagesResponse getResponse = streamClient.getMessages(getRequest);
-	//Extract Json message from getResponse
-	//Print message
+  GetMessagesResponse getResponse = streamClient.getMessages(getRequest);
+  //Extract Json message from getResponse
+  //Print message
 }
-						</code></pre>
-					</section>
-			</section> <!-- end of lecture-->
+            </code></pre>
+          </section>
+      </section> <!-- end of lecture-->
 
-			<!-- Lab -->
-			<section id="lab">
-				<section>
-					<h2>Hands-on Practice</h2>
-					<p class="mu-small mu-left">
-						For this practice lab you will need to fix the source code which has missing functionality.
-						But first you need to checkout a branch. 
-					</p>
-					<pre><code class="hljs text">git checkout workshop/shipping-lab</code></pre>
-					<p class="mu-small mu-left">Now make changes to the producer, Shipping microservice. Edit the following file and modify the initConnection method. Instruction are found as inline comments. </p>
-					<pre><code class="hljs text">mushop/src/shipping/src/main/java/mushop/shipping/configuration/OciStreamsConfiguration.java</code></pre>
-					<p class="mu-small mu-left">Next edit the following file. Modify the publishMessages method. Instruction are found as inline comments.</p>
-					<pre><code class="hljs text">mushop/src/shipping/src/main/java/mushop/shipping/streams/StreamsPublisher.java</code></pre>
-				</section>
-				<section>
-					<h2>Stream Service Code Changes</h2>
-					<p class="mu-small mu-left">Now you need to make changes to the consumer, Stream microservice. Edit the following file and modify the initConnection method. Instruction are found as inline comments.</p>
-					<pre><code class="hljs text">mushop/src/stream/src/main/java/mushop/stream/configuration/OciStreamsConfiguration.java</code></pre>
-					<p class="mu-small mu-left">Next edit the following file and modify the forEverMessageLoop and getCursorByPartition methods. Instruction are found as inline comments. </p>
-					<pre><code class="hljs text">mushop/src/stream/src/main/java/mushop/stream/AppStartupRunner.java</code></pre>
-				</section>
-				<!-- <section>
-					<h2>Test and Build</h2>
-					<p class="mu-small mu-left"></p>Using you preferred editor or IDE, run the application. 
-					You can check if your message is being published by looking at the OSS stream in the OCI console for intvravipati, mushop compartment. 
-					<pre><code class="hljs text">https://console.us-phoenix-1.oraclecloud.com/?tenant=intvravipati</code></pre>
-					The stream name is shipping-stream. 
-					Click the “Refresh” button in Recent Messages to see the latest messages.
-				</section> -->
-				<section>
-					<h2>Build docker image</h2>
-					<p class="mu-small mu-left">To build the docker image, make sure you are in the correct folder (You will see a Dockerfile there)</p>
-					<pre><code class="hljs text">mushop/src/shipping</code></pre>
-					<p class="mu-small mu-left">Run the following to build the image.</p>
-					<pre><code class="hljs text">docker build . --tag shipping:0.0.1</code></pre>
-				</section>
-				<section>
-					<h2>Update deployment descriptor</h2>
-					<p class="mu-small mu-left">The deployment descriptor that was checked in is pointing to the wrong image. Edit shipping.yaml and update to the correct image name. It should look like this:</p>
-					<pre><code class="hljs text">- image: shipping:0.0.1</code></pre>
-					<p class="mu-small mu-left">Also remove the following line:</p>
-					<pre><code class="hljs yaml">imagePullPolicy: Always</code></pre>
-				</section>
-				<section>
-					<h2>Create a deployment</h2>
-					<p class="mu-small mu-left">The following command instructs kubernetes to create a pod with your new image:</p>
-					<pre><code class="hljs text">kubectl apply -f shipping.yaml</code></pre>
-					<p class="mu-small mu-left">To verify the pod and service were created, list all resources in the namespace mushop:</p>
-					<pre><code class="hljs text">kubectl get all</code></pre>
-					<p class="mu-small mu-left">Repeat the same series of steps (begining at building an image) for the stream application.</p>
-				</section>
-				<section>
-					<h2>Prepare to watch the logs</h2>
-					<p class="mu-small mu-left">
-						To tail the application logs first you need to find and save the shipping and stream pod names. 
-						Then in two separate terminal windows (one for shipping, one for stream) run the following but replace pod_name with the actual pod name that you saved:
-					</p> 
-					<pre><code class="hljs text">kubectl logs -f pod_name</code></pre>
-				</section>
-				<section>
-					<h2>Send message to shipping</h2>
-					<div class="mu-sequence mu-medium">
-						<p class="mu-small">Expose the shipping service</p>
-						<pre><code class="hljs text">kubectl port-forward svc/shipping 8000:80</code></pre>
-						<p class="mu-small">Open another terminal and run the following command which sends a test message to the shipping microservice running as a pod in your local Kubernetes cluster.</p>
-						<pre><code class="hljs curl">curl -X POST \
+      <!-- Lab -->
+      <section id="lab">
+        <section>
+          <h2>Hands-on Practice</h2>
+          <p class="mu-small mu-left">
+            For this practice lab you will need to fix the source code which has missing functionality.
+            But first you need to checkout a branch. 
+          </p>
+          <pre><code class="hljs text">git checkout workshop/shipping-lab</code></pre>
+          <p class="mu-small mu-left">Now make changes to the producer, Shipping microservice. Edit the following file and modify the initConnection method. Instruction are found as inline comments. </p>
+          <pre><code class="hljs text">mushop/src/shipping/src/main/java/mushop/shipping/configuration/OciStreamsConfiguration.java</code></pre>
+          <p class="mu-small mu-left">Next edit the following file. Modify the publishMessages method. Instruction are found as inline comments.</p>
+          <pre><code class="hljs text">mushop/src/shipping/src/main/java/mushop/shipping/streams/StreamsPublisher.java</code></pre>
+        </section>
+        <section>
+          <h2>Stream Service Code Changes</h2>
+          <p class="mu-small mu-left">Now you need to make changes to the consumer, Stream microservice. Edit the following file and modify the initConnection method. Instruction are found as inline comments.</p>
+          <pre><code class="hljs text">mushop/src/stream/src/main/java/mushop/stream/configuration/OciStreamsConfiguration.java</code></pre>
+          <p class="mu-small mu-left">Next edit the following file and modify the forEverMessageLoop and getCursorByPartition methods. Instruction are found as inline comments. </p>
+          <pre><code class="hljs text">mushop/src/stream/src/main/java/mushop/stream/AppStartupRunner.java</code></pre>
+        </section>
+        <!-- <section>
+          <h2>Test and Build</h2>
+          <p class="mu-small mu-left"></p>Using you preferred editor or IDE, run the application. 
+          You can check if your message is being published by looking at the OSS stream in the OCI console for intvravipati, mushop compartment. 
+          <pre><code class="hljs text">https://console.us-phoenix-1.oraclecloud.com/?tenant=intvravipati</code></pre>
+          The stream name is shipping-stream. 
+          Click the “Refresh” button in Recent Messages to see the latest messages.
+        </section> -->
+        <section>
+          <h2>Build docker image</h2>
+          <p class="mu-small mu-left">To build the docker image, make sure you are in the correct folder (You will see a Dockerfile there)</p>
+          <pre><code class="hljs text">mushop/src/shipping</code></pre>
+          <p class="mu-small mu-left">Run the following to build the image.</p>
+          <pre><code class="hljs text">docker build . --tag shipping:0.0.1</code></pre>
+        </section>
+        <section>
+          <h2>Update deployment descriptor</h2>
+          <p class="mu-small mu-left">The deployment descriptor that was checked in is pointing to the wrong image. Edit shipping.yaml and update to the correct image name. It should look like this:</p>
+          <pre><code class="hljs text">- image: shipping:0.0.1</code></pre>
+          <p class="mu-small mu-left">Also remove the following line:</p>
+          <pre><code class="hljs yaml">imagePullPolicy: Always</code></pre>
+        </section>
+        <section>
+          <h2>Create a deployment</h2>
+          <p class="mu-small mu-left">The following command instructs kubernetes to create a pod with your new image:</p>
+          <pre><code class="hljs text">kubectl apply -f shipping.yaml</code></pre>
+          <p class="mu-small mu-left">To verify the pod and service were created, list all resources in the namespace mushop:</p>
+          <pre><code class="hljs text">kubectl get all</code></pre>
+          <p class="mu-small mu-left">Repeat the same series of steps (begining at building an image) for the stream application.</p>
+        </section>
+        <section>
+          <h2>Prepare to watch the logs</h2>
+          <p class="mu-small mu-left">
+            To tail the application logs first you need to find and save the shipping and stream pod names. 
+            Then in two separate terminal windows (one for shipping, one for stream) run the following but replace pod_name with the actual pod name that you saved:
+          </p> 
+          <pre><code class="hljs text">kubectl logs -f pod_name</code></pre>
+        </section>
+        <section>
+          <h2>Send message to shipping</h2>
+          <div class="mu-sequence mu-medium">
+            <p class="mu-small">Expose the shipping service</p>
+            <pre><code class="hljs text">kubectl port-forward svc/shipping 8000:80</code></pre>
+            <p class="mu-small">Open another terminal and run the following command which sends a test message to the shipping microservice running as a pod in your local Kubernetes cluster.</p>
+            <pre><code class="hljs curl">curl -X POST \
 http://localhost:8000/shipping \
 -H 'Content-Type: application/json' \
 -H 'cache-control: no-cache' \
@@ -362,22 +362,22 @@ http://localhost:8000/shipping \
   "id": "123-45-8876",
   "name": "shipment 500" 
 }'</code></pre>
-						<p class="mu-small">
-							Look at the terminal windows and observe messages being created in the shipping and consumed in the stream. 
-							You should also look at the OCI console. Refresh the table and watch your message being published to the stream.
-						</p>
-					</div>
-				</section>
-				<section>
-						<p class="mu-small mu-left">
-							Click <a href="https://console.us-phoenix-1.oraclecloud.com/?tenant=intvravipati" target="_blank">here</a> to access the OCI console.
-						</p>
-						<div class="mu-flex mu-gutter">
-							<div><img class="plain" width="100%" data-src="/images/streams/console1.png" alt="Helm"/></div>
-							<div><img class="plain" width="100%" data-src="/images/streams/console2.png" alt="Helm"/></div>
-						</div>
-				</section>
-				<section>
-					<img class="plain" width="100%" data-src="/images/streams/console3.png" alt="Helm"/>
-				</section>
-			</section>  <!-- end of lab -->
+            <p class="mu-small">
+              Look at the terminal windows and observe messages being created in the shipping and consumed in the stream. 
+              You should also look at the OCI console. Refresh the table and watch your message being published to the stream.
+            </p>
+          </div>
+        </section>
+        <section>
+            <p class="mu-small mu-left">
+              Click <a href="https://console.us-phoenix-1.oraclecloud.com/?tenant=intvravipati" target="_blank">here</a> to access the OCI console.
+            </p>
+            <div class="mu-flex mu-gutter">
+              <div><img class="plain" width="100%" data-src="/images/streams/console1.png" alt="Helm"/></div>
+              <div><img class="plain" width="100%" data-src="/images/streams/console2.png" alt="Helm"/></div>
+            </div>
+        </section>
+        <section>
+          <img class="plain" width="100%" data-src="/images/streams/console3.png" alt="Helm"/>
+        </section>
+      </section>  <!-- end of lab -->

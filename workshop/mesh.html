@@ -1,102 +1,102 @@
 
-			<!-- title -->
-			<section id="home">
-				<!-- landing -->
-				<section id="home-title">
-					<h1>Cloud Native OCI</h1>
-					<h2>Service Mesh</h2>
-					<p class="mu-small">(Backup Slides - Need Update)</p>
+      <!-- title -->
+      <section id="home">
+        <!-- landing -->
+        <section id="home-title">
+          <h1>Cloud Native OCI</h1>
+          <h2>Service Mesh</h2>
+          <p class="mu-small">(Backup Slides - Need Update)</p>
           include "partials/_titleSlide.html"
-				</section>
+        </section>
 
-				<!-- TOC -->
-				<section id="toc">
-					<h2>Table of Contents</h2>
-					<ul class="plain">
-						<!-- add a line for each <section id="slideId">...</section>  -->
-						<li><a href="#intro">Introduction</a></li>
-						<li><a href="#whatservicemesh">What is a service mesh?</a></li>
-						<li><a href="#featuresservicemesh">Features of Istio service mesh</a></li>
-						<li><a href="#servicemeshcomponents">Service Mesh Components</a></li>
-					</ul>
-				</section>
+        <!-- TOC -->
+        <section id="toc">
+          <h2>Table of Contents</h2>
+          <ul class="plain">
+            <!-- add a line for each <section id="slideId">...</section>  -->
+            <li><a href="#intro">Introduction</a></li>
+            <li><a href="#whatservicemesh">What is a service mesh?</a></li>
+            <li><a href="#featuresservicemesh">Features of Istio service mesh</a></li>
+            <li><a href="#servicemeshcomponents">Service Mesh Components</a></li>
+          </ul>
+        </section>
 
-				<!-- Contributors -->
+        <!-- Contributors -->
         include "partials/_contributors.html"
-			</section>
+      </section>
 
-			<!-- Intro to Mesh -->
-			<section id="intro">
-				<h2>Introduction to service mesh</h2>
-				
-				<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
-					<img data-src="/images/tech/k8s.png" style="width:10%"/>
-				</div>
-	
-				<div class="fragment fade-in">
-					<p>In this module we will introduce you to a concept of a service mesh and its role in modern, microservices oriented software architecture.</p>
-				</div>
-			</section>
+      <!-- Intro to Mesh -->
+      <section id="intro">
+        <h2>Introduction to service mesh</h2>
+        
+        <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+          <img data-src="/images/tech/k8s.png" style="width:10%"/>
+        </div>
+  
+        <div class="fragment fade-in">
+          <p>In this module we will introduce you to a concept of a service mesh and its role in modern, microservices oriented software architecture.</p>
+        </div>
+      </section>
 
-			<!-- Service Mesh -->
-			<section>
-				<section id="whatservicemesh">
-						<h2>What is a service mesh?</h2>
-						
-						<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
-							<img data-src="/images/tech/k8s.png" style="width:10%"/>
-						</div>
-			
-						<div class="fragment fade-in">
-							<p class="mu-small">The term service mesh is used to describe the network of microservices that make up such applications and the interactions between them. As a service mesh grows in size and complexity, it can become harder to understand and manage. Its requirements can include discovery, load balancing, failure recovery, metrics, and monitoring. A service mesh also often has more complex operational requirements, like A/B testing, canary releases, rate limiting, access control, and end-to-end authentication.</p>
-						</div>
-				</section>
-				<section id="featuresservicemesh">
-						<h2>Features of Istio service mesh:</h2>
-						
-						<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
-							<img data-src="/images/tech/k8s.png" style="width:10%"/>
-						</div>
-			
-						<div class="fragment fade-in">
-							<ul>
-									<li>Traffic Management</li>
-									<li>Observability</li>
-									<li>Policy Enforcement</li>
-									<li>Service Identity and Security</li>
-							</ul>
-							<blockquote class="mu-small">
-								Decrease the coupling between application code, platform and policy. This makes services easier to imnplement and move between environments or to new policy schemes. <br/>Result = more portable applications.
-							</blockquote>			
-						</div>
-				</section>
-				<section id="servicemeshcomponents">
-						<h2>Service Mesh Components</h2>
-						
-						<div class="mu-flex mu-flex-middle mu-gutter mu-margin">
-							<img data-src="/images/tech/k8s.png" style="width:10%"/>
-						</div>
+      <!-- Service Mesh -->
+      <section>
+        <section id="whatservicemesh">
+            <h2>What is a service mesh?</h2>
+            
+            <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+              <img data-src="/images/tech/k8s.png" style="width:10%"/>
+            </div>
+      
+            <div class="fragment fade-in">
+              <p class="mu-small">The term service mesh is used to describe the network of microservices that make up such applications and the interactions between them. As a service mesh grows in size and complexity, it can become harder to understand and manage. Its requirements can include discovery, load balancing, failure recovery, metrics, and monitoring. A service mesh also often has more complex operational requirements, like A/B testing, canary releases, rate limiting, access control, and end-to-end authentication.</p>
+            </div>
+        </section>
+        <section id="featuresservicemesh">
+            <h2>Features of Istio service mesh:</h2>
+            
+            <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+              <img data-src="/images/tech/k8s.png" style="width:10%"/>
+            </div>
+      
+            <div class="fragment fade-in">
+              <ul>
+                  <li>Traffic Management</li>
+                  <li>Observability</li>
+                  <li>Policy Enforcement</li>
+                  <li>Service Identity and Security</li>
+              </ul>
+              <blockquote class="mu-small">
+                Decrease the coupling between application code, platform and policy. This makes services easier to imnplement and move between environments or to new policy schemes. <br/>Result = more portable applications.
+              </blockquote>      
+            </div>
+        </section>
+        <section id="servicemeshcomponents">
+            <h2>Service Mesh Components</h2>
+            
+            <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
+              <img data-src="/images/tech/k8s.png" style="width:10%"/>
+            </div>
 
-						<p class="mu-small mu-left">The information here will be specific to Istio, however, most of the service meshes are generally split into two pieces:</p>
-			
-						<div class="fragment fade-in">
-							<ul>
-								<li>Data Plane:
-									<ul>
-										<li class="mu-small">bunch of proxies (Envoy) deployed as sidecars (What is a sidecar?). Purpose of these proxies is to control all communication between services and the Mixer (policy & telemetry service)</li>
-									</ul>
-								</li>
-								<li>Control Plane:
-									<ul>
-										<li class="mu-small" >manages and configures data plane (proxies) to route traffic. It also confugres Mixers to enforce policies and collect telemtry.</li>
-									</ul>
-								</li>
-							</ul>	
-						</div>
-				</section>
-			</section>
+            <p class="mu-small mu-left">The information here will be specific to Istio, however, most of the service meshes are generally split into two pieces:</p>
+      
+            <div class="fragment fade-in">
+              <ul>
+                <li>Data Plane:
+                  <ul>
+                    <li class="mu-small">bunch of proxies (Envoy) deployed as sidecars (What is a sidecar?). Purpose of these proxies is to control all communication between services and the Mixer (policy & telemetry service)</li>
+                  </ul>
+                </li>
+                <li>Control Plane:
+                  <ul>
+                    <li class="mu-small" >manages and configures data plane (proxies) to route traffic. It also confugres Mixers to enforce policies and collect telemtry.</li>
+                  </ul>
+                </li>
+              </ul>  
+            </div>
+        </section>
+      </section>
 
 
-			<section>
-				...
-			</section>
+      <section>
+        ...
+      </section>
