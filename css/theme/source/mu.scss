@@ -476,6 +476,39 @@ a.title-print {
 	}
 }
 
+// play button
+
+$playSize: 	$heading2Size;
+$playTriangle: 1em * 2/3;
+
+.play-button {
+	height: $playSize;
+	width: $playSize;
+	line-height: $playSize;
+	margin: 0 auto;
+	box-sizing: border-box;
+	background: $o-color-black;
+	border: 2px solid $o-color-white;
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.25);
+	border-radius: 50%;
+	position: relative;
+
+	$playTriangleBorder: 1em / 2;
+	label {
+		position: absolute;
+		left: 33%; top: 50%;
+		transform: translateY(-50%);
+		cursor: pointer;
+		border: 0;
+		height: 0;
+		width: 0;
+		display: block;
+		border-style: solid;
+		border-width: 0.4em 0 0.4em 0.7em;
+		border-color: transparent transparent transparent $o-color-white;
+	}
+}
+
 // agenda
 
 table.agenda {
