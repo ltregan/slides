@@ -56,6 +56,12 @@
         { src: '/plugin/highlight/highlight.js', async: true }
       ]
     });
+
+    Reveal.addEventListener( 'slidechanged', function(event) {
+      const id = event.currentSlide.getAttribute('id') || '';
+      document.body.setAttribute('data-slide', id);
+      // event.previousSlide, event.currentSlide, event.indexh, event.indexv
+    });
   </script>
 </body>
 

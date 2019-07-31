@@ -470,6 +470,10 @@ a.title-print {
 		filter: drop-shadow(5px 5px 30px rgba(0,0,0,0.5));
 		opacity: 0.4;
 	}
+	// hide on teaser
+	[data-slide="teaser"] & {
+		visibility: hidden;
+	}
 }
 
 // agenda
