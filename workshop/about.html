@@ -3,7 +3,7 @@
   <!-- landing -->
   <section id="home">
     <h1>Cloud Native OCI</h1>
-    <h2>MuShop Overview</h2>
+    <h2>Overview</h2>
     include "partials/_titleSlide.html"
   </section>
 
@@ -12,5 +12,277 @@
 </section>
 
 <section>
+  <section id="what">
+    <h2>What is MuShop?</h2>
+    <div class="mu-small mu-margin">
+      <ul>
+        <li>An e-commerce reference app realized as a set of microservices developed on OCI</li>
+        <li>Demonstrates real use case scenarios for OKE, ATP, Streaming, Networking, and more</li>
+        <li>A collection of self-paced, workshop-style exercises showcasing OCI features</li>
+        <li>Developer focused, interactive, hands-on demonstrations</li>
+      </ul>
+    </div>
+
+    <div class="mu-flex mu-flex-center fragment">
+      <video controls data-autoplay class="col-2-3">
+        <source type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'
+          src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/59R0vVW-TvlmiTiINNbXZl_ggF-krQAx5vecmrEd-u0/n/intvravipati/b/demo-assets/o/mushopTeaser4.mp4" />
+      </video>
+    </div>
+  </section>
+
+  include "partials/_whymushop.html"
+</section>
+
+<section id="goals">
+  <h2>Goals</h2>
+  <ol>
+    <li class="fragment fade-up">
+      Test bed for early OCI Service incubation
+      <p class="mu-small no-margin">
+        For execution purpose, services are developed independently by OCI Engineering.
+        We put them together to ensure the parts fit as expected, and validate
+        the end-user experience
+      </p>
+    </li>
+    <li class="fragment fade-up">
+      Training tool on OCI Services
+      <ul class="mu-small">
+        <li>A-Team</li>
+        <li>Critical customers: hand-delivered; workshop can be customized.</li>
+        <li>Field & General public: 100% self-service content</li>
+      </ul>
+    </li>
+    <li class="fragment fade-up">
+      Launchpad for expedited time-to-market reference materials
+      <p class="mu-small no-margin">
+        Following the initial release, MuShop can be quickly adapted to
+        reflect changes in the platform, or showcase strategic OCI feature
+        releases
+      </p>
+    </li>
+    <li class="fragment fade-up">
+      Build credibility on Oracle’s support of micro-service Architecture
+    </li>
+  </ol>
+</section>
+
+<section id="process">
+  <h2>Process</h2>
   ...
+</section>
+
+<section>
+  <section id="services">
+    <h2>OCI Services</h2>
+    <div class="mu-flex mu-gutter">
+      <div class="col-1-2">
+        <h4>Complete</h4>
+        <table class="mu-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Topic</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>ATP</td>
+              <td>Database</td>
+              <td class="mu-center">✅</td>
+            </tr>
+            <tr>
+              <td>OKE</td>
+              <td>Developer</td>
+              <td class="mu-center">✅</td>
+            </tr>
+            <tr>
+              <td>OCIR</td>
+              <td>Developer</td>
+              <td class="mu-center">✅</td>
+            </tr>
+            <tr>
+              <td>DNS Zone</td>
+              <td>Core Networking</td>
+              <td class="mu-center">✅</td>
+            </tr>
+            <tr>
+              <td>Object Stoage</td>
+              <td>Core</td>
+              <td class="mu-center">✅</td>
+            </tr>
+            <tr>
+              <td>Streaming</td>
+              <td>Analytics</td>
+              <td class="mu-center">✅</td>
+            </tr>
+            <tr>
+              <td>Load Balancer</td>
+              <td>Networking</td>
+              <td class="mu-center">✅</td>
+            </tr>
+            <tr>
+              <td>WAF Policies</td>
+              <td>Security</td>
+              <td class="mu-center">✅</td>
+            </tr>
+            <tr>
+              <td>Health Checks</td>
+              <td>Monitoring</td>
+              <td class="mu-center">✅</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="col-1-2">
+        <h4>Planned</h4>
+        <table class="mu-table">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Topic</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Events</td>
+              <td>Application Integration</td>
+              <td class="mu-muted">ML image gallery</td>
+            </tr>
+            <tr>
+              <td>Functions</td>
+              <td>Developer</td>
+              <td class="mu-muted">ML image gallery</td>
+            </tr>
+            <tr>
+              <td>Email Delivery</td>
+              <td>Platform</td>
+              <td class="mu-muted">Newsletter</td>
+            </tr>
+            <tr>
+              <td>Service Metrics</td>
+              <td>Monitoring</td>
+              <td class="mu-muted">Load scenario</td>
+            </tr>
+            <tr>
+              <td>Alarms</td>
+              <td>Monitoring</td>
+              <td class="mu-muted">Load scenario</td>
+            </tr>
+            <tr>
+              <td>IDCS</td>
+              <td>Security</td>
+              <td class="mu-muted">OAuth2 / client</td>
+            </tr>
+            <tr>
+              <td>SDKs</td>
+              <td>Developer</td>
+              <td class="mu-muted">Administrative panel</td>
+            </tr>
+          </thead>
+        </table>
+      </div>
+    </div>
+  </section>
+  
+  include "partials/_diagram.html"
+</section>
+
+<section id="outcomes">
+  <h2>Usage &amp; Outcomes</h2>
+  <div class="mu-small">
+    <div class="mu-small mu-margin">
+      <table>
+        <thead>
+          <tr>
+            <th>Outcome/Consumer</th>
+            <th><!--link--></th>
+            <th>Detail</th>
+            <th>Contact</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Internal Contribution Model</td>
+            <td><a href="https://confluence.oci.oraclecorp.com/display/ATEAM/MuShop+Contribution+Model" target="_blank">🔗</a></td>
+            <td>Defines a process for ongoing enhancement aligning with OCI Native service development</td>
+            <td>A-Team</td>
+          </tr>
+          <tr>
+            <td>Oracle Solutions Portal</td>
+            <td><a href="https://docs.oracle.com/en/solutions/solutions.html" target="_blank">🔗</a></td>
+            <td>Managed set of Design, Develop, Integrate, and Operate user acceptance documents</td>
+            <td>Don Biasotti</td>
+          </tr>
+          <tr>
+            <td>Oracle Cloud Native Labs</td>
+            <td><a href="https://cloudnative.oracle.com/learn.html" target="_blank">🔗</a></td>
+            <td>Cloud Native content portal for OCI</td>
+            <td>Karthik Gaekwad</td>
+          </tr>
+          <tr>
+            <td>Sales Field Enablement</td>
+            <td></td>
+            <td>Create production ready, repeatable, end-to-end solutions for all autonomous sales plays</td>
+            <td>Souji Madhurapantula</td>
+          </tr>
+          <tr>
+            <td>EMEA Cloud Pursuit</td>
+            <td></td>
+            <td>Proposed 2-day outbound technical enablement session</td>
+            <td>Andrea Morena</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    
+
+    <div class="testimonials fragment">
+      <p>⭐ Testimonials</p>
+      <hr>
+      <blockquote class="fragment fade-up">
+        <q>Kudos to the entire team creating the reference app. it was needed!</q>
+        <span>~ Jeet J.</span>
+      </blockquote>
+      <blockquote class="fragment fade-up">
+        <q>There is definitely the need for an enablement session on Cloud Native ... your content is absolutely perfect for that purpose!</q>
+        <span>~ Andrea M.</span>
+      </blockquote>
+      <blockquote class="fragment fade-up">
+        <q>I am very excited about the work done by [A-Team] around the ATP use cases. There is a lot of existing material that we can use.</q>
+        <span>~ Souji M.</span>
+      </blockquote>
+    </div>
+  </div>
+</section>
+
+<section>
+  <h2>Moving Forward</h2>
+  <ul>
+    <li>Broadcast learnings to field</li>
+    <li>Reuse the model for a suite of references</li>
+    <li>Evangelize to developer community (open source)</li>
+    <li>Improve time to market samples (process)</li>
+    <li>...</li>
+  </ul>
+</section>
+
+<section>
+  <section id="highlights">
+    <h2>Highlights 😎</h2>
+    <p class="mu-small">
+      Shown below is a preview of several highlights from the hands-on 
+      workshops, showcasing the richness of MuShop materials
+    </p>
+    <h3>Thank you!</h3>
+  </section>
+include "partials/highlights/_runlocal.html"
+include "partials/highlights/_okeingress.html"
+include "partials/highlights/_testshipping.html"
+include "partials/highlights/_provisionatp.html"
+include "partials/highlights/_deployosb.html"
+include "partials/highlights/_wafdemo.html"
 </section>

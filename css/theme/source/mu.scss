@@ -79,8 +79,8 @@ section.has-dark-background {
 	@include radial-gradient( rgb(197, 197, 197), rgba(255,255,255,1), 25% );
 }
 
-@mixin divider() {
-	background: linear-gradient(to right, $o-color-grey-alpha, $o-color-grey, $o-color-grey-alpha);
+@mixin divider($gradient: linear-gradient(to right, $o-color-grey-alpha, $o-color-grey, $o-color-grey-alpha)) {
+	background: $gradient;
 	height: 1px;
 	border: none;
 }
@@ -511,9 +511,49 @@ $playTriangle: 1em * 2/3;
 
 // agenda
 
-table.agenda {
+table.mu-table {
 	font-size: 0.5em;
 	td {
 		white-space: nowrap;
+	}
+}
+
+.testimonials {
+	text-align: left;
+	border-left: 5px solid $o-color-orange;
+	padding-left: 1em;
+	blockquote {
+		display: block;
+		margin: 0 0 $blockMargin auto;
+		box-shadow: none;
+		max-width: 70%;
+		font-size: 0.9em;
+		&:nth-child(even) {
+			margin: 0 auto $blockMargin 0;
+		}
+		&:after {
+			// background: linear-gradient(to right, $o-color-grey-alpha, $o-color-grey, $o-color-grey-alpha);
+			content: '';
+			display: block;
+			margin-top: 2px;
+			@include divider(linear-gradient(to right, $o-color-grey-alpha, rgba($o-color-orange, 0.2)));
+		}
+		q {
+			quotes: "“" "”" "‘" "’";
+			&:before {
+				content: open-quote;
+				font-size: 1.5em;
+				opacity: 0.5;
+			}
+			&:after {
+				content: close-quote;
+				font-size: 1.5em;
+				opacity: 0.5;
+			}
+		}
+		span {
+			display: block;
+			text-align: right;
+		}
 	}
 }

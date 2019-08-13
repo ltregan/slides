@@ -348,26 +348,7 @@ final String region = env.getProperty("OCI_REGION");</code></pre>
           </p> 
           <pre><code class="hljs text">kubectl logs -f pod_name</code></pre>
         </section>
-        <section>
-          <h2>Send message to shipping</h2>
-          <div class="mu-sequence mu-medium">
-            <p class="mu-small">Expose the shipping service</p>
-            <pre><code class="hljs text">kubectl port-forward svc/shipping 8000:80</code></pre>
-            <p class="mu-small">Open another terminal and run the following command which sends a test message to the shipping microservice running as a pod in your local Kubernetes cluster.</p>
-            <pre><code class="hljs curl">curl -X POST \
-http://localhost:8000/shipping \
--H 'Content-Type: application/json' \
--H 'cache-control: no-cache' \
--d '{ 
-  "id": "123-45-8876",
-  "name": "shipment 500" 
-}'</code></pre>
-            <p class="mu-small">
-              Look at the terminal windows and observe messages being created in the shipping and consumed in the stream. 
-              You should also look at the OCI console. Refresh the table and watch your message being published to the stream.
-            </p>
-          </div>
-        </section>
+include "partials/highlights/_testshipping.html"
         <section>
             <p class="mu-small mu-left">
               Click <a href="https://console.us-phoenix-1.oraclecloud.com/?tenant=intvravipati" target="_blank">here</a> to access the OCI console.

@@ -93,85 +93,7 @@
         <!-- <pre class="fragment"><code class="hljs text">oci dns zone list</code></pre> -->
       </section>
 
-      <section>
-        <section id="k8s-ingress">
-          <h2>OKE Ingress</h2>
-          
-           <div class="mu-flex mu-flex-middle mu-gutter mu-margin">
-            <img data-src="/images/tech/k8s.png" style="width:10%"/>
-            <blockquote class="mu-small">
-              Ingress exposes HTTP and HTTPS routes from outside the cluster to
-              services within the cluster. Traffic routing is controlled by rules
-              on the <b>Ingress</b> resource
-            </blockquote>
-          </div>
-
-          <div class="mu-flex mu-flex-middle">
-            <div class="mu-svc">
-              <img data-src="/images/tech/lb.svg" /> LB
-            </div>
-            <div class="mu-flex-connector arrow"></div>
-            <div class="mu-svc">
-              <img data-src="/images/tech/vcn.svg" /> VCN
-            </div>
-            <div class="mu-flex-connector arrow"></div>
-            <div class="mu-svc">
-              <img data-src="/images/tech/k8s.icon.png" /> OKE
-            </div>
-          </div>
-
-          <div class="fragment-set">
-            <div class="fragment fade-out">
-              <p>Explore how this works...</p>
-            </div>
-            <div class="fragment">
-              <p>First an ingress controller is installed</p>
-              <pre><code class="hljs text">helm install \
---name nginx-ingress \
---namespace nginx-ingress \
-stable/nginx-ingress</code></pre>
-              <pre><code class="hljs text">kubectl get svc -n nginx-ingress</code></pre>
-              <pre><code class="hljs text">NAME                       TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
-nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:32491/TCP,443:31240/TCP   5m</code></pre>
-              <p class="mu-small">An <b><code>EXTERNAL-IP</code></b> is assigned after a few seconds</p>
-            </div>
-            <div class="fragment">
-              <p>Next verify the load balancer in OCI</p>
-              <pre><code class="hljs text">oci lb load-balancer list \
-| jq '.data[] | {id: .id, name: .["display-name"], ipAddr: .["ip-addresses"][]["ip-address"]}'</code></pre>
-              <pre><code>{
-  "id": "ocid1.loadbalancer.oc1.phx.aaaaaaaaucgamttt3piveonxw5d6ssirzxprcbrcv7vf6tgswna7qxdnvnfa",
-  "name": "097f5359-9165-11e9-bfe8-0a580aed21e9",
-  "ipAddr": "129.146.192.154"
-}</code></pre>
-              <p class="mu-small">Notice 👀 <b><code>ipAddr</code></b> matches <b><code>EXTERNAL-IP</code></b> assigned to the controller 🤘</p>
-            </div>
-            <div class="fragment mu-ratio mu-ratio-2-1">
-              <div>
-                <p class="no-margin">
-                  Then deploy ingress on the cluster
-                </p>
-                <pre class="mu-xsmall"><code class="hljs text">kubectl apply -f deploy/kubernetes/ingress/mushop-dev.yaml</code></pre>
-                <pre class="mu-xsmall"><code class="hljs yaml">apiVersion: extensions/v1beta1
-kind: Ingress
-metadata:
-  name: mushop-dev
-  annotations:
-    kubernetes.io/ingress.class: nginx
-spec:
-  rules:
-  - http:
-      paths:
-      - path: /
-        backend:
-          serviceName: edge
-          servicePort: 80</code></pre>
-                <pre class="mu-xsmall"><code class="hljs text">kubectl get ingress mushop-dev</code></pre>
-              </div>
-            </div>
-          </div>
-        </section>
-      </section>
+include "partials/highlights/_okeingress.html"
 
       <!-- WAF -->
       <section>
@@ -262,30 +184,7 @@ spec:
       </section>
       
       <section>
-        <section id="waf-demo">
-          <h2>WAF Demo</h2>
-          <div class="mu-flex mu-flex-middle">
-            <div class="mu-svc">
-              <span class="mu-svc-icon">👿</span>
-            </div>
-            <div class="mu-flex-connector arrow">attacker</div>
-            <div class="mu-svc">
-              <img data-src="/images/tech/dns.svg" /> DNS
-            </div>
-            <div class="mu-flex-connector arrow">CNAME</div>
-            <div class="mu-svc">
-              <img data-src="/images/tech/waf.svg" /> WAF
-            </div>
-            <div class="mu-flex-connector arrow">403</div>
-            <div class="mu-svc">
-              <span class="mu-svc-icon">🚫</span>
-            </div>
-          </div>
-
-          <a href="https://mushop.ateam.cloud" target="_blank">
-            <img data-src="/images/logo.png" />
-          </a>
-        </section>
+        include "partials/highlights/_wafdemo.html"
 
         <section id="waf-verify">
           <h2>Verify WAF Edge</h2>
