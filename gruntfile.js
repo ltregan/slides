@@ -72,7 +72,7 @@ module.exports = grunt => {
 				wrapper: '_wrapper.html'
 			},
 			files: {
-				src: ['*.html', 'workshop/**/*.html', '!**/_*.html'],
+				src: ['*.html', 'workshop/**/*.html', 'internal/**/*.html', '!**/_*.html'],
 				dest: 'build',
 				flatten: false,
 				cwd: '.',

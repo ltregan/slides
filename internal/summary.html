@@ -3,12 +3,12 @@
   <!-- landing -->
   <section id="home">
     <h1>Cloud Native OCI</h1>
-    <h2>Overview</h2>
-    include "partials/_titleSlide.html"
+    <h2>Summary</h2>
+    include "../workshop/partials/_titleSlide.html"
   </section>
 
   <!-- Contributors -->
-  include "partials/_contributors.html"
+  include "../workshop/partials/_contributors.html"
 </section>
 
 <section>
@@ -63,41 +63,68 @@
     </div>
   </section>
 
-  include "partials/_whymushop.html"
 </section>
 
-<section id="goals">
-  <h2>Goals</h2>
-  <ol>
-    <li class="fragment fade-up">
-      Test bed for early OCI Service incubation
-      <p class="mu-small no-margin">
-        For execution purpose, services are developed independently by OCI Engineering.
-        We put them together to ensure the parts fit as expected, and validate
-        the end-user experience
-      </p>
-    </li>
-    <li class="fragment fade-up">
-      Training tool on OCI Services
-      <ul class="mu-small">
-        <li>A-Team</li>
-        <li>Critical customers: hand-delivered; workshop can be customized.</li>
-        <li>Field & General public: 100% self-service content</li>
-      </ul>
-    </li>
-    <li class="fragment fade-up">
-      Launchpad for expedited time-to-market reference materials
-      <p class="mu-small no-margin">
-        Following the initial release, MuShop can be quickly adapted to
-        reflect changes in the platform, or showcase strategic OCI feature
-        releases
-      </p>
-    </li>
-    <li class="fragment fade-up">
-      Build credibility on Oracle’s support of micro-service Architecture
-    </li>
-  </ol>
+<section>
+  <section id="goals">
+    <h2>Goals</h2>
+    <div class="mu-flex mu-wrap mu-flex-stretch mu-gutter mu-small mu-left">
+      <div class="card col-1-2">
+        Test bed for early OCI Service incubation
+        <ul class="mu-small">
+          <li>OCI Services are developed independently by OCI Engineering</li>
+          <li>Assemble a comprehensive use case</li>
+          <li>Validate end-user experience</li>
+        </ul>
+      </div>
+      <div class="card col-1-2">
+        Training tool on OCI Services
+        <ul class="mu-small">
+          <li>A-Team</li>
+          <li>Critical customers: hand-delivered; workshop can be customized</li>
+          <li>Field: Sales/Pre-Sales, Consulting, and Customer enablement</li>
+          <li>Public: Customers and Oracle developer community</li>
+        </ul>
+      </div>
+      <div class="card col-1-2">
+        Launchpad for time-to-market reference materials
+        <ul class="mu-small">
+          <li>
+            MuShop can be quickly adapted to reflect changes in the platform,
+            or showcase strategic OCI feature releases
+          </li>
+          <li>Establish familiar and easily deployable applications/example suite to get started</li>
+        </ul>
+      </div>
+      <div class="card col-1-2">
+        <!-- Present OCI as a viable option for Cloud Native workloads -->
+        Showcase OCI for Cloud Native workloads
+        <ul class="mu-small">
+          <li>Position Oracle within the <strong>enterprise</strong> cloud market</li>
+          <li>Modernized approach to enterprise application development</li>
+          <li>Choose <span class="fg-red">Oracle</span> <span class="mu-muted">over</span> AWS, Google, Azure, IBM</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  include "../workshop/partials/_whymushop.html"
 </section>
+
+<!-- <section id="process">
+  <h2>Process</h2>
+  <div class="mu-flex mu-flex-middle mu-small">
+    <div class="card fragment">Present MuShop</div>
+    <div class="mu-flex-connector arrow fragment"></div>
+    <div class="card fragment">Propose Service(s)</div>
+    <div class="mu-flex-connector arrow fragment"></div>
+    <div class="card fragment">Plan Feature</div>
+    <div class="mu-flex-connector arrow fragment"></div>
+    <div class="card fragment">Implement Code</div>
+    <div class="mu-flex-connector arrow fragment"></div>
+    <div class="card fragment">Create Workshop</div>
+  </div>
+</section> -->
 
 <section>
   <section id="services">
@@ -175,7 +202,7 @@
             <tr>
               <th>Service</th>
               <th>Topic</th>
-              <th>Status</th>
+              <th>Solution</th>
             </tr>
           </thead>
           <tbody>
@@ -230,7 +257,7 @@
     </div>
   </section>
   
-  include "partials/_diagram.html"
+  include "../workshop/partials/_diagram.html"
 </section>
 
 <section id="outcomes">
@@ -243,7 +270,6 @@
             <th>Outcome/Consumer</th>
             <th><!--link--></th>
             <th>Detail</th>
-            <th>Contact</th>
           </tr>
         </thead>
         <tbody>
@@ -251,31 +277,26 @@
             <td>Internal Contribution Model</td>
             <td><a href="https://confluence.oci.oraclecorp.com/display/ATEAM/MuShop+Contribution+Model" target="_blank">🔗</a></td>
             <td>Defines a process for ongoing enhancement aligning with OCI Native service development</td>
-            <td>A-Team</td>
           </tr>
           <tr>
             <td>Oracle Solutions Portal</td>
             <td><a href="https://docs.oracle.com/en/solutions/solutions.html" target="_blank">🔗</a></td>
             <td>Managed set of Design, Develop, Integrate, and Operate user acceptance documents</td>
-            <td>Don Biasotti</td>
           </tr>
           <tr>
             <td>Oracle Cloud Native Labs</td>
             <td><a href="https://cloudnative.oracle.com/learn.html" target="_blank">🔗</a></td>
             <td>Cloud Native content portal for OCI</td>
-            <td>Karthik Gaekwad</td>
           </tr>
           <tr>
             <td>Sales Field Enablement</td>
             <td></td>
             <td>Create production ready, repeatable, end-to-end solutions for all autonomous sales plays</td>
-            <td>Souji Madhurapantula</td>
           </tr>
           <tr>
             <td>EMEA Cloud Pursuit</td>
             <td></td>
             <td>Proposed 2-day outbound technical enablement session</td>
-            <td>Andrea Morena</td>
           </tr>
         </tbody>
       </table>
@@ -286,7 +307,7 @@
       <p>⭐ Testimonials</p>
       <hr>
       <blockquote class="fragment fade-up">
-        <q>Kudos to the entire team creating the reference app. it was needed!</q>
+        <q>Kudos to the entire team creating the reference app. It was needed!</q>
         <span>~ Jeet J.</span>
       </blockquote>
       <blockquote class="fragment fade-up">
@@ -307,8 +328,7 @@
     <li>Broadcast learnings to field</li>
     <li>Reuse the model for a suite of references</li>
     <li>Evangelize to developer community (open source)</li>
-    <li>Improve time to market samples (process)</li>
-    <li>...</li>
+    <li>Improve time-to-market samples (process)</li>
   </ul>
 </section>
 
@@ -320,12 +340,12 @@
       workshops, showcasing the richness of MuShop materials
     </p>
   </section>
-include "partials/highlights/_runlocal.html"
-include "partials/highlights/_ordersoverview.html"
-include "partials/highlights/_okeingress.html"
-include "partials/highlights/_testshipping.html"
-include "partials/highlights/_deployosb.html"
-include "partials/highlights/_wafaccess.html"
+include "../workshop/partials/highlights/_runlocal.html"
+include "../workshop/partials/highlights/_ordersoverview.html"
+include "../workshop/partials/highlights/_okeingress.html"
+include "../workshop/partials/highlights/_testshipping.html"
+include "../workshop/partials/highlights/_deployosb.html"
+include "../workshop/partials/highlights/_wafaccess.html"
 </section>
 
 <section>
