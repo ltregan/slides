@@ -144,6 +144,9 @@ a {
 .mu-margin {
 	margin-bottom: $blockMargin;
 }
+.mu-margin-top {
+	margin-top: $blockMargin;
+}
 
 .no-margin {
 	.reveal section & {
@@ -313,6 +316,7 @@ a.title-print {
 		margin-left: -$blockMargin !important;
 		> * {
 			margin-left: $blockMargin;
+			margin-bottom: $blockMargin;
 			&.col-1-1 {
 				width: calc(#{percentage(1)} - #{$blockMargin});
 			}
