@@ -1,12 +1,12 @@
 <section id="start">
   <h2>Run <img data-src="/images/logo.png" alt="MuShop" /></h2>
   <div class="mu-sequence">
-    Deploy in local K8S cluster
+    Deploy in local Kubernetes cluster
     <pre class="fragment"><code class="hljs text">kubectl apply -f deploy/kubernetes/mushop.yaml</code></pre>
     <pre class="fragment"><code class="hljs text">kubectl get pod --watch</code></pre>
     <pre class="fragment"><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
     <div class="fragment">
-      Open Browser <span class="mu-muted">(Chrome)</span>: <a href="http://localhost:8000" target="_blank">localhost:8000</a>
+      Open Browser: <a href="http://localhost:8000" target="_blank">localhost:8000</a>
     </div>
   </div>
 </section>
