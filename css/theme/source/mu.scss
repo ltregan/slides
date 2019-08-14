@@ -273,7 +273,11 @@ a.title-print {
 // FLEX
 
 .mu-flex {
-	display: flex;
+	display: flex !important;
+	// wrap
+	&.mu-wrap {
+		flex-wrap: wrap;
+	}
 	// horizontal
 	&.mu-flex-left {
 		justify-content: flex-start;
@@ -306,34 +310,46 @@ a.title-print {
 
 	// gutter
 	&.mu-gutter {
+		margin-left: -$blockMargin !important;
 		> * {
 			margin-left: $blockMargin;
-			&:last-child {
-				margin-right: $blockMargin;
+			&.col-1-1 {
+				width: calc(#{percentage(1)} - #{$blockMargin});
+			}
+			&.col-1-2 {
+				width: calc(#{percentage(1/2)} - #{$blockMargin});
+			}
+			&.col-1-3 {
+				width: calc(#{percentage(1/3)} - #{$blockMargin});
+			}
+			&.col-2-3 {
+				width: calc(#{percentage(2/3)} - #{$blockMargin});
+			}
+			&.col-1-4 {
+				width: calc(#{percentage(1/4)} - #{$blockMargin});
+			}
+			&.col-3-4 {
+				width: calc(#{percentage(3/4)} - #{$blockMargin});
 			}
 		}
 	}
 
-	// elements
-	.col-1-1 {
-		width: percentage(1);
-	}
-	.col-1-2 {
-		width: percentage(1/2);
-	}
-	.col-1-3 {
-		width: percentage(1/3);
-	}
-	.col-2-3 {
-		width: percentage(2/3);
-	}
-	.col-1-4 {
-		width: percentage(1/4);
-	}
-	.col-3-4 {
-		width: percentage(3/4);
+	[class*="col-"] {
+		img, video {
+			max-height: none;
+			max-width: 100%;
+		}
 	}
 
+	.card {
+		@include shadow();
+		border: 1px solid $o-color-light-alpha;
+		border-radius: 5px;
+		box-sizing: border-box;
+		padding: $blockMargin;
+		margin-bottom: $blockMargin;
+		list-style: none;
+	}
 
 	$connectorSize: 4px;
 	$connectorArrowSize: 10px;
@@ -363,6 +379,26 @@ a.title-print {
 	}
 }
 
+// width elements
+.col-1-1 {
+	width: percentage(1);
+}
+.col-1-2 {
+	width: percentage(1/2);
+}
+.col-1-3 {
+	width: percentage(1/3);
+}
+.col-2-3 {
+	width: percentage(2/3);
+}
+.col-1-4 {
+	width: percentage(1/4);
+}
+.col-3-4 {
+	width: percentage(3/4);
+}
+
 // Overflow
 .mu-overflow {
 	overflow: auto;
@@ -370,6 +406,19 @@ a.title-print {
 	> img {
 		max-height: none !important;
 		margin: 0 !important;
+	}
+}
+
+.mu-overlay {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	@include shadow();
+	background: $o-color-white;
+	img, video {
+		max-width: 100%;
+		max-height: none;
 	}
 }
 
