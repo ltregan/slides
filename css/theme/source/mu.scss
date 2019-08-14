@@ -89,6 +89,14 @@ section.has-dark-background {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
 
+@mixin fg($color: $o-color-red) {
+	color: $color;
+}
+
+@mixin bg($color: $o-color-red) {
+	background-color: $color;
+}
+
 // Theme template ------------------------------
 @import "../template/theme";
 // ---------------------------------------------
@@ -197,20 +205,18 @@ section > h2 > img {
 	font-style: normal !important;
 	font-weight: inherit !important;
 }
-
-.mu-danger {
-	color: $o-color-red;
+.bg-black {
+	@include bg($o-color-black);
 }
-.mu-warning {
-	color: $o-color-orange;
+.mu-danger, .fg-red {
+	@include fg($o-color-red);
+}
+.mu-warning, .fg-orange {
+	@include fg($o-color-orange);
 }
 .mu-muted {
 	opacity: 0.5;
 }
-.no-wrap {
-	white-space: nowrap;
-}
-
 .mu-grayscale {
 	filter: grayscale(100%) opacity(50%);
 }
@@ -252,6 +258,10 @@ section > h2 > img {
 		list-style: none;
 		margin: $blockMargin 0;
 	}
+}
+
+.no-wrap {
+	white-space: nowrap;
 }
 
 // Print
