@@ -1,0 +1,69 @@
+<section id="DeployingOCIServiceBroker" data-background-image="/images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
+  <h2>Deploying OCI Service Broker</h2>
+  <div class="fragment-set">
+    <div class="fragment fade-in">
+      <div class="mu-sequence">
+        <p class="mu-small mu-left">The OCI Service Broker for Kubernetes needs OCI user credentials to provision and manage services and resources
+          in the user tenancy. <br/>
+          You can reuse previous created OCI credentials or create a separate one just for the service broker:</p>
+        <pre><code class="hljs text">kubectl create secret generic ocicredentials \
+  --from-literal=tenancy=(CUSTOMER_TENANCY_OCID) \
+  --from-literal=user=(USER_OCID) \
+  --from-literal=fingerprint=(USER_PUBLIC_API_KEY_FINGERPRINT) \
+  --from-literal=region=(USER_OCI_REGION) \
+  --from-literal=passphrase=(PASSPHRASE_STRING) \
+  --from-file=privatekey=(PATH_OF_USER_PRIVATE_API_KEY)</code></pre>
+        <a href="/downloads/k8s/ocicredentials-secret.yaml">K8S Secret for ocicredentials (Dev)</a>
+        <blockquote class="mu-small">
+          🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
+        </blockquote>
+      </div>
+    </div>
+    <div class="fragment fade-in">
+      <div class="mu-sequence">
+        <p class="mu-small">This command will deploy the OCI service broker on your cluster. Note that is using the secret ocicredentials.</p>
+        <pre><code class="hljs text">helm install https://github.com/oracle/oci-service-broker/releases/download/v1.2.0/oci-service-broker-1.2.0.tgz  --name oci-service-broker \
+  --set ociCredentials.secretName=ocicredentials \
+  --set storage.etcd.useEmbedded=true \
+  --set tls.enabled=false \
+  --namespace mushop</code></pre>
+        <blockquote class="mu-xsmall">
+          Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
+          It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in production environments,
+          instead a separate etcd cluster should be setup and used by the OCI Sevice Broker. <br/>
+          The open source etcd operator project or a commercial offering may be used to setup a production quality etcd cluster.
+          The recommended setup can be found <a href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup" target="_blank">here</a>
+        </blockquote>
+      </div>
+    </div>
+    <div class="fragment fade-in">
+      <div class="mu-sequence">
+        <p class="mu-medium">Register OCI Service Broker</p>
+        <pre><code class="hljs text">kubectl create -f oci-service-broker.yaml</code></pre>
+        <pre class="mu-xsmall"><code class="hljs yaml">apiVersion: servicecatalog.k8s.io/v1beta1
+kind: ClusterServiceBroker
+metadata:
+  name: oci-service-broker
+spec:
+  url: http://oci-service-broker.mushop:8080</code></pre>
+      </div>
+    </div>
+    <div class="fragment fade-in">
+      <div class="mu-sequence">
+        <p class="mu-medium">Verify that the Service Broker is available and ready...</p>
+        <pre><code class="hljs text">kubectl get clusterservicebrokers -o 'custom-columns=BROKER:.metadata.name,STATUS:.status.conditions[0].reason'</code></pre>
+        <pre><code class="hljs text">BROKER              STATUS
+oci-service-broker  FetchedCatalog
+        </code></pre>
+      </div>
+    </div>
+    <div class="fragment fade-in">
+      <div class="mu-sequence">
+        <p class="mu-medium">Using the svcat cli to see the status, service and plans available...</p>
+        <pre><code class="hljs text">svcat get brokers</code></pre>
+        <pre><code class="hljs text">svcat get classes</code></pre>
+        <pre><code class="hljs text">svcat get plans</code></pre>
+      </div>
+    </div>
+  </div>
+</section>

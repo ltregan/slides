@@ -31,35 +31,10 @@
         </ul>
       </section>
 
-      <section id="orderintro">
-        <section>
-          <h2>Orders</h2>
-          <p class="mu-small mu-left">
-            Orders is a Java micro service built using
-            <a href="https://spring.io/projects/spring-boot">Spring Boot</a>, and
-            uses Oracle Autonomous Transaction Processing (ATP) as its data store.
-          </p>
-          <p class="mu-small mu-left">
-            The services are exposed over HTTP, and when deployed over Kubernetes,
-            can be scaled horizontally while other services discover and interact
-            with this micro service over it's Service abstraction.
-          </p>
-        </section>
+      <section >
+        include "partials/highlights/_ordersoverview.html"
 
-        <section>
-          <h2>Step 1 - Provision ATP</h2>
-          <p class="mu-small">
-            Create your Oracle ATP Database instance, using the steps below.
-            <a target="_blank"
-              href="https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/tutorial-getting-started-autonomous-db/">Read
-              More...</a>
-          </p>
-          <video width="640" height="440" controls>
-            <source
-              src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/2yE4roHC3N2-CdVgx0wSWzLafj0-2bpcE1E3ff41zBs/n/intvravipati/b/demo-assets/o/dem-ord-create_atp.mp4"
-              type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-          </video>
-        </section>
+        include "partials/highlights/_provisionatp.html"
 
         <section data-markdown>
           <script type="text/template">

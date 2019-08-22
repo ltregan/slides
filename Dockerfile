@@ -38,6 +38,7 @@ FROM nginx:alpine as web
 
 COPY nginx/nginx.conf /etc/nginx/nginx.conf
 COPY nginx/.htpasswd /etc/nginx/.htpasswd
+COPY nginx/.internal.htpasswd /etc/nginx/.internal.htpasswd
 COPY nginx/default.conf /etc/nginx/conf.d/default.conf
 COPY --from=builder /usr/src/app/build /usr/share/nginx/html
 
