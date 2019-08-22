@@ -1,4 +1,3 @@
-
 <!-- title -->
 <section id="home">
   <h1>Cloud Native OCI</h1>
@@ -14,7 +13,7 @@
       The following applications are required for the workshop.
       Please 🙏 ensure access and/or installation ahead of time
     </p>
-    <hr/>
+    <hr />
     <div class="mu-flex mu-gutter">
       <div class="col-1-2">Required</div>
       <div class="col-1-2">Optional</div>
@@ -23,39 +22,43 @@
       <div class="col-1-2">
         <!-- required -->
         <ul class="justified">
-          <li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" target="_blank">OCI Tenancy Access<sup>1</sup></a></li>
+          <li><a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" target="_blank">OCI Tenancy
+              Access<sup>1</sup></a></li>
           <li>
             <a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop</a>
-            <div class="mu-small">(Includes local K8s and kubectl)</div>
+            <div class="mu-small">(Includes local Kubernetes and kubectl)</div>
           </li>
           <li>
-            <a href="https://github.com/helm/helm" target="_blank">Helm</a> -  
+            <a href="https://github.com/helm/helm" target="_blank">Helm</a> -
             <a href="#helm">quick install</a>
-            <div class="mu-small">(K8s Package Manager)</div>
+            <div class="mu-small">(Kubernetes Package Manager)</div>
           </li>
-          <li><a href="https://www.oracle.com/technetwork/developer-tools/sql-developer/downloads/index.html" target="_blank">Oracle SQL Developer</a></li>
         </ul>
       </div>
       <div class="col-1-2">
         <!-- optional -->
         <ul class="justified">
-          <li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a></li>
+          <li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI
+              Command Line<sup>2</sup></a>
+          </li>
           <li>
             <a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat</a>
-            <div class="mu-small">(K8s Service Catalog CLI)</div>
+            <div class="mu-small">(Kubernetes Service Catalog CLI)</div>
           </li>
           <li><a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor</a></li>
         </ul>
       </div>
     </div>
     <blockquote class="mu-small mu-left">
-      <sup>1</sup>Tenancy access may be provided, or you may use an existing tenancy
+      <sup>1</sup>Tenancy access may be provided, or you may use an existing tenancy<br />
+      <sup>2</sup>Required if using an OKE cluster
     </blockquote>
   </div>
 </section>
 
 <!-- K8S Setup -->
-<section id="k8s" data-background-image="/images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
+<section id="k8s" data-background-image="/images/tech/k8s.png" data-background-size="100px"
+  data-background-position="20px 20px">
   <h2>Prepare Local K8s</h2>
 
   <div class="fragment-set">
@@ -65,7 +68,7 @@
         In order to run commands in a local cluster, please follow these
         instructions to setup your environment.
       </p>
-      <hr/>
+      <hr />
     </div>
     <div class="fragment fade-in">
       <p>Enable Kubernetes (Mac)</p>
@@ -91,7 +94,8 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
       <small>
         <blockquote>
           <b>NOTE:</b> There are several options for ingress controllers in K8S. This demo
-          uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites" target="_blank">ingress-nginx</a>
+          uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites"
+            target="_blank">ingress-nginx</a>
         </blockquote>
         <p>
           ☝️ More on this later...
@@ -101,38 +105,58 @@ kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/mast
   </div>
 </section>
 
-<section id="k8s-context">
-  <h2>Prepare K8S Context</h2>
-  <p class="mu-small">
-    With <code>kubectl</code> it is necessary to change context at times, and we will
-    do so during this workshop. Specifically, you will need to use <code>kubectl</code>
-    on your local cluster, as well as the OKE cluster. Follow these steps to establish
-    an OKE connection
-  </p>
-  <div class="mu-sequence mu-medium">
-    <div class="fragment">
-      Download <a href="/downloads/k8s/kubeconfig.yaml"><code>kubeconfig.yaml</code></a>
+<section id="k8s" data-background-image="/images/tech/k8s.png" data-background-size="100px"
+  data-background-position="20px 20px">
+  <h2>Prepare OKE Cluster</h2>
+
+  <div class="fragment-set">
+    <div class="fragment fade-out">
+      <p class="mu-medium">
+        In addition to local Kubernetes cluster, you can also create and use an OKE cluster. Please follow these
+        instructions to set up an OKE cluster.
+      </p>
+      <hr />
     </div>
-    <div class="fragment">
-      <blockquote class="mu-small">
-        <b>⚠️ NOTE:</b> Path to Downloads/kubeconfig.yaml and change as necessary
-      </blockquote>
-      Merge kubectl context with the downloaded configuration
-      <pre><code class="hljs sh"># create backup
-cp $HOME/.kube/config $HOME/.kube/config.bak
-# merge configuration
-KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml kubectl config view --flatten >> $HOME/.kube/config</code></pre>
+    <div class="fragment fade-in mu-flex mu-gutter">
+      <div><img class="plain" width="100%" data-src="/images/k8s/console1.png"
+          alt="Console - Developer Services - Container Clusters" /></div>
+      <div><img class="plain" width="100%" data-src="/images/k8s/console2.png" alt="Console - Cluster List" /></div>
     </div>
-    <div class="fragment">
-      Verify the workshop named context
-      <pre><code class="hljs text">kubectl config get-contexts</code></pre>
-      <pre><code class="hljs text">CURRENT   NAME                 CLUSTER                      AUTHINFO             NAMESPACE
-*         docker-for-desktop   docker-for-desktop-cluster   docker-for-desktop   mushop
-          mushop-workshop      cluster-czgezlcgrsg          user-czgezlcgrsg     </code></pre>
+    <div class="fragment fade-in mu-flex mu-gutter">
+      <img class="plain" data-src="/images/k8s/create_simple_oke1.png" alt="Console - Cluster Creation" />
+    </div>
+    <div class="fragment fade-in mu-overflow">
+      <img class="plain" data-src="/images/k8s/create_simple_oke2.png" alt="Console - Cluster Node Pool Creation" />
     </div>
   </div>
 </section>
 
+<section>
+  <h2>How to manage an OKE Cluster</h2>
+  <ul>
+    <li class="mu-small fragment">Kubectl - Command Line Tool</li>
+  </ul>
+  <div class="mu-flex mu-gutter">
+    <div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig1.png"
+        alt="Console - Cluster Details" /></div>
+    <div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig2.png"
+        alt="Console - Accessing Kubeconfig" /></div>
+  </div>
+  <pre><code class="hljs text fragment">mkdir -p $HOME/.kube</code></pre>
+  <pre><code class="hljs text fragment">oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae3dgnlgmqzgczjsg4zgeyjzhfsggmrvmi3ggobwgczgezlcgrsg --file $HOME/.kube/config --region us-phoenix-1</code></pre>
+  <pre><code class="hljs text fragment">export KUBECONFIG=$HOME/.kube/config</code></pre>
+</section>
+<section>
+  <h2>How to manage an OKE Cluster</h2>
+  <ul>
+    <li class="mu-small fragment">Dashboard - UI Tool</li>
+  </ul>
+  <img class="plain fragment" data-src="/images/k8s/dashboard.png" alt="Console - Accessing Kubernetes Dashboard" />
+  <pre><code class="hljs text fragment">kubectl proxy</code></pre>
+  <p class="mu-small">Then click <a
+      href="http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/"
+      target="_blank">here</a> to access the dashboard.</p>
+</section>
 <section id="helm">
   <h2>Quick Install - Helm</h2>
   <div class="fragment-set mu-sequence">
@@ -180,7 +204,7 @@ Server: &version.Version{SemVer:"v2.14.1", GitCommit:"5270352a09c7e8b6e8c9593002
 mkdir -f ~\bin
 $env:PATH += ";${pwd}\bin"
 svcat version --client</code></pre>
-        <hr/>
+        <hr />
         <p class="mu-small">
           Or download the binary directly and make executable:
           <a href="https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe" target="_blank">svcat.exe download</a>
@@ -188,18 +212,4 @@ svcat version --client</code></pre>
       </div>
     </div>
   </div>
-</section>
-
-<section id="resources">
-  <section id="downloads">
-    <h2>Downloads</h2>
-    <p>Any workshop related downloads may be found here. </p>
-    <ul class="mu-small">
-      <li><a href="/downloads/k8s/secrets.yaml">K8S Secrets (Dev)</a></li>
-      <li><a href="/downloads/k8s/kubeconfig.yaml">OKE <code>kubeconfig</code></a></li>
-    </ul>
-    <blockquote class="mu-small">
-      🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
-    </blockquote>
-  </section>
 </section>
