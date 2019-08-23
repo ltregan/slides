@@ -1,9 +1,11 @@
 <section id="ship">
   <h2>Send message to shipping</h2>
   <div class="mu-sequence mu-medium">
-    <p class="mu-small">Expose the shipping service</p>
-    <pre><code class="hljs text">kubectl port-forward svc/shipping 8000:80</code></pre>
-    <p class="mu-small">Open another terminal and run the following command which sends a test message to the shipping microservice running as a pod in your local Kubernetes cluster.</p>
+    <p class="mu-small">Expose the <code>shipping</code> service, make sure to provide the <code>namespace_name</code>:
+    </p>
+    <pre><code class="hljs text">kubectl port-forward svc/shipping 8000:80 -n namespace_name</code></pre>
+    <p class="mu-small">Open another terminal and run the following command which sends a test message to the shipping
+      microservice running as a pod in your local Kubernetes cluster.</p>
     <pre><code class="hljs sh">curl -X POST \
 http://localhost:8000/shipping \
 -H 'Content-Type: application/json' \
@@ -13,7 +15,8 @@ http://localhost:8000/shipping \
   "name": "shipment 500" 
 }'</code></pre>
     <p class="mu-small">
-      Look at the terminal windows and observe messages being created in the shipping and consumed in the stream. 
+      Look at the terminal windows and observe messages being created in the shipping and consumed in the stream. Notice
+      the extra message that you added to the shipping service.
       You should also look at the OCI console. Refresh the table and watch your message being published to the stream.
     </p>
   </div>
