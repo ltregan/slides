@@ -2,11 +2,17 @@
   <h2>Run <img data-src="/images/logo.png" alt="MuShop" /></h2>
   <div class="mu-sequence">
     Deploy in local Kubernetes cluster
-    <pre class="fragment"><code class="hljs text">kubectl apply -f deploy/kubernetes/mushop.yaml</code></pre>
-    <pre class="fragment"><code class="hljs text">kubectl get pod --watch</code></pre>
-    <pre class="fragment"><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
+    <pre class="fragment"><code class="hljs text">
+helm install deploy/helm-chart/mushop \
+     --name mushop \
+     --namespace mushop \
+     --set global.mock.service="all"
+    </code></pre>
+    <pre class="fragment"><code class="hljs text">
+kubectl get pod --watch -n mushop
+</code></pre>
     <div class="fragment">
-      Open Browser: <a href="http://localhost:8000" target="_blank">localhost:8000</a>
+      Open Browser: <a href="http://localhost" target="_blank">localhost</a>
     </div>
   </div>
 </section>

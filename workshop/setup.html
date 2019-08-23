@@ -1,39 +1,39 @@
-      <!-- title -->
-      <section id="home">
-        <!-- landing -->
-        <section id="home-title">
-          <h1>Cloud Native OCI</h1>
-          <h2>Developer Setup</h2>
-          include "partials/_titleSlide.html"
-        </section>
+<!-- title -->
+<section id="home">
+  <!-- landing -->
+  <section id="home-title">
+    <h1>Cloud Native OCI</h1>
+    <h2>Developer Setup</h2>
+    include "partials/_titleSlide.html"
+  </section>
 
-        <!-- Contributors -->
-        include "partials/_contributors.html"
-      </section>
+  <!-- Contributors -->
+  include "partials/_contributors.html"
+</section>
 
-      <!-- exercise -->
-      <section>
-        <section id="lab">
-          <h2>MuShop Development</h2>
-          <ol>
-            <li><a href="#clone">Clone</a></li>
-            <li><a href="#credentials">Install Credentials</a></li>
-            <li><a href="#start">Start</a></li>
-          </ol>
-        </section>
+<!-- exercise -->
+<section>
+  <section id="lab">
+    <h2>MuShop Development</h2>
+    <ol>
+      <li><a href="#clone">Clone</a></li>
+      <li><a href="#prepare">Prepare</a></li>
+      <li><a href="#start">Start</a></li>
+    </ol>
+  </section>
 
-        <section id="clone">
-          <h2>Clone Repository</h2>
-          <div class="mu-sequence">
-            <p class="mu-small no-margin">
-              Begin by cloning the workshop project.
-            </p>
-            <div class="fragment">
-              <pre><code class="hljs sh">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
+  <section id="clone">
+    <h2>Clone Repository</h2>
+    <div class="mu-sequence">
+      <p class="mu-small no-margin">
+        Begin by cloning the workshop project.
+      </p>
+      <div class="fragment">
+        <pre><code class="hljs sh">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git
 cd mushop-oci-demo</code></pre>
-            </div>
-            <div class="fragment">
-              <pre class="mu-xsmall"><code class="hljs text">.
+      </div>
+      <div class="fragment">
+        <pre class="mu-xsmall"><code class="hljs text">.
 ├── LICENSE
 ├── README.md
 ├── deploy
@@ -54,45 +54,38 @@ cd mushop-oci-demo</code></pre>
 │   ├── stream
 │   └── user
 └── wercker.yml</code></pre>
-            </div>
-          </div>
-          <div class="fragment">
-            Next: <a class="navigate-down">Install Credentials</a>
-          </div>
-        </section>
+      </div>
+    </div>
+  </section>
 
-        <section id="credentials">
-          <h2>🔒 Install K8S Credentials</h2>
-          <p class="mu-small">
-            The application runtime requires connectivity to an OCI Tenancy.
-            A credential file for the development environment is provided
-          </p>
-          <hr/>
-          <div class="mu-sequence">
-            <div class="fragment">
-              Check <code>kubectl</code> context:
-              <pre><code class="hljs sh">kubectl config current-context
+  <section id="prepare">
+    <h2>Prepare</h2>
+    <p class="mu-small">
+      The Mushop application can run in "mock mode" where service responses are mocked,
+      yet the whole system is fully functional. This is mainly used for quick demos and testing.
+    </p>
+    <hr />
+    <div class="mu-sequence">
+      <div class="fragment">
+        Check <code>kubectl</code> context:
+        <pre><code class="hljs sh">kubectl config current-context
 # docker-for-desktop</code></pre>
-            </div>
-            <div class="fragment">
-              Check <code>kubectl</code> namespace configuration:
-              <pre><code class="hljs sh">kubectl config view | grep namespace</code></pre>
-            </div>
-            <div class="fragment">
-              Download K8S <a href="/downloads/k8s/secrets.yaml">secrets.yaml</a> and install:
-              <pre><code class="hljs text">kubectl create -f secrets.yaml</code></pre>
-            </div>
-          </div>
-          
-          <div class="fragment">
-            Next: <a class="navigate-down">Start</a>
-          </div>
-        </section>
+      </div>
+      <div class="fragment">
+        Check <code>kubectl</code> namespace configuration:
+        <pre><code class="hljs sh">kubectl config view | grep namespace</code></pre>
+      </div>
+    </div>
 
-        include "partials/highlights/_runlocal.html"
+    <div class="fragment">
+      Next: <a class="navigate-down">Start</a>
+    </div>
+  </section>
 
-      </section>
+  include "partials/highlights/_runlocal.html"
 
-      <section id="ready">
-        <h2>😎 Ready!</h2>
-      </section>
+</section>
+
+<section id="ready">
+  <h2>😎 Ready!</h2>
+</section>
