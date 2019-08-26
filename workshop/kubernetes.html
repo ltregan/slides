@@ -166,9 +166,12 @@ spec:
   <section>
     <h2>The Solution: Helm</h2>
     <ul>
-      <li>Helm is a package management tool for Kubernetes</li>
+      <li>Package management tool for Kubernetes</li>
       <li>A CNCF project</li>
-      <li>A package manager similar to yum, brew, apt-get, npm, choco, etc., but specifically for
+      <li>A package manager similar to <code>yum</code>, <code>brew</code>, <code>apt-get</code>, <code>npm</code>,
+        <code>choco</code>, etc., but
+        specifically
+        for
         Kubernetes</li>
       <li>Method for repeatable application installation, configuration, and versioning through the
         use of charts, repositories, and releases</li>
@@ -187,80 +190,51 @@ spec:
     <h2>Lab Overview</h2>
     <ul>
       <li>Switch context</li>
-      <li>Create namespace and secrets</li>
-      <li>Checkout code</li>
-      <li>Modify deployment file</li>
-      <li>Deploy</li>
+      <li>Change default namespace</li>
+      <li>Create a deployment</li>
       <li>Verify</li>
     </ul>
   </section>
   <section>
-    <h3>Step 1: switch context</h3>
+    <h3>Step 1: Switch context</h3>
     <p class="mu-left">
-      You will perform the tasks for the lab in the OKE cluster mushop-workshop.
-      To switch to that cluster use docker desktop
+      You will perform the tasks for the lab in the OKE cluster you created.
+      To switch to that cluster use Docker desktop
     </p>
     <img class="plain" width=40% data-src="/images/k8s/switch_context2.png" alt="Helm" />
   </section>
+
   <section>
-    <h3>Step 2: install credentials in OKE</h3>
+    <h3>Step 2: Change the default namespace</h3>
     <p class="mu-left">
-      You already got the secrets.yaml and created a namespace and installed the secrets
-      in your local cluster. Now you are going to do the same in the OKE cluster mushop-workshop
-    </p>
-    <ol class="block">
-      <li>Create a namespace
-        <pre><code class="hljs text">kubectl create namespace your-name</code></pre>
-      </li>
-      <li>Install Secrets
-        <pre><code class="hljs text">kubectl create -f secrets.yaml -n your-name</code></pre>
-      </li>
-    </ol>
-  </section>
-  <section>
-    <h3>Step 3: change default namespace</h3>
-    <p class="mu-left">
-      Change the your default namespace to your name to avoid having to add
-      <strong>--namespace your-name</strong> to every kubectl command.
+      Change your default namespace to your name to avoid having to add
+      <code>--namespace your-name</code> to every kubectl command.
     </p>
     <pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=your-name</code></pre>
     <p class="mu-left">To validate it:</p>
     <pre><code class="hljs text">kubectl config view | grep namespace:</code></pre>
   </section>
   <section>
-    <h3>Step 4: modify deployment</h3>
+    <h3>Step 3: Create a deployment</h3>
     <p class="mu-left">
-      Next you will have to modify an incomplete deployment descriptor.
-      Your job is to add what is missing so the service will deploy without errors.
-      Checkout branch workshop/k8s-lab
+      Next, you will use Helm to deploy Mushop to your namespace within an OKE cluster
     </p>
-    <pre><code class="hljs text">git checkout workshop/k8s-lab</code></pre>
-    <p class="mu-left">
-      Open file mushop.yaml in an editor of your choice.
-      Look for the deployment section for catalogue.
-      The commented lines (start with #) have instruction to create environment variables.
-    </p>
+    <pre><code class="hljs text">helm install deploy/helm-chart/mushop \
+        --name mushop \
+        --set global.mock.service="all" \
+        --set ingress.enabled=false
+</code></pre>
   </section>
   <section>
-    <h3>Step 5: modify the deployment</h3>
+    <h3>Step 4: Verify</h3>
     <p class="mu-left">
-      Repeat the same procedure for the shipping and stream deployments.
-      When finished, save and exit the file.
-      Now it's time to deploy the services and pods needed to run the mushop store.
-      Run this command:
+      Run the command below to check that all resources have been created:
     </p>
-    <pre><code class="hljs text">kubectl apply -f mushop.yaml</code></pre>
-  </section>
-  <section>
-    <h3>Step 6: Verify</h3>
+    <pre><code class="hljs text">kubectl get pod --watch </code></pre>
     <p class="mu-left">
-      To check that all resources have been created run this:
+      Proxy from your machine to the Edge service running in OKE:
     </p>
-    <pre><code class="hljs text">kubectl get pod --watch</code></pre>
-    <p class="mu-left">
-      Proxy from your machine to the services running in OKE:
-    </p>
-    <pre><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
+    <pre><code class="hljs text">kubectl port-forward svc/mushop-edge 8000:80</code></pre>
     <p class="mu-left">
       You are done! To access the store click <a href="http://localhost:8000">here</a>
     </p>
