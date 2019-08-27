@@ -86,22 +86,6 @@
       <p>Set default namespace <em class="mu-muted">(optional)</em></p>
       <pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=mushop</code></pre>
     </div>
-    <div class="fragment fade-in">
-      <p>Install an ingress controller <span class="mu-muted">(optional)</span></p>
-      <pre><code class="hljs text">kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/mandatory.yaml
-kubectl apply -f https://raw.githubusercontent.com/kubernetes/ingress-nginx/master/deploy/static/provider/cloud-generic.yaml</code></pre>
-
-      <small>
-        <blockquote>
-          <b>NOTE:</b> There are several options for ingress controllers in K8S. This demo
-          uses the common <a href="https://kubernetes.io/docs/concepts/services-networking/ingress/#prerequisites"
-            target="_blank">ingress-nginx</a>
-        </blockquote>
-        <p>
-          ☝️ More on this later...
-        </p>
-      </small>
-    </div>
   </div>
 </section>
 

@@ -1,38 +1,37 @@
-<section id="DeployingOCIServiceBroker" data-background-image="/images/tech/k8s.png" data-background-size="100px" data-background-position="20px 20px">
+<section id="DeployingOCIServiceBroker" data-background-image="/images/tech/k8s.png" data-background-size="100px"
+  data-background-position="20px 20px">
   <h2>Deploying OCI Service Broker</h2>
   <div class="fragment-set">
     <div class="fragment fade-in">
       <div class="mu-sequence">
-        <p class="mu-small mu-left">The OCI Service Broker for Kubernetes needs OCI user credentials to provision and manage services and resources
-          in the user tenancy. <br/>
-          You can reuse previous created OCI credentials or create a separate one just for the service broker:</p>
-        <pre><code class="hljs text">kubectl create secret generic ocicredentials \
-  --from-literal=tenancy=(CUSTOMER_TENANCY_OCID) \
-  --from-literal=user=(USER_OCID) \
-  --from-literal=fingerprint=(USER_PUBLIC_API_KEY_FINGERPRINT) \
-  --from-literal=region=(USER_OCI_REGION) \
-  --from-literal=passphrase=(PASSPHRASE_STRING) \
-  --from-file=privatekey=(PATH_OF_USER_PRIVATE_API_KEY)</code></pre>
-        <a href="/downloads/k8s/ocicredentials-secret.yaml">K8S Secret for ocicredentials (Dev)</a>
-        <blockquote class="mu-small">
-          🔒 <b>NOTE</b> Access credentials will be provided during the workshop 
-        </blockquote>
+        <p class="mu-small mu-left">The OCI Service Broker for Kubernetes needs OCI user credentials to provision and
+          manage services and resources
+          in the user tenancy. <br />
+          If you already deployed a non-mock version of Mushop, the secret called <code>service-broker</code> was
+          already created for you.
+          Use the command below to check if the secret is created:</p>
+        <pre><code class="hljs sh">kubectl get secret service-broker </code></pre>
       </div>
     </div>
     <div class="fragment fade-in">
       <div class="mu-sequence">
-        <p class="mu-small">This command will deploy the OCI service broker on your cluster. Note that is using the secret ocicredentials.</p>
+        <p class="mu-small">This command will deploy the OCI service broker on your cluster. Note that is using the
+          secret ocicredentials.</p>
         <pre><code class="hljs text">helm install https://github.com/oracle/oci-service-broker/releases/download/v1.2.0/oci-service-broker-1.2.0.tgz  --name oci-service-broker \
-  --set ociCredentials.secretName=ocicredentials \
+  --set ociCredentials.secretName=service-broker \
   --set storage.etcd.useEmbedded=true \
   --set tls.enabled=false \
   --namespace mushop</code></pre>
         <blockquote class="mu-xsmall">
           Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
-          It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in production environments,
-          instead a separate etcd cluster should be setup and used by the OCI Sevice Broker. <br/>
-          The open source etcd operator project or a commercial offering may be used to setup a production quality etcd cluster.
-          The recommended setup can be found <a href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup" target="_blank">here</a>
+          It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in
+          production environments,
+          instead a separate etcd cluster should be setup and used by the OCI Sevice Broker. <br />
+          The open source etcd operator project or a commercial offering may be used to setup a production quality etcd
+          cluster.
+          The recommended setup can be found <a
+            href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup"
+            target="_blank">here</a>
         </blockquote>
       </div>
     </div>
