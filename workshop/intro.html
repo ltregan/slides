@@ -8,43 +8,51 @@
           include "partials/_titleSlide.html"
         </section>
 
-        <!-- TOC -->
-        <section id="toc">
-          <h2>Table of Contents</h2>
-          <div class="mu-flex mu-gutter">
-            <ul class="plain">
-              <!-- add a line for each <section id="slideId">...</section>  -->
-              <li><a href="#home">Home</a></li>
-              <li><a href="#intro">Introduction</a></li>
-              <li><a href="#background">Background</a></li>
-              <li><a href="#services">Services</a></li>
-              <li><a href="#demo">Demo</a></li>
-            </ul>
-          </div>
-        </section>
-
         <!-- Contributors -->
         include "partials/_contributors.html"
       </section>
 
       <!-- About -->
       <section id="intro">
-        <h2>Workshop Overview</h2>
-        <ul>
-          <li>Learn to utilize Cloud Native OCI services</li>
-          <li>Build and deploy microservices with OKE</li>
-          <li>Demo a complete polyglot application on OCI</li>
-          <li>Exhibit benefits of Cloud Native services</li>
-        </ul>
+        <h2>Workshop Topics</h2>
+        <div class="testimonials">
+          <ul class="mu-flex mu-gutter mu-small mu-wrap">
+            <li class="card col-1-1 fragment fade-up">Learn to utilize Cloud Native OCI services</li>
+            <li class="card col-1-1 fragment fade-up">Build and deploy microservices with OKE</li>
+            <li class="card col-1-1 fragment fade-up">Demo a complete polyglot application on OCI</li>
+            <li class="card col-1-1 fragment fade-up">Exhibit benefits of Cloud Native services</li>
+          </ul>
+        </div>
       </section>
 
+
+      <!-- mushop background -->
+      <section>
+        <section id="background">
+          <h2>What is MuShop?</h2>
+          <div class="mu-small mu-margin-top">
+            include "partials/_whatismushop.html"
+          </div>
+        </section>
+
+        <section id="genesis">
+          <h2 class="mu-normal">Why <em>Mu</em> Shop?</h2>
+          <p class="mu-medium">
+            MuShop is a polyglot microservices application <strong>purpose-built</strong>
+            as a cloud native approach to implementing OCI
+          </p>
+          include "partials/_mugenesis.html"
+        </section>
+      </section>
+
+      <!-- microservices -->
       <section id="microservices">
         <section id="why-microservices">
-          <img data-src="/images/tech/intro/logos.png" class="mu-muted">
           <h2>Microservices</h2>
-          <ul>
-            <li>Enables us to build and run scalable apps in dynamic environments</li>
-            <li>Enables distributed system design that can be realized as resilient, manageable and
+          <img data-src="/images/tech/intro/logos.png" class="mu-muted">
+          <ul class="mu-small mu-flex mu-gutter">
+            <li class="card col-1-2">Enable us to build and run scalable apps in dynamic environments</li>
+            <li class="card col-1-2">Enable distributed system design that can be realized as resilient, manageable and
               observable systems</li>
           </ul>
         </section>
@@ -68,7 +76,6 @@
                 attributes
                 of “routing around failures” by restarting failed servers or replicating data.
               </p>
-              <br>
               <p>See
                 <a
                   href="http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/">
@@ -84,51 +91,16 @@
         </section>
 
         <section id="landscape">
-          <h2>Landscape</h2>
+          <h2>Cloud Native Landscape</h2>
           <div class="mu-ratio mu-ratio-2-1">
             <iframe data-src="https://landscape.cncf.io/fullscreen=yes"></iframe>
           </div>
         </section>
       </section>
 
-      include "partials/_whymushop.html"
-
       <section>
         <!-- services -->
-        <section id="services" data-background-image="/images/tech/oci.png" data-background-size="auto 100px" data-background-position="20px 20px">
-          <h2>OCI Service Showcase</h2>
-          <div class="mu-flex mu-margin mu-gutter mu-small">
-            <div class="col-1-2">
-              <h3>Application</h3>
-              <ul>
-                <li>DNS</li>
-                <li>Firewall (WAF)</li>
-                <li>Object Storage</li>
-                <li class="mu-divider"></li>
-                <li>Load Balancer</li>
-                <li>Virtual Cloud Network (VCN)</li>
-                <li class="mu-divider"></li>
-                <li>ATP Database</li>
-                <li>Streaming</li>
-                <li>OKE + Service Broker</li>
-                <li class="mu-muted">Functions*</li>
-              </ul>
-            </div>
-            <div class="col-1-2">
-              <h3>Ops</h3>
-              <ul>
-                <li class="mu-muted">Terraform, Resource Manager*</li>
-                <li class="mu-muted">Monitoring*</li>
-                <li class="mu-muted">CI/CD*</li>
-                <li class="mu-muted">HA/DR*</li>
-              </ul>
-            </div>
-          </div>
-          <blockquote class="mu-small">
-            *Indicates future/planned material
-          </blockquote>
-        </section>
-
+        include "partials/_ociservices.html"
         include "partials/_diagram.html"
       </section>
 

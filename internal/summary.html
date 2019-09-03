@@ -16,44 +16,7 @@
     <h2>What is MuShop?</h2>
     <div class="fragment-set">
       <div class="mu-small fragment mu-margin-top">
-        <ul class="plain mu-flex mu-wrap mu-flex-stretch mu-gutter mu-margin">
-          <li class="card col-1-3">
-            An e-commerce reference app realized as a set of microservices developed on OCI
-            <div><img data-src="/images/tech/oci.png" /></div>
-          </li>
-          <li class="card col-1-3">
-            Real use case scenarios for OKE, ATP, Streaming, Networking, and
-            <a href="https://confluence.oci.oraclecorp.com/pages/viewpage.action?spaceKey=PM&title=Cloud+Native+Update"
-              target="_blank">more</a>
-            <div class="mu-margin-top">
-              <div class="mu-flex mu-flex-middle mu-gutter mu-wrap">
-                <div class="col-1-4"><img class="no-margin" data-src="/images/tech/k8s.icon.png" /></div>
-                <div class="col-1-4"><img class="no-margin" data-src="/images/tech/atp.png" /></div>
-                <div class="col-1-4"><img class="no-margin" data-src="/images/tech/streaming.svg" /></div>
-                <div class="col-1-4"><img class="no-margin" data-src="/images/tech/vcn.svg" /></div>
-                <div class="col-1-4"><img class="no-margin" data-src="/images/tech/bucket.svg" /></div>
-                <div class="col-1-4"><img class="no-margin" data-src="/images/tech/waf.svg" /></div>
-                <div class="col-1-4"><img class="no-margin" data-src="/images/tech/lb.svg" /></div>
-                <div class="col-1-4"><img class="no-margin" data-src="/images/tech/dns.svg" /></div>
-              </div>
-            </div>
-          </li>
-          <li class="card col-1-3">
-            Collection of self-paced, workshop-style exercises showcasing OCI features
-            <div>
-              <pre><code class="hljs text">helm install \
-  --name nginx-ingress \
-  --namespace nginx-ingress \
-  stable/nginx-ingress</code></pre>
-              <pre><code class="hljs text">oci lb load-balancer list | jq '.data[]'</code></pre>
-              <pre><code class="hljs text">kubectl create -f mushop.yaml</code></pre>
-            </div>
-          </li>
-          <!-- <li class="card col-1-2">Developer focused, interactive, hands-on demonstrations</li> -->
-        </ul>
-        <div class="mu-center">
-          <img data-src="/images/logo.png" height="80" />
-        </div>
+        include "../workshop/partials/_whatismushop.html"
       </div>
 
       <div class="mu-flex mu-flex-center fragment">
@@ -71,6 +34,7 @@
 </section>
 
 <section>
+  <!-- internal -->
   <section id="goals">
     <h2>Goals</h2>
     <div class="mu-flex mu-wrap mu-flex-stretch mu-gutter mu-small mu-left">
@@ -113,7 +77,64 @@
     </div>
   </section>
 
-  include "../workshop/partials/_whymushop.html"
+  <section id="background">
+    <h2 class="mu-normal">Why <em>Mu</em> Shop?</h2>
+    <div class="mu-flex mu-gutter mu-margin">
+      <div class="card mu-small mu-left col-1-3">
+        MuShop is a polyglot microservices application <strong>purpose-built</strong>
+        as a cloud native approach to utilizing OCI
+      </div>
+      <!-- competitive offerings -->
+      <div class="col-2-3">
+        <table class="mu-table">
+          <thead>
+            <tr>
+              <th>Provider</th>
+              <th>Reference</th>
+              <th>Services</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Google Cloud</td>
+              <td><a href="https://github.com/GoogleCloudPlatform/microservices-demo" target="_blank">Hipster Shop</a></td>
+              <td class="mu-muted">GKE, Cloud Native</td>
+            </tr>
+            <tr>
+              <td>Azure</td>
+              <td><a href="https://github.com/microsoft/SmartHotel360" target="_blank">SmartHotel360</a></td>
+              <td class="mu-muted">AKS, Cloud Native</td>
+            </tr>
+            <tr>
+              <td>Weave Works</td>
+              <td><a href="https://github.com/microservices-demo/microservices-demo" target="_blank">Sock Shop</a></td>
+              <td class="mu-muted">Weave Net, K8s</td>
+            </tr>
+            <tr>
+              <td>Pivotal</td>
+              <td><a href="https://kb.vmtestdrive.com/hc/en-us/articles/360001143454-Pivotal-Container-Service-Deep-dive" target="_blank">Guest Book</a></td>
+              <td class="mu-muted">PKs</td>
+            </tr>
+            <tr>
+              <td>IBM</td>
+              <td><a href="https://github.com/ibm-cloud-architecture/refarch-cloudnative-kubernetes" target="_blank">BlueCompute</a></td>
+              <td class="mu-muted">IBM Cloud Private Cluster, K8s, Helm</td>
+            </tr>
+            <tr class="fragment">
+              <td class="fg-red"><strong>Oracle<strong></td>
+              <td><a class="fg-red" href="https://mushop.ateam.cloud" target="_blank">MuShop</a></td>
+              <td>OKE, WAF, ATP, OSB, OOS, OSS, K8s, Helm, Istio....</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="mu-margin">
+      include "../workshop/partials/_mugenesis.html"
+    </div>
+  </section>
+
 </section>
 
 <!-- <section id="process">
@@ -132,137 +153,7 @@
 </section> -->
 
 <section>
-  <section id="services" data-background-image="/images/tech/oci.png" data-background-size="auto 100px"
-    data-background-position="20px 20px">
-    <h2>OCI Services</h2>
-    <div class="mu-flex mu-gutter">
-      <div class="col-1-2">
-        <h4>Complete</h4>
-        <table class="mu-table">
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th>Topic</th>
-              <th>Status</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>ATP</td>
-              <td>Database</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>OKE</td>
-              <td>Developer</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>OCIR</td>
-              <td>Developer</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>OCI Service Broker</td>
-              <td>Developer</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>DNS Zone</td>
-              <td>Core Networking</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>Object Storage</td>
-              <td>Core</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>Streaming</td>
-              <td>Analytics</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>Load Balancer</td>
-              <td>Networking</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>WAF Policies</td>
-              <td>Security</td>
-              <td class="mu-center">✅</td>
-            </tr>
-            <tr>
-              <td>Health Checks</td>
-              <td>Monitoring</td>
-              <td class="mu-center">✅</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-
-      <div class="col-1-2">
-        <h4>Planned</h4>
-        <table class="mu-table">
-          <thead>
-            <tr>
-              <th>Service</th>
-              <th>Topic</th>
-              <th>Solution</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Events</td>
-              <td>Application Integration</td>
-              <td class="mu-muted">ML image gallery</td>
-            </tr>
-            <tr>
-              <td>Functions</td>
-              <td>Developer</td>
-              <td class="mu-muted">ML image gallery</td>
-            </tr>
-            <tr>
-              <td>Email Delivery</td>
-              <td>Platform</td>
-              <td class="mu-muted">Newsletter</td>
-            </tr>
-            <tr>
-              <td>API Gateway</td>
-              <td>Platform</td>
-              <td class="mu-muted">Storefront REST</td>
-            </tr>
-            <tr>
-              <td>Service Metrics</td>
-              <td>Monitoring</td>
-              <td class="mu-muted">Load scenario</td>
-            </tr>
-            <tr>
-              <td>Alarms</td>
-              <td>Monitoring</td>
-              <td class="mu-muted">Load scenario</td>
-            </tr>
-            <tr>
-              <td>IDCS</td>
-              <td>Security</td>
-              <td class="mu-muted">OAuth2 / client</td>
-            </tr>
-            <tr>
-              <td>Key Management</td>
-              <td>Security</td>
-              <td class="mu-muted">Secrets</td>
-            </tr>
-            <tr>
-              <td>SDKs</td>
-              <td>Developer</td>
-              <td class="mu-muted">Administrative panel</td>
-            </tr>
-            </thead>
-        </table>
-      </div>
-    </div>
-  </section>
-
+  include "../workshop/partials/_ociservices.html"
   include "../workshop/partials/_diagram.html"
 </section>
 
