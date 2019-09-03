@@ -12,24 +12,21 @@
         include "partials/_contributors.html"
       </section>
 
-      <!-- About -->
-      <section id="intro">
-        <h2>Workshop Topics</h2>
-        <div class="testimonials">
-          <ul class="mu-flex mu-gutter mu-small mu-wrap">
-            <li class="card col-1-1 fragment fade-up">Learn to utilize Cloud Native OCI services</li>
-            <li class="card col-1-1 fragment fade-up">Build and deploy microservices with OKE</li>
-            <li class="card col-1-1 fragment fade-up">Demo a complete polyglot application on OCI</li>
-            <li class="card col-1-1 fragment fade-up">Exhibit benefits of Cloud Native services</li>
-          </ul>
-        </div>
-      </section>
+      <section>
+        <!-- overview -->
+        include "partials/_overview.html"
 
+        <!-- teaser -->
+        include "partials/_teaserSlide.html"
+      </section>
 
       <!-- mushop background -->
       <section>
         <section id="background">
           <h2>What is MuShop?</h2>
+          <p class="mu-medium">
+            MuShop represents a showcase of cloud native on OCI
+          </p>
           <div class="mu-small mu-margin-top">
             include "partials/_whatismushop.html"
           </div>
@@ -39,7 +36,7 @@
           <h2 class="mu-normal">Why <em>Mu</em> Shop?</h2>
           <p class="mu-medium">
             MuShop is a polyglot microservices application <strong>purpose-built</strong>
-            as a cloud native approach to implementing OCI
+            as a cloud native approach to OCI utilization
           </p>
           include "partials/_mugenesis.html"
         </section>
