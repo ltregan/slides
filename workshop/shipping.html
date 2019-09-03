@@ -42,6 +42,9 @@
       <li class=fragment>OSS is a distributed event-log</li>
       <li class=fragment>Messages are written to partitions and can be referenced via partition/offset</li>
     </ul>
+    <aside class="notes" data-markdown>
+      Storage solution for ingesting continuous, high-volume streams of data.
+    </aside>
   </section>
   <section>
     <h2>Use cases</h2>
@@ -86,29 +89,50 @@
   <section>
     <h2>Concepts</h2>
     <h4>Cursor Type: AT_OFFSET</h4>
+    <p class="mu-small">Consume at a specified offset.</p>
     <img class="plain" data-src="/images/streams/at_offset.png" alt="at_offset cursor" />
+    <aside class="notes" data-markdown>
+      Start consuming at a specified offset. The offset must be greater than or equal to the offset of the oldest
+      message and less than or equal to the latest published offset.
+    </aside>
   </section>
   <section>
     <h2>Concepts</h2>
     <h4>Cursor Type: AFTER_OFFSET</h4>
+    <p class="mu-small">Consume after the given offset.</p>
     <img class="plain" data-src="/images/streams/after_offset.png" alt="after_offset cursor" />
+    <aside class="notes" data-markdown>
+      Start consuming after the given offset. This cursor has the same restrictions as the AT_OFFSET cursor.
+    </aside>
   </section>
   <section>
     <h2>Concepts</h2>
     <h4>Cursor Type: TRIM_HORIZON</h4>
+    <p class="mu-small">Consume from the oldest available message.</p>
     <img class="plain" data-src="/images/streams/trim_horizon.png" alt="trim_horizon cursor" />
+    <aside class="notes" data-markdown>
+      Start consuming from the oldest available message in the stream. Create a cursor at the TRIM_HORIZON to consume
+      all
+      messages in a stream.
+    </aside>
   </section>
   <section>
     <h2>Concepts</h2>
     <h4>Cursor Type: AT_TIME</h4>
     <p class="mu-small">Consume after given time. Timestamp of the message &ge; supplied time.</p>
     <img class="plain" data-src="/images/streams/at_time.png" alt="at_time cursor" />
+    <aside class="notes" data-markdown>
+      Start consuming from a given time. The timestamp of the returned message will be on or after the supplied time
+    </aside>
   </section>
   <section>
     <h2>Concepts</h2>
     <h4>Cursor Type: LATEST</h4>
     <p class="mu-small">Consume messages published after the cursor creation.</p>
     <img class="plain" data-src="/images/streams/latest.png" alt="latest cursor" />
+    <aside class="notes" data-markdown>
+      Start consuming messages that were published after you created the cursor.
+    </aside>
   </section>
   <section>
     <h2>Limits</h2>
@@ -145,6 +169,12 @@
         <img data-src="/images/streams/shipping-2.png" /> Fulfillment
       </div>
     </div>
+
+    <aside class="notes" data-markdown>
+      We have two services as part of the Mushop that are using the streaming service. First, we have the shipping
+      service: once an order is created, shipping service puts a message with order information on to the stream. Then,
+      we have stream consumer that simply reads those messages from a stream as they come in.
+    </aside>
   </section>
   <section>
     <h2>Connecting to OSS</h2>
