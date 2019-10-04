@@ -89,6 +89,10 @@ section.has-dark-background {
 	box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
 }
 
+@mixin emphasis() {
+	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+}
+
 @mixin fg($color: $o-color-red) {
 	color: $color;
 }
@@ -180,7 +184,7 @@ section > h2 > img {
 
 // Text
 .mu-left {
-	text-align: left;
+	text-align: left !important;
 }
 .mu-center {
 	text-align: center !important;
@@ -402,12 +406,24 @@ a.title-print {
 
 	.card {
 		@include shadow();
-		border: 1px solid $o-color-light-alpha;
+		@include bg($backgroundColor);
+		border: 1px solid $o-color-light-alpha !important;
 		border-radius: 5px;
 		box-sizing: border-box;
 		padding: $blockMargin;
 		margin-bottom: $blockMargin;
 		list-style: none;
+	}
+	a.card {
+		.mu-normal {
+			@include fg($mainColor !important);
+		}
+		&:hover {
+			@include emphasis();
+			img { 
+				box-shadow: none;
+			}
+		}
 	}
 
 	$connectorSize: 4px;
