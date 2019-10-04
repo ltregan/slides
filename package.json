@@ -1,24 +1,13 @@
 {
-  "name": "reveal.js",
+  "name": "mushop-slides",
   "version": "3.8.0",
   "description": "The HTML Presentation Framework",
-  "homepage": "http://revealjs.com",
-  "subdomain": "revealjs",
-  "main": "js/reveal.js",
   "scripts": {
     "test": "grunt test",
     "start": "grunt serve",
     "build": "grunt"
   },
-  "author": {
-    "name": "Hakim El Hattab",
-    "email": "hakim.elhattab@gmail.com",
-    "web": "http://hakim.se"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git://github.com/hakimel/reveal.js.git"
-  },
+  "author": "Oracle",
   "engines": {
     "node": ">=9.0.0"
   },

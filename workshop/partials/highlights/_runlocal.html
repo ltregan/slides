@@ -2,15 +2,12 @@
   <h2>Run <img data-src="/images/logo.png" alt="MuShop" /></h2>
   <div class="mu-sequence">
     Deploy in local Kubernetes cluster
-    <pre class="fragment"><code class="hljs text">
-helm install deploy/helm-chart/mushop \
-     --name mushop \
-     --namespace mushop \
-     --set global.mock.service="all"
-    </code></pre>
-    <pre class="fragment"><code class="hljs text">
-kubectl get pod --watch -n mushop
-</code></pre>
+    <pre class="fragment"><code class="hljs sh">helm dependency update deploy/helm-chart/mushop</code></pre>
+    <pre class="fragment"><code class="hljs sh">helm install deploy/helm-chart/mushop \
+  --name mushop \
+  --namespace mushop \
+  --set global.mock.service="all"</code></pre>
+    <pre class="fragment"><code class="hljs text">kubectl get pod --watch -n mushop</code></pre>
     <div class="fragment">
       Open Browser: <a href="http://localhost" target="_blank">localhost</a>
     </div>
