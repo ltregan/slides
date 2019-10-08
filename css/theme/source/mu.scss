@@ -8,6 +8,7 @@
 // Default mixins and settings -----------------
 @import "../template/mixins";
 @import "../template/settings";
+@import "../template/custom/all";
 // ---------------------------------------------
 
 
@@ -107,11 +108,14 @@ section.has-dark-background {
 
 // Copier
 pre {
+	box-shadow: none !important;
+	padding-top: $blockMargin;
+	margin-top: -$blockMargin !important;
 	a.copier {
 		display: none;
 		cursor: pointer;
 		position: absolute;
-		bottom: 100%;
+		top: 0;
 		right: 0;
 		font-size: 14px;
 		padding: 5px 10px;
@@ -149,6 +153,9 @@ a {
 	}
 	pre {
 		font-size: 0.4em;
+	}
+	label {
+		font-weight: bold;
 	}
 }
 
@@ -192,6 +199,9 @@ section > h2 > img {
 .mu-small {
 	font-size: 0.6em;
 	line-height: 1.1;
+	pre {
+		font-size: 0.65em;
+	}
 }
 .mu-xsmall {
 	font-size: 0.3em !important;
@@ -200,6 +210,9 @@ section > h2 > img {
 .mu-medium {
 	font-size: 0.8em;
 	line-height: 1.1;
+	pre {
+		font-size: 0.55em;
+	}
 }
 .mu-large {
 	font-size: 2em;
@@ -243,6 +256,10 @@ section > h2 > img {
 	&:hover .hover-show {
 		display: block;
 	}
+}
+
+.underline {
+	text-decoration: underline;
 }
 
 .reveal ul, .reveal ol {
@@ -453,6 +470,10 @@ a.title-print {
 			transform: translateY(-($connectorArrowSize + $connectorSize / 2));
 		}
 	}
+
+	> label {
+		width: 130px;
+	}
 }
 
 
@@ -466,6 +487,14 @@ a.title-print {
 	}
 }
 
+// Overlay
+.overlay-content {
+	display: none;
+	.overlay & {
+		display: block;
+	}
+}
+
 .mu-overlay {
 	position: absolute;
 	top: 50%;
@@ -476,6 +505,55 @@ a.title-print {
 	img, video {
 		max-width: 100%;
 		max-height: none;
+	}
+}
+
+// Switcher
+.switcher {
+	display: flex;
+	align-items: stretch;
+	> ul {
+		margin-left: 0;
+		> li {
+			list-style: none;
+			@include transition();
+		}
+		// controls
+		&:first-child {
+			> li {
+				padding: $blockMargin/2 $blockMargin $blockMargin/2 0;
+				border-right: 5px solid $o-color-grey;
+				opacity: 0.5;
+				cursor: pointer;
+				white-space: nowrap;
+				&.active, &:hover {
+					border-right-color: $o-color-orange;
+					opacity: 1;
+				}
+			}
+		}
+		// content
+		&:last-child {
+			width: percentage(1); // flex
+			position: relative;
+			> li {
+				visibility: hidden;
+				padding-left: $blockMargin;
+				position: absolute;
+				top: 0; bottom: 0; left: 0; right: 0;
+				opacity: 0;
+				@include transform(translateX($blockMargin));
+				&.active {
+					visibility: visible;
+					opacity: 1;
+					@include transform(none);
+				}
+			}
+
+			pre {
+				margin-left: 0;
+			}
+		}
 	}
 }
 
@@ -616,7 +694,6 @@ $playTriangle: 1em * 2/3;
 }
 
 // agenda
-
 table.mu-table {
 	font-size: 0.5em;
 	td {
@@ -661,5 +738,32 @@ table.mu-table {
 			display: block;
 			text-align: right;
 		}
+	}
+}
+
+// OUI styles
+
+.oui-button {
+	margin: 0;
+	border: none;
+	border-radius: 0;
+	overflow: visible;
+	font: inherit;
+	color: inherit;
+	text-transform: none;
+	display: inline-block;
+	box-sizing: border-box;
+	padding: 0 10px;
+	vertical-align: middle;
+	font-size: 14px;
+	line-height: 28px;
+	text-align: center;
+	text-decoration: none;
+
+	&.oui-button-primary {
+		background-color: #0572ce;
+    color: #fff;
+    border: 1px solid transparent;
+    border-radius: 3px;
 	}
 }

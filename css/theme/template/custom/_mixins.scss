@@ -1,0 +1,37 @@
+@mixin _crossbrowser($property, $value) {
+  -webkit-#{$property}: $value;
+  -moz-#{$property}: $value;
+  -ms-#{$property}: $value;
+  #{$property}: $value;
+}
+
+@mixin valign() {
+  position: relative;
+  top: 50%;
+  @include transform(translateY(-50%));
+}
+
+@mixin blur($size) {
+  @include _crossbrowser(filter, blur($size));
+}
+
+@mixin transition($transition: $base-transition, $delay: 0) {
+  @include _crossbrowser(transition, $transition);
+  @if $delay > 0 {
+    @include _crossbrowser(transition-delay, $delay);
+  }
+}
+
+@mixin transform($transform) {
+  @include _crossbrowser(transform, $transform);
+}
+
+@mixin animation($animationName, $duration: 0) {
+  animation-name: $animationName;
+  @if $duration > 0 {
+    animation-duration: $duration;
+  }
+}
+@mixin animationDelay($delay) {
+  animation-delay: $delay
+}

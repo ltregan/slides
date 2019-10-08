@@ -51,6 +51,7 @@
       dependencies: [
         { src: '/plugin/markdown/marked.js' },
         { src: '/plugin/markdown/markdown.js' },
+        { src: '/plugin/switcher/switcher.js', async: true },
         { src: '/plugin/clipboard/copy.js', async: true },
         { src: '/plugin/help/usage.js', async: true },
         { src: '/plugin/notes/notes.js', async: true },
@@ -61,7 +62,6 @@
     Reveal.addEventListener( 'slidechanged', function(event) {
       const id = event.currentSlide.getAttribute('id') || '';
       document.body.setAttribute('data-slide', id);
-      // event.previousSlide, event.currentSlide, event.indexh, event.indexv
     });
   </script>
 </body>
