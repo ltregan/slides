@@ -68,6 +68,7 @@ $ratio-3-2:                                     66.66%;
 $ratio-4-3:                                     75%;
 $ratio-16-9:                                    56.25%;
 $ratio-2-1:                                     50%;
+$ratio-5-2:                                     40%;
 
 section.has-dark-background {
 	&, h1, h2, h3, h4, h5, h6 {
@@ -551,6 +552,7 @@ a.title-print {
 			}
 
 			pre {
+				width: auto;
 				margin-left: 0;
 			}
 		}
@@ -599,6 +601,9 @@ a.title-print {
 
 .mu-ratio-2-1::before {
   padding-top: $ratio-2-1;
+}
+.mu-ratio-5-2::before {
+  padding-top: $ratio-5-2;
 }
 
 // Fragment
@@ -764,6 +769,12 @@ table.mu-table {
 		background-color: #0572ce;
     color: #fff;
     border: 1px solid transparent;
+    border-radius: 3px;
+	}
+	&.oui-button-default {
+		background-color: #f5f5f5;
+    color: #222;
+    border: 1px solid #b5bbc2;
     border-radius: 3px;
 	}
 }

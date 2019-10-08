@@ -4,17 +4,15 @@
   <h2>💻 Workshop Preparation</h2>
   include "partials/_titleSlide.html"
 </section>
-
-<!-- Prerequisites -->
-<section id="prerequisites">
-  <h2>Install Tools</h2>
+<!-- tools -->
+<section id="tools">
+  <h2>Prerequisites</h2>
   <div class="mu-sequence">
     <p class="mu-left mu-medium">
       The following applications are required for the workshop.
       Please 🙏 ensure access and/or installation ahead of time
     </p>
     <hr />
-
     <table class="mu-table">
       <thead>
         <tr>
@@ -91,156 +89,154 @@
   </div>
 </section>
 
-<section>
-  <section id="configuration">
-    <h2>Configure Tenancy</h2>
-    <div class="mu-small">
-      <p class="mu-left">
-        When a tenancy is created, an <strong>Administrators</strong> group is automatically created
-        for the tenancy. Users that are members of the <strong>Administrators</strong> group can
-        perform any operation on resources in the tenancy.
-      </p>
-      <hr />
-    </div>
+<!-- configuration -->
+<section id="configuration">
+  <h2>Configure Tenancy</h2>
+  <p class="mu-small mu-left">
+    When a tenancy is created, an <strong>Administrators</strong> group is automatically created
+    for the tenancy. Users that are members of the <strong>Administrators</strong> group can
+    perform any operation on resources in the tenancy.
+  </p>
+  <hr />
 
-    <div class="mu-flex mu-small switcher">
-      <ul>
-        <li>OKE Policies</li>
-        <li>Compartment</li>
-        <li>API User</li>
-        <li>User Policies</li>
-        <li>Service Limits</li>
-        <li>✅ Checklist</li>
-      </ul>
-      <ul class="col-1-1">
-        <!-- oke policy -->
-        <li>
-          Before you can use Container Engine for Kubernetes (OKE) to create and deploy
-          clusters, the tenancy's <b>root compartment</b> must include a
-          policy to allow OKE to perform operations in the tenancy.
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li>OKE Policies</li>
+      <li>Compartment</li>
+      <li>API User</li>
+      <li>User Policies</li>
+      <li>Service Limits</li>
+      <li>✅ Checklist</li>
+    </ul>
+    <ul class="col-1-1">
+      <!-- oke policy -->
+      <li>
+        Before you can use Container Engine for Kubernetes (OKE) to create and deploy
+        clusters, the tenancy's <b>root compartment</b> must include a
+        policy to allow OKE to perform operations in the tenancy.
 
-          <div class="mu-margin mu-margin-top">
-            <ol class="mu-medium">
-              <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/a/identity/policies" target="_blank">OCI Console</a></li>
-              <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
-              <li><pre><code class="hljs text">Allow service OKE to manage all-resources in tenancy</code></pre></li>
-            </ol>
-          </div>
-          <a href="https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm" target="_blank">
-            ℹ️ Documentation
-          </a>
-        </li>
-        <!-- compartment setup -->
-        <li>
-          Depending on the tenancy and your level of access,
-          you <em>may</em> want <b>(or need)</b> to create a compartment
-          dedicated to this application and the resources allocated.
- 
-          <div class="mu-margin mu-margin-top">
-            <ol class="mu-medium">
-              <li>Launch <a href="https://console.us-phoenix-1.oraclecloud.com/identity/compartments" target="_blank">OCI Console</a></li>
-              <li>Governance and Admininstration &raquo; Identity &raquo; Compartments &raquo; Create</li>
-              <li>
-                <div class="mu-flex">
-                  <label>NAME</label> <span class="mu-muted">A name for the Compartment</span>
-                </div>
-                <div class="mu-flex">
-                  <label>DESCRIPTION</label> <span class="mu-muted">A user-friendly description</span>
-                </div>
-              </li>
-              <li>✏️ Make note of the Compartment <b><code>OCID</code></b></li>
-            </ol>
-          </div>
-          <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#two" target="_blank">
-            ℹ️ Documentation
-          </a>
-        </li>
-        <!-- api user -->
-        <li>
+        <div class="mu-margin mu-margin-top">
+          <ol class="mu-medium">
+            <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/a/identity/policies" target="_blank">OCI Console</a></li>
+            <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
+            <li><pre><code class="hljs text">Allow service OKE to manage all-resources in tenancy</code></pre></li>
+          </ol>
+        </div>
+        <a href="https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm" target="_blank">
+          ℹ️ Documentation
+        </a>
+      </li>
+      <!-- compartment setup -->
+      <li>
+        Depending on the tenancy and your level of access,
+        you <em>may</em> want <b>(or need)</b> to create a compartment
+        dedicated to this application and the resources allocated.
+
+        <div class="mu-margin mu-margin-top">
+          <ol class="mu-medium">
+            <li>Launch <a href="https://console.us-phoenix-1.oraclecloud.com/identity/compartments" target="_blank">OCI Console</a></li>
+            <li>Governance and Admininstration &raquo; Identity &raquo; Compartments &raquo; Create</li>
+            <li>
+              <div class="mu-flex">
+                <label>NAME</label> <span class="mu-muted">A name for the Compartment</span>
+              </div>
+              <div class="mu-flex">
+                <label>DESCRIPTION</label> <span class="mu-muted">A user-friendly description</span>
+              </div>
+            </li>
+            <li>✏️ Make note of the Compartment <b><code>OCID</code></b></li>
+          </ol>
+        </div>
+        <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#two" target="_blank">
+          ℹ️ Documentation
+        </a>
+      </li>
+      <!-- api user -->
+      <li>
+        You will need a User with <b>API Key</b> access in your tenancy. This can be your personal user account, or 
           You will need a User with <b>API Key</b> access in your tenancy. This can be your personal user account, or 
-          a virtual user specific to usage of this application.
-          <div class="mu-margin mu-margin-top">
-            <ol class="mu-medium">
-              <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/a/identity/users" target="_blank">OCI Console</a></li>
-              <li>Governance and Admininstration &raquo; Identity &raquo; Users</li>
-              <li>Select <em>or create</em> the user you wish to use</li>
+        You will need a User with <b>API Key</b> access in your tenancy. This can be your personal user account, or 
+        a virtual user specific to usage of this application.
+        <div class="mu-margin mu-margin-top">
+          <ol class="mu-medium">
+            <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/a/identity/users" target="_blank">OCI Console</a></li>
+            <li>Governance and Admininstration &raquo; Identity &raquo; Users</li>
+            <li>Select <em>or create</em> the user you wish to use</li>
+            <li>If necessary, follow these 
               <li>If necessary, follow these 
-                <a href="https://docs.cloud.oracle.com/iaas/Content/Functions/Tasks/functionssetupapikey.htm" target="_blank">instructions</a>
-                to create an API key
-              </li>
-              <li>
-                ✏️ Make note of the following items:
-                <div>User <b><code>OCID</code></b></div>
-                <div>API Key <b>Fingerprint</b></div>
-              </li>
-            </ol>
-          </div>
-        </li>
-        <!-- user group policies -->
-        <li>
-          If your configured User (with API Key) is <em><b>not</b></em> a member
-          of the Administrators Group, then a <b>Group</b> with specific Policies must be
-          created, and the User added as a member
-          <div class="mu-margin mu-margin-top">
-            <ol class="mu-medium">
-              <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/identity/groups" target="_blank">OCI Console</a></li>
-              <li>Governance and Admininstration &raquo; Identity &raquo; Groups &raquo; Create</li>
-              <li>Specify metadata for the Group, and make note of the <label>NAME</label></li>
-              <li>Click <button class="oui-button oui-button-primary">Add User to Group</button> and select your API User</li>
-              <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
-              <li>
-                Create a Policy with the following statement:
-                <pre><code class="hljs text">Allow group &lt;GroupName&gt; to manage all-resources in compartment &lt;CompartmentName&gt;</code></pre>
-                <blockquote class="mu-medium">
-                  ⚠️ This policy is intentionally broad for the sake of simplicity, and is not recommended in most
-                  real-world use cases. Refer to the
-                  <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/overview.htm#three" target="_blank">Documentation</a>
-                  for more on this topic.
-                </blockquote>
-              </li>
-            </ol>
-          </div>
-        </li>
-        <!-- service limits -->
-        <li>Streaming...</li>
-        <!-- checklist -->
-        <li>
-          Many of these tenancy configurations will be used at different times
-          within the material that follows. Please create a file with the following
-          information to simplify lookups later.
-          <div class="mu-margin mu-margin-top">
-            <pre><code class="hljs yaml">region:       # Region where resources will be provisioned. (ex: us-phoenix-1)
+            <li>If necessary, follow these 
+              <a href="https://docs.cloud.oracle.com/iaas/Content/Functions/Tasks/functionssetupapikey.htm" target="_blank">instructions</a>
+              to create an API key
+            </li>
+            <li>
+              ✏️ Make note of the following items:
+              <div>User <b><code>OCID</code></b></div>
+              <div>API Key <b>Fingerprint</b></div>
+            </li>
+          </ol>
+        </div>
+      </li>
+      <!-- user group policies -->
+      <li>
+        If your configured User (with API Key) is <em><b>not</b></em> a member
+        of the Administrators Group, then a <b>Group</b> with specific Policies must be
+        created, and the User added as a member
+        <div class="mu-margin mu-margin-top">
+          <ol class="mu-medium">
+            <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/identity/groups" target="_blank">OCI Console</a></li>
+            <li>Governance and Admininstration &raquo; Identity &raquo; Groups &raquo; Create</li>
+            <li>Specify metadata for the Group, and make note of the <label>NAME</label></li>
+            <li>Click <button class="oui-button oui-button-primary">Add User to Group</button> and select your API User</li>
+            <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
+            <li>
+              Create a Policy with the following statement:
+              <pre><code class="hljs text">Allow group &lt;GroupName&gt; to manage all-resources in compartment &lt;CompartmentName&gt;</code></pre>
+              <blockquote class="mu-medium">
+                ⚠️ This policy is intentionally broad for the sake of simplicity, and is not recommended in most
+                real-world use cases. Refer to the
+                <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/overview.htm#three" target="_blank">Documentation</a>
+                for more on this topic.
+              </blockquote>
+            </li>
+          </ol>
+        </div>
+      </li>
+      <!-- service limits -->
+      <li>Streaming...</li>
+      <!-- checklist -->
+      <li>
+        Many of these tenancy configurations will be used at different times
+        within the material that follows. Please create a file with the following
+        information to simplify lookups later.
+        <div class="mu-margin mu-margin-top">
+          <pre><code class="hljs yaml">region:       # Region where resources will be provisioned. (ex: us-phoenix-1)
 tenancy:      # Tenancy OCID value
 user:         # API User OCID value
 compartment:  # Compartment OCID value
 key:          # Private API Key file path (ex: /Users/jdoe/.oci/oci_key.pem)
 fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
-          </div>
-          <blockquote class="mu-small">
-            ⚠️ It is also recommeded to configure the OCI Command Line with using these values. Refer
-            the <a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliconfigure.htm" target="_blank">Documentation</a>
-            on CLI configuration .
-          </blockquote>
-        </li>
-      </ul>
-    </div>
-
-  </section>
+        </div>
+        <blockquote class="mu-small">
+          ⚠️ It is also recommeded to configure the OCI Command Line with using these values. Refer
+          the <a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliconfigure.htm" target="_blank">Documentation</a>
+          on CLI configuration .
+        </blockquote>
+      </li>
+    </ul>
+  </div>
 
 </section>
-
 <!-- K8S Setup -->
 <section id="k8s" data-background-image="/images/tech/k8s.png" data-background-size="100px"
   data-background-position="20px 20px">
   <h2>Prepare Docker/K8s</h2>
-  <div>
-    <p class="mu-left mu-medium">
-      Several exercises in the workshop require the use of Docker/Kubernetes.
-      In order to run commands in a local cluster, please follow these
-      instructions to setup your environment.
-    </p>
-    <hr />
-  </div>
+  <p class="mu-small mu-left">
+    Several exercises in the workshop require the use of Docker/Kubernetes.
+    In order to run commands in a local cluster, please follow these
+    instructions to setup your environment.
+  </p>
+  <hr />
+
   <div class="mu-flex mu-small switcher">
     <ul>
       <li>Enable K8s (Mac)</li>
@@ -264,63 +260,112 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
   </div>
 </section>
 
-<section id="k8s" data-background-image="/images/tech/k8s.png" data-background-size="100px"
+<section id="oke" data-background-image="/images/tech/k8s.png" data-background-size="100px"
   data-background-position="20px 20px">
   <h2>Prepare OKE Cluster</h2>
-
-  <div class="fragment-set">
-    <div class="fragment fade-out">
-      <p class="mu-left mu-medium">
-        In <em>addition</em> to local Kubernetes cluster, you can also create and use an OKE cluster.
-        Please follow these instructions to set up an OKE cluster.
-      </p>
-      <hr />
-    </div>
-    <div class="fragment fade-in mu-flex mu-gutter">
-      <div><img class="plain" width="100%" data-src="/images/k8s/console1.png"
-          alt="Console - Developer Services - Container Clusters" /></div>
-      <div><img class="plain" width="100%" data-src="/images/k8s/console2.png" alt="Console - Cluster List" /></div>
-    </div>
-    <div class="fragment fade-in mu-flex mu-gutter">
-      <img class="plain" data-src="/images/k8s/create_simple_oke1.png" alt="Console - Cluster Creation" />
-    </div>
-    <div class="fragment fade-in mu-overflow">
-      <img class="plain" data-src="/images/k8s/create_simple_oke2.png" alt="Console - Cluster Node Pool Creation" />
-    </div>
+  <p class="mu-left mu-small">
+    In <em>addition</em> to local Kubernetes cluster, you can also create and use an OKE cluster.
+    Please follow these instructions to set up an OKE cluster.
+  </p>
+  <hr />
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li>Create Cluster</li>
+      <li>Configure <code>kubectl</code></li>
+      <li>K8s Dashboard</li>
+    </ul>
+    <ul class="col-1-1">
+      <li>
+        Developer Services &raquo; Container Clusters (OKE) &raquo; <button class="oui-button oui-button-primary">Create Cluster</button>
+        <div class="mu-ratio mu-ratio-16-9 mu-margin-top">
+          <div class="mu-overflow">
+            <img data-src="/images/k8s/create.oke.png" alt="Console - Cluster Creation" />
+          </div>
+        </div>
+      </li>
+      <li>
+        Configure <code>kubectl</code> command line tool with <button class="oui-button oui-button-default">Access Kubeconfig</button>
+        <div class="mu-margin mu-margin-top">
+          <div class="mu-ratio mu-ratio-5-2">
+            <div class="mu-overflow">
+              <img data-src="/images/k8s/kubeconfig2.png" alt="Console - Accessing Kubeconfig" />
+            </div>
+          </div>
+        </div>
+        <pre><code class="hljs text">mkdir -p $HOME/.kube</code></pre>
+        <pre><code class="hljs text">oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae3dgnlgmqzgczjsg4zgeyjzhfsggmrvmi3ggobwgczgezlcgrsg --file $HOME/.kube/config --region us-phoenix-1</code></pre>
+        <pre><code class="hljs text">export KUBECONFIG=$HOME/.kube/config</code></pre>
+      </li>
+      <li>
+        Access the Kubernetes Dashboard UI
+        <div class="mu-margin mu-margin-top">
+          <img class="no-margin" data-src="/images/k8s/dashboard.png" alt="Console - Accessing Kubernetes Dashboard" />
+        </div>
+        <pre><code class="hljs text">kubectl proxy</code></pre>
+        <p class="mu-small">Open <a
+        href="http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/"
+        target="_blank">http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/</a></p>
+      </li>
+    </ul>
   </div>
-</section>
-
-<section id="oke-kubectl">
-  <h2>Access an OKE Cluster</h2>
-  <ul class="mu-small">
-    <li>Kubectl - Command Line Tool</li>
-  </ul>
-  <div class="mu-flex mu-gutter">
-    <div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig1.png"
-        alt="Console - Cluster Details" /></div>
-    <div><img class="plain fragment" width="100%" data-src="/images/k8s/kubeconfig2.png"
-        alt="Console - Accessing Kubeconfig" /></div>
-  </div>
-  <pre class="fragment"><code class="hljs text">mkdir -p $HOME/.kube</code></pre>
-  <pre class="fragment"><code class="hljs text">oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae3dgnlgmqzgczjsg4zgeyjzhfsggmrvmi3ggobwgczgezlcgrsg --file $HOME/.kube/config --region us-phoenix-1</code></pre>
-  <pre class="fragment"><code class="hljs text">export KUBECONFIG=$HOME/.kube/config</code></pre>
-</section>
-
-<section id="oke-dashboard">
-  <h2>Access an OKE Cluster</h2>
-  <ul class="mu-small">
-    <li>Dashboard - UI Tool</li>
-  </ul>
-  <img class="plain fragment" data-src="/images/k8s/dashboard.png" alt="Console - Accessing Kubernetes Dashboard" />
-  <pre class="fragment"><code class="hljs text">kubectl proxy</code></pre>
-  <p class="mu-small">Then click <a
-      href="http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/"
-      target="_blank">here</a> to access the dashboard.</p>
 </section>
 
 <section id="helm">
-  <h2>Quick Install - Helm</h2>
-  <div class="fragment-set mu-sequence">
+  <h2>Helm Installations</h2>
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li>MacOS or Linux</li>
+      <li>Windows</li>
+      <li>Windows (svcat)</li>
+    </ul>
+    <ul class="col-1-1">
+      <li>
+        <p>Install Homebrew, a MacOS package manager, if not yet installed</p>
+        <pre><code class="hljs shell">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
+        <p>Install Helm using this command. Will also install the optional svcat cli</p>
+        <pre><code class="hljs shell">brew update && brew install kubernetes-helm kubernetes-service-catalog-client</code></pre>
+        <p>Check if you have helm installed on the local K8s (Docker Desktop)</p>
+        <pre><code class="hljs text">helm version</code></pre>
+        <p>The Helm version command should give result similar to this:</p>
+        <pre><code class="hljs shell">&gt; helm version
+Client: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}</code></pre>
+        <p>If you receive an error that helm could not find tiller pod on the server, do this:</p>
+        <pre><code class="hljs text">helm init --history-max 200</code></pre>
+      </li>
+      <li>
+        <p>Install
+          <a href="https://chocolatey.org/install" target="_blank">Chocolatey</a>,
+          a Windows package manager, if not yet installed
+        </p>
+        <p>Install Helm using this command</p>
+        <pre><code class="hljs shell">choco install kubernetes-helm</code></pre>
+        <p>Check if you have helm installed on the local K8s (Docker Desktop)</p>
+        <pre><code class="hljs text">helm version</code></pre>
+        <p>The Helm version command should give result similar to this:</p>
+        <pre><code class="hljs shell">c:\ helm version
+Client: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}
+Server: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}</code></pre>
+        <p>If you receive an error that helm could not find tiller pod on the server, do this:</p>
+        <pre><code class="hljs text">helm init --history-max 200</code></pre>
+      </li>
+      <li>
+        <p>Install the svcat cli:</p>
+        <pre><code class="hljs shell">iwr 'https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe' -UseBasicParsing -OutFile svcat.exe
+mkdir -f ~\bin
+$env:PATH += ";${pwd}\bin"
+svcat version --client</code></pre>
+        <hr />
+        <p>
+          Or download the binary directly and make executable:
+          <a href="https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe" target="_blank">svcat.exe download</a>
+        </p>
+      </li>
+    </ul>
+  </div>
+
+
+  <!-- <div class="fragment-set mu-sequence">
     <div class="fragment fade-out">
       <p class="mu-center no-margin">MacOS or Linux</p>
       <div class="mu-medium">
@@ -372,5 +417,5 @@ svcat version --client</code></pre>
         </p>
       </div>
     </div>
-  </div>
+  </div> -->
 </section>
