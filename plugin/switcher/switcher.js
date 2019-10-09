@@ -1,10 +1,20 @@
 
 var Switcher = (function() {
 
-  function initSwitcher(el) {
+  function initSlide(el) {
+    var nodes = el.querySelectorAll('.switcher');
+    Array.apply(null, nodes).forEach(initSwitcher);
+  }
+
+  function initSwitcher(el, switcherIndex) {
     var control = el.children[0];
     var content = el.children[1];
     
+    if (el.getAttribute('data-switcher-init')) {
+      return;
+    }
+    el.setAttribute('data-switcher-init', true);
+    console.log('init');
     var tabs = Array.apply(null, control.children);
     var panes = Array.apply(null, content.children);
 
@@ -23,7 +33,7 @@ var Switcher = (function() {
       }, false);
     });
 
-    // fragment listener
+    // fragment
     if (frag) {
       Reveal.addEventListener('fragmentshown', function(e) {
         // last shown from an action
@@ -32,9 +42,19 @@ var Switcher = (function() {
           setActive(tabs, panes, i);
         }
       });
+      Reveal.addEventListener('fragmenthidden', function(e) {
+        // last shown from an action
+        var i = tabs.indexOf(e.fragments.slice().pop()) - 1;
+        if (i > -1) {
+          setActive(tabs, panes, i);
+        }
+      });
     }
 
     // initial
+    if (switcherIndex === 0 && frag && activeIndex <= 0) {
+      Reveal.navigateFragment(~~tabs[0].getAttribute('data-fragment-index'), 0);
+    }
     setActive(tabs, panes, activeIndex);
   }
 
@@ -50,8 +70,10 @@ var Switcher = (function() {
 
   return {
     init: function() {
-      var nodes = Reveal.getRevealElement().querySelectorAll('.switcher');
-      Array.apply(null, nodes).forEach(initSwitcher);
+      initSlide(Reveal.getCurrentSlide());
+      Reveal.addEventListener('slidechanged', function(e) { 
+        initSlide(e.currentSlide);
+      });
     }
   }
 })();
