@@ -778,3 +778,13 @@ table.mu-table {
     border-radius: 3px;
 	}
 }
+a.oui-button:hover {
+	border: 1px solid transparent;
+	&.oui-button-primary {
+    color: #fff;
+	}
+	&.oui-button-default {
+    color: #222;
+		border-color: #b5bbc2;
+	}
+}

@@ -16,92 +16,92 @@
     <table class="mu-table">
       <thead>
         <tr>
-          <th>Name</th>
+          <th colspan="2">Name</th>
           <th>Description</th>
-          <th>Info</th>
           <th>Required?</th>
         </tr>
       </thead>
       <tbody>
         <tr>
           <td>
-            <a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" target="_blank">OCI Tenancy<sup>1</sup></a>
+            <a href="https://docs.cloud.oracle.com/iaas/Content/GSG/Tasks/signingup.htm" target="_blank">OCI Tenancy</a>
           </td>
+          <td><a href="#tenancy">ℹ️</a></td>
           <td>Access to Oracle Cloud Infrastructure console and resources</td>
-          <td></td>
-          <td class="mu-center">✅</td>
+          <td>✅<sup>1</sup></td>
         </tr>
         <tr>
           <td>
-              <a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop<sup></sup></a>
+              <a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker</a>
           </td>
-          <td>Docker engine including Kubernetes and <code>kubectl</code></td>
           <td><a href="#k8s">ℹ️</a></td>
-          <td class="mu-center">✅</td>
+          <td>Docker engine including Kubernetes and <code>kubectl</code></td>
+          <td>✅</td>
         </tr>
         <tr>
           <td>
-            <a href="https://github.com/helm/helm" target="_blank">Helm<sup></sup></a>
-          </td>
-          <td>
-            Kubernetes Package Manager
+            <a href="https://github.com/helm/helm" target="_blank">Helm</a>
           </td>
           <td><a href="#helm">ℹ️</a></td>
-          <td class="mu-center">✅</td>
+          <td>Kubernetes Package Manager</td>
+          <td>✅</td>
         </tr>
         <tr>
           <td>
-            <a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line<sup>2</sup></a>
-          </td>
-          <td>
-            Oracle Cloud Infrastructure command line interface
+            <a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a>
           </td>
           <td></td>
-          <td class="mu-center mu-grayscale">✅</td>
+          <td>Oracle Cloud Infrastructure command line interface</td>
+          <td class="mu-grayscale">✅<sup>2</sup></td>
         </tr>
         <tr>
           <td>
-            <a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat<sup></sup></a></a>
+            <a href="https://svc-cat.io/docs/install/#step-2---install-service-catalog" target="_blank">svcat</a>
           </td>
-          <td>
-            Kubernetes Service Catalog CLI
-          </td>
+          <td><a href="#helm">ℹ️</a></td>
+          <td>Kubernetes Service Catalog CLI</td>
           <td></td>
-          <td class="mu-center"></td>
         </tr>
         <tr>
           <td>
-            <a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor<sup></sup></a></a>
-          </td>
-          <td>
-            Command line utility for parsing JSON outputs
+            <a href="https://stedolan.github.io/jq/" target="_blank">JSON CLI Processor</a>
           </td>
           <td></td>
-          <td class="mu-center"></td>
+          <td>Command line utility for parsing JSON outputs</td>
+          <td></td>
+        </tr>
+        <tr>
+          <td>
+            <a href="https://docs.microsoft.com/en-us/powershell/" target="_blank">PowerShell</a> or
+            <a href="https://cmder.net/">cmder</a>
+          </td>
+          <td></td>
+          <td>Windows command line shell</td>
+          <td>✅<sup>3</sup></td>
         </tr>
       </tbody>
     </table>
 
     <blockquote class="mu-small mu-left">
       <sup>1</sup>Tenancy access may or may not be provided. Plan to use your own.<br />
-      <sup>2</sup><strong>Required</strong> if using an OKE cluster.
+      <sup>2</sup>OCI command line is <b>required</b> if using an OKE cluster.<br />
+      <sup>3</sup><b>Required</b> for Windows users.
     </blockquote>
   </div>
 </section>
 
 <!-- configuration -->
-<section id="configuration">
+<section id="tenancy">
   <h2>Configure Tenancy</h2>
   <p class="mu-small mu-left">
     When a tenancy is created, an <strong>Administrators</strong> group is automatically created
-    for the tenancy. Users that are members of the <strong>Administrators</strong> group can
+    for the tenancy. Users that are members of the default <strong>Administrators</strong> group can
     perform any operation on resources in the tenancy.
   </p>
   <hr />
 
   <div class="mu-flex mu-small switcher">
     <ul>
-      <li>OKE Policies</li>
       <li>Compartment</li>
       <li>API User</li>
       <li>User Policies</li>
@@ -109,23 +109,6 @@
       <li>✅ Checklist</li>
     </ul>
     <ul class="col-1-1">
-      <!-- oke policy -->
-      <li>
-        Before you can use Container Engine for Kubernetes (OKE) to create and deploy
-        clusters, the tenancy's <b>root compartment</b> must include a
-        policy to allow OKE to perform operations in the tenancy.
-
-        <div class="mu-margin mu-margin-top">
-          <ol class="mu-medium">
-            <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/a/identity/policies" target="_blank">OCI Console</a></li>
-            <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
-            <li><pre><code class="hljs text">Allow service OKE to manage all-resources in tenancy</code></pre></li>
-          </ol>
-        </div>
-        <a href="https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm" target="_blank">
-          ℹ️ Documentation
-        </a>
-      </li>
       <!-- compartment setup -->
       <li>
         Depending on the tenancy and your level of access,
@@ -135,26 +118,17 @@
         <div class="mu-margin mu-margin-top">
           <ol class="mu-medium">
             <li>Launch <a href="https://console.us-phoenix-1.oraclecloud.com/identity/compartments" target="_blank">OCI Console</a></li>
-            <li>Governance and Admininstration &raquo; Identity &raquo; Compartments &raquo; Create</li>
-            <li>
-              <div class="mu-flex">
-                <label>NAME</label> <span class="mu-muted">A name for the Compartment</span>
-              </div>
-              <div class="mu-flex">
-                <label>DESCRIPTION</label> <span class="mu-muted">A user-friendly description</span>
-              </div>
-            </li>
+            <li>Governance and Admininstration &raquo; Identity &raquo; Compartments</li>
+            <li>Click the <button class="oui-button oui-button-primary">Create Compartment</button> button</li>
             <li>✏️ Make note of the Compartment <b><code>OCID</code></b></li>
           </ol>
         </div>
-        <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#two" target="_blank">
+        <a class="oui-button oui-button-default" href="https://docs.cloud.oracle.com/iaas/Content/Identity/Tasks/managingcompartments.htm#two" target="_blank">
           ℹ️ Documentation
         </a>
       </li>
       <!-- api user -->
       <li>
-        You will need a User with <b>API Key</b> access in your tenancy. This can be your personal user account, or 
-          You will need a User with <b>API Key</b> access in your tenancy. This can be your personal user account, or 
         You will need a User with <b>API Key</b> access in your tenancy. This can be your personal user account, or 
         a virtual user specific to usage of this application.
         <div class="mu-margin mu-margin-top">
@@ -163,43 +137,45 @@
             <li>Governance and Admininstration &raquo; Identity &raquo; Users</li>
             <li>Select <em>or create</em> the user you wish to use</li>
             <li>If necessary, follow these 
-              <li>If necessary, follow these 
-            <li>If necessary, follow these 
               <a href="https://docs.cloud.oracle.com/iaas/Content/Functions/Tasks/functionssetupapikey.htm" target="_blank">instructions</a>
               to create an API key
             </li>
             <li>
               ✏️ Make note of the following items:
-              <div>User <b><code>OCID</code></b></div>
-              <div>API Key <b>Fingerprint</b></div>
+              <ul>
+                <li>User <b><code>OCID</code></b></li>
+                <li>API Key <b>Fingerprint</b></li>
+              </ul>
             </li>
           </ol>
         </div>
       </li>
       <!-- user group policies -->
       <li>
-        If your configured User (with API Key) is <em><b>not</b></em> a member
+        If your configured User (with API Key) is <em class="underline"><b>not</b></em> a member
         of the Administrators Group, then a <b>Group</b> with specific Policies must be
         created, and the User added as a member
         <div class="mu-margin mu-margin-top">
           <ol class="mu-medium">
             <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/identity/groups" target="_blank">OCI Console</a></li>
             <li>Governance and Admininstration &raquo; Identity &raquo; Groups &raquo; Create</li>
+            <li>Click the <button class="oui-button oui-button-primary">Create Group</button> button</li>
             <li>Specify metadata for the Group, and make note of the <label>NAME</label></li>
-            <li>Click <button class="oui-button oui-button-primary">Add User to Group</button> and select your API User</li>
+            <li>Click the <button class="oui-button oui-button-primary">Add User to Group</button> button and select your API User<hr/></li>
             <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
+            <li>Click the <button class="oui-button oui-button-primary">Create Policy</button> button</li>
             <li>
               Create a Policy with the following statement:
               <pre><code class="hljs text">Allow group &lt;GroupName&gt; to manage all-resources in compartment &lt;CompartmentName&gt;</code></pre>
-              <blockquote class="mu-medium">
-                ⚠️ This policy is intentionally broad for the sake of simplicity, and is not recommended in most
-                real-world use cases. Refer to the
-                <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/overview.htm#three" target="_blank">Documentation</a>
-                for more on this topic.
-              </blockquote>
             </li>
           </ol>
         </div>
+        <blockquote class="mu-medium">
+          ⚠️ This policy is intentionally broad for the sake of simplicity, and is not recommended in most
+          real-world use cases. Refer to the
+          <a href="https://docs.cloud.oracle.com/iaas/Content/Identity/Concepts/overview.htm#three" target="_blank">Documentation</a>
+          for more on this topic.
+        </blockquote>
       </li>
       <!-- service limits -->
       <li>Streaming...</li>
@@ -227,34 +203,89 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
 
 </section>
 <!-- K8S Setup -->
-<section id="k8s" data-background-image="/images/tech/k8s.png" data-background-size="100px"
-  data-background-position="20px 20px">
+<section id="k8s" data-background-image="/images/tech/docker.svg" data-background-size="100px"
+  data-background-position="10px 0">
   <h2>Prepare Docker/K8s</h2>
   <p class="mu-small mu-left">
-    Several exercises in the workshop require the use of Docker/Kubernetes.
-    In order to run commands in a local cluster, please follow these
-    instructions to setup your environment.
+    Several exercises in the workshop require the use of Docker &amp; Kubernetes.
+    Please follow these instructions to setup your environment.
   </p>
   <hr />
 
   <div class="mu-flex mu-small switcher">
     <ul>
+      <li>Install Docker</li>
       <li>Enable K8s (Mac)</li>
       <li>Enable K8s (Windows)</li>
       <li><code>kubectl</code></li>
     </ul>
     <ul class="col-1-1">
-      <li><img class="plain" data-src="/images/help/enable_k8s.png" alt="Enable K8S" /></li>
-      <li><img class="plain" data-src="/images/help/enable_k8s_win.png" alt="Enable K8S" /></li>
+      <li>
+        Depending on operating system, Docker may be installed in a number of ways, 
+        with the simplest option being
+        <a href="https://www.docker.com/products/docker-desktop" target="_blank">Docker Desktop</a>.
+        <p>
+          ⚠️ Docker Desktop for Windows <b>requires</b> <code>Hyper-V</code> support.
+          There are several options available, please choose accordingly.
+        </p>
+        <p>
+          Windows users must select the option for <b>Linux</b> containers.
+        </p>
+        <ul>
+          <li>
+            <a href="https://docs.docker.com/docker-for-windows/install/" target="_blank">Docker Desktop for Windows</a>
+            <span class="mu-small">(Windows 10 Pro with Hyper-V)</span>
+          </li>
+          <li>
+            <a href="https://docs.docker.com/toolbox/toolbox_install_windows/" target="_blank">Docker Toolbox</a>
+            <span class="mu-small">(Windows without Hyper-V)</span>
+          </li>
+          <li>
+            <a href="https://learnk8s.io/blog/installing-docker-and-kubernetes-on-windows/" target="_blank">Docker + Minikube</a>
+            <span class="mu-small">(Windows without Hyper-V)</span>
+          </li>
+        </ul>
+      </li>
+      <li>
+        Docker &raquo; Preferences
+        <blockquote class="mu-small">
+          ℹ️ This also installs the <code>kubectl</code> CLI
+        </blockquote>
+        <img class="no-margin" data-src="/images/help/enable_k8s.png" alt="Enable K8S" />
+      </li>
+      <li>
+        Installing Docker and running a local Kubernetes cluster on a <b>Windows</b> machine
+        will depend on the operating system, and features available - namely
+        <code>Hyper-V</code>
+        <blockquote class="mu-small">
+          ℹ️ If using a local K8s cluster presents an inconvenience, it is recommended
+          to setup an <a href="#oke">OKE</a> cluster instead. In this situation,
+          a local installation of the Kubernetes command line: 
+          <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-windows" target="_blank"><code>kubectl</code></a>
+          is also necessary.
+        </blockquote>
+        <img class="no-margin" data-src="/images/help/enable_k8s_win.png" alt="Enable K8S" />
+      </li>
       <li class="mu-sequence">
-        <p>Check <code>kubectl</code> context</p>
-        <pre><code class="hljs text">kubectl config current-context</code></pre>
-        <p>Create namespace</p>
-        <pre><code class="hljs text">kubectl create namespace mushop</code></pre>
-        <p>Set default namespace <em class="mu-muted">(optional)</em></p>
-        <pre><code class="hljs text">kubectl config set-context \
+        <ol>
+          <li>
+            If not already available, install <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl"><code>kubectl</code></a>
+          </li>
+          <li>
+            Check <code>kubectl</code> context
+            <pre><code class="hljs text">kubectl config current-context</code></pre>
+          </li>
+          <li>
+            Create namespace
+            <pre><code class="hljs text">kubectl create namespace mushop</code></pre>
+          </li>
+          <li>
+            Set default namespace <em class="mu-muted">(optional)</em>
+            <pre><code class="hljs text">kubectl config set-context \
   $(kubectl config current-context) \
   --namespace=mushop</code></pre>
+          </li>
+        </ol>
       </li>
     </ul>
   </div>
@@ -264,17 +295,40 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
   data-background-position="20px 20px">
   <h2>Prepare OKE Cluster</h2>
   <p class="mu-left mu-small">
-    In <em>addition</em> to local Kubernetes cluster, you can also create and use an OKE cluster.
-    Please follow these instructions to set up an OKE cluster.
+    As an alternative to a local Kubernetes cluster, you may wish to utilize an OKE cluster.
+    Please follow these instructions to setup an OKE cluster.
   </p>
   <hr />
   <div class="mu-flex mu-small switcher">
     <ul>
+      <li>OKE IAM Policies</li>
       <li>Create Cluster</li>
       <li>Configure <code>kubectl</code></li>
       <li>K8s Dashboard</li>
     </ul>
     <ul class="col-1-1">
+      <!-- oke policy -->
+      <li>
+        Before you can use Container Engine for Kubernetes (OKE) to manage clusters,
+        the tenancy's <b>root compartment</b> must include a
+        policy to allow OKE to perform necessary operations.
+
+        <div class="mu-margin mu-margin-top">
+          <ol class="mu-medium">
+            <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/a/identity/policies" target="_blank">OCI Console</a></li>
+            <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
+            <li>Click the <button class="oui-button oui-button-primary">Create Policy</button> button</li>
+            <li>
+              Create a Policy with the following Statement:
+              <pre><code class="hljs text">Allow service OKE to manage all-resources in tenancy</code></pre>
+            </li>
+          </ol>
+        </div>
+        <a class="oui-button oui-button-default" href="https://docs.cloud.oracle.com/iaas/Content/ContEng/Concepts/contengpolicyconfig.htm" target="_blank">
+          ℹ️ Documentation
+        </a>
+      </li>
+      <!-- create -->
       <li>
         Developer Services &raquo; Container Clusters (OKE) &raquo; <button class="oui-button oui-button-primary">Create Cluster</button>
         <div class="mu-ratio mu-ratio-16-9 mu-margin-top">
@@ -283,6 +337,7 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
           </div>
         </div>
       </li>
+      <!-- kubectl -->
       <li>
         Configure <code>kubectl</code> command line tool with <button class="oui-button oui-button-default">Access Kubeconfig</button>
         <div class="mu-margin mu-margin-top">
@@ -296,6 +351,7 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
         <pre><code class="hljs text">oci ce cluster create-kubeconfig --cluster-id ocid1.cluster.oc1.phx.aaaaaaaaae3dgnlgmqzgczjsg4zgeyjzhfsggmrvmi3ggobwgczgezlcgrsg --file $HOME/.kube/config --region us-phoenix-1</code></pre>
         <pre><code class="hljs text">export KUBECONFIG=$HOME/.kube/config</code></pre>
       </li>
+      <!-- dashboard -->
       <li>
         Access the Kubernetes Dashboard UI
         <div class="mu-margin mu-margin-top">
@@ -311,7 +367,7 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
 </section>
 
 <section id="helm">
-  <h2>Helm Installations</h2>
+  <h2>Helm/svcat Installation</h2>
   <div class="mu-flex mu-small switcher">
     <ul>
       <li>MacOS or Linux</li>
@@ -364,58 +420,4 @@ svcat version --client</code></pre>
     </ul>
   </div>
 
-
-  <!-- <div class="fragment-set mu-sequence">
-    <div class="fragment fade-out">
-      <p class="mu-center no-margin">MacOS or Linux</p>
-      <div class="mu-medium">
-        <p class="mu-small">Install Homebrew, a MacOS package manager, if not yet installed</p>
-        <pre><code class="hljs shell">/usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"</code></pre>
-        <p class="mu-small">Install Helm using this command. Will also install the optional svcat cli</p>
-        <pre><code class="hljs shell">brew update && brew install kubernetes-helm kubernetes-service-catalog-client</code></pre>
-        <p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
-        <pre><code class="hljs text">helm version</code></pre>
-        <p class="mu-small">The Helm version command should give result similar to this:</p>
-        <pre><code class="hljs shell">> helm version
-Client: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}
-Server: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}</code></pre>
-        <p class="mu-small">If you receive an error that helm could not find tiller pod on the server, do this:</p>
-        <pre><code class="hljs text">helm init --history-max 200</code></pre>
-      </div>
-    </div>
-    <div class="fragment fade-in">
-      <p class="mu-center no-margin">Windows</p>
-      <div class="mu-medium">
-        <p class="mu-small">Install
-          <a href="https://chocolatey.org/install" target="_blank">Chocolatey</a>,
-          a Windows package manager, if not yet installed
-        </p>
-        <p class="mu-small">Install Helm using this command</p>
-        <pre><code class="hljs shell">choco install kubernetes-helm</code></pre>
-        <p class="mu-small">Check if you have helm installed on the local K8s (Docker Desktop)</p>
-        <pre><code class="hljs text">helm version</code></pre>
-        <p class="mu-small">The Helm version command should give result similar to this:</p>
-        <pre><code class="hljs shell">c:\ helm version
-Client: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}
-Server: &version.Version{SemVer:"v2.14.3", GitCommit:"0e7f3b6637f7af8fcfddb3d2941fcc7cbebb0085", GitTreeState:"clean"}</code></pre>
-        <p class="mu-small">If you receive an error that helm could not find tiller pod on the server, do this:</p>
-        <pre><code class="hljs text">helm init --history-max 200</code></pre>
-      </div>
-    </div>
-    <div class="fragment fade-in">
-      <p class="mu-center no-margin">Windows</p>
-      <div class="mu-medium">
-        <p class="mu-small">Install the svcat cli:</p>
-        <pre><code class="hljs shell">iwr 'https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe' -UseBasicParsing -OutFile svcat.exe
-mkdir -f ~\bin
-$env:PATH += ";${pwd}\bin"
-svcat version --client</code></pre>
-        <hr />
-        <p class="mu-small">
-          Or download the binary directly and make executable:
-          <a href="https://download.svcat.sh/cli/latest/windows/amd64/svcat.exe" target="_blank">svcat.exe download</a>
-        </p>
-      </div>
-    </div>
-  </div> -->
 </section>
