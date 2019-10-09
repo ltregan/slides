@@ -200,8 +200,7 @@ ALTER USER carts_user
 docker build -t orders:local .
   
 #> src/carts
-docker build -t carts:local .
-    </code></pre>
+docker build -t carts:local .</code></pre>
 
       <p>This builds the application and produces a Docker image that contains the required artifacts
         to run the Orders and Carts application. </p>
@@ -222,28 +221,20 @@ docker images
 
           Make a copy of the values-dev.yaml file first:
         </p>
-        <pre><code class="hljs sh">
-cp deploy/helm-chart/mushop/values-dev.yaml deploy/helm-chart/mushop/local-orders-carts.yaml
-              </code></pre>
-
+        <pre><code class="hljs sh">cp deploy/helm-chart/mushop/values-dev.yaml deploy/helm-chart/mushop/local-orders-carts.yaml</code></pre>
         <p class="mu-small mu-left"><strong>Note</strong>: if you have an existing version of Mushop deployed,
           you can remove it using:</p>
-        <pre><code class="hljs sh">
-helm del mushop --purge
-
-</code></pre>
+        <pre><code class="hljs sh">helm delete mushop --purge</code></pre>
 
       </div>
       <div class="fragment fade-in">
         <p class="mu-small mu-left">
           The copied file has placeholders for the passwords needed for the services to access the
-          ATP. The
-          wallet files you copied to orders/carts subfolders also get used by Helm and mounted inside the
+          ATP. The wallet files you copied to orders/carts subfolders also get used by Helm and mounted inside the
           corresponding pods.
           <br />
           Fill out the <code>local-orders-carts.yaml</code> file with the passwords you set when you created the ATP and
-          the built
-          image names.
+          the built image names.
 
           <br />
           Note: if you haven't deployed Mushop to the cluster yet, make sure you fill out the OCI values as well at the
