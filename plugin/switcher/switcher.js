@@ -8,20 +8,41 @@ var Switcher = (function() {
     var tabs = Array.apply(null, control.children);
     var panes = Array.apply(null, content.children);
 
-    tabs.map(function(t, i) {
+    // init tab control
+    var frag, activeIndex = -1;
+    tabs.forEach(function(t, i) {
+      frag = frag || t.classList.contains('fragment');
+      activeIndex = activeIndex > -1 ? activeIndex : 
+        (t.classList.contains('current-fragment') || t.classList.contains('active')) ? i : -1;
+
       t.addEventListener('click', function() {
         setActive(tabs, panes, i);
+        if (frag) {
+          Reveal.navigateFragment(~~t.getAttribute('data-fragment-index'), 0);
+        }
       }, false);
     });
 
-    setActive(tabs, panes);
+    // fragment listener
+    if (frag) {
+      Reveal.addEventListener('fragmentshown', function(e) {
+        // last shown from an action
+        var i = tabs.indexOf(e.fragments.slice().pop());
+        if (i > -1) {
+          setActive(tabs, panes, i);
+        }
+      });
+    }
+
+    // initial
+    setActive(tabs, panes, activeIndex);
   }
 
   function setActive(tabs, panes, index) {
-    index = index || 0;
+    index = index > -1 ? index : 0;
     [tabs, panes].forEach(function(group) {
-      group.forEach(function(el) {
-        el.classList.remove('active');
+      group.forEach(function(el, i) {
+        i !== index && el.classList.remove('active');
       });
       return group[index] && group[index].classList.add('active');
     });
@@ -30,7 +51,7 @@ var Switcher = (function() {
   return {
     init: function() {
       var nodes = Reveal.getRevealElement().querySelectorAll('.switcher');
-      Array.apply(null, nodes).map(initSwitcher);
+      Array.apply(null, nodes).forEach(initSwitcher);
     }
   }
 })();

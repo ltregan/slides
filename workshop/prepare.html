@@ -102,11 +102,11 @@
 
   <div class="mu-flex mu-small switcher">
     <ul>
-      <li>Compartment</li>
-      <li>API User</li>
-      <li>User Policies</li>
-      <li>Service Limits</li>
-      <li>✅ Checklist</li>
+      <li class="fragment">Compartment</li>
+      <li class="fragment">API User</li>
+      <li class="fragment">User Policies</li>
+      <li class="fragment">Service Limits</li>
+      <li class="fragment">✅ Checklist</li>
     </ul>
     <ul class="col-1-1">
       <!-- compartment setup -->
@@ -178,7 +178,48 @@
         </blockquote>
       </li>
       <!-- service limits -->
-      <li>Streaming...</li>
+      <li>
+        Use of Cloud Native services in OCI will be subject to Service Limits in your
+        tenancy. Please check minimum resource availability as follows: 
+
+        <div class="mu-margin mu-margin-top">
+          <ol class="mu-medium">
+            <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/limits" target="_blank">OCI Console</a> Limits</li>
+            <li>Governance and Admininstration &raquo; Governance &raquo; Limits, Quotas, and Usage</li>
+            <li>Check Limits</li>
+          </ol>
+        </div>
+
+        <table class="mu-medium">
+          <thead>
+            <tr>
+              <th>Service</th>
+              <th>Description</th>
+              <th>Requirement</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Database</td>
+              <td>Autonomous Transaction Processing OCPU Count</td>
+              <td><code>>=1</code></td>
+            </tr>
+            <tr>
+              <td>Streaming</td>
+              <td>Partition Count</td>
+              <td>
+                <code>>=1</code><br/>
+                <span>⚠️ Default is <b>0</b> for Trial Tenancies</span>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <blockquote class="mu-medium">
+          ℹ️ This does not include requirements in cases where OKE is used. If using an OKE cluster, please refer to
+          <a href="#oke">OKE</a> Instructions
+        </blockquote>
+      </li>
       <!-- checklist -->
       <li>
         Many of these tenancy configurations will be used at different times
@@ -193,7 +234,7 @@ key:          # Private API Key file path (ex: /Users/jdoe/.oci/oci_key.pem)
 fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
         </div>
         <blockquote class="mu-small">
-          ⚠️ It is also recommeded to configure the OCI Command Line with using these values. Refer
+          ℹ️ It is also recommeded to configure the OCI Command Line with using these values. Refer
           the <a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliconfigure.htm" target="_blank">Documentation</a>
           on CLI configuration .
         </blockquote>
@@ -214,10 +255,10 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
 
   <div class="mu-flex mu-small switcher">
     <ul>
-      <li>Install Docker</li>
-      <li>Enable K8s (Mac)</li>
-      <li>Enable K8s (Windows)</li>
-      <li><code>kubectl</code></li>
+      <li class="fragment">Install Docker</li>
+      <li class="fragment">Enable K8s (Mac)</li>
+      <li class="fragment">Enable K8s (Windows)</li>
+      <li class="fragment"><code>kubectl</code></li>
     </ul>
     <ul class="col-1-1">
       <li>
@@ -301,10 +342,10 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
   <hr />
   <div class="mu-flex mu-small switcher">
     <ul>
-      <li>OKE IAM Policies</li>
-      <li>Create Cluster</li>
-      <li>Configure <code>kubectl</code></li>
-      <li>K8s Dashboard</li>
+      <li class="fragment">OKE IAM Policies</li>
+      <li class="fragment">Create Cluster</li>
+      <li class="fragment">Configure <code>kubectl</code></li>
+      <li class="fragment">K8s Dashboard</li>
     </ul>
     <ul class="col-1-1">
       <!-- oke policy -->
@@ -370,9 +411,9 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
   <h2>Helm/svcat Installation</h2>
   <div class="mu-flex mu-small switcher">
     <ul>
-      <li>MacOS or Linux</li>
-      <li>Windows</li>
-      <li>Windows (svcat)</li>
+      <li class="fragment">MacOS or Linux</li>
+      <li class="fragment">Windows</li>
+      <li class="fragment">Windows (svcat)</li>
     </ul>
     <ul class="col-1-1">
       <li>

@@ -135,7 +135,7 @@ module.exports = grunt => {
 					open: true,
 					useAvailablePort: true,
 					middleware: (connect, options, middlewares) => {
-						middlewares.unshift((req, res, next) => { console.log(req.url); next(); });
+						// middlewares.unshift((req, res, next) => { console.log(req.url); next(); });
 						return middlewares;
 					}
 				}
@@ -159,8 +159,8 @@ module.exports = grunt => {
 
 		watch: {
 			js: {
-				files: [ 'gruntfile.js', 'js/reveal.js' ],
-				tasks: 'js'
+				files: [ 'gruntfile.js', 'js/reveal.js', 'plugin/**/*.js' ],
+				tasks: ['js', 'copy']
 			},
 			theme: {
 				files: [
