@@ -13,75 +13,117 @@
 
 <!-- exercise -->
 <section>
-  <section id="lab">
+  <section id="lab" data-background-image="/images/logo.png" data-background-size="150px"
+  data-background-position="20px 20px">
     <h2>MuShop Development</h2>
-    <ol>
-      <li><a href="#clone">Clone</a></li>
-      <li><a href="#prepare">Prepare</a></li>
-      <li><a href="#start">Start</a></li>
-    </ol>
-  </section>
 
-  <section id="clone">
-    <h2>Clone Repository</h2>
-    <div class="mu-sequence">
-      <p class="mu-small no-margin">
-        Begin by cloning the Mushop project.
-      </p>
-      <div class="fragment">
-        <pre><code class="hljs sh">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git mushop
+    <div class="mu-flex mu-small switcher">
+      <ul>
+        <li class="fragment">Get Source Code</li>
+        <li class="fragment">Prepare Cluster</li>
+        <li class="fragment">Install MuShop</li>
+        <li class="fragment">Launch App</li>
+      </ul>
+      <ul class="col-1-1">
+        <li>
+          <ol>
+            <li>Connect to 🔒 VPN</li>
+            <li>Open <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo" target="blank">repo</a></li>
+            <li>
+              Click <a class="oui-button oui-button-primary">Clone</a>
+              <em class="mu-medium">(May require adding an <a href="https://orahub.oraclecorp.com/profile/keys" target="_blank">SSH key</a>)</em>
+
+              <div class="mu-medium mu-margin-top">
+                  <pre><code class="hljs text">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git mushop
 cd mushop</code></pre>
-      </div>
-      <div class="fragment">
-        <pre class="mu-xsmall"><code class="hljs text">.
-├── LICENSE
+                  <pre class="mu-small"><code class="hljs text">.
 ├── README.md
 ├── deploy
 │   ├── docker-compose
 │   ├── helm-chart
 │   └── kubernetes
-├── src
-│   ├── api
-│   ├── carts
-│   ├── catalogue
-│   ├── edge-router
-│   ├── load
-│   ├── orders
-│   ├── payment
-│   ├── shipping
-│   ├── storefront
-│   ├── stream
-│   └── user
-└── wercker.yml</code></pre>
-      </div>
-    </div>
-  </section>
-
-  <section id="prepare">
-    <h2>Prepare</h2>
-    <p class="mu-small">
-      The Mushop application can run in "mock mode" where service responses are mocked,
-      yet the whole system is fully functional. This is mainly used for quick demos and testing.
-    </p>
-    <hr />
-    <div class="mu-sequence">
-      <div class="fragment">
-        Check <code>kubectl</code> context:
-        <pre><code class="hljs sh">kubectl config current-context
+└── src
+    ├── api
+    ├── carts
+    ├── catalogue
+    ├── edge-router
+    ├── load
+    ├── orders
+    ├── payment
+    ├── shipping
+    ├── storefront
+    ├── stream
+    └── user</code></pre>
+                </div>
+            </li>
+          </ol>
+        </li>
+        <li>
+          MuShop provides a helm chart called <code>setup</code>, which includes several
+          <em>recommended</em> installations on the cluster. These installations represent
+          common 3rd party services, which integrate with Oracle Cloud Infrastructure
+          or enable certain features within the application.
+          <hr />
+          <ol>
+            <li>🔓 Disconnect VPN</li>
+            <li>
+              Check <code>kubectl</code> context:
+              <pre><code class="hljs sh">kubectl config current-context
 # docker-for-desktop</code></pre>
-      </div>
-      <div class="fragment">
-        Check <code>kubectl</code> namespace configuration:
-        <pre><code class="hljs sh">kubectl config view | grep namespace</code></pre>
-      </div>
-    </div>
-
-    <div class="fragment">
-      Next: <a class="navigate-down">Start</a>
-    </div>
+            </li>
+            <li>
+              Install cluster dependencies using <code>helm</code>:
+              <pre><code class="hljs sh">helm dependency update deploy/helm-chart/setup</code></pre>
+              <pre><code class="hljs sh">helm install deploy/helm-chart/setup \
+  --name mushop-setup \
+  --namespace mushop-setup</code></pre>
+              <div>
+                <blockquote class="mu-small">
+                  ⚠️ It is possible that certain services may conflict with pre-existing installs.<br/>
+                  If so, try setting <code>--set &lt;chart&gt;.enabled=false</code> for any
+                  conflicting charts.
+                </blockquote>
+              </div>
+            </li>
+          </ol>
+        </li>
+        <li>
+          MuShop application supports <em>"mock mode"</em> where service responses are mocked,
+          yet the application is fully functional.
+          <hr />
+          <pre><code class="hljs sh">helm install deploy/helm-chart/mushop \
+  --name mushop \
+  --namespace mushop \
+  --set global.mock.service="all"</code></pre>
+          <pre><code class="hljs text">kubectl get pod --watch -n mushop</code></pre>
+          <blockquote>
+            ⏲️ It may take a few moments to download all the application images.
+            It is also normal for some to show errors in mock mode.
+          </blockquote>
+        </li>
+        <!-- launch -->
+        <li>
+          Open MuShop in your browser: <a href="http://localhost" target="_blank">localhost</a>
+          <blockquote>
+            Kubernetes will use a self-signed SSL certificate by default
+          </blockquote>
+          <pre><code class="hljs text">########################################
+   __  __        _____ _                 
+  |  \/  |      / ____| |                
+  | \  / |_   _| (___ | |__   ___  _ __  
+  | |\/| | | | |\___ \| '_ \ / _ \| '_ \ 
+  | |  | | |_| |____) | | | | (_) | |_) |
+  |_|  |_|\__,_|_____/|_| |_|\___/| .__/ 
+                                  | |    
+                                  |_|    
+########################################</code></pre>
+          Alternatively access MuShop with a proxy to the cluster service
+          <pre><code class="hljs text">kubectl port-forward \
+  svc/edge 8000:80 \
+  --namespace mushop</code></pre>
+        </li>
+      </ul>
   </section>
-
-include "partials/highlights/_runlocal.html"
 
 </section>
 

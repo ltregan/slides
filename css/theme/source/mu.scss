@@ -151,6 +151,9 @@ a {
 	}
 	blockquote {
 		width: auto;
+		background: $o-color-light-alpha;
+		font-style: normal;
+		padding: $blockMargin / 2;
 	}
 	pre {
 		font-size: 0.4em;
@@ -563,6 +566,9 @@ a.title-print {
 			pre {
 				width: auto;
 				margin-left: 0;
+				&:last-child {
+					margin-bottom: 5px;
+				}
 			}
 		}
 	}
@@ -725,6 +731,7 @@ table.mu-table {
 		box-shadow: none;
 		max-width: 70%;
 		font-size: 0.9em;
+		background: none;
 		&:nth-child(even) {
 			margin: 0 auto $blockMargin 0;
 		}

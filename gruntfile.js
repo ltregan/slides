@@ -159,7 +159,7 @@ module.exports = grunt => {
 
 		watch: {
 			js: {
-				files: [ 'gruntfile.js', 'js/reveal.js', 'plugin/**/*.js' ],
+				files: [ 'gruntfile.js', 'js/reveal.js', 'plugin/**/*.js', '!node_modules/**/*'],
 				tasks: ['js', 'copy']
 			},
 			theme: {
@@ -172,15 +172,11 @@ module.exports = grunt => {
 				tasks: 'css-themes'
 			},
 			css: {
-				files: [ 'css/reveal.scss' ],
+				files: [ 'css/reveal.scss', '!node_modules/**/*' ],
 				tasks: 'css-core'
 			},
-			test: {
-				files: [ 'test/*.html' ],
-				tasks: 'test'
-			},
 			html: {
-				files: [ '**/*.html', '!build/**' ],
+				files: [ '**/*.html', '!build/**', '!node_modules/**/*' ],
 				tasks: 'includes'
 			},
 			markdown: {

@@ -314,7 +314,9 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
           </li>
           <li>
             Check <code>kubectl</code> context
-            <pre><code class="hljs text">kubectl config current-context</code></pre>
+            <pre><code class="hljs text">kubectl config current-context
+# docker-for-desktop
+            </code></pre>
           </li>
           <li>
             Create namespace
@@ -323,8 +325,7 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
           <li>
             Set default namespace <em class="mu-muted">(optional)</em>
             <pre><code class="hljs text">kubectl config set-context \
-  $(kubectl config current-context) \
-  --namespace=mushop</code></pre>
+  --current --namespace=mushop</code></pre>
           </li>
         </ol>
       </li>
@@ -461,4 +462,8 @@ svcat version --client</code></pre>
     </ul>
   </div>
 
+</section>
+
+<section id="done">
+  <h3>All Set!</h3>
 </section>
