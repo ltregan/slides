@@ -207,16 +207,20 @@ section > h2 > img {
 		font-size: 0.65em;
 	}
 }
-.mu-xsmall {
-	font-size: 0.3em !important;
-	line-height: 1;
-}
 .mu-medium {
 	font-size: 0.8em;
 	line-height: 1.1;
 	pre {
 		font-size: 0.55em;
 	}
+}
+.mu-smaller {
+	font-size: 0.5em !important;
+	line-height: 1;
+}
+.mu-xsmall {
+	font-size: 0.3em !important;
+	line-height: 1;
 }
 .mu-large {
 	font-size: 2em;
