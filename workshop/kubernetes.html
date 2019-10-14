@@ -326,9 +326,9 @@ spec:
     </p>
     <pre><code class="hljs text">kubectl get pod --watch </code></pre>
     <p class="mu-left">
-      Proxy from your machine to the Edge service running in OKE:
+      Proxy from your machine to the <code>edge</code> service running in Kubernetes:
     </p>
-    <pre><code class="hljs text">kubectl port-forward svc/mushop-edge 8000:80</code></pre>
+    <pre><code class="hljs text">kubectl port-forward svc/edge 8000:80</code></pre>
     <p class="mu-left">
       You are done! To access the store click <a href="http://localhost:8000">here</a>
     </p>

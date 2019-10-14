@@ -266,8 +266,18 @@ section > h2 > img {
 	}
 }
 
+.hidden {
+	visibility: hidden;
+}
+
 .underline {
 	text-decoration: underline;
+}
+
+.mu-hook {
+	.mu-hide-hook & {
+		visibility: hidden;
+	}
 }
 
 .reveal ul, .reveal ol {
@@ -427,8 +437,12 @@ a.title-print {
 			max-height: none;
 			max-width: 100%;
 		}
+		table {
+			margin: 0;
+		}
 	}
 
+	// cards
 	.card {
 		@include shadow();
 		@include bg($backgroundColor);
@@ -438,6 +452,7 @@ a.title-print {
 		padding: $blockMargin;
 		margin-bottom: $blockMargin;
 		list-style: none;
+		position: relative;
 	}
 	a.card {
 		.mu-normal {
@@ -513,6 +528,48 @@ a.title-print {
 	img, video {
 		max-width: 100%;
 		max-height: none;
+	}
+}
+
+// Blurbs
+.mu-blurb {
+	$connect-color: $o-color-burgundy;
+	$connect-size: 75px;
+	$dot-size: 10px;
+
+	position: absolute;
+	left: $dot-size;
+	top: 90%;
+	padding-top: $connect-size;
+	padding-left: $dot-size;
+	text-align: left;
+	border-left: 1px solid $connect-color;
+	font-size: 0.8em;
+
+	&::before {
+		content: "";
+		display: block;
+		background: $connect-color;
+		height: $dot-size;
+		width: $dot-size;
+		@include _crossbrowser(border-radius, $dot-size);
+		position: absolute;
+		top: 0; left: -($dot-size / 2);
+	}
+
+	.mu-blurb-invert & {
+		top: auto;
+		bottom: 90%;
+		padding-top: 0;
+		padding-bottom: $connect-size;
+		&::before {
+			top: auto;
+			bottom: 0;
+		}
+	}
+
+	.no-blurb & {
+		display: none !important;
 	}
 }
 

@@ -1,0 +1,75 @@
+https://grafana.com/grafana/plugins/oci-datasource
+https://github.com/oracle/oci-grafana-plugin/blob/master/docs/kubernetes.md
+## Grafana
+
+https://grafana.com/dashboards
+https://grafana.com/grafana/dashboards/1860 Node Exporter Full
+https://grafana.com/grafana/dashboards/3662 Prom Overview
+https://grafana.com/grafana/dashboards/6336 k8s pods !!!
+https://grafana.com/grafana/dashboards/6417 K8 Cluster !!!
+https://grafana.com/grafana/dashboards/1471 k8s App metrics
+https://grafana.com/grafana/dashboards/6663 Pod and Cluster!
+https://medium.com/@chris_linguine/how-to-monitor-your-kubernetes-cluster-with-prometheus-and-grafana-2d5704187fc8
+
+check out
+https://grafana.com/grafana/dashboards/8588
+
+
+Usage
+- Hover graph + "V"
+- Time adjust
+
+<section>
+  
+What is Grafana?
+
+The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
+
+Access Grafana
+
+We installed Grafana as part of the umbrella <code>setup</code> chart. Now let's
+revisit the charts and connect to some Grafana dashboards.
+
+
+```
+> helm list
+```
+
+<pre><code class="hljs text">NAME          REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
+mushop-setup  1               Sat Oct 12 06:12:45 2019        DEPLOYED        mushop-setup-0.0.1      1.0             mushop-setup      
+mushop        1               Sun Oct 13 20:23:28 2019        DEPLOYED        mushop-0.1.0            1.0             default </code></pre>
+
+```
+helm status mushop-setup
+```
+
+TL;DR
+
+Find the section on Grafana. It will contain instructions on connecting to the
+Grafana instance running on the K8s cluster.
+
+Get the <code>admin</code> password:
+
+<pre><code class="hljs text">kubectl get secret -n mushop-setup mushop-setup-grafana \
+  -o jsonpath="{.data.admin-password}" | base64 --decode ; echo</code></pre>
+
+Proxy from your machine to the <code>grafana</code> service running in Kubernetes:
+
+<pre><code class="hljs text">kubectl port-forward -n mushop-setup \
+  svc/mushop-setup-grafana 3000:80</code></pre>
+
+
+
+</section>
+
+<!-- hpa -->
+<section>
+<h2>Horizontal Autoscaling</h2>
+
+<a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" target="_blank">Horizontal Pod Autoscaling</a>
+
+
+<pre><code class="hljs text">kubectl scale --replicas=2 deployment/mushop-api</code></pre>
+
+</section>
+

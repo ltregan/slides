@@ -9,7 +9,7 @@
 </section>
 
 <section id="options">
-  <h2>MuShop in Development</h2>
+  <h2>Environment Options</h2>
 
   <ul class="plain mu-flex mu-wrap mu-flex-stretch mu-gutter">
     <li class="card col-1-3 mu-svc">
@@ -25,7 +25,7 @@
 
   <div class="mu-flex mu-flex-middle mu-small mu-margin">
     <div>Manual</div>
-    <div class="mu-flex-connector arrow">configuration</div>
+    <div class="mu-flex-connector arrow"></div>
     <div>Automated</div>
   </div>
 
@@ -135,7 +135,7 @@ cd mushop</code></pre>
   --namespace mushop \
   --set global.mock.service="all"</code></pre>
           <pre><code class="hljs text">kubectl get pod --watch -n mushop</code></pre>
-          <blockquote>
+          <blockquote class="mu-small">
             ⏲️ It may take a few moments to download all the application images.
             It is also normal for some to show errors in mock mode.
           </blockquote>
@@ -143,7 +143,7 @@ cd mushop</code></pre>
         <!-- launch -->
         <li>
           Open MuShop in your browser: <a href="http://localhost" target="_blank">localhost</a>
-          <blockquote>
+          <blockquote class="mu-small">
             Kubernetes will use a self-signed SSL certificate by default
           </blockquote>
           <pre><code class="hljs text">########################################
