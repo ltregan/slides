@@ -98,7 +98,7 @@ cd mushop</code></pre>
           </ol>
         </li>
         <li>
-          MuShop provides a helm chart called <code>setup</code>, which includes several
+          MuShop provides an umbrella helm chart called <code>setup</code>, which includes several
           <em>recommended</em> installations on the cluster. These installations represent
           common 3rd party services, which integrate with Oracle Cloud Infrastructure
           or enable certain features within the application.
@@ -111,9 +111,14 @@ cd mushop</code></pre>
 # docker-for-desktop</code></pre>
             </li>
             <li>
+              Add required <code>helm</code> repositories:
+              <pre><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+helm repo add stable https://kubernetes-charts.storage.googleapis.com</code></pre>
+            </li>
+            <li>
               Install cluster dependencies using <code>helm</code>:
-              <pre><code class="hljs sh">helm dependency update deploy/helm-chart/setup</code></pre>
-              <pre><code class="hljs sh">helm install deploy/helm-chart/setup \
+              <pre><code class="hljs text">helm dependency update deploy/helm-chart/setup</code></pre>
+              <pre><code class="hljs text">helm install deploy/helm-chart/setup \
   --name mushop-setup \
   --namespace mushop-setup</code></pre>
               <div>

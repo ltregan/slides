@@ -10,7 +10,8 @@
   <div class="mu-sequence">
     <p class="mu-left mu-medium">
       The following applications are required for the workshop.
-      Please 🙏 ensure access and/or installation ahead of time
+      Please 🙏 ensure access and/or installation of <b><em>recent versions</em></b>
+      ahead of time
     </p>
     <hr />
     <table class="mu-table">
@@ -245,7 +246,7 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
 </section>
 <!-- K8S Setup -->
 <section id="k8s">
-  <h2>Prepare Docker/K8s</h2>
+  <h2>Setup Docker/K8s</h2>
   <p class="mu-small mu-left">
     Several exercises in the workshop require the use of Docker &amp; Kubernetes.
     Please follow these instructions to setup your environment.
@@ -291,7 +292,11 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
         <blockquote class="mu-small">
           ℹ️ This also installs the <code>kubectl</code> CLI
         </blockquote>
-        <img class="no-margin" data-src="/images/help/enable_k8s.png" alt="Enable K8S" />
+        <div class="mu-ratio mu-ratio-2-1">
+          <div class="mu-overflow">
+            <img class="no-margin" data-src="/images/help/enable_k8s.png" alt="Enable K8S" />
+          </div>
+        </div>
       </li>
       <li>
         Installing Docker and running a local Kubernetes cluster on a <b>Windows</b> machine
@@ -304,12 +309,16 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
           <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl/#install-kubectl-on-windows" target="_blank"><code>kubectl</code></a>
           is also necessary.
         </blockquote>
-        <img class="no-margin" data-src="/images/help/enable_k8s_win.png" alt="Enable K8S" />
+        <div class="mu-ratio mu-ratio-5-2">
+          <div class="mu-overflow">
+            <img class="no-margin" data-src="/images/help/enable_k8s_win.png" alt="Enable K8S" />
+          </div>
+        </div>
       </li>
-      <li class="mu-sequence">
+      <li>
         <ol>
           <li>
-            If not already available, install <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl"><code>kubectl</code></a>
+            ⚠️ Make <em>sure</em> <a href="https://kubernetes.io/docs/tasks/tools/install-kubectl"><code>kubectl</code></a> is installed
           </li>
           <li>
             Check <code>kubectl</code> context

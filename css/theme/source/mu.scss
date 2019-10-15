@@ -95,6 +95,10 @@ section.has-dark-background {
 	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
 }
 
+@mixin muted() {
+	opacity: 0.4;
+}
+
 @mixin fg($color: $o-color-red) {
 	color: $color;
 }
@@ -240,7 +244,7 @@ section > h2 > img {
 	@include fg($o-color-orange);
 }
 .mu-muted {
-	opacity: 0.5;
+	@include muted();
 }
 .mu-grayscale {
 	filter: grayscale(100%) opacity(50%);
@@ -275,8 +279,11 @@ section > h2 > img {
 }
 
 .mu-hook {
-	.mu-hide-hook & {
+	.mu-hooks-hide & {
 		visibility: hidden;
+	}
+	.mu-hooks-dim & {
+		@include muted();
 	}
 }
 
