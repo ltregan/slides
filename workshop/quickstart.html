@@ -1,3 +1,10 @@
+<!-- title -->
+<section id="home">
+  <h1>Cloud Native OCI</h1>
+  <h2>Quickstart Deployment</h2>
+  include "partials/_titleSlide.html"
+</section>
+
 <section id="background"
   data-background-image="/images/tech/terraform.svg"
   data-background-size="100px"
@@ -30,6 +37,7 @@
       <div class="mu-small">
         <pre><code class="hljs tf">
   Terraform will perform the following actions:
+
   <= data.oci_database_autonomous_database_wallet.autonomous_database_wallet
   id:                      &lt;computed&gt;
   autonomous_database_id:  "${oci_database_autonomous_database.mushop_autonomous_database.id}"
