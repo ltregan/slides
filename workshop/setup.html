@@ -51,119 +51,107 @@
 <section>
   <section id="lab" data-background-image="/images/logo.png" data-background-size="150px"
   data-background-position="20px 20px">
-    <h2>MuShop Development</h2>
+  <h2>Develop MuShop</h2>
 
-    <div class="mu-flex mu-small switcher">
-      <ul>
-        <li class="fragment">Get Source Code</li>
-        <li class="fragment">Prepare Cluster</li>
-        <li class="fragment">Install MuShop</li>
-        <li class="fragment">Launch App</li>
-      </ul>
-      <ul class="col-1-1">
-        <li>
-          <ol>
-            <li>Connect to 🔒 VPN</li>
-            <li>Open <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo" target="blank">repo</a></li>
-            <li>
-              Click <a class="oui-button oui-button-primary">Clone</a>
-              <em class="mu-medium">(May require adding an <a href="https://orahub.oraclecorp.com/profile/keys" target="_blank">SSH key</a>)</em>
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">Get Source Code</li>
+      <li class="fragment">Prepare Cluster</li>
+      <li class="fragment">Install MuShop</li>
+      <li class="fragment">Launch App</li>
+    </ul>
+    <ul class="col-1-1">
+      <li>
 
-              <div class="mu-medium mu-margin-top">
-                  <pre><code class="hljs text">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git mushop
+        <div class="mu-flex mu-flex-stretch mu-gutter">
+          <div class="card col-1-2">
+            <code>&gt;</code> Clone with <code>git</code>
+            <ol class="mu-small">
+              <li>Connect to 🔒 VPN</li>
+              <li>Open <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo" target="blank">repo</a></li>
+              <li>
+                Click <a class="oui-button oui-button-primary">Clone</a>
+              </li>
+            </ol>
+            <div class="mu-medium mu-margin-top">
+              <pre><code class="hljs text">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git mushop
 cd mushop</code></pre>
-                  <pre class="mu-small"><code class="hljs text">.
-├── README.md
-├── deploy
-│   ├── docker-compose
-│   ├── helm-chart
-│   └── kubernetes
-└── src
-    ├── api
-    ├── carts
-    ├── catalogue
-    ├── edge-router
-    ├── load
-    ├── orders
-    ├── payment
-    ├── shipping
-    ├── storefront
-    ├── stream
-    └── user</code></pre>
-                </div>
-            </li>
-          </ol>
-        </li>
-        <li>
-          MuShop provides an umbrella helm chart called <code>setup</code>, which includes several
-          <em>recommended</em> installations on the cluster. These installations represent
-          common 3rd party services, which integrate with Oracle Cloud Infrastructure
-          or enable certain features within the application.
-          <hr />
-          <ol>
-            <li>🔓 Disconnect VPN</li>
-            <li>
-              Check <code>kubectl</code> context:
-              <pre><code class="hljs sh">kubectl config current-context
+              <blockquote class="mu-small">
+                (May require adding an <a href="https://orahub.oraclecorp.com/profile/keys" target="_blank">SSH key</a>)
+              </blockquote>
+            </div>
+          </div>
+          <div class="mu-muted no-wrap mu-valign">- OR -</div>
+          <div class="card col-1-2">
+            <code>&gt;</code> <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo/-/archive/develop/mushop-oci-demo-develop.tar.gz">Download</a>
+            <blockquote class="mu-small">
+              Extract contents to a folder available on your disk
+            </blockquote>
+          </div>
+        </div>
+        <div class="mu-small">
+include "_mushopTree.html"
+        </div>
+      </li>
+      <li>
+        MuShop provides an umbrella helm chart called <code>setup</code>, which includes several
+        <em>recommended</em> installations on the cluster. These installations represent
+        common 3rd party services, which integrate with Oracle Cloud Infrastructure
+        or enable certain application features.
+        <hr />
+        <ol>
+          <li>🔓 Disconnect VPN</li>
+          <li>
+            Check <code>kubectl</code> context:
+            <pre><code class="hljs sh">kubectl config current-context
 # docker-for-desktop</code></pre>
-            </li>
-            <li>
-              Add required <code>helm</code> repositories:
-              <pre><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+          </li>
+          <li>
+            Add required <code>helm</code> repositories:
+            <pre><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
 helm repo add stable https://kubernetes-charts.storage.googleapis.com</code></pre>
-            </li>
-            <li>
-              Install cluster dependencies using <code>helm</code>:
-              <pre><code class="hljs text">helm dependency update deploy/helm-chart/setup</code></pre>
-              <pre><code class="hljs text">helm install deploy/helm-chart/setup \
-  --name mushop-setup \
-  --namespace mushop-setup</code></pre>
-              <div>
-                <blockquote class="mu-small">
-                  ⚠️ It is possible that certain services may conflict with pre-existing installs.<br/>
-                  If so, try setting <code>--set &lt;chart&gt;.enabled=false</code> for any
-                  conflicting charts.
-                </blockquote>
-              </div>
-            </li>
-          </ol>
-        </li>
-        <li>
-          MuShop application supports <em>"mock mode"</em> where service responses are mocked,
-          yet the application is fully functional.
-          <hr />
-          <pre><code class="hljs sh">helm install deploy/helm-chart/mushop \
-  --name mushop \
-  --namespace mushop \
-  --set global.mock.service="all"</code></pre>
-          <pre><code class="hljs text">kubectl get pod --watch -n mushop</code></pre>
-          <blockquote class="mu-small">
-            ⏲️ It may take a few moments to download all the application images.
-            It is also normal for some to show errors in mock mode.
-          </blockquote>
-        </li>
-        <!-- launch -->
-        <li>
-          Open MuShop in your browser: <a href="http://localhost" target="_blank">localhost</a>
-          <blockquote class="mu-small">
-            Kubernetes will use a self-signed SSL certificate by default
-          </blockquote>
-          <pre><code class="hljs text">########################################
-   __  __        _____ _                 
-  |  \/  |      / ____| |                
-  | \  / |_   _| (___ | |__   ___  _ __  
-  | |\/| | | | |\___ \| '_ \ / _ \| '_ \ 
-  | |  | | |_| |____) | | | | (_) | |_) |
-  |_|  |_|\__,_|_____/|_| |_|\___/| .__/ 
-                                  | |    
-                                  |_|    
-########################################</code></pre>
-          Alternatively access MuShop with a proxy to the cluster service
-          <pre><code class="hljs text">kubectl port-forward \
-  svc/edge 8000:80 \
-  --namespace mushop</code></pre>
-        </li>
-      </ul>
+          </li>
+          <li>
+            Install cluster dependencies using <code>helm</code>:
+            <pre><code class="hljs text">helm dependency update deploy/helm-chart/setup</code></pre>
+            <pre><code class="hljs text">helm install deploy/helm-chart/setup \
+--name mushop-setup \
+--namespace mushop-setup</code></pre>
+            <div>
+              <blockquote class="mu-small">
+                ⚠️ It is possible that certain services may conflict with pre-existing installs.<br/>
+                If so, try setting <code>--set &lt;chart&gt;.enabled=false</code> for any
+                conflicting charts.
+              </blockquote>
+            </div>
+          </li>
+        </ol>
+      </li>
+      <!-- deploy -->
+      <li>
+        MuShop application supports a simplified deployment called <em>"mock mode"</em>
+        with only minimum service requirements.
+        <hr />
+        <div class="mu-margin">
+          💻 Download <a href="/public/mushop.setup.yaml">mushop.setup.yaml</a>
+        </div>
+        <pre><code class="hljs sh">kubectl create -f mushop.setup.yaml</code></pre>
+        <pre><code class="hljs text">kubectl get pod --watch</code></pre>
+        <blockquote class="mu-medium">
+          ⏲️ It may take a few moments to download all the application images.
+          It is also normal for some to show errors in mock mode.
+        </blockquote>
+      </li>
+      <!-- launch -->
+      <li>
+include "_openmushop.html"
+        <blockquote class="mu-medium">
+          ℹ️ To completely remove the application, use the following command:
+          <pre><code class="hljs sh">kubectl delete -f mushop.setup.yaml</code></pre>
+        </blockquote>
+      </li>
+    </ul>
+  </div>
   </section>
 
 </section>

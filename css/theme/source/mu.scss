@@ -400,6 +400,10 @@ a.title-print {
 		align-items: center;
 	}
 
+	> .mu-valign {
+		align-self: center;
+	}
+
 	// gutter
 	&.mu-gutter {
 		margin-left: -$blockMargin !important;
