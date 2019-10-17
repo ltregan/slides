@@ -1,4 +1,4 @@
-<ul class="plain mu-flex mu-wrap mu-flex-stretch mu-gutter mu-margin">
+<ul class="plain mu-flex mu-wrap mu-flex-stretch mu-gutter mu-margin mu-small">
   <li class="card col-1-3">
     An e-commerce reference app realized as a set of microservices developed on OCI
     <div><img data-src="/images/tech/oci.png" /></div>
@@ -20,17 +20,14 @@
   </li>
   <li class="card col-1-3">
     Collection of self-paced, workshop-style exercises showcasing OCI features
-    <div>
+    <div class="mu-margin-top">
       <pre><code class="hljs text">helm install \
---name nginx-ingress \
---namespace nginx-ingress \
-stable/nginx-ingress</code></pre>
+  --name nginx-ingress \
+  --namespace nginx-ingress \
+  stable/nginx-ingress</code></pre>
       <pre><code class="hljs text">oci lb load-balancer list | jq '.data[]'</code></pre>
       <pre><code class="hljs text">kubectl create -f mushop.yaml</code></pre>
     </div>
   </li>
   <!-- <li class="card col-1-2">Developer focused, interactive, hands-on demonstrations</li> -->
 </ul>
-<div class="mu-center">
-  <img data-src="/images/logo.png" height="80" />
-</div>

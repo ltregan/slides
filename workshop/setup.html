@@ -1,88 +1,156 @@
 <!-- title -->
 <section id="home">
-  <!-- landing -->
-  <section id="home-title">
-    <h1>Cloud Native OCI</h1>
-    <h2>Developer Setup</h2>
-    include "partials/_titleSlide.html"
-  </section>
+  <h1>Cloud Native OCI</h1>
+  <h2>Developer Setup</h2>
+  include "partials/_titleSlide.html"
+</section>
 
-  <!-- Contributors -->
-  include "partials/_contributors.html"
+<section id="options">
+  <h2>Environment Options</h2>
+
+  <ul class="plain mu-flex mu-wrap mu-flex-stretch mu-gutter">
+    <li class="card col-1-3 mu-svc">
+      <img data-src="/images/tech/docker.png" alt="docker" />
+    </li>
+    <li class="card col-1-3 mu-svc">
+      <img data-src="/images/tech/k8s.png" alt="kubernetes" />
+    </li>
+    <li class="card col-1-3 mu-svc">
+      <img data-src="/images/tech/helm.svg" alt="helm" />
+    </li>
+  </ul>
+
+  <div class="mu-flex mu-flex-middle mu-small mu-margin">
+    <div>Manual</div>
+    <div class="mu-flex-connector arrow"></div>
+    <div>Automated</div>
+  </div>
+
+  <div class="testimonials mu-margin ">
+    <ul class="mu-flex mu-gutter mu-smaller mu-wrap">
+      <li class="card col-1-1 fragment fade-up">
+        A microservices design offers excellent separation of concerns,
+        and developer independence.
+      </li>
+      <li class="card col-1-1 fragment fade-up">
+        While these benefits are clear, they can often introduce some complexity
+        for development environments.
+      </li>
+      <li class="card col-1-1 fragment fade-up">
+        Services support configurations that offer flexibity
+        as necessary, and establish parity as much as possible.
+      </li>
+      <li class="card col-1-1 fragment fade-up">
+        Use the same tools for development - production.
+      </li>
+    </ul>
+  </div>
 </section>
 
 <!-- exercise -->
-<section>
-  <section id="lab">
-    <h2>MuShop Development</h2>
-    <ol>
-      <li><a href="#clone">Clone</a></li>
-      <li><a href="#prepare">Prepare</a></li>
-      <li><a href="#start">Start</a></li>
-    </ol>
-  </section>
+<section id="setup" data-background-image="/images/logo.png" data-background-size="150px"
+  data-background-position="20px 20px">
+  <h2>Develop MuShop</h2>
 
-  <section id="clone">
-    <h2>Clone Repository</h2>
-    <div class="mu-sequence">
-      <p class="mu-small no-margin">
-        Begin by cloning the Mushop project.
-      </p>
-      <div class="fragment">
-        <pre><code class="hljs sh">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git mushop
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">Get Source Code</li>
+      <li class="fragment">Prepare Cluster</li>
+      <li class="fragment">Install MuShop</li>
+      <li class="fragment">Launch App</li>
+    </ul>
+    <ul class="col-1-1">
+      <li>
+
+        <div class="mu-flex mu-flex-stretch mu-gutter">
+          <div class="card col-1-2">
+            <code>&gt;</code> Clone with <code>git</code>
+            <ol class="mu-small">
+              <li>Connect to 🔒 VPN</li>
+              <li>Open <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo" target="blank">repo</a></li>
+              <li>
+                Click <a class="oui-button oui-button-primary">Clone</a>
+              </li>
+            </ol>
+            <div class="mu-medium mu-margin-top">
+              <pre><code class="hljs text">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git mushop
 cd mushop</code></pre>
-      </div>
-      <div class="fragment">
-        <pre class="mu-xsmall"><code class="hljs text">.
-├── LICENSE
-├── README.md
-├── deploy
-│   ├── docker-compose
-│   ├── helm-chart
-│   └── kubernetes
-├── src
-│   ├── api
-│   ├── carts
-│   ├── catalogue
-│   ├── edge-router
-│   ├── load
-│   ├── orders
-│   ├── payment
-│   ├── shipping
-│   ├── storefront
-│   ├── stream
-│   └── user
-└── wercker.yml</code></pre>
-      </div>
-    </div>
-  </section>
-
-  <section id="prepare">
-    <h2>Prepare</h2>
-    <p class="mu-small">
-      The Mushop application can run in "mock mode" where service responses are mocked,
-      yet the whole system is fully functional. This is mainly used for quick demos and testing.
-    </p>
-    <hr />
-    <div class="mu-sequence">
-      <div class="fragment">
-        Check <code>kubectl</code> context:
-        <pre><code class="hljs sh">kubectl config current-context
+              <blockquote class="mu-small">
+                (May require adding an <a href="https://orahub.oraclecorp.com/profile/keys" target="_blank">SSH key</a>)
+              </blockquote>
+            </div>
+          </div>
+          <div class="mu-muted no-wrap mu-valign">- OR -</div>
+          <div class="card col-1-2">
+            <code>&gt;</code> <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo/-/archive/develop/mushop-oci-demo-develop.tar.gz">Download</a>
+            <blockquote class="mu-small">
+              Extract contents to a folder available on your disk
+            </blockquote>
+          </div>
+        </div>
+        <div class="mu-small">
+include "_mushopTree.html"
+        </div>
+      </li>
+      <li>
+        MuShop provides an umbrella helm chart called <code>setup</code>, which includes several
+        <em>recommended</em> installations on the cluster. These installations represent
+        common 3rd party services, which integrate with Oracle Cloud Infrastructure
+        or enable certain application features.
+        <hr />
+        <ol>
+          <li>🔓 Disconnect VPN</li>
+          <li>
+            Check <code>kubectl</code> context:
+            <pre><code class="hljs sh">kubectl config current-context
 # docker-for-desktop</code></pre>
-      </div>
-      <div class="fragment">
-        Check <code>kubectl</code> namespace configuration:
-        <pre><code class="hljs sh">kubectl config view | grep namespace</code></pre>
-      </div>
-    </div>
-
-    <div class="fragment">
-      Next: <a class="navigate-down">Start</a>
-    </div>
-  </section>
-
-include "partials/highlights/_runlocal.html"
-
+          </li>
+          <li>
+            Add required <code>helm</code> repositories:
+            <pre><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+helm repo add stable https://kubernetes-charts.storage.googleapis.com</code></pre>
+          </li>
+          <li>
+            Install cluster dependencies using <code>helm</code>:
+            <pre><code class="hljs text">helm dependency update deploy/helm-chart/setup</code></pre>
+            <pre><code class="hljs text">helm install deploy/helm-chart/setup \
+--name mushop-setup \
+--namespace mushop-setup</code></pre>
+            <div>
+              <blockquote class="mu-small">
+                ⚠️ It is possible that certain services may conflict with pre-existing installs.<br/>
+                If so, try setting <code>--set &lt;chart&gt;.enabled=false</code> for any
+                conflicting charts.
+              </blockquote>
+            </div>
+          </li>
+        </ol>
+      </li>
+      <!-- deploy -->
+      <li>
+        MuShop application supports a simplified deployment called <em>"mock mode"</em>
+        with only minimum service requirements.
+        <hr />
+        <div class="mu-margin">
+          💻 Download <a href="/public/mushop.setup.yaml">mushop.setup.yaml</a>
+        </div>
+        <pre><code class="hljs sh">kubectl create -f mushop.setup.yaml</code></pre>
+        <pre><code class="hljs text">kubectl get pod --watch</code></pre>
+        <blockquote class="mu-medium">
+          ⏲️ It may take a few moments to download all the application images.
+          It is also normal for some to show errors in mock mode.
+        </blockquote>
+      </li>
+      <!-- launch -->
+      <li>
+include "_openmushop.html"
+        <blockquote class="mu-medium">
+          ℹ️ To completely remove the application, use the following command:
+          <pre><code class="hljs sh">kubectl delete -f mushop.setup.yaml</code></pre>
+        </blockquote>
+      </li>
+    </ul>
+  </div>
 </section>
 
 <section id="ready">

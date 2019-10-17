@@ -1,7 +1,7 @@
 <!-- title -->
-<section id="home">
+<section>
   <!-- landing -->
-  <section id="home-title">
+  <section id="home">
     <h1>Cloud Native OCI</h1>
     <h2>Kubernetes/OKE</h2>
     include "partials/_titleSlide.html"
@@ -16,9 +16,6 @@
       <li><a href="#lab">Lab Overview</a></li>
     </ul>
   </section>
-
-  <!-- Contributors -->
-  include "partials/_contributors.html"
 </section>
 
 <!-- Kubernetes -->
@@ -193,61 +190,74 @@
   </section>
   <section>
     <h2>Deployment Manifests</h2>
-    <pre><code class="fragment hljs sql mu-small">
-apiVersion: extensions/v1beta1
+    <p class="mu-small">
+    Shown below is a simple deployment manifest for the MuShop <code>storefront</code> service
+    </p>
+    <pre><code class="fragment hljs yaml mu-small">
+apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: api
+  name: storefront
   labels:
-    name: api
-    layer: client
+    app.kubernetes.io/name: storefront
 spec:
   replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: storefront
   template:
     metadata:
       labels:
-        name: api
-        layer: client
+        app.kubernetes.io/name: storefront
     spec:
       containers:
-      - name: api
-        image: phx.ocir.io/intvravipati/mushop/api:1
-        imagePullPolicy: Always
-        ports:
-        - name: http
-          containerPort: 3000
-        env:
-        - name: SESSION_REDIS
-          value: session
-        resources:
-          limits:
-            cpu: 300m
-            memory: 1000Mi
-          requests:
-            cpu: 100m
-            memory: 300Mi
-        securityContext:
-          runAsNonRoot: true
-          runAsUser: 10001
-          capabilities:
-            drop:
-              - all
-            add:
+        - name: storefront
+          image: "phx.ocir.io/intvravipati/mushop/storefront:2.0.0"
+          ports:
+            - name: http
+              containerPort: 8080
+            - name: status
+              containerPort: 8888
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http
+          volumeMounts:
+          - mountPath: /tmp
+            name: tmp-volume
+          resources:
+            limits:
+              cpu: 300m
+              memory: 300Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+            
+          securityContext:
+            capabilities:
+              add:
               - NET_BIND_SERVICE
-          readOnlyRootFilesystem: true
-        livenessProbe:
-          httpGet:
-            path: /health
-            port: http
-        readinessProbe:
-          httpGet:
-            path: /health
-            port: http
-          </code></pre>
+              - CHOWN
+              - SETGID
+              - SETUID
+              drop:
+              - all
+            readOnlyRootFilesystem: true
+            runAsNonRoot: true
+            runAsUser: 10001
+            
+      volumes:
+        - name: tmp-volume
+          emptyDir:
+            medium: Memory</code></pre>
   </section>
   <section>
     <h2>The Problem</h2>
-    <ul>
+    <ul class="mu-medium">
       <li>Steep learning curve when implementing Kubernetes</li>
       <li>Increased complexity of microservice environments</li>
       <li>Manual application deployment using kubectl</li>
@@ -259,7 +269,7 @@ spec:
   </section>
   <section>
     <h2>The Solution: Helm</h2>
-    <ul>
+    <ul class="mu-medium">
       <li>Package management tool for Kubernetes</li>
       <li>A CNCF project</li>
       <li>A package manager similar to <code>yum</code>, <code>brew</code>, <code>apt-get</code>, <code>npm</code>,
@@ -280,57 +290,99 @@ spec:
 
 <!-- Lab -->
 <section id="lab">
-  <section>
+  <section id="lab">
     <h2>Lab Overview</h2>
     <ul>
-      <li>Switch context</li>
+      <li>Set Kubernetes context</li>
       <li>Change default namespace</li>
-      <li>Create a deployment</li>
+      <li>Create a deployment with Helm</li>
       <li>Verify</li>
     </ul>
   </section>
-  <section>
-    <h3>Step 1: Switch context</h3>
-    <p class="mu-left">
-      You will perform the tasks for the lab in the OKE cluster you created.
-      To switch to that cluster use Docker desktop
-    </p>
-    <img class="plain" width=40% data-src="/images/k8s/switch_context2.png" alt="Helm" />
-  </section>
 
-  <section>
-    <h3>Step 2: Change the default namespace</h3>
-    <p class="mu-left">
-      Change your default namespace to your name to avoid having to add
-      <code>--namespace your-name</code> to every kubectl command.
-    </p>
-    <pre><code class="hljs text">kubectl config set-context $(kubectl config current-context) --namespace=your-name</code></pre>
-    <p class="mu-left">To validate it:</p>
-    <pre><code class="hljs text">kubectl config view | grep namespace:</code></pre>
-  </section>
-  <section>
-    <h3>Step 3: Create a deployment</h3>
-    <p class="mu-left">
-      Next, you will use Helm to deploy Mushop to your namespace within an OKE cluster
-    </p>
-    <pre><code class="hljs text">helm install deploy/helm-chart/mushop \
-        --name mushop \
-        --set global.mock.service="all" \
-        --set ingress.enabled=false
-</code></pre>
-  </section>
-  <section>
-    <h3>Step 4: Verify</h3>
-    <p class="mu-left">
-      Run the command below to check that all resources have been created:
-    </p>
-    <pre><code class="hljs text">kubectl get pod --watch </code></pre>
-    <p class="mu-left">
-      Proxy from your machine to the Edge service running in OKE:
-    </p>
-    <pre><code class="hljs text">kubectl port-forward svc/mushop-edge 8000:80</code></pre>
-    <p class="mu-left">
-      You are done! To access the store click <a href="http://localhost:8000">here</a>
-    </p>
+  <section id="exercise">
+    <h2>Deploy MuShop</h2>
+    <div class="mu-flex mu-small switcher">
+      <ul>
+        <li class="fragment">Set K8s Context</li>
+        <li class="fragment">Change Namespace</li>
+        <li class="fragment">Deploy with Helm</li>
+        <li class="fragment">Open App</li>
+      </ul>
+      <ul class="col-1-1">
+        <!-- context -->
+        <li>
+          If available, you may wish to perform these tasks in 
+          an OKE cluster instead of a local cluster. <span class="mu-muted">OPTIONAL</span>
+          <hr/>
+          <div class="mu-flex mu-gutter mu-flex-stretch">
+            <div class="col-1-2">
+              <p>Use Docker Desktop UI:</p>
+              <img class="no-margin" data-src="/images/k8s/switch_context2.png" alt="k8s switch" />
+            </div>
+            <div class="mu-valign mu-muted no-wrap">- OR -</div>
+            <div class="col-1-2">
+              <p>Use the command line:</p>
+              <pre><code class="hljs text">kubectl config get-contexts</code></pre>
+              <pre><code class="hljs text">kubectl config use-context &lt;name&gt;</code></pre>
+              <blockquote class="mu-small">
+                <b>TIP:</b> use <a href="https://github.com/ahmetb/kubectx" target="_blank">kubectx</a>
+                to switch context easily &amp; often from the command line
+              </blockquote>
+            </div>
+          </div>
+        </li>
+        <!-- namespace -->
+        <li>
+          Change your default namespace to your name to avoid having to add
+          <code>--namespace &lt;name&gt;</code> to every kubectl command.
+          <hr />
+          <pre><code class="hljs text">kubectl create namespace mushop</code></pre>
+          <pre><code class="hljs text">kubectl config set-context \
+  --current --namespace=mushop</code></pre>
+          <blockquote class="mu-small">
+            <b>TIP:</b> use <a href="https://github.com/ahmetb/kubectx" target="_blank">kubens</a>
+            to switch namespace easily &amp; often from the command line
+          </blockquote>
+        </li>
+        <!-- deploy -->
+        <li>
+          Remembering that <code>helm</code> provides a way of packaging and deploying <em>configurable</em>
+          charts, next we will deploy the application in <em>"mock mode"</em> where cloud services are
+          mocked, yet the application is fully functional
+          <hr />
+          <p>
+            ⚠️ <b>NOTE:</b> Ensure <a href="/workshop/setup.html#setup" target="_blank">setup</a>
+            steps were completed, and prior installations are removed
+          </p>
+          <pre><code class="hljs sh">helm install deploy/helm-chart/mushop \
+  --name mushop \
+  --set global.mock.service="all"</code></pre>
+          <div class="mu-small mu-margin"><pre><code class="hljs text">########################################
+    __  __        _____ _                 
+  |  \/  |      / ____| |                
+  | \  / |_   _| (___ | |__   ___  _ __  
+  | |\/| | | | |\___ \| '_ \ / _ \| '_ \ 
+  | |  | | |_| |____) | | | | (_) | |_) |
+  |_|  |_|\__,_|_____/|_| |_|\___/| .__/ 
+                                  | |    
+                                  |_|    
+########################################</code></pre>
+          </div>
+          <pre><code class="hljs text">kubectl get pod --watch</code></pre>
+          <blockquote class="mu-small">
+            ⏲️ It may take a few moments to download all the application images.
+            It is also normal for some pods to show errors in mock mode.
+          </blockquote>
+        </li>
+        <!-- launch -->
+        <li>
+          After inspecting the resources created with <code>helm install</code>,
+          go ahead and launch the application in your browser.
+          <hr/>
+include "_openmushop.html"
+        </li>
+      </ul>
+    </div>
   </section>
 </section>

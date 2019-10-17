@@ -1,0 +1,83 @@
+<!-- title -->
+<section id="home">
+  <h1>Cloud Native OCI</h1>
+  <h2>Quickstart Deployment</h2>
+  include "partials/_titleSlide.html"
+</section>
+
+<section id="background"
+  data-background-image="/images/tech/terraform.svg"
+  data-background-size="100px"
+  data-background-position="20px 20px">
+  <h2>Infrastructure as Code</h2>
+  <blockquote class="mu-small mu-margin">
+    Use Infrastructure as Code <code>(IaC)</code> to manage any
+    cloud, infrastructure, or service
+  </blockquote>
+  <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-medium">
+    <div class="card col-1-3">
+      Declarative
+      <div class="mu-small">
+        <pre><code class="hljs tf">
+  resource "oci_core_virtual_network" "mushopVCN" {
+    cidr_block     = "10.1.0.0/16"
+    compartment_id = "${var.compartment_ocid}"
+    display_name   = "mushop-${random_id.mushop_id.dec}"
+    dns_label      = "mushopvcn${random_id.mushop_id.dec}"
+  }
+        </code></pre>
+      </div>
+      <div class="mu-blurb fragment mu-small">
+        Write declarative configuration files to manage the full lifecycle of cloud
+        resources
+      </div>
+    </div>
+    <div class="card col-1-3">
+      Predictable
+      <div class="mu-small">
+        <pre><code class="hljs tf">
+  Terraform will perform the following actions:
+
+  <= data.oci_database_autonomous_database_wallet.autonomous_database_wallet
+  id:                      &lt;computed&gt;
+  autonomous_database_id:  "${oci_database_autonomous_database.mushop_autonomous_database.id}"
+  base64_encode_content:   "false"
+  content:                 &lt;computed&gt;
+  password:                &lt;sensitive&gt;
+  # ...
+  Plan: 33 to add, 0 to change, 0 to destroy.
+        </code></pre>
+      </div>
+      <div class="mu-blurb fragment mu-small">
+        Declarative infrastructure makes it easy to deploy and modify your application resources
+      </div>
+    </div>
+    <div class="card col-1-3">
+      Reproducible
+      <div class="mu-flex mu-flex-middle mu-medium mu-margin-top mu-muted">
+        <div>Dev</div>
+        <div class="mu-flex-connector arrow"></div>
+        <div>Prod</div>
+      </div>
+      <img alt="OCI" data-src="/images/tech/oci.png"/>
+      <div class="mu-blurb fragment mu-small">
+        Removes the complexity and burden of managing reproducible infrastructure across
+        environments
+      </div>
+    </div>
+  </div>
+  <!-- <p class="mu-small">
+    Resource Manager is a managed service that can provision all Oracle Cloud Infrastructure resources and services. Resource Manager reduces configuration errors and increases productivity by managing infrastructure declaratively (i.e. "infrastructure as code") using industry standard Hashicorp Terraform 
+  </p> -->
+  <!-- include "_whatismushop_basic.html" -->
+  
+</section>
+
+<section id="resources">
+  <h2>Resources</h2>
+  <ul>
+    <li><a href="https://www.terraform.io/">Terraform</a></li>
+    <li><a href="https://www.terraform.io/docs/providers/oci/index.html">OCI Terraform Provider</a></li>
+    <li><a href="https://www.oracle.com/cloud/systems-management/resource-manager/">About Resource Manager</a></li>
+  </ul>
+</section>

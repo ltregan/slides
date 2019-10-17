@@ -1,0 +1,81 @@
+<section>
+  <h2>MuShop Downloads</h2>
+  <small>Use these resources as needed during various exercises in the workshop</small>
+  <hr/>
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">Source Code</li>
+      <li class="fragment">OCI Resources</li>
+    </ul>
+    <ul class="mu-medium">
+      <!-- <li class="mu-flex mu-gutter mu-flex-stretch"> -->
+      <li>
+        <div class="mu-ratio mu-ratio-16-9">
+          <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-wrap mu-overflow">
+            <div class="card col-1-1">
+              <code>&gt;</code> <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo/-/archive/develop/mushop-oci-demo-develop.tar.gz">MuShop Code</a>
+              <blockquote class="mu-small">
+                Extract contents to a folder available on your disk
+              </blockquote>
+include "partials/_mushopTree.html"
+            </div>
+          </div>
+        </div>
+      </li>
+      <!-- k8s downloads -->
+      <li>
+        <div class="mu-ratio mu-ratio-16-9">
+          <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-wrap mu-overflow">
+            <!-- oci stream secret -->
+            <div class="card col-1-2">
+              <code>&gt;</code> <a href="/downloads/k8s/stream-secret.yaml">stream-secret.yaml</a>
+              <blockquote class="mu-small">
+                K8s secret for connecting to an OCI stream<br/>
+                <b>⚠️ NOTE:</b> Use with <code>--set skip.streaming=true</code> in mushop helm chart
+              </blockquote>
+              <pre><code class="hljs text">kubectl create -f stream-secret.yaml --namespace mushop</code></pre>
+            </div>
+            <!-- oci credentials -->
+            <div class="card col-1-2">
+              <code>&gt;</code> <a href="/downloads/k8s/ocicredentials-secret.yaml">ocicredentials-secret.yaml</a>
+              <blockquote class="mu-small">
+                K8s secret for Service Broker
+              </blockquote>
+              <pre><code class="hljs text">kubectl create -f ocicredentials-secret.yaml --namespace mushop</code></pre>
+            </div>
+            <!-- oke cluster (mushop-workshop) -->
+            <div class="card col-1-1">
+              <code>&gt;</code> <a href="/downloads/k8s/kubeconfig.yaml">kubeconfig.yaml</a>
+              <blockquote class="mu-small">
+                This is an access configuration for an OKE cluster to be used in cases
+                where you are unable to provision, or use a local cluster
+              </blockquote>
+              Installation:
+              <ol>
+                <li>
+                  Backup existing kube/config:
+                  <pre><code class="hljs sh">cp $HOME/.kube/config $HOME/.kube/config.bak</code></pre>
+                </li>
+                <li>
+                  Merge downloaded kubeconfig.yaml:
+                  <pre><code class="hljs sh">KUBECONFIG=$HOME/.kube/config:$HOME/Downloads/kubeconfig.yaml \
+                    kubectl config view --flatten > $HOME/.kube/config</code></pre>
+                  <blockquote class="mu-small">
+                    <b>⚠️ NOTE:</b> Path to Downloads/kubeconfig.yaml and change as necessary
+                  </blockquote>
+                </li>
+                <li>
+                  Verify the mushop-workshop context:
+                  <pre><code class="hljs sh">kubectl config get-contexts</code></pre>
+                  <pre><code class="hljs text">CURRENT   NAME                 CLUSTER                      AUTHINFO             NAMESPACE
+*         docker-for-desktop   docker-for-desktop-cluster   docker-for-desktop   mushop
+          mushop-workshop      cluster-czgezlcgrsg          user-czgezlcgrsg     </code></pre>
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

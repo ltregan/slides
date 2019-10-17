@@ -1,7 +1,7 @@
 <!-- title -->
-<section id="home">
+<section>
   <!-- landing -->
-  <section id="home-title">
+  <section id="home">
     <h1>Cloud Native OCI</h1>
     <h2>Shipping and Stream Services</h2>
     include "partials/_titleSlide.html"
@@ -16,9 +16,6 @@
       <li><a href="#lab">Lab Overview</a></li>
     </ul>
   </section>
-
-  <!-- Contributors -->
-  include "partials/_contributors.html"
 </section>
 
 
@@ -142,7 +139,7 @@
       <li class="fragment">Message size: 1 MB maximum</li>
       <li class="fragment">API calls per second: 5 getMessages per partition</li>
       <li class="fragment">Max Total Data Write per second: 1 MB per partition</li>
-      <li class="fragment">Number of partitions: Enterprise tenancy: 5, Non-Enterprise: 0</li>
+      <li class="fragment">Number of partitions: Enterprise: 5, Non-Enterprise: 0</li>
     </ul>
   </section>
   <section>
@@ -354,7 +351,7 @@ streamsPublisher.publishMessage(myShipment);
       Dockerfile there)</p>
     <pre><code class="hljs text">mushop/src/shipping</code></pre>
     <p class="mu-small mu-left">Run the following to build the image.</p>
-    <pre><code class="hljs text">docker build . --tag shipping:0.0.1</code></pre>
+    <pre><code class="hljs text">docker build -t shipping:dev .</code></pre>
   </section>
   <section>
     <h2>Update the Helm chart values file</h2>
@@ -371,13 +368,14 @@ streamsPublisher.publishMessage(myShipment);
     imagePullPolicy: Never
 
 secrets:
-  oci:
+  streams:
     compartmentId: OCI_COMPARTMENT_ID
     tenantId: OCI_TENANT_ID
     userId: OCI_USER_ID
     fingerprint: OCI_FINGERPRINT
     region: OCI_REGION
     passphrase: OCI_PASSPHRASE
+    streamName: STREAM_NAME
     </code></pre>
   </section>
   <section>

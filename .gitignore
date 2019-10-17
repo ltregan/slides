@@ -12,6 +12,7 @@ node_modules/
 css/reveal.min.css
 js/reveal.min.js
 build
+_build.html
 
 ## Remote Dev Containers Settings
 .devcontainer/

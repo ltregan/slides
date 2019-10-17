@@ -1,0 +1,30 @@
+<div class="mu-flex mu-gutter mu-flex-stretch mu-wrap mu-small">
+  <div class="card col-1-3">
+    Local Cluster
+    <hr/>
+    <a href="https://localhost" target="_blank">https://localhost</a>
+    <blockquote class="mu-medium">
+      Will use a self-signed SSL certificate by default
+    </blockquote>
+  </div>
+  <div class="card col-2-3">
+    OKE or Cluster with Ingress Controller
+    <hr/>
+    <div>
+      Find the <code>EXTERNAL-IP</code> assigned to the ingress controller:
+      <pre><code class="hljs text">kubectl get svc \
+  mushop-setup-nginx-ingress-controller \
+  -n mushop-setup</code></pre>
+      Open the IP address in your browser
+    </div>
+  </div>
+  <div class="card col-1-1">
+    Alternatively
+    <hr/>
+    Proxy to the MuShop app on <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>
+    (or a port of your choice)
+    <pre><code class="hljs text">kubectl port-forward \
+  svc/edge 8000:80 \
+  --namespace mushop</code></pre>
+  </div>
+</div>

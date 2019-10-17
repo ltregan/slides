@@ -1,3 +1,4 @@
+const fs = require('fs');
 const sass = require('node-sass');
 
 module.exports = grunt => {
@@ -6,12 +7,18 @@ module.exports = grunt => {
 
 	let port = grunt.option('port') || 8000;
 	let root = grunt.option('root') || '.';
+	const pkg = grunt.file.readJSON('package.json');
 
 	if (!Array.isArray(root)) root = [root];
 
+	fs.writeFileSync('_build.html', `
+		<div><span>Version:</span> ${pkg.version}</div>
+		<div><span>Build:</span> ${new Date().toISOString().split('.').shift()}</div>
+	`);
+
 	// Project configuration
 	grunt.initConfig({
-		pkg: grunt.file.readJSON('package.json'),
+		pkg,
 		meta: {
 			banner:
 				'/*!\n' +
@@ -58,6 +65,7 @@ module.exports = grunt => {
 				src: [
 					'lib/**',
 					'downloads/**',
+					'public/**',
 					'images/**',
 					'plugin/**',
 					'css/**/*.css', '!css/theme/**',
@@ -69,7 +77,12 @@ module.exports = grunt => {
 
 		includes: {
 			options: {
-				wrapper: '_wrapper.html'
+				wrapper: '_wrapper.html',
+				includePath: [
+					'.',
+					'./workshop',
+					'./workshop/partials',
+				]
 			},
 			files: {
 				src: ['*.html', '{workshop,events,internal}/**/*.html', '!**/_*.html'],
@@ -135,7 +148,7 @@ module.exports = grunt => {
 					open: true,
 					useAvailablePort: true,
 					middleware: (connect, options, middlewares) => {
-						middlewares.unshift((req, res, next) => { console.log(req.url); next(); });
+						// middlewares.unshift((req, res, next) => { console.log(req.url); next(); });
 						return middlewares;
 					}
 				}
@@ -159,8 +172,8 @@ module.exports = grunt => {
 
 		watch: {
 			js: {
-				files: [ 'gruntfile.js', 'js/reveal.js' ],
-				tasks: 'js'
+				files: [ 'gruntfile.js', 'js/reveal.js', 'plugin/**/*.js', '!node_modules/**/*'],
+				tasks: ['js', 'copy']
 			},
 			theme: {
 				files: [
@@ -172,15 +185,11 @@ module.exports = grunt => {
 				tasks: 'css-themes'
 			},
 			css: {
-				files: [ 'css/reveal.scss' ],
+				files: [ 'css/reveal.scss', '!node_modules/**/*' ],
 				tasks: 'css-core'
 			},
-			test: {
-				files: [ 'test/*.html' ],
-				tasks: 'test'
-			},
 			html: {
-				files: [ '**/*.html', '!build/**' ],
+				files: [ '**/*.html', '!build/**', '!node_modules/**/*' ],
 				tasks: 'includes'
 			},
 			markdown: {
