@@ -1,7 +1,7 @@
 <!-- title -->
 <section id="home">
   <h1>Cloud Native OCI</h1>
-  <h2>Quickstart Deployment</h2>
+  <h2>IaC Deployment</h2>
   include "partials/_titleSlide.html"
 </section>
 
@@ -71,6 +71,83 @@
   </p> -->
   <!-- include "_whatismushop_basic.html" -->
   
+</section>
+<section id="orm"
+  data-background-image="/images/oci/resourcemanager.svg"
+  data-background-size="100px"
+  data-background-position="20px 20px">
+  <h2>OCI Resource Manager</h2>
+  <p class="mu-small">
+    Resource Manager is a managed service that can provision all Oracle Cloud Infrastructure
+    resources and services. Resource Manager reduces configuration errors and increases
+    productivity by managing IaC using industry standard Hashicorp Terraform
+  </p>
+  <hr/>
+  <div class="mu-flex mu-flex-middle">
+    <div class="mu-svc">
+      <img data-src="/images/tech/orm.svg" /> ORM
+    </div>
+    <div class="mu-flex-connector arrow">job</div>
+    <div class="mu-svc">
+      <img data-src="/images/tech/terraform.svg" /> Terraform
+    </div>
+    <div class="mu-flex-connector arrow">infrastructure</div>
+    <div class="mu-svc">
+      <img data-src="/images/tech/oci.png" />
+    </div>
+    <div class="mu-flex-connector arrow">state</div>
+    <div class="mu-svc">
+      <img data-src="/images/tech/bucket.svg" /> Object Storage
+    </div>
+  </div>
+</section>
+
+<section id="mushopbasic">
+  <h2>MuShop IaC</h2>
+
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">MuShop Basic</li>
+      <li class="fragment">Infrastructure</li>
+      <li class="fragment">Application</li>
+      <li class="fragment">Try It!</li>
+    </ul>
+    <ul class="col-1-1">
+      <li>
+        <div class="mu-medium">
+          As an IaC example, we offer a <em>"simplified"</em> deployment of MuShop
+          using core infrastructure <em class="underline">"Always Free"</em> resources
+        </div>
+        <hr/>
+        include "_whatismushop_basic.html"
+      </li>
+      <li class="mu-medium">
+        Shown below is the OCI infrastructure diagram created by this Resource Manager Stack
+        <hr/>
+        <img data-src="/images/free/mubasic.infra.png"/>
+      </li>
+      <li class="mu-medium">
+        Deployment uses a simplified application runtime
+        <hr/>
+        <div class="mu-flex mu-flex-center">
+          <div class="col-2-3">
+            <div class="mu-ratio mu-ratio-2-1">
+              <iframe data-src="https://mushop.ateam.cloud/services.html?basic=true"></iframe>
+            </div>
+          </div>
+        </div>
+      </li>
+      <li class="mu-medium">
+        Instructions are best if followed directly from GitHub!
+        <hr/>
+        <div class="mu-medium mu-flex mu-flex-center mu-flex-middle mu-gutter">
+          <a class="card" href="https://github.com/oci-quickstart/oci-cloudnative#getting-started" target="_blank">
+            <img data-src="/images/tech/github.svg" alt="github">
+          </a>
+        </div>
+      </li>
+    </ul>
+  </div>
 </section>
 
 <section id="resources">
