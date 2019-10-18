@@ -403,6 +403,9 @@ a.title-print {
 	> .mu-valign {
 		align-self: center;
 	}
+	.no-shrink {
+		flex-shrink: 0;
+	}
 
 	// gutter
 	&.mu-gutter {
@@ -501,6 +504,19 @@ a.title-print {
 			position: absolute;
 			top: 0;
 			right: -$connectorSize;
+			transform: translateY(-($connectorArrowSize + $connectorSize / 2));
+		}
+		&.arrow-left::before {
+			content: "";
+			display: block;
+			width: 0; 
+			height: 0; 
+			border-top: $connectorArrowSize solid transparent;
+			border-bottom: $connectorArrowSize solid transparent;
+			border-right: $connectorArrowSize solid $connectorColor;
+			position: absolute;
+			top: 0;
+			left: -$connectorSize;
 			transform: translateY(-($connectorArrowSize + $connectorSize / 2));
 		}
 	}
