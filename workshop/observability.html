@@ -1,75 +1,311 @@
-https://grafana.com/grafana/plugins/oci-datasource
-https://github.com/oracle/oci-grafana-plugin/blob/master/docs/kubernetes.md
-## Grafana
+<!-- title -->
+<section id="home">
+  <h1>Cloud Native OCI</h1>
+  <h2>Observability &amp; Monitoring</h2>
+  include "partials/_titleSlide.html"
+</section>
 
-https://grafana.com/dashboards
-https://grafana.com/grafana/dashboards/1860 Node Exporter Full
-https://grafana.com/grafana/dashboards/3662 Prom Overview
-https://grafana.com/grafana/dashboards/6336 k8s pods !!!
-https://grafana.com/grafana/dashboards/6417 K8 Cluster !!!
-https://grafana.com/grafana/dashboards/1471 k8s App metrics
-https://grafana.com/grafana/dashboards/6663 Pod and Cluster!
-https://medium.com/@chris_linguine/how-to-monitor-your-kubernetes-cluster-with-prometheus-and-grafana-2d5704187fc8
+<section id="background"
+  data-background-image="/images/oci/telemetry.svg"
+  data-background-size="100px"
+  data-background-position="20px 20px">
+  <h2>Background</h2>
+  <blockquote class="mu-small mu-margin">
+    Expect a fundamental culture change concerning monitoring when shifting to
+    Cloud Native. Instead of monitoring to <em>avoid</em> failure, monitor to
+    <em>manage</em> failures.
+  </blockquote>
 
-check out
-https://grafana.com/grafana/dashboards/8588
+  <!-- <blockquote class="mu-small mu-margin">
+    A cloud-native application is composed of independent microservices and their required
+    backing services. Even though it is expected to be highly available,
+    its transient services will start or stop as to adjust for capacity requirements
+    or to recover from failures.
+  </blockquote> -->
+  <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
+    <div class="card col-1-3">
+      Observability
+      <hr>
+      <ul class="mu-medium">
+        <li>Health Checks</li>
+        <li>Metrics</li>
+        <li>Logging</li>
+        <li>Tracing</li>
+      </ul>
+      <div class="mu-blurb fragment mu-small">
+        Each fluid entity must <b class="underline">produce</b> appropriate data to support problem detection
+        and alerting, manual debugging when necessary, and system health analysis
+      </div>
+    </div>
+    <div class="card col-1-3">
+      Telemetry
+      <hr>
+      <ul class="mu-medium">
+        <li>Automated</li>
+        <li>Centralized</li>
+        <li>Compliance</li>
+      </ul>
+      <div class="mu-blurb fragment mu-small">
+        Automatic collection and transmission of data from <b class="underline">transient</b> processes
+        to <b class="underline">centralized</b> locations for subsequent analysis
+      </div>
+    </div>
+    <div class="card col-1-3">
+      Monitoring
+      <hr>
+      <ul class="mu-medium">
+        <li>Aggregated</li>
+        <li>Holistic</li>
+        <li>Visible</li>
+      </ul>
+      <div class="mu-blurb fragment mu-small">
+        The state of the system is monitored as a <b class="underline">whole</b>. Each individual service
+        produces data that feeds into an aggregated view.
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="oci">
+  <section id="oci-monitoring">
+    <h2>OCI Monitoring</h2>
+    
+    <div class="mu-flex mu-flex-stretch mu-small">
+      <!-- oci -->
+      <div class="card col-1-3">
+        <div class="mu-flex mu-flex-center mu-flex-middle">
+          <img class="col-2-3 no-margin" data-src="/images/tech/oci.png"/>
+          <div class="mu-svc">
+            <img alt="monitoring" data-src="/images/oci/telemetry.svg"/>
+            Monitoring
+          </div>
+        </div>
+
+        <div class="mu-smaller">
+          <blockquote>
+            Reports metrics from <b>all resources</b> and services in Oracle Cloud Infrastructure.
+          </blockquote>
+          <ul>
+            <li>Service Metrics</li>
+            <li>Alarms</li>
+            <li>Health Checks</li>
+            <li>Integrated Dashboards</li>
+            <li><b>API Accessbile</b></li>
+          </ul>
+        </div>
+      </div>
+      <div class="mu-flex-connector mu-valign arrow">DATA</div>
+      <!-- grafana -->
+      <div class="card col-1-2">
+        <div >
+          <div class="mu-svc mu-margin">
+            <img alt="grafana" data-src="/images/tech/grafana.png"/>
+            Grafana
+          </div>
+          <div class="mu-small">
+            <blockquote>
+              Widely adopted open source tool for monitoring, metric analytics, dashboards
+              sourced by its integrated <b class="underline">extensive</b> Data Sources and plugins
+            </blockquote>
+            <ul>
+              <li><a href="https://grafana.com/grafana/plugins/oci-datasource">OCI Datasource (plugin)</a></li>
+              <li><a href="https://grafana.com/docs/features/datasources/prometheus">Prometheus (built-in)</a></li>
+            </ul>
+            <hr>
+            <ul>
+              <li>📈 Dashboards</li>
+              <li>⚠️ Alarms</li>
+              <li>🔔 Notifications (Slack, PagerDuty, etc...)</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="mu-flex-connector mu-valign arrow-left">DATA</div>
+      <!-- k8s prom -->
+      <div class="card col-1-3">
+        <div class="mu-flex mu-flex-center mu-flex-middle">
+          <div class="mu-svc">
+            <img alt="k8s" data-src="/images/tech/k8s.icon.png"/>
+            Kubernetes
+          </div>
+          <span>+</span>
+          <div class="mu-svc">
+            <img alt="monitoring" data-src="/images/tech/prometheus.png"/>
+            Prometheus
+          </div>
+        </div>
+
+        <div class="mu-smaller">
+          <blockquote>
+            Container metrics and alerting toolkit fitting <b>dynamic microservice</b> architectures
+          </blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section
+    data-background-image="/images/tech/k8s.icon.png"
+    data-background-size="100px"
+    data-background-position="20px 20px">
+    <h2>Kubernetes Cluster</h2>
+    <div class="mu-ratio mu-ratio-16-9">
+      <div class="mu-overflow">
+        <a class="mu-small" href="https://grafana.com/grafana/dashboards/6417" target="_blank">
+          <img class="no-margin" data-src="/images/grafana/grafana.cluster.png" />
+        </a>
+      </div>
+    </div>
+    <!-- <hr> -->
+  </section>
+  <section
+    data-background-image="/images/logo.png"
+    data-background-size="150px"
+    data-background-position="20px 20px">
+    <h2>K8S Pods (MuShop)</h2>
+    <div class="mu-ratio mu-ratio-16-9">
+      <div class="mu-overflow">
+        <a class="mu-small" href="https://grafana.com/grafana/dashboards/6336" target="_blank">
+          <img class="no-margin" data-src="/images/grafana/grafana.pods.png" />
+        </a>
+      </div>
+    </div>
+  </section>
+  <section
+    data-background-image="/images/tech/oci.png"
+    data-background-size="auto 100px"
+    data-background-position="20px 20px">
+    <h2>OCI Compute</h2>
+    <div class="mu-ratio mu-ratio-16-9">
+      <div class="mu-overflow">
+        <a class="mu-small" href="https://grafana.com/grafana/dashboards/10497" target="_blank">
+          <img class="no-margin" data-src="/images/grafana/grafana.oci.png" />
+        </a>
+      </div>
+    </div>
+  </section>
+</section>
 
 
-Usage
-- Hover graph + "V"
-- Time adjust
-
-<section>
-  
-What is Grafana?
-
-The tool for beautiful monitoring and metric analytics & dashboards for Graphite, InfluxDB & Prometheus & More
-
-Access Grafana
-
-We installed Grafana as part of the umbrella <code>setup</code> chart. Now let's
-revisit the charts and connect to some Grafana dashboards.
-
-
-```
-> helm list
-```
-
-<pre><code class="hljs text">NAME          REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
+<section id="lab">
+  <h2>Monitoring MuShop</h2>
+  <div>
+    <div class="mu-flex mu-small switcher">
+      <ul>
+        <li class="fragment">Access Grafana</li>
+        <li class="fragment">Check Data Source</li>
+        <li class="fragment">Import Dashboards</li>
+        <li class="fragment">📈 Scale It</li>
+      </ul>
+      <ul class="col-1-1">
+        <li>
+          <div class="mu-flex mu-gutter">
+            <div class="mu-svc no-shrink">
+              <img data-src="/images/tech/grafana.png" alt="grafana">
+            </div>
+            <div class="mu-medium">
+              Good News! We already installed Prometheus/Grafana as part of the
+              umbrella chart during <a href="/workshop/setup.html#setup"><code>setup</code></a>.
+              Now let's revisit the charts and connect to some Grafana dashboards!
+            </div>
+          </div>
+          <pre><code class="hljs text">helm list</code></pre>
+          <pre><code class="hljs text">NAME          REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
 mushop-setup  1               Sat Oct 12 06:12:45 2019        DEPLOYED        mushop-setup-0.0.1      1.0             mushop-setup      
-mushop        1               Sun Oct 13 20:23:28 2019        DEPLOYED        mushop-0.1.0            1.0             default </code></pre>
+mushop        1               Sun Oct 13 20:23:28 2019        DEPLOYED        mushop-0.1.0            1.0             mushop </code></pre>
+          
+          Get the output from the setup installation:
+          <pre><code class="hljs text">helm status mushop-setup
 
-```
-helm status mushop-setup
-```
+## Grafana... </code></pre>
 
-TL;DR
+          Get the auto-generated admin password:         
+          <pre><code class="hljs text">kubectl get secret -n mushop-setup mushop-setup-grafana \
+ -o jsonpath="{.data.admin-password}" | base64 --decode ; echo</code></pre>
 
-Find the section on Grafana. It will contain instructions on connecting to the
-Grafana instance running on the K8s cluster.
-
-Get the <code>admin</code> password:
-
-<pre><code class="hljs text">kubectl get secret -n mushop-setup mushop-setup-grafana \
-  -o jsonpath="{.data.admin-password}" | base64 --decode ; echo</code></pre>
-
-Proxy from your machine to the <code>grafana</code> service running in Kubernetes:
-
-<pre><code class="hljs text">kubectl port-forward -n mushop-setup \
+          Connect to the <a href="http://localhost:3000" target="_blank">dashboard</a> with admin/&lt;password&gt;:
+          <pre><code class="hljs text">kubectl port-forward -n mushop-setup \
   svc/mushop-setup-grafana 3000:80</code></pre>
+        </li>
+        <!-- add dashboards -->
+        <li>
+          <div class="mu-flex mu-gutter">
+            <div class="mu-svc no-shrink">
+              <img data-src="/images/tech/prometheus.png" alt="Prometheus">
+            </div>
+            <div>
+              The Prometheus Data Source was also added automatically with the umbrella
+              setup chart 💥
+            </div>
+          </div>
+          
+          <blockquote class="mu-small no-margin">
+            Click ⚙️ <b><em>Data Sources</em></b> and see Prometheus
+          </blockquote>
+          <img data-src="/images/grafana/ds.prom.png">
+        </li>
+        <!-- dashboards -->
+        <li>
+          Grafana hosts a tremendous number of dashboards created by the user community.
+          This makes it very easy to import rich, freely-available dashboards.
+          <hr>
+          <ol class="mu-medium">
+            <li>Navigate ➕ &raquo; Import</li>
+            <li>Add dashboard id: <code>6417</code> (Kubernetes Cluster)</li>
+            <li>Navigate ➕ &raquo; Import</li>
+            <li>Add dashboard id: <code>6336</code> (Kubernetes Pods)</li>
+          </ol>
+          <div class="mu-ratio mu-ratio-2-1">
+            <div class="mu-overflow">
+              <img data-src="/images/grafana/grafana.cluster.png" alt="k8s cluster">
+            </div>
+          </div>
+        </li>
+        <!-- hpa -->
+        <li>
+          Now that dashboards have been imported, let's deploy a load-simulation
+          pod to our runtime.
+          <blockquote class="mu-small">
+            ℹ️ This also showcases the
+            <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" target="_blank">Horizontal Pod Autoscaling</a>
+            configurations deployed with the MuShop application
+          </blockquote>
+          <hr>
+          Return to the <code>mushop</code> source code downloaded earlier:
+          <pre><code class="hljs sh"># mushop&gt;</code></pre>
+          🔥 Deploy the load simulation pods:
+          <pre><code class="hljs sh">kubectl create -f src/load/load-dep.yaml</code></pre>
+          Watch the Horizontal Pod Autoscaling output
+          <pre><code class="hljs sh">NAME                REFERENCE                      TARGETS    MINPODS   MAXPODS   REPLICAS   AGE
+mushop-api          Deployment/mushop-api          47%/70%    1         10        5          4m2s
+mushop-catalogue    Deployment/mushop-catalogue    30%/70%    1         10        3          4m2s
+mushop-edge         Deployment/mushop-edge         57%/70%    1         10        6          4m2s
+mushop-storefront   Deployment/mushop-storefront   25%/70%    1         10        1          4m2s
+mushop-user         Deployment/mushop-user         20%/70%    1         10        3          4m1s</code></pre>
+          
+          <!-- <div class="mu-flex mu-gutter">
 
+          </div> -->
+          Now return to the Grafana console and review the dashboards...
+          <hr>
+          🧯 Be sure to remove the load simulator when done:
+          <pre><code class="hljs sh">kubectl delete -f src/load/load-dep.yaml</code></pre>
 
-
+        </li>
+      </ul>
+    </div>
+  </div>
 </section>
 
-<!-- hpa -->
-<section>
-<h2>Horizontal Autoscaling</h2>
-
-<a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" target="_blank">Horizontal Pod Autoscaling</a>
-
-
-<pre><code class="hljs text">kubectl scale --replicas=2 deployment/mushop-api</code></pre>
-
+<section id="resources">
+  <h2>Resources</h2>
+  <ul>
+    <li><a href="https://grafana.com/" target="_blank">Grafana</a></li>
+    <li><a href="https://grafana.com/grafana/dashboards" target="_blank">Grafana Dashboards</a></li>
+    <li><a href="https://grafana.com/grafana/plugins/oci-datasource" target="_blank">Grafana OCI Datasource</a></li>
+    <li><a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/grafana.htm" target="_blank">OCI Grafana Plugin</a></li>
+    <li><a href="https://github.com/oracle/oci-grafana-plugin/blob/master/docs/kubernetes.md" target="_blank">Grafana in OKE</a></li>
+    <li><a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" target="_blank">Horizontal Pod Autoscaling</a></li>
+  </ul>
 </section>
-

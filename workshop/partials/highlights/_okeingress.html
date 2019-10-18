@@ -45,6 +45,7 @@ nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:324
         <div class="mu-sequence">
           <p>Next verify the load balancer in OCI</p>
           <pre><code class="hljs text">oci lb load-balancer list \
+--compartment-id &lt;compartment&gt; \
 | jq '.data[] | {id: .id, name: .["display-name"], ipAddr: .["ip-addresses"][]["ip-address"]}'</code></pre>
         <pre><code>{
   "id": "ocid1.loadbalancer.oc1.phx.aaaaaaaaucgamttt3piveonxw5d6ssirzxprcbrcv7vf6tgswna7qxdnvnfa",
