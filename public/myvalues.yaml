@@ -1,0 +1,53 @@
+ingress:
+  enabled: true
+
+# carts service connection
+carts:
+  secrets:
+    oadbAdminPassword: ''
+    oadbWalletPassword: ''
+    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbUser: mushop_cartsvc # runtime db schema user
+    oadbPassword: muSecret_Pass1 # create schema password
+
+# catalogue service connection
+catalogue:
+  secrets:
+    oadbAdminPassword: ''
+    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbUser: mushop_cataloguesvc # runtime db schema user
+    oadbPassword: muSecret_Pass1 # create schema password
+
+# orders service connection
+orders:
+  secrets:
+    oadbAdminPassword: ''
+    oadbWalletPassword: ''
+    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbUser: mushop_ordersvc # runtime db schema user
+    oadbPassword: muSecret_Pass1 # create schema password
+
+# user service connection
+user:
+  secrets:
+    oadbAdminPassword: ''
+    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbUser: mushop_usersvc # runtime db schema user
+    oadbPassword: muSecret_Pass1 # create schema password
+
+# Depending on the scenario, certain resources might need to be skipped.
+# For example, --set skip.streaming=true to disable creating streaming secrets
+skip:
+  streaming: false
+
+secrets:
+  # oss connection information
+  streams:
+    streamName:
+    tenantId: 
+    compartmentId: 
+    userId: 
+    region: 
+    fingerprint: 
+    passphrase: 
+    keyFile: 

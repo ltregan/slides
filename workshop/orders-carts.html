@@ -34,25 +34,8 @@
 
   include "partials/highlights/_provisionatp.html"
 
-  <section data-markdown>
-    <script type="text/template">
-      ## Step 2 - Get the code
-      Clone the repository (if not done already)
-
-      ```text
-      git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git mushop
-      ```
-
-      Switch to master branch
-
-      ```text
-      git checkout master
-      ```
-    </script>
-  </section>
-
   <section>
-    <h2>Step 3 - Prepare your Cloud Database</h2>
+    <h2>Prepare the ATP Database</h2>
     <div class="fragment-set">
       <div class="fragment fade-out mu-small">
         <p>Download the database client credentials (Wallet).
@@ -67,7 +50,7 @@
       </div>
       <div class="fragment fade-in">
         <div class="mu-small">
-          <p>Connect to you cloud database with Web SQL Developer.
+          <p>Connect to the cloud database with Web SQL Developer.
             <a target="_blank" href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/sql-developer-web.html">More
               details...</a></p>
           <video width="640" height="440" controls>
@@ -166,7 +149,7 @@ ALTER USER carts_user
   </section>
 
   <section>
-    <h2>Step 4 - Prepare the application</h2>
+    <h2>Prepare the application</h2>
     <div class="mu-small">
       <p>Copy all files from the credential package (wallet) to: </p>
       <pre>mushop/deploy/helm-chart/mushop/orders/secrets</pre>
@@ -185,7 +168,7 @@ ALTER USER carts_user
   </section>
 
   <section>
-    <h2>Step 5 - Build</h2>
+    <h2>Build</h2>
     <div class="mu-small mu-left">
       <p>The repository contains a Dockerfile that sets up a build environment, builds the application and
         generates a Docker image with the built application.</p>

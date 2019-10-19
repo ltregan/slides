@@ -69,6 +69,7 @@ $ratio-4-3:                                     75%;
 $ratio-16-9:                                    56.25%;
 $ratio-2-1:                                     50%;
 $ratio-5-2:                                     40%;
+$ratio-3-1:                                    	33.33%;
 
 section.has-dark-background {
 	&, h1, h2, h3, h4, h5, h6 {
@@ -113,24 +114,28 @@ section.has-dark-background {
 
 // Copier
 pre {
-	box-shadow: none !important;
-	padding-top: $blockMargin;
-	margin-top: -$blockMargin !important;
+	$copier-color: $o-color-white;
 	a.copier {
+		width: auto;
+		height: auto;
 		display: none;
 		cursor: pointer;
 		position: absolute;
 		top: 0;
 		right: 0;
+		bottom: auto;
+		left: auto;
 		font-size: 14px;
 		padding: 5px 10px;
     background: #272822;
-    color: white;
-    border-top-left-radius: 4px;
-    border-top-right-radius: 4px;
+		color: $copier-color;
+		border-bottom-left-radius: 4px;
+		border-left: 1px solid $copier-color !important;
+		border-bottom: 1px solid $copier-color !important;
 	}
 	&:hover {
 		a.copier {
+			color: $copier-color;
 			display: block;
 		}
 	}
@@ -161,6 +166,12 @@ a {
 	}
 	pre {
 		font-size: 0.4em;
+		margin: 0 0 $blockMargin;
+		box-shadow: none;
+		box-sizing: border-box;
+		code {
+			box-sizing: border-box;
+		}
 	}
 	label {
 		font-weight: bold;
@@ -707,6 +718,9 @@ a.title-print {
 }
 .mu-ratio-5-2::before {
   padding-top: $ratio-5-2;
+}
+.mu-ratio-3-1::before {
+  padding-top: $ratio-3-1;
 }
 
 // Fragment

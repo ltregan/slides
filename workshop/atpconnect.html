@@ -1,0 +1,285 @@
+<!-- landing -->
+<section id="home">
+  <h1>Cloud Native OCI</h1>
+  <h2>Connecting Oracle ATP</h2>
+  include "partials/_titleSlide.html"
+</section>
+
+<section id="overview">
+  <h2>Lab Overview</h2>
+  <div class="testimonials">
+    <ul class="mu-flex mu-gutter mu-small mu-wrap">
+      <li class="card col-1-1 fragment fade-up">Introducing microservices using ATP</li>
+      <li class="card col-1-1 fragment fade-up">Oracle Autonomous Transaction Processing (ATP) setup</li>
+      <li class="card col-1-1 fragment fade-up">Connecting to ATP</li>
+      <li class="card col-1-1 fragment fade-up">Build & validation</li>
+    </ul>
+  </div>
+</section>
+
+include "highlights/_atpapps.html"
+
+<section id="lab">
+  <h2>Connecting to ATP</h2>
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">Provision ATP</li>
+      <li class="fragment">Download Wallet</li>
+      <li class="fragment">Prepare Chart</li>
+      <li class="fragment">Configure Values</li>
+      <li class="fragment">Deploy</li>
+      <li class="fragment">Under the Hood</li>
+    </ul>
+    <ul class="col-1-1">
+      <li>
+        <div class="mu-flex mu-flex-between">
+          <span>Create your Oracle ATP Database instance:</span>  
+          <a class="oui-button oui-button-default" target="_blank" href="https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/tutorial-getting-started-autonomous-db/">
+            ℹ️ Documentation
+          </a>
+        </div>
+        
+        <div class="mu-ratio mu-ratio-4-3 col-2-3">
+          <video controls>
+            <source
+              data-src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/2yE4roHC3N2-CdVgx0wSWzLafj0-2bpcE1E3ff41zBs/n/intvravipati/b/demo-assets/o/dem-ord-create_atp.mp4"
+              type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+          </video>
+        </div>
+        <blockquote class="mu-medium">
+          📝 Be sure to make note of the <b>Admin Password</b> used when provisioning the ATP Instance
+        </blockquote>
+      </li>
+
+      <li>
+
+        <div class="mu-flex mu-flex-between">
+          <span>Download the database connection (Wallet):</span>  
+          <a class="oui-button oui-button-default" target="_blank" href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-download-wallet.html#GUID-B06202D2-0597-41AA-9481-3B174F75D4B1">
+            ℹ️ Documentation
+          </a>
+        </div>
+        
+        <div class="mu-ratio mu-ratio-4-3 col-2-3">
+          <video controls>
+            <source
+              src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/99gv74HvqmDifWRXLHWrJb0t4o-1wpHd2gu8oeznwHw/n/intvravipati/b/demo-assets/o/dem-ord-atp_cred_download.mp4"
+              type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+          </video>
+        </div>
+
+        <blockquote class="mu-medium">
+          📝 Be sure to make note of the <b>Wallet Password</b> used and connection <b>TNS Name</b> when downloading the Wallet
+        </blockquote>
+      </li>
+
+      <li>
+        With the Cloud Wallet unzipped, you should expect to see a number of files
+        listed. Create a copy of the Wallet <b>folder</b> and place in to each 
+        service directory as shown:
+        <hr>
+        <div class="mu-flex mu-gutter mu-medium">
+          <div class="card col-1-2">
+            <div class="mu-margin">DB Connection (Wallet) folder contents:</div>
+            <pre><code class="hljs text">~/Downloads/Wallet_mymushopdb
+├── cwallet.sso
+├── ewallet.p12
+├── keystore.jks
+├── ojdbc.properties
+├── sqlnet.ora
+├── tnsnames.ora
+└── truststore.jks</code></pre>
+          </div>
+          <div class="card col-1-2">
+            <div class="mu-margin">Wallets added to each service helm chart:</div>
+            <pre><code class="hljs text">deploy/helm-chart/mushop/
+├── charts
+│   ├── carts
+│   │   └── secrets
+│   │       └── Wallet_mymushopdb
+│   ├── catalogue
+│   │   └── secrets
+│   │       └── Wallet_mymushopdb
+│   ├── orders
+│   │   └── secrets
+│   │       └── Wallet_mymushopdb
+│   └── user
+│       └── secrets
+│           └── Wallet_mymushopdb
+└── secrets
+    └── oci_streams_api_key.pem</code></pre>
+          </div>
+        </div>
+        <blockquote class="mu-medium no-margin">
+          ℹ️ <b>NOTE:</b> Here each service will connect using the same Wallet for simplicity.
+          It is <b class="underline">expected</b> for each service to support an independent
+          instance and schema.
+        </blockquote>
+      </li>
+
+      <li>
+        Next create (or edit) a <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a> to
+        specifiy connection information for each ATP backed microservice:
+        <hr>
+        <div class="mu-medium">
+          Traverse into the helm chart deployment directory:
+          <pre><code class="hljs text">cd deploy/helm-chart</code></pre>
+          Copy an example values file into your workspace:
+          <pre><code class="hljs text">cp mushop/values-dev.yaml ./myvalues.yaml</code></pre>
+          Enter helm chart configuation for each service:
+          <pre class="mu-ratio mu-ratio-5-2"><code class="hljs yaml mu-overflow">ingress:
+  enabled: true
+
+# carts service connection
+carts:
+  secrets:
+    oadbAdminPassword: ''
+    oadbWalletPassword: ''
+    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbUser: mushop_cartsvc # runtime db schema user
+    oadbPassword: muSecret_Pass1 # create schema password
+
+# catalogue service connection
+catalogue:
+  secrets:
+    oadbAdminPassword: ''
+    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbUser: mushop_cataloguesvc # runtime db schema user
+    oadbPassword: muSecret_Pass1 # create schema password
+
+# orders service connection
+orders:
+  secrets:
+    oadbAdminPassword: ''
+    oadbWalletPassword: ''
+    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbUser: mushop_ordersvc # runtime db schema user
+    oadbPassword: muSecret_Pass1 # create schema password
+
+# user service connection
+user:
+  secrets:
+    oadbAdminPassword: ''
+    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbUser: mushop_usersvc # runtime db schema user
+    oadbPassword: muSecret_Pass1 # create schema password
+
+# Depending on the scenario, certain resources might need to be skipped.
+# For example, --set skip.streaming=true to disable creating streaming secrets
+skip:
+  streaming: false
+
+secrets:
+  # oss connection information
+  streams:
+    streamName:
+    tenantId: 
+    compartmentId: 
+    userId: 
+    region: 
+    fingerprint: 
+    passphrase: 
+    keyFile: </code></pre>
+        </div>
+      </li>
+      <li>
+        With the values configured, the application is ready to deploy
+        <hr>
+        <div class="mu-medium">
+          Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
+          <pre><code class="hljs text">helm del --purge mushop</code></pre>
+          Install from the <code>deploy/helm-cart</code> directory:
+          <pre><code class="hljs text">helm install mushop \
+  --name mushop \
+  --set skip.streaming=true</code></pre>
+          <pre><code class="hljs text">kubectl get pod --watch</code></pre>
+          <hr>
+          <p>You will notice several pods with an <b><code>-init-</code></b> component
+          in their name. These are pods corresponding to Kubernetes Job definitions,
+          where each is performing DB schema initializations.</p>
+          View the logs of an init pod like so <span class="mu-muted">(name will vary)</span>:
+          <pre><code class="hljs text">kubectl get logs mushop-carts-1.0.2-init-d475m</code></pre>
+          <blockquote class=>
+            ⏲️ It may take a few moments for all services to become ready
+          </blockquote>
+        </div>
+      </li>
+
+      <li>
+        In this exercise, the use helm presents involves a degree of <b>opaque</b> automation
+        that we can de-mystify by reviewing the mechanics under the hood. Using the
+        <code>src/user</code> service as an example:
+        <hr>
+        <div class="mu-medium mu-flex mu-flex-stretch">
+          <div class="card col-1-2">
+          Create a secret containing the <b>Wallet</b> contents:
+          <pre><code class="hljs text">kubectl create secret generic user-oadb-wallet \
+  --from-file=Wallet_mymushopdb</code></pre>
+          Create a secret with the database <b>ADMIN</b> password:
+          <pre><code class="hljs text">kubectl create secret generic user-oadb-admin \
+  --from-literal=oadb_admin_pw='xxxxxx'</code></pre>
+          Create a secret with the ATP <b>schema user</b> credentials and <b>Connection String</b>:
+          <pre><code class="hljs text">kubectl create secret generic user-oadb-connection \
+  --from-literal=oadb_wallet_pw='xxxxxx' \
+  --from-literal=oadb_service=mymushopdb_tp \
+  --from-literal=oadb_user=mushop_usersvc \
+  --from-literal=oadb_pw='xxxxxx'</code></pre>
+          </div>
+          <div class="mu-flex-connector mu-valign"></div>
+          <div class="card col-1-2">
+          Example deployment of user service:
+          <pre class=""><code class="hljs yaml">apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: user
+  labels:
+    name: user
+spec:
+  template:
+    metadata:
+      labels:
+        name: user
+    spec:
+      containers:
+      - name: user
+        image: mushop/user:latest
+        imagePullPolicy: Never
+        ports:
+        - name: http
+          containerPort: 3000
+        # ...
+        env:
+        # Database connection information
+        - name: OADB_USER
+          valueFrom:
+            secretKeyRef:
+              name: user-oadb-connection
+              key: oadb_user
+        - name: OADB_PW
+          valueFrom:
+            secretKeyRef:
+              name: user-oadb-connection
+              key: oadb_pw
+        - name: OADB_SERVICE
+          valueFrom:
+            secretKeyRef:
+              name: user-oadb-connection
+              key: oadb_service
+        # ...
+        volumeMounts:
+        # mount information for the the 'wallet' volume definition
+        - name: wallet
+          mountPath: /usr/lib/oracle/19.3/client64/lib/network/admin
+          readOnly: true
+      volumes:
+      # define the 'wallet' volume from the wallet secret files
+      - name: wallet
+        secret:
+          secretName: user-oadb-wallet
+          defaultMode: 256</code></pre>
+        </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>
