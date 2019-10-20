@@ -1,28 +1,41 @@
 <section id="DeployingOCIServiceBroker" data-background-image="/images/tech/k8s.png" data-background-size="100px"
   data-background-position="20px 20px">
-  <h2>Deploying OCI Service Broker</h2>
+  <h2>Deploy OCI Service Broker</h2>
   <div class="fragment-set">
     <div class="fragment fade-in">
-      <div class="mu-sequence">
-        <p class="mu-small mu-left">The OCI Service Broker for Kubernetes needs OCI user credentials to provision and
+      <div class="mu-sequence mu-small mu-left">
+        The OCI Service Broker for Kubernetes needs OCI user credentials to provision and
           manage services and resources
-          in the user tenancy. <br />
-          If you already deployed a <strong>non-mock</strong> version of Mushop, the secret called <code>service-broker</code>
-          was already created for you.
-          Use the command below to check if the secret is created:</p>
-        <pre><code class="hljs sh">kubectl get secret service-broker </code></pre>
+          in the user tenancy.
+
+          <blockquote class="mu-medium">
+            ⚠️ <b>NOTE:</b> The account used must have sufficient policies in <b>IAM</b> to manage 
+            resources provisioned with Service Broker
+          </blockquote>
+
+          <pre><code class="hljs sh">kubectl create secret generic oci-service-broker \
+  --namespace mushop \
+  --from-literal=tenancy=&lt;CUSTOMER_TENANCY_OCID&gt; \
+  --from-literal=user=&lt;USER_OCID&gt; \
+  --from-literal=fingerprint=&lt;USER_PUBLIC_API_KEY_FINGERPRINT&gt; \
+  --from-literal=region=&lt;USER_OCI_REGION&gt; \
+  --from-literal=passphrase=&lt;PASSPHRASE_STRING&gt; \
+  --from-file=privatekey=&lt;PATH_OF_USER_PRIVATE_API_KEY&gt;</code></pre>
       </div>
     </div>
     <div class="fragment fade-in">
-      <div class="mu-sequence">
-        <p class="mu-small">This command will deploy the OCI service broker on your cluster. Note that is using the
-          secret ocicredentials.</p>
-        <pre><code class="hljs text">helm install https://github.com/oracle/oci-service-broker/releases/download/v1.3.1/oci-service-broker-1.3.1.tgz  --name oci-service-broker \
-  --set ociCredentials.secretName=service-broker \
+      <div class="mu-sequence mu-small">
+        <div class="mu-margin">
+          This command will deploy the OCI service broker on your cluster. Note that is using the
+          secret: <b><code>oci-service-broker</code></b>.
+        </div>
+        <pre><code class="hljs text">helm install https://github.com/oracle/oci-service-broker/releases/download/v1.3.1/oci-service-broker-1.3.1.tgz \
+  --namespace mushop \
+  --name oci-service-broker \
+  --set ociCredentials.secretName=oci-service-broker \
   --set storage.etcd.useEmbedded=true \
-  --set tls.enabled=false \
-  --namespace mushop</code></pre>
-        <blockquote class="mu-xsmall">
+  --set tls.enabled=false</code></pre>
+        <blockquote class="mu-small">
           Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
           It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in
           production environments,
@@ -35,16 +48,17 @@
       </div>
     </div>
     <div class="fragment fade-in">
-      <div class="mu-sequence">
-        <p class="mu-medium">Register OCI Service Broker</p>
-        <p class="mu-small">Create the file oci-service-broker.yaml with the following content:</p>
-        <pre class="mu-xsmall"><code class="hljs yaml">apiVersion: servicecatalog.k8s.io/v1beta1
+      <div class="mu-sequence mu-small">
+        <div class="mu-margin">Register OCI Service Broker</div>
+        Create the file <a href="/public/oci-service-broker.yaml"><b><code>oci-service-broker.yaml</code></b></a>
+        with the following content:
+        <pre><code class="hljs yaml">apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ClusterServiceBroker
 metadata:
   name: oci-service-broker
 spec:
   url: http://oci-service-broker.mushop:8080</code></pre>
-        <p class="mu-small">Create the ClusterServiceBroker:</p>
+          
         <pre><code class="hljs text">kubectl create -f oci-service-broker.yaml</code></pre>
       </div>
     </div>

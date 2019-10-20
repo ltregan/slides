@@ -132,18 +132,20 @@
     </aside>
   </section>
   <section>
-    <h2>Limits</h2>
-    <ul>
-      <li class="fragment">Message retention: up to 7 days</li>
-      <li class="fragment">Throughput: 1 MB/sec per partition</li>
-      <li class="fragment">Message size: 1 MB maximum</li>
-      <li class="fragment">API calls per second: 5 getMessages per partition</li>
-      <li class="fragment">Max Total Data Write per second: 1 MB per partition</li>
-      <li class="fragment">Number of partitions: Enterprise: 5, Non-Enterprise: 0</li>
-    </ul>
+    <h2>Service Limits</h2>
+    <div class="testimonials mu-small">
+      <ul class="mu-flex mu-gutter mu-wrap">
+        <li class="card col-1-1 fragment">Message retention: up to 7 days</li>
+        <li class="card col-1-1 fragment">Throughput: 1 MB/sec per partition</li>
+        <li class="card col-1-1 fragment">Message size: 1 MB maximum</li>
+        <li class="card col-1-1 fragment">API calls per second: 5 getMessages per partition</li>
+        <li class="card col-1-1 fragment">Max Total Data Write per second: 1 MB per partition</li>
+        <li class="card col-1-1 fragment">Number of partitions: Enterprise: 5, Non-Enterprise: 0</li>
+      </ul>
+    </div>
   </section>
   <section>
-    <h2>Mushop Shipping and Stream Service</h2>
+    <h2>Mushop Use Case</h2>
 
     <div class="mu-flex mu-flex-middle mu-margin">
       <div class="mu-svc fragment fade-in">
@@ -153,11 +155,11 @@
       <div class="mu-svc fragment fade-in">
         <img data-src="/images/tech/java.png" /> Shipping
       </div>
-      <div class="mu-flex-connector arrow fragment fade-in"></div>
+      <div class="mu-flex-connector arrow fragment fade-in">producer</div>
       <div class="mu-svc fragment fade-in">
         <img data-src="/images/tech/streaming.svg" /> OSS
       </div>
-      <div class="mu-flex-connector arrow fragment fade-in"></div>
+      <div class="mu-flex-connector arrow fragment fade-in">consumer</div>
       <div class="mu-svc fragment fade-in">
         <img data-src="/images/tech/java.png" /> Stream
       </div>
@@ -190,44 +192,57 @@
     <img class="fragment" data-src="/images/k8s/secret.png" />
   </section>
   <section>
-    <h2>In the Shipping Helm chart...</h2>
-    <pre class="mu-small"><code class="hljs yaml">env:
-- name: OCI_TENANT_ID
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Release.Name }}-streams-secret
-      key: oci_tenant_id
-- name: OCI_USER_ID
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Release.Name }}-streams-secret
-      key: oci_user_id
-- name: OCI_FINGERPRINT
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Release.Name }}-streams-secret
-      key: oci_fingerprint
-- name: OCI_PASS_PHRASE
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Release.Name }}-streams-secret
-      key: oci_pass_phrase
-- name: OCI_API_KEY
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Release.Name }}-streams-secret
-      key: oci_api_key
-- name: OCI_REGION
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Release.Name }}-streams-secret
-      key: oci_region
-- name: OCI_COMPARTMENT_ID
-  valueFrom:
-    secretKeyRef:
-      name: {{ .Release.Name }}-streams-secret
-      key: oci_compartment_id
-          </code></pre>
+    <h2>Deployment Configuration</h2>
+    <div class="mu-small mu-flex">
+    <pre class="mu-ratio mu-ratio-3-2 mu-col-1-1"><code class="hljs yaml"># Source: mushop/charts/shipping/templates/shipping-deployment.yaml
+#...
+env:
+  - name: STREAM_NAME
+    valueFrom:
+      secretKeyRef:
+        name: mushop-oss-connection
+        key: streamName
+  - name: STREAM_ID
+    valueFrom:
+      secretKeyRef:
+        name: mushop-oss-connection
+        key: streamId
+  - name: OCI_TENANT_ID
+    valueFrom:
+      secretKeyRef:
+        name: streaming-secret
+        key: oci_tenant_id
+  - name: OCI_USER_ID
+    valueFrom:
+      secretKeyRef:
+        name: streaming-secret
+        key: oci_user_id
+  - name: OCI_FINGERPRINT
+    valueFrom:
+      secretKeyRef:
+        name: streaming-secret
+        key: oci_fingerprint
+  - name: OCI_PASS_PHRASE
+    valueFrom:
+      secretKeyRef:
+        name: streaming-secret
+        key: oci_pass_phrase
+  - name: OCI_API_KEY
+    valueFrom:
+      secretKeyRef:
+        name: streaming-secret
+        key: oci_api_key
+  - name: OCI_REGION
+    valueFrom:
+      secretKeyRef:
+        name: streaming-secret
+        key: oci_region
+  - name: OCI_COMPARTMENT_ID
+    valueFrom:
+      secretKeyRef:
+        name: streaming-secret
+        key: oci_compartment_id</code></pre>
+    </div>
   </section>
   <section>
     <h2>Connecting to OSS</h2>
@@ -428,7 +443,7 @@ secrets:
   </section>
   <section>
     <p class="mu-small mu-left">
-      Click <a href="https://console.us-phoenix-1.oraclecloud.com/?tenant=intvravipati" target="_blank">here</a> to
+      Click <a href="https://console.us-phoenix-1.oraclecloud.com/" target="_blank">here</a> to
       access the OCI console.
     </p>
     <div class="mu-flex mu-gutter">

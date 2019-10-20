@@ -33,15 +33,16 @@ include "partials/_mushopTree.html"
                 K8s secret for connecting to an OCI stream<br/>
                 <b>⚠️ NOTE:</b> Use with <code>--set skip.streaming=true</code> in mushop helm chart
               </blockquote>
-              <pre><code class="hljs text">kubectl create -f stream-secret.yaml --namespace mushop</code></pre>
+              <pre><code class="hljs text">kubectl create -f streaming-secret.yaml --namespace mushop</code></pre>
             </div>
             <!-- oci credentials -->
             <div class="card col-1-2">
-              <code>&gt;</code> <a href="/downloads/k8s/ocicredentials-secret.yaml">ocicredentials-secret.yaml</a>
+              <code>&gt;</code> <a href="/downloads/k8s/service-broker-secret.yaml">service-broker-secret.yaml</a>
               <blockquote class="mu-small">
-                K8s secret for Service Broker
+                K8s secret for Service Broker<br/>
+                <b>⚠️ NOTE:</b> Use with <code>--set skip.ociCredentials=true</code> in provision helm chart
               </blockquote>
-              <pre><code class="hljs text">kubectl create -f ocicredentials-secret.yaml --namespace mushop</code></pre>
+              <pre><code class="hljs text">kubectl create -f service-broker-secret.yaml --namespace mushop</code></pre>
             </div>
             <!-- oke cluster (mushop-workshop) -->
             <div class="card col-1-1">

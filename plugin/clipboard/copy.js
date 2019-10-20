@@ -10,14 +10,18 @@ var SnippetCopy = (function() {
     area.select();
     document.execCommand("copy");
     document.body.removeChild(area);
-    link.innerHTML = 'Copied';
+    var txt = link.innerHTML;
+    link.innerHTML = 'copied';
+    setTimeout(function() {
+      link.innerHTML = txt;
+    }, 2000);
   }
 
   return {
     init: function() {
       var nodes = Reveal.getRevealElement().querySelectorAll('pre > code');
       var iter = Array.apply(null, nodes);
-      var text = 'Copy';
+      var text = 'copy';
       for (var i=0; i < iter.length; i++) {
         var code = iter[i];
         var copy = document.createElement('a');

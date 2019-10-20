@@ -64,8 +64,8 @@ $o-color-light-alpha: rgba($o-color-light-grey, 0.15);
 
 // ratios
 $ratio-1-1:                                     100%;
-$ratio-3-2:                                     66.66%;
 $ratio-4-3:                                     75%;
+$ratio-3-2:                                     66.66%;
 $ratio-16-9:                                    56.25%;
 $ratio-2-1:                                     50%;
 $ratio-5-2:                                     40%;
@@ -166,7 +166,7 @@ a {
 	}
 	pre {
 		font-size: 0.4em;
-		margin: 0 0 $blockMargin;
+		margin: 0 auto $blockMargin;
 		box-shadow: none;
 		box-sizing: border-box;
 		code {
