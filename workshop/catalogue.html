@@ -154,8 +154,8 @@
         </div>
         <hr>
         <div class="mu-medium">
-          Create a file <a href="/public/oci-service-broker.yaml"><b><code>oci-service-broker.yaml</code></b></a>
-          with the following content:
+          <p>Create a file <a href="/public/oci-service-broker.yaml"><b><code>oci-service-broker.yaml</code></b></a>
+          with the following contents:</p>
           <pre><code class="hljs yaml">apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ClusterServiceBroker
 metadata:
@@ -176,10 +176,9 @@ oci-service-broker  FetchedCatalog</code></pre>
         <pre><code class="hljs text">svcat get brokers</code></pre>
         <pre><code class="hljs text">svcat get classes</code></pre>
         <pre><code class="hljs text">svcat get plans</code></pre>
-        <pre><code class="hljs text">    NAME     NAMESPACE          CLASS                    DESCRIPTION            
-+----------+-----------+----------------------+--------------------------------+
-  standard               atp-service            OCI Autonomous Transaction      
-                                                Processing                      
+        <pre><code class="hljs text">    NAME     NAMESPACE          CLASS                       DESCRIPTION            
++----------+-----------+----------------------+-------------------------------------+
+  standard               atp-service            OCI Autonomous Transaction Processing                      
   archive                object-store-service   An Archive type Object Storage  
   standard               object-store-service   A Standard type Object Storage  
   standard               adw-service            OCI Autonomous Data Warehouse   
@@ -190,7 +189,7 @@ oci-service-broker  FetchedCatalog</code></pre>
 </section>
 
 <section id="lab">
-  <h2>Hands on Service Broker</h2>
+  <h2>Hands-on Service Broker</h2>
   <div class="mu-small mu-left">
     Follow the steps outlined here to provision an ATP <em>instance</em> and resolve
     a <em>binding</em> secret with its DB Connection Wallet:

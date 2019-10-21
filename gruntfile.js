@@ -13,7 +13,7 @@ module.exports = grunt => {
 
 	fs.writeFileSync('_build.html', `
 		<div><span>Version:</span> ${pkg.version}</div>
-		<div><span>Build:</span> ${new Date().toISOString().split('.').shift()}</div>
+		<div><span>Build:</span> ${new Date().toISOString().split('.').shift()}Z</div>
 	`);
 
 	// Project configuration

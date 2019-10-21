@@ -159,7 +159,7 @@
       <div class="mu-svc fragment fade-in">
         <img data-src="/images/tech/streaming.svg" /> OSS
       </div>
-      <div class="mu-flex-connector arrow fragment fade-in">consumer</div>
+      <div class="mu-flex-connector arrow-left fragment fade-in">consumer</div>
       <div class="mu-svc fragment fade-in">
         <img data-src="/images/tech/java.png" /> Stream
       </div>
@@ -170,33 +170,58 @@
     </div>
 
     <aside class="notes" data-markdown>
-      We have two services as part of the Mushop that are using the streaming service. First, we have the shipping
+      We have two services as part of MuShop using the streaming service. First, we have the <b><code>shipping</code></b>
       service: once an order is created, shipping service puts a message with order information on to the stream. Then,
       we have stream consumer that simply reads those messages from a stream as they come in.
     </aside>
   </section>
   <section>
     <h2>Connecting to OSS</h2>
-    <ol>
-      <li class="mu-left fragment">Generate API signing key and public key</li>
-      <li class="mu-left fragment">Upload public key to OCI</li>
-      <li class="mu-left fragment">Expose credentials to the application (configuration/environment/etc.)</li>
-      <li class="mu-left fragment">Using Streaming SDK connect to OSS</li>
-    </ol>
-    <br />
-    <a href="https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdks.htm">OCI SDKs (Java, Python, Ruby and Go)</a>
+    <div class="mu-flex mu-gutter">
+      <div class="card col-1-2">
+        Using APIs
+        <hr>
+        <ol class="mu-small">
+          <li class="mu-left fragment">Generate API signing and public key</li>
+          <li class="mu-left fragment">Upload public key to OCI
+            <blockquote class="mu-medium no-margin">
+              See <a href="/workshop/prepare.html#tenancy" target="_blank">setup</a> for API user configuration.
+            </blockquote>
+          </li>
+          <li class="mu-left fragment">Configure the application</li>
+          <li class="mu-left fragment">
+            Utilize SDKs connect to OSS
+            <blockquote class="mu-medium no-margin">
+              <a href="https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdks.htm" target="_blank">
+                OCI SDKs</a> (Java, Python, Ruby and Go)
+            </blockquote>
+          </li>
+        </ol>
+      </div>
+      <div class="mu-muted mu-valign no-wrap">- OR -</div>
+      <div class="card col-1-2">
+        Kafka Compatibility
+        <hr>
+        🆕
+      </div>
+    </div>
   </section>
   <section>
-    <h2>How Shipping App Connects to OSS</h2>
-    <p class="fragment">Create a secret that has credentials needed for authentication</p>
-    <img class="fragment" data-src="/images/k8s/secret.png" />
-  </section>
-  <section>
-    <h2>Deployment Configuration</h2>
-    <div class="mu-small mu-flex">
-    <pre class="mu-ratio mu-ratio-3-2 mu-col-1-1"><code class="hljs yaml"># Source: mushop/charts/shipping/templates/shipping-deployment.yaml
-#...
+    <h2>Connecting from K8s</h2>
+    <div class="mu-medium">
+      Using a secret with credentials needed for API authentication, and resource
+      specifics.
+    </div>
+    <hr>
+    <div class="mu-flex mu-gutter mu-small">
+      <div class="card col-1-2">
+        <img class="fragment" data-src="/images/k8s/secret.png" />
+      </div>
+      <div class="card col-1-2 mu-medium">
+        Sample Kubernetes deployment configurations:
+        <pre class="mu-ratio mu-ratio-1-1"><code class="hljs yaml"># Source: mushop/charts/shipping/templates/shipping-deployment.yaml
 env:
+  # access configurations
   - name: STREAM_NAME
     valueFrom:
       secretKeyRef:
@@ -242,92 +267,99 @@ env:
       secretKeyRef:
         name: streaming-secret
         key: oci_compartment_id</code></pre>
+      </div>
     </div>
   </section>
-  <section>
+  
+  <section id="example">
     <h2>Connecting to OSS</h2>
-    <p>In Java get credentials/IDs from environment</p>
-
-    <pre class="mu-small"><code class="hljs java">final String tenantId = env.getProperty("OCI_TENANT_ID");
-final String userId = env.getProperty("OCI_USER_ID");
-final String fingerprint = env.getProperty("OCI_FINGERPRINT");
-final String privateKey = env.getProperty("OCI_API_KEY");
-final String passPhrase = env.getProperty("OCI_PASS_PHRASE");
-final String region = env.getProperty("OCI_REGION");
-final String compartmentId = env.getProperty("OCI_COMPARTMENT_ID");</code></pre>
-  </section>
-  <section>
-    <h2>Connecting to OSS</h2>
-    <p>Create auth provider and stream client objects</p>
-    <pre class="mu-small"><code class="hljs java">AuthenticationDetailsProvider provider =  
-  SimpleAuthenticationDetailsProvider.builder()
-      .tenantId(tenantId)
-      .userId(userId)
-      .fingerprint(fingerprint)
-      .privateKeySupplier(new StringPrivateKeySupplier(privateKey))
-      .region(Region.fromRegionId(region))
-      .build();
-    
+    <div class="mu-small">
+      The following represents an example of how an integration with OSS might
+      work.
+    </div>
+    <hr>
+    <div class="mu-flex mu-small switcher">
+      <ul>
+        <li class="fragment">Configuration</li>
+        <li class="fragment">Auth/Client</li>
+        <li class="fragment">Producer</li>
+        <li class="fragment">Consumer</li>
+      </ul>
+      <ul class="col-1-1">
+        <li>
+          <div class="mu-margin">
+            In Java get credentials/IDs from environment:
+          </div>
+          <pre><code class="hljs java">final String tenantId = env.getProperty("OCI_TENANT_ID");
+              final String userId = env.getProperty("OCI_USER_ID");
+              final String fingerprint = env.getProperty("OCI_FINGERPRINT");
+              final String privateKey = env.getProperty("OCI_API_KEY");
+              final String passPhrase = env.getProperty("OCI_PASS_PHRASE");
+              final String region = env.getProperty("OCI_REGION");
+              final String compartmentId = env.getProperty("OCI_COMPARTMENT_ID");
+              final String streamId = env.getProperty("STREAM_ID");</code></pre>
+        </li>
+        <li>
+          <div class="mu-margin">
+            Create auth provider and stream client objects:
+          </div>
+          <pre><code class="hljs java">AuthenticationDetailsProvider provider =  
+SimpleAuthenticationDetailsProvider.builder()
+    .tenantId(tenantId)
+    .userId(userId)
+    .fingerprint(fingerprint)
+    .privateKeySupplier(new StringPrivateKeySupplier(privateKey))
+    .region(Region.fromRegionId(region))
+    .build();
+  
 final StreamAdminClient adminClient = new StreamAdminClient(provider);
 Stream stream = getStream(adminClient, compartmentId, streamName, partitions);
 
 streamClient = new StreamClient(provider);
 streamClient.setEndpoint(stream.getMessagesEndpoint());</code></pre>
+        </li>
+        <li>
+          <div class="mu-margin">
+            Publishing messages to OSS:
+          </div>
+          <pre class="mu-small"><code class="hljs java">PutMessagesDetails messagesDetails = PutMessagesDetails.builder()
+  .messages(messages)
+  .build();</code></pre>
+          <pre class="mu-small"><code class="hljs java">PutMessagesRequest putRequest = PutMessagesRequest.builder()
+  .streamId(streamsConfig.getStreamId())
+  .putMessagesDetails(messagesDetails)
+  .build();</code></pre>
+          <pre class="mu-small"><code class="hljs java">PutMessagesResponse putResponse = streamsConfig.getStreamClient()
+  .putMessages(putRequest);</code></pre>
+        </li>
+        <li>
+          <div class="mu-margin">
+            Consuming messages in the Stream:
+          </div>
+          <div class="mu-flex mu-gutter">
+            <div class="col-1-2 mu-medium">
+              1. Create a cursor:
+              <pre><code class="hljs java">CreateCursorDetails cursorDetails =
+  CreateCursorDetails.builder()
+  .partition(partition)
+  .type(Type.Latest)
+  //.type(Type.TrimHorizon)
+  //.type(Type.AtOffset)
+  .build();
 
-  </section>
-  <section>
-    <h2>Publishing messages to OSS</h2>
-    <pre class="mu-small"><code class="hljs java">
-  PutMessagesDetails messagesDetails = PutMessagesDetails.builder()
-    .messages(messages)
-    .build();
-  </code></pre>
-    <pre class="mu-small"><code class="hljs java">
-  PutMessagesRequest putRequest = PutMessagesRequest.builder()
-    .streamId(streamsConfig.getStreamId())
-    .putMessagesDetails(messagesDetails)
-    .build();
-  </code></pre>
-    <pre class="mu-small"><code class="hljs java">
-  PutMessagesResponse putResponse = streamsConfig.getStreamClient()
-    .putMessages(putRequest);
-  </code></pre>
-  </section>
-  <section>
-    <h2>Consuming messages from OSS</h2>
-    <p class="mu-left">Use the same steps to create a connection as in Shipping App:</p>
-    <ul>
-      <li>get credentials from the environment</li>
-      <li>create an authentication object</li>
-      <li>get streamClient and streamId</li>
-    </ul>
-    <p class="mu-left">Then: ...</p>
-  </section>
-  <section>
-    <h2>Create a cursor</h2>
-    <pre class="mu-small"><code class="hljs java">  CreateCursorDetails cursorDetails =
-    CreateCursorDetails
-    .builder()
-    .partition(partition)
-    .type(Type.Latest)
-    //.type(Type.TrimHorizon)
-    //.type(Type.AtOffset)
-    .build();
+CreateCursorRequest createCursorRequest =
+  CreateCursorRequest.builder()
+  .streamId(streamId)
+  .createCursorDetails(cursorDetails)
+  .build();
 
-  CreateCursorRequest createCursorRequest =
-    CreateCursorRequest.builder()
-    .streamId(streamId)
-    .createCursorDetails(cursorDetails)
-    .build();
-
-  CreateCursorResponse cursorResponse = 
-    streamClient.createCursor(createCursorRequest);
-    return cursorResponse.getCursor().getValue();
-            </code></pre>
-  </section>
-  <section>
-    <h2>Get messages</h2>
-    <pre class="mu-small"><code class="hljs java">for (;;) {
+CreateCursorResponse cursorResponse = 
+  streamClient.createCursor(createCursorRequest);
+  return cursorResponse.getCursor().getValue();</code></pre>
+            </div>
+            <div class="col-1-2 mu-medium">
+              2. Get messages:
+              <pre><code class="hljs java">for (;;) {
   GetMessagesRequest getRequest =
     GetMessagesRequest.builder()
       .streamId(streamId)
@@ -338,9 +370,15 @@ streamClient.setEndpoint(stream.getMessagesEndpoint());</code></pre>
   GetMessagesResponse getResponse = streamClient.getMessages(getRequest);
   //Extract Json message from getResponse
   //Print message
-}
-            </code></pre>
+}</code></pre>
+            </div>
+          </div>
+        </li>
+        
+      </ul>
+    </div>
   </section>
+
 </section> <!-- end of lecture-->
 
 <!-- Lab -->
