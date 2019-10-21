@@ -106,6 +106,7 @@ include "highlights/_atpapps.html"
 │   └── user
 │       └── secrets
 │           └── Wallet_mymushopdb
+├── myvalues.yaml
 └── secrets
     └── oci_streams_api_key.pem</code></pre>
           </div>
@@ -124,7 +125,7 @@ include "highlights/_atpapps.html"
         <div class="mu-medium">
           Traverse into the helm chart deployment directory:
           <pre><code class="hljs text">cd deploy/helm-chart</code></pre>
-          Copy an example values file into your workspace:
+          <a href="/public/myvalues.yaml">Download</a> or copy an example values file into your workspace:
           <pre><code class="hljs text">cp mushop/values-dev.yaml ./myvalues.yaml</code></pre>
           Enter helm chart configuation for each service:
           <pre class="mu-ratio mu-ratio-5-2"><code class="hljs yaml mu-overflow">ingress:
@@ -134,8 +135,8 @@ include "highlights/_atpapps.html"
 carts:
   secrets:
     oadbAdminPassword: ''
-    oadbWalletPassword: ''
-    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbWalletPassword: 'changeme'
+    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
     oadbUser: mushop_cartsvc # runtime db schema user
     oadbPassword: muSecret_Pass1 # create schema password
 
@@ -143,7 +144,7 @@ carts:
 catalogue:
   secrets:
     oadbAdminPassword: ''
-    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
     oadbUser: mushop_cataloguesvc # runtime db schema user
     oadbPassword: muSecret_Pass1 # create schema password
 
@@ -151,8 +152,8 @@ catalogue:
 orders:
   secrets:
     oadbAdminPassword: ''
-    oadbWalletPassword: ''
-    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbWalletPassword: 'changeme'
+    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
     oadbUser: mushop_ordersvc # runtime db schema user
     oadbPassword: muSecret_Pass1 # create schema password
 
@@ -160,26 +161,11 @@ orders:
 user:
   secrets:
     oadbAdminPassword: ''
-    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
     oadbUser: mushop_usersvc # runtime db schema user
     oadbPassword: muSecret_Pass1 # create schema password
 
-# Depending on the scenario, certain resources might need to be skipped.
-# For example, --set skip.streaming=true to disable creating streaming secrets
-skip:
-  streaming: false
-
-secrets:
-  # oss connection information
-  streams:
-    streamName:
-    tenantId: 
-    compartmentId: 
-    userId: 
-    region: 
-    fingerprint: 
-    passphrase: 
-    keyFile: </code></pre>
+#...</code></pre>
         </div>
       </li>
       <li>
@@ -191,7 +177,8 @@ secrets:
           Install from the <code>deploy/helm-cart</code> directory:
           <pre><code class="hljs text">helm install mushop \
   --name mushop \
-  --set skip.streaming=true</code></pre>
+  --set skip.streaming=true \
+  -f myvalues.yaml</code></pre>
           <pre><code class="hljs text">kubectl get pod --watch</code></pre>
           <hr>
           <p>You will notice several pods with an <b><code>-init-</code></b> component

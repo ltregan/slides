@@ -117,10 +117,12 @@
         dedicated to this application and the resources allocated.
 
         <div class="mu-margin mu-margin-top">
-          <ol class="mu-medium">
+          <ol class="mu-medium mu-steps">
             <li>Launch <a href="https://console.us-phoenix-1.oraclecloud.com/identity/compartments" target="_blank">OCI Console</a></li>
-            <li>Governance and Admininstration &raquo; Identity &raquo; Compartments</li>
-            <li>Click the <button class="oui-button oui-button-primary">Create Compartment</button> button</li>
+            <li>
+              Governance and Admininstration &raquo; Identity &raquo; Compartments &raquo;
+              <button class="oui-button oui-button-primary">Create Compartment</button>
+            </li>
             <li>✏️ Make note of the Compartment <b><code>OCID</code></b></li>
           </ol>
         </div>
@@ -133,7 +135,7 @@
         You will need a User with <b>API Key</b> access in your tenancy. This can be your personal user account, or 
         a virtual user specific to usage of this application.
         <div class="mu-margin mu-margin-top">
-          <ol class="mu-medium">
+          <ol class="mu-medium mu-steps">
             <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/a/identity/users" target="_blank">OCI Console</a></li>
             <li>Governance and Admininstration &raquo; Identity &raquo; Users</li>
             <li>Select <em>or create</em> the user you wish to use</li>
@@ -157,14 +159,18 @@
         of the Administrators Group, then a <b>Group</b> with specific Policies must be
         created, and the User added as a member
         <div class="mu-margin mu-margin-top">
-          <ol class="mu-medium">
+          <ol class="mu-medium mu-steps">
             <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/identity/groups" target="_blank">OCI Console</a></li>
-            <li>Governance and Admininstration &raquo; Identity &raquo; Groups &raquo; Create</li>
-            <li>Click the <button class="oui-button oui-button-primary">Create Group</button> button</li>
+            <li>
+              Governance and Admininstration &raquo; Identity &raquo; Groups &raquo; 
+              <button class="oui-button oui-button-primary">Create Group</button>
+            </li>
             <li>Specify metadata for the Group, and make note of the <label>NAME</label></li>
             <li>Click the <button class="oui-button oui-button-primary">Add User to Group</button> button and select your API User<hr/></li>
-            <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
-            <li>Click the <button class="oui-button oui-button-primary">Create Policy</button> button</li>
+            <li>
+              Governance and Admininstration &raquo; Identity &raquo; Policies &raquo;
+              <button class="oui-button oui-button-primary">Create Policy</button>
+            </li>
             <li>
               Create a Policy with the following statement:
               <pre><code class="hljs text">Allow group &lt;GroupName&gt; to manage all-resources in compartment &lt;CompartmentName&gt;</code></pre>
@@ -184,7 +190,7 @@
         tenancy. Please check minimum resource availability as follows: 
 
         <div class="mu-margin mu-margin-top">
-          <ol class="mu-medium">
+          <ol class="mu-medium mu-steps">
             <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/limits" target="_blank">OCI Console</a> Limits</li>
             <li>Governance and Admininstration &raquo; Governance &raquo; Limits, Quotas, and Usage</li>
             <li>Check Limits</li>
@@ -364,7 +370,7 @@ fingerprint:  # Public API Key fingerprint (ex: 43:65:2c...)</code></pre>
         policy to allow OKE to perform necessary operations.
 
         <div class="mu-margin mu-margin-top">
-          <ol class="mu-medium">
+          <ol class="mu-medium mu-steps">
             <li>Open <a href="https://console.us-phoenix-1.oraclecloud.com/a/identity/policies" target="_blank">OCI Console</a></li>
             <li>Governance and Admininstration &raquo; Identity &raquo; Policies &raquo; Create</li>
             <li>Click the <button class="oui-button oui-button-primary">Create Policy</button> button</li>

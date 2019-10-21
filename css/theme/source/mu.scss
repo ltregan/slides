@@ -310,6 +310,9 @@ section > h2 > img {
 	&.justified {
 		margin-left: 1em;
 	}
+	&.mu-steps {
+		line-height: 1.5;
+	}
 
 	li.mu-divider {
 		list-style: none;

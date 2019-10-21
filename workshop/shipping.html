@@ -178,18 +178,18 @@
   <section>
     <h2>Connecting to OSS</h2>
     <div class="mu-flex mu-gutter">
-      <div class="card col-1-2">
+      <div class="card col-1-2 fragment">
         Using APIs
         <hr>
         <ol class="mu-small">
-          <li class="mu-left fragment">Generate API signing and public key</li>
-          <li class="mu-left fragment">Upload public key to OCI
+          <li class="mu-left">Generate API signing and public key</li>
+          <li class="mu-left">Upload public key to OCI
             <blockquote class="mu-medium no-margin">
               See <a href="/workshop/prepare.html#tenancy" target="_blank">setup</a> for API user configuration.
             </blockquote>
           </li>
-          <li class="mu-left fragment">Configure the application</li>
-          <li class="mu-left fragment">
+          <li class="mu-left">Configure the application</li>
+          <li class="mu-left">
             Utilize SDKs connect to OSS
             <blockquote class="mu-medium no-margin">
               <a href="https://docs.cloud.oracle.com/iaas/Content/API/Concepts/sdks.htm" target="_blank">
@@ -198,8 +198,8 @@
           </li>
         </ol>
       </div>
-      <div class="mu-muted mu-valign no-wrap">- OR -</div>
-      <div class="card col-1-2">
+      <div class="mu-valign no-wrap fragment"><span class="mu-muted">- OR -</span></div>
+      <div class="card col-1-2 fragment">
         Kafka Compatibility
         <hr>
         🆕
@@ -214,10 +214,10 @@
     </div>
     <hr>
     <div class="mu-flex mu-gutter mu-small">
-      <div class="card col-1-2">
-        <img class="fragment" data-src="/images/k8s/secret.png" />
+      <div class="card col-1-2 fragment">
+        <img data-src="/images/k8s/secret.png" />
       </div>
-      <div class="card col-1-2 mu-medium">
+      <div class="card col-1-2 fragment mu-medium">
         Sample Kubernetes deployment configurations:
         <pre class="mu-ratio mu-ratio-1-1"><code class="hljs yaml"># Source: mushop/charts/shipping/templates/shipping-deployment.yaml
 env:
@@ -384,114 +384,180 @@ CreateCursorResponse cursorResponse =
 <!-- Lab -->
 <section id="lab">
   <section>
-    <h2>Hands-on Practice</h2>
-    <p class="mu-small mu-left">
-      For this practice lab you will update the source code to put an additional message on the stream.
-    </p>
-    <p class="mu-small mu-left">You will create an additional shipment in the following controller file:</p>
-    <pre><code class="hljs text">mushop/src/shipping/src/main/java/mushop/shipping/controller/ShippingController.java</code></pre>
-    <p class="mu-small mu-left">Locate the <code>postShipping</code> method and right under the
-      <code>publishMessage</code> call, create another
-      shipment.</p>
-    <pre class="mu-small"><code class="hljs java">
-Shipment myShipment = new Shipment("123456", "This is an additional shippment!");
-streamsPublisher.publishMessage(myShipment);
-    </code></pre>
-  </section>
-  <section>
-    <h2>Build docker image</h2>
-    <p class="mu-small mu-left">To build the docker image, make sure you are in the correct folder (You will see a
-      Dockerfile there)</p>
-    <pre><code class="hljs text">mushop/src/shipping</code></pre>
-    <p class="mu-small mu-left">Run the following to build the image.</p>
-    <pre><code class="hljs text">docker build -t shipping:dev .</code></pre>
-  </section>
-  <section>
-    <h2>Update the Helm chart values file</h2>
-    <p class="mu-small mu-left">Make a copy of the values file that can be used to only deploy the Shipping and
-      Streaming service:</p>
-    <pre><code class="hljs sh">cp mushop/deploy/helm-chart/mushop/values-shipping.yaml my-values-shipping.yaml</code></pre>
-    <p class="mu-small mu-left">Next, you need to open the file and fill out the missing values (image name you built as
-      well as OCI information):</p>
-    <pre><code class="hljs yaml mu-small">shipping:
-  enabled: true
-  image:
-    repository: IMAGE NAME HERE
-    tag: IMAGE TAG HERE
-    imagePullPolicy: Never
+    <h2>Hands-on with OSS</h2>
+    
+    <div class="mu-flex mu-small switcher">
+      <ul>
+        <li class="fragment">Create Stream</li>
+        <li class="fragment">Configure</li>
+        <li class="fragment">Deploy</li>
+        <li class="fragment">Verify</li>
+        <li class="fragment">Outputs</li>
+      </ul>
+      <ul class="col-1-1">
+        <li>
+          In order to connect the demo application to the OCI Streaming service,
+          you first need a provisioned stream.
+          <hr>
+          <ol class="mu-medium mu-steps">
+            <li>Launch <a href="https://console.us-phoenix-1.oraclecloud.com/storage/streaming" target="_blank">OCI Console</a></li>
+            <li>Solutions and Platform &raquo; Analytics &raquo; <b>Streaming</b></li>
+            <li>Choose a Compartment and click <button class="oui-button oui-button-primary">Create Stream</button></li>
+            <li>Enter a name like <code>mushop-stream</code>, leaving other values as their defaults</li>
+            <li>Click <button class="oui-button oui-button-primary">Create</button></li>
+            <li>
+              ✏️ Make note of the following items:
+              <ul>
+                <li>Stream <b><code>OCID</code></b></li>
+                <li>Stream <b><code>Name</code></b></li>
+              </ul>
+            </li>
+          </ol>
+        </li>
 
+        <!-- configure app -->
+        <li>
+          Next create (or edit) a <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a> file to
+          specifiy connection secrets for the stream:
+          <hr>
+          <div class="mu-flex mu-gutter mu-flex-stretch">
+            <ol class="mu-medium mu-steps card col-1-2">
+              <li>
+                Traverse into the helm chart:
+                <pre><code class="hljs text">cd deploy/helm-chart</code></pre>
+              </li>
+              <li>
+                Enter <code>myvalues.yaml</code> accordingly:
+                <pre><code class="hljs yaml">#...
 secrets:
+  # oss connection information
   streams:
-    compartmentId: OCI_COMPARTMENT_ID
-    tenantId: OCI_TENANT_ID
-    userId: OCI_USER_ID
-    fingerprint: OCI_FINGERPRINT
-    region: OCI_REGION
-    passphrase: OCI_PASSPHRASE
-    streamName: STREAM_NAME
-    </code></pre>
-  </section>
-  <section>
-    <h2>Create a deployment</h2>
-    <p class="mu-small mu-left">The following command deploys a Helm chart using the values file you created:
-    </p>
-    <pre><code class="hljs sh">helm install -f deploy/helm-chart/mushop/my-values-shipping.yaml deploy/helm-chart/mushop
-        --name shipping --namespace mushop</code></pre>
-    <p class="mu-small mu-left">To verify the pod and service were created, list all resources in the namespace
-      <code>mushop</code>:
-    </p>
-    <pre><code class="hljs text">kubectl get all --namespace mushop</code></pre>
-    <p class="mu-small mu-left">Repeat the same series of steps (begining at building an image) for the
-      <code>stream</code>
-      service. Make sure you provide the image information in the <code>values.yaml</code> file.</p>
-  </section>
-  <section>
-    <h2>Prepare to watch the logs</h2>
-    <p class="mu-small mu-left">
-      To tail the application logs first you need to find the <code>shipping</code> and <code>stream</code> pod names.
-      Then, in two separate terminal windows (one for <code>shipping</code>, one for <code>stream</code>), run the
-      following but replace <code>pod_name</code>
-      with the actual pod name that you saved, and <code>namespace_name</code> with the namespace where you deployed the
-      services to:
-    </p>
-    <pre><code class="hljs text">kubectl logs -f pod_name -n namespace_name</code></pre>
-  </section>
-  include "partials/highlights/_testshipping.html"
-  <section>
-    <h2>Shipping and stream output</h2>
-    <pre><code class="hljs text mu-small">
-  # Shipping service output
-  {"name":"shipment 500","id":"123-45-8876"}
-  Created a list with one message
-  Publishing 1 messages to stream ocid1.stream.oc1.phx.aaaaaaaaa5acbmqg4t3ul6dyy3kbcihsxpw66tvpyxw7j7kesmdz3i6cc45a.
-  Published message to partition 0, offset 49.
-  Created a list with one message
-  Publishing 1 messages to stream ocid1.stream.oc1.phx.aaaaaaaaa5acbmqg4t3ul6dyy3kbcihsxpw66tvpyxw7j7kesmdz3i6cc45a.
-  Published message to partition 0, offset 50.
-    </code></pre>
+    streamName:     # Name of the stream created
+    tenantId:       # Tenancy OCID
+    compartmentId:  # Compartment OCID
+    userId:         # Stream User OCID
+    region:         # Region (eg us-phoenix-1)
+    fingerprint:    # Public API Key fingerprint (ex: 43:65:2c...)
+    passphrase:     # Optional API Key passphrase
+    keyFile: secrets/oci_streams_api_key.pem # Private Key in secrets/ folder</code></pre>
+              </li>
+            </ol>
+            <div class="card col-1-2 mu-medium">
+              <div class="mu-margin">
+                ⚠️ A copy of the User API private key must be added to the chart
+                as indicated, named according to the values entered earlier: 
+              </div>
+              <pre><code class="hljs text">deploy/helm-chart/mushop/
+├── charts
+├── myvalues.yaml
+└── secrets
+    └── oci_streams_api_key.pem</code></pre>
+            </div>
+          </div>
+        </li>
 
-    <pre><code class="hljs text mu-small">
-  # Stream service output
-  Received shipment task: shipment 500
-  Shipment{id='123-45-8876', name='shipment 500'}
-  Received shipment task: shipment 500
-  Shipment{id='SomeID', name='MyShippment Name!'}
-  Received shipment task: MyShippment Name!
-          </code></pre>
-  </section>
-  <section>
-    <p class="mu-small mu-left">
-      Click <a href="https://console.us-phoenix-1.oraclecloud.com/" target="_blank">here</a> to
-      access the OCI console.
-    </p>
-    <div class="mu-flex mu-gutter">
-      <div><img class="plain" width="100%" data-src="/images/streams/console1.png" alt="Analytics - Streaming" /></div>
-      <div><img class="plain" width="100%" data-src="/images/streams/console2.png"
-          alt="Analytics - Streaming - Overview" /></div>
+        <!-- deploy -->
+        <li>
+          With the values configured, the application is ready to deploy
+          <hr>
+          <div class="mu-medium">
+            Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
+            <pre><code class="hljs text">helm del --purge mushop</code></pre>
+            Install from the <code>deploy/helm-cart</code> directory:
+            <pre><code class="hljs text">helm install mushop \
+  --name mushop \
+  -f myvalues.yaml</code></pre>
+            <pre><code class="hljs text">kubectl get pod --watch</code></pre>
+          </div>
+        </li>
+
+        <!-- verify -->
+        <li>
+          Verify the streaming flow by sending a test message to the shipping
+          service
+          <hr>
+          <div class="mu-flex mu-flex-stretch mu-medium">
+            <div class="col-1-2">
+              <div class="mu-flex mu-gutter mu-wrap">
+                <div class="card col-1-1">
+                  To tail the application logs first you need to find the <code>shipping</code> and <code>stream</code> pod names:
+                  <pre><code class="hljs text">kubectl get po</code></pre>
+                </div>
+                <div class="card col-1-1">
+                  <code>&gt;</code> Terminal 1: Tail <code>shipping</code> logs:
+                  <pre class="no-margin"><code class="hljs text">kubectl logs -f mushop-shipping-d475m</code></pre>
+                  <span class="mu-muted">(name will vary)</span>
+                </div>
+                <div class="card col-1-1">
+                  <code>&gt;</code> Terminal 2: Tail <code>stream</code> logs:
+                  <pre class="no-margin"><code class="hljs text">kubectl logs -f mushop-stream-d475m</code></pre>
+                  <span class="mu-muted">(name will vary)</span>
+                </div>
+              </div>
+            </div>
+
+            <div class="mu-flex-connector arrow mu-valign"></div>
+            <div class="card col-1-2">
+              Expose the <code>shipping</code> service:
+              <pre><code class="hljs text">kubectl port-forward svc/shipping 8000:80</code></pre>
+              
+              <code>&gt;</code> Terminal 3: Send a test message to the shipping
+              microservice:
+              <pre><code class="hljs sh">curl -X POST \
+  http://localhost:8000/shipping \
+  -H 'Content-Type: application/json' \
+  -H 'cache-control: no-cache' \
+  -d '{ 
+    "id": "123-45-8876",
+    "name": "shipment 500" 
+  }'</code></pre>
+              <blockquote class="mu-medium">
+                👀 Watch the terminals and observe messages being created by 
+                <code>shipping</code>,then and consumed in the <code>stream</code>
+              </blockquote>
+
+              <blockquote class="mu-medium">
+                You should also look at the OCI console.
+                Refresh the table and watch your message being published to the stream.
+              </blockquote>
+            </div>
+          </div>
+        </li>
+
+        <li>
+          Sample outputs from shipping and stream services
+          <hr>
+          Shipping service output:
+          <pre><code class="hljs text">{"name":"shipment 500","id":"123-45-8876"}
+Created a list with one message
+Publishing 1 messages to stream ocid1.stream.oc1.phx.aaaaaaaaa5acbmqg4t3ul6dyy3kbcihsxpw66tvpyxw7j7kesmdz3i6cc45a.
+Published message to partition 0, offset 192</code></pre>
+
+          Stream service output:
+          <pre><code class="hljs text">Received shipment task: shipment 500
+Shipment{id='123-45-8876', name='shipment 500'}
+Received shipment task: shipment 500</code></pre>
+        </li>
+      </ul>
     </div>
   </section>
+  
   <section>
-    <img class="plain" width="100%" data-src="/images/streams/console3.png"
-      alt="Anaylics - Streaming - Stream Details" />
+    <h2>Streaming Console</h2>
+    <p class="mu-small mu-left">
+      Click <a href="https://console.us-phoenix-1.oraclecloud.com/storage/streaming" target="_blank">here</a> to
+      access the OCI console.
+    </p>
+    <div class="fragment-set">
+      <div class="mu-flex mu-gutter fragment">
+        <div><img class="plain" width="100%" data-src="/images/streams/console1.png" alt="Analytics - Streaming" /></div>
+        <div><img class="plain" width="100%" data-src="/images/streams/console2.png"
+            alt="Analytics - Streaming - Overview" /></div>
+      </div>
+      <div class="fragment">
+      <img class="plain" width="100%" data-src="/images/streams/console3.png"
+        alt="Anaylics - Streaming - Stream Details" />
+      </div>
+    </div>
   </section>
 </section> <!-- end of lab -->

@@ -5,8 +5,8 @@ ingress:
 carts:
   secrets:
     oadbAdminPassword: ''
-    oadbWalletPassword: ''
-    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbWalletPassword: 'changeme'
+    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
     oadbUser: mushop_cartsvc # runtime db schema user
     oadbPassword: muSecret_Pass1 # create schema password
 
@@ -14,7 +14,7 @@ carts:
 catalogue:
   secrets:
     oadbAdminPassword: ''
-    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
     oadbUser: mushop_cataloguesvc # runtime db schema user
     oadbPassword: muSecret_Pass1 # create schema password
 
@@ -22,8 +22,8 @@ catalogue:
 orders:
   secrets:
     oadbAdminPassword: ''
-    oadbWalletPassword: ''
-    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbWalletPassword: 'changeme'
+    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
     oadbUser: mushop_ordersvc # runtime db schema user
     oadbPassword: muSecret_Pass1 # create schema password
 
@@ -31,7 +31,7 @@ orders:
 user:
   secrets:
     oadbAdminPassword: ''
-    oadbService: # TNS Name, ie mymushopdb_tp
+    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
     oadbUser: mushop_usersvc # runtime db schema user
     oadbPassword: muSecret_Pass1 # create schema password
 
@@ -50,4 +50,4 @@ secrets:
     region: 
     fingerprint: 
     passphrase: 
-    keyFile: 
+    keyFile: secrets/oci_streams_api_key.pem
