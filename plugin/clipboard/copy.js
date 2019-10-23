@@ -1,8 +1,16 @@
 
 var SnippetCopy = (function() {
 
+  function isWin() {
+    return navigator && /windows/i.test(navigator.userAgent || '');
+  }
+
   function clipboard(link) {
     var text = this.innerText;
+    if (isWin()) {
+      // strip breaks
+      text = text.replace(/\s\\\s*\n\s*/g, ' ');
+    }
     var area = document.createElement('textarea');
     area.textContent = text;
     area.style.height = area.style.width = 0;
