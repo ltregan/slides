@@ -14,7 +14,6 @@ var Switcher = (function() {
       return;
     }
     el.setAttribute('data-switcher-init', true);
-    console.log('init');
     var tabs = Array.apply(null, control.children);
     var panes = Array.apply(null, content.children);
 
