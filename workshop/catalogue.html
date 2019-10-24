@@ -71,6 +71,7 @@
   <div class="mu-flex mu-small switcher">
     <ul>
       <li class="fragment">Install Service Catalog</li>
+      <li class="fragment">Create Credentials</li>
       <li class="fragment">Add OCI Service Broker</li>
       <li class="fragment">Register Cluster Broker</li>
       <li class="fragment">Verify</li>
@@ -78,34 +79,50 @@
     <ul class="col-1-1">
       <!-- install svc cat -->
       <li>
-        <blockquote class="mu-medium no-margin">
-          👍 Good news! You already installed <code>svc-cat/catalog</code> as part of the
-          umbrella chart during <a href="/workshop/setup.html#setup"><code>setup</code></a>. 
-          In case this <em>was not</em> completed, here are steps to do so:
-        </blockquote>
-        <hr>
-        <div class="mu-margin-top">
-          Add the Kubernetes Service Catalog helm repository:
-          <pre class="mu-margin"><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com</code></pre>
-          Install the Kubernetes Service Catalog helm chart:
-          <pre><code class="hljs text">helm install svc-cat/catalog \
+        <div class="mu-flex mu-gutter mu-wrap">
+          <div class="card col-1-1">
+            <div class="mu-margin">
+              👍 Good news! You already installed <code>svc-cat/catalog</code> as part of the
+              umbrella chart during <a href="/workshop/setup.html#setup"><code>setup</code></a>.
+              Verify that the chart was installed:
+            </div>
+            <pre><code class="hljs text">kubectl get pod -A -l chart=catalog-0.2.1</code></pre>
+          </div>
+          <div class="col-1-1">
+            <div class="mu-margin">
+              If Service Catalog <em><b>is not</b></em> installed, please perform these steps:
+            </div>
+            Add the Kubernetes Service Catalog helm repository:
+            <pre class="mu-margin"><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com</code></pre>
+            Install the Kubernetes Service Catalog helm chart:
+            <pre><code class="hljs text">helm install svc-cat/catalog \
   --name catalog \
   --namespace service-catalog </code></pre>
-          <blockquote class="mu-small">
-            <div class="mu-margin">
-              ℹ️ Please note that the above command configures the Service Catalog using an embedded etcd instance.
-              It is not recommended to run the Service Catalog using an embedded etcd instance in production environments,
-              instead a separate etcd cluster should be setup and used by the Service Catalog.
-            </div>
-            The open source etcd operator project or a commercial offering may be used to setup a production quality etcd cluster.
-          </blockquote>
+
+            <blockquote class="mu-small">
+              ℹ️ Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
+              It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in
+              production environments, instead a separate etcd cluster should be setup and used by the OSB.
+              <hr>
+              The open source etcd operator project or a commercial offering may be used to setup a production quality etcd
+              cluster. The recommended setup can be found <a
+                href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup"
+                target="_blank">here</a>
+            </blockquote>
+          </div>
         </div>
+        <!-- <blockquote class="mu-medium no-margin">
+          
+        </blockquote>
+        <hr> -->
       </li>
       <!-- oci service broker -->
       <li>
-        <div class="mu-small">
-          The OCI Service Broker for Kubernetes uses access credentials to provision and
-          manage services and resources in the user tenancy.
+        <div class="mu-">
+          The OCI Service Broker for Kubernetes requires tenancy credentials to provision and
+          manage services and resources.
+          <hr>
+          Create a secret containing these values:
           <pre><code class="hljs shell">kubectl create secret generic oci-service-broker \
   --namespace mushop \
   --from-literal=tenancy=&lt;TENANCY_OCID&gt; \
@@ -115,36 +132,35 @@
   --from-literal=passphrase=&lt;PRIVATE_API_KEY_PASSPHRASE&gt; \
   --from-file=privatekey=&lt;PATH_OF_PRIVATE_API_KEY&gt;</code></pre>
 
-          <blockquote class="mu-">
+          <blockquote class="mu-medium">
             ⚠️ <b>NOTE:</b> The account used must have sufficient policies in <b>IAM</b> to manage 
             resources provisioned with Service Broker
           </blockquote>
-
-          Next, deploy the OCI service broker on your cluster. Note the
-          <b><code>secretName=oci-service-broker</code></b> created above.
+        </div>
+      </li>
+      <li>
+        <div>
+          Next, deploy the OCI service broker on your cluster. This is done with
+          the Oracle OCI Service Broker helm chart.
+          <hr>
           <pre><code class="hljs text">helm install https://github.com/oracle/oci-service-broker/releases/download/v1.3.1/oci-service-broker-1.3.1.tgz \
   --namespace mushop \
   --name oci-service-broker \
   --set ociCredentials.secretName=oci-service-broker \
   --set storage.etcd.useEmbedded=true \
   --set tls.enabled=false</code></pre>
-
-          <blockquote class="mu-">
-            <div class="mu-margin">
-              ℹ️ Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
-              It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in
-              production environments, instead a separate etcd cluster should be setup and used by the OSB.
-            </div>
-            The open source etcd operator project or a commercial offering may be used to setup a production quality etcd
-            cluster. The recommended setup can be found <a
-              href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup"
-              target="_blank">here</a>
+  
+          <blockquote class="mu-medium">
+            ⚠️ Note the <b><code>secretName=oci-service-broker</code></b> secret created before.
           </blockquote>
         </div>
       </li>
       <!-- clusterbroker -->
       <li>
-        <div class="mu-margin">Register OCI Service Broker</div>
+        <div class="mu-margin">
+          Lastly, establish the link between Service Catalog and the OCI Service Broker
+          implementation by creating a <code>ClusterServiceBroker</code> resource.
+        </div>
         <div class="mu-margin mu-flex mu-flex-middle">
           <div class="mu-svc"><img data-src="/images/tech/k8s.png"></div>
           <div class="mu-center mu-flex-connector arrow arrow-left">Service Broker</div>
@@ -153,9 +169,9 @@
           <div class="mu-svc"><img data-src="/images/tech/oci.png"></div>
         </div>
         <hr>
-        <div class="mu-medium">
-          <p>Create a file <a href="/public/oci-service-broker.yaml"><b><code>oci-service-broker.yaml</code></b></a>
-          with the following contents:</p>
+        <div class="">
+          <p>Create file <a href="/public/oci-service-broker.yaml"><b><code>oci-service-broker.yaml</code></b></a>
+          with the following:</p>
           <pre><code class="hljs yaml">apiVersion: servicecatalog.k8s.io/v1beta1
 kind: ClusterServiceBroker
 metadata:
@@ -313,12 +329,11 @@ spec:
         deployment of the catalogue service. Inspect the following for additional
         information.
 
-        <hr>
-        <div class="mu- mu-flex mu-flex-stretch">
+        <div class="mu-margin-top mu-flex mu-flex-stretch">
           <div class="card col-1-2">
             Inspect the catalogue deployment:
             <pre><code class="hljs text">kubectl get deploy mushop-catalogue -o yaml</code></pre>
-            And the catalogue init pod <span class="mu-muted">(will vary)</span>: 
+            And the db init pod <span class="mu-muted">(name will vary)</span>: 
             <pre><code class="hljs text">kubectl logs mushop-catalogue-1.2-init-d475m</code></pre>
           </div>
           <div class="mu-flex-connector mu-valign"></div>
@@ -398,26 +413,53 @@ spec:
 
       <!-- automation -->
       <li>
-        <blockquote class="no-margin mu-left">
-          💯 These steps may be <b>automated</b> by another helm chart included in the source repo:
-          <pre><code class="hljs text">deploy/helm-chart/provision</code></pre>
-        </blockquote>
-        <p>
-          The <code>provision</code> helm chart manages the following:
-        </p>
-        <ul class="mu-medium">
-          <li>Service Broker API Secret</li>
-          <li>Global ATP Instance/Binding</li>
-          <li>Optional service-specific instance(s) <code class="mu-muted">(--set {svc}.osb.atp.true)</code></li>
-          <li>Auto-generated <code>*-oadb-admin</code> secrets</li>
-          <li>Auto-generated <code>*-oadb-connection</code> secrets</li>
-        </ul>
-        <hr>
-        <h3>TL;DR</h3>
-        Create instance(s) and binding(s):
-        <pre><code class="hljs text">helm install provision --name mushop-provision</code></pre>
-        ⏲️ Wait for servicebindings to be <b><code>READY</code></b>. Then deploy MuShop...
-        <pre><code class="hljs text">helm install mushop --name mushop --set global.osb.atp=true</code></pre>
+        <div class="mu-flex mu-gutter mu-wrap">
+          <div class="card col-1-2">
+            <div>
+              💯 The processes contained in this exercise may be <b>automated</b>
+              through the use of another helm chart included in the repo:
+              <pre><code class="hljs text">deploy/helm-chart/provision</code></pre>
+            </div>
+          </div>
+          <div class="card col-1-2">
+            The <code>provision</code> chart includes:
+            <ul class="mu-medium">
+              <li>OCI Service Broker API Secret</li>
+              <li>OCI ClusterServiceBroker</li>
+              <li>Global ATP Instance/Binding</li>
+              <li>Optional service-specific instance(s)</code></li>
+              <li>Auto-generated <code>*-oadb-admin</code> secrets</li>
+              <li>Auto-generated <code>*-oadb-connection</code> secrets</li>
+            </ul>
+          </div>
+        </div>
+
+        <ol>
+          <li>
+            Remove previous deployment:
+            <pre><code class="hljs text">helm delete --purge mushop</code></pre>
+          </li>
+          <li>
+            Provision instance(s) and binding(s):
+            <pre><code class="hljs text">helm install provision -n mushop-provision --namespace mushop \
+  --set skip.ociCredentials=true --set skip.clusterBroker=true</code></pre>
+            <!-- <blockquote class="mu-small">
+              ⚠️ <b>NOTE:</b> skip flags in this command correspond to the
+              <b><code>oci-service-broker</code></b> secret and
+              <b><code>ClusterServiceBroker</code></b> already created
+            </blockquote> -->
+          </li>
+          <li>
+            ⏲️ Wait for servicebindings to be <b><code>READY</code></b>:
+            <pre><code class="hljs text">kubectl get servicebindings -A</code></pre>
+          </li>
+          <li>
+            Deploy MuShop again, now indicating the use of Service Broker ATP backing:
+            <pre><code class="hljs text">helm install mushop -n mushop --namespace mushop \
+  --set global.osb.atp=true \
+  --set skip.streaming=true</code></pre>
+          </li>
+        </ol>
       </li>
     </ul>
   </div>
