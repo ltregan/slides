@@ -66,23 +66,22 @@
           <div class="card col-1-2">
             <code>&gt;</code> Clone with <code>git</code>
             <ol class="mu-small mu-steps">
-              <li>Connect to 🔒 VPN</li>
-              <li>Open <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo" target="blank">repo</a></li>
+              <li>Open <a href="https://github.com/oracle-quickstart/oci-cloudnative" target="blank">repo</a></li>
               <li>
-                Click <a class="oui-button oui-button-primary">Clone</a>
+                Click <a class="oui-button oui-button-primary">Clone or download</a>
               </li>
             </ol>
             <div class="mu-medium mu-margin-top">
-              <pre><code class="hljs text">git clone git@orahub.oraclecorp.com:ateam/mushop-oci-demo.git mushop
+              <pre><code class="hljs text">git clone https://github.com/oracle-quickstart/oci-cloudnative.git mushop
 cd mushop</code></pre>
               <blockquote class="mu-small">
-                (May require adding an <a href="https://orahub.oraclecorp.com/profile/keys" target="_blank">SSH key</a>)
+                (Or clone with SSH)
               </blockquote>
             </div>
           </div>
           <div class="mu-muted no-wrap mu-valign">- OR -</div>
           <div class="card col-1-2">
-            <code>&gt;</code> <a href="https://orahub.oraclecorp.com/ateam/mushop-oci-demo/-/archive/develop/mushop-oci-demo-develop.tar.gz">Download</a>
+            <code>&gt;</code> <a href="https://github.com/oracle-quickstart/oci-cloudnative/archive/develop.zip">Download</a>
             <blockquote class="mu-small">
               Extract contents to a folder available on your disk
             </blockquote>
@@ -99,7 +98,6 @@ include "_mushopTree.html"
         or enable certain application features.
         <hr />
         <ol>
-          <li>🔓 Disconnect VPN</li>
           <li>
             Check <code>kubectl</code> context:
             <pre><code class="hljs sh">kubectl config current-context
@@ -112,8 +110,8 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com</code></pr
           </li>
           <li>
             Install cluster dependencies using <code>helm</code>:
-            <pre><code class="hljs text">helm dependency update deploy/helm-chart/setup</code></pre>
-            <pre><code class="hljs text">helm install deploy/helm-chart/setup \
+            <pre><code class="hljs text">helm dependency update deploy/complete/helm-chart/setup</code></pre>
+            <pre><code class="hljs text">helm install deploy/complete/helm-chart/setup \
 --name mushop-setup \
 --namespace mushop-setup</code></pre>
             <div>

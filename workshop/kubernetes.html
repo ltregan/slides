@@ -212,7 +212,7 @@ spec:
     spec:
       containers:
         - name: storefront
-          image: "phx.ocir.io/intvravipati/mushop/storefront:2.0.0"
+          image: "iad.ocir.io/oracle/ateam/mushop-storefront:2.0.0"
           ports:
             - name: http
               containerPort: 8080
@@ -356,7 +356,7 @@ spec:
             ⚠️ <b>NOTE:</b> Ensure <a href="/workshop/setup.html#setup" target="_blank">setup</a>
             steps were completed, and prior installations are removed
           </p>
-          <pre><code class="hljs sh">helm install deploy/helm-chart/mushop \
+          <pre><code class="hljs sh">helm install deploy/complete/helm-chart/mushop \
   --name mushop \
   --set global.mock.service="all"</code></pre>
           <div class="mu-small mu-margin"><pre><code class="hljs text">########################################
@@ -388,7 +388,7 @@ include "_openmushop.html"
           using the <b><code>template</code></b> command:
           <hr>
           <pre><code class="hljs text">mkdir ./out</code></pre>
-          <pre><code class="hljs text">helm template deploy/helm-chart/mushop \
+          <pre><code class="hljs text">helm template deploy/complete/helm-chart/mushop \
   --name mushop \
   --set global.mock.service="all" \
   --output-dir ./out</code></pre>
@@ -422,7 +422,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: "phx.ocir.io/intvravipati/mushop/api:2.0.0"
+          image: "iad.ocir.io/oracle/ateam/mushop-api:2.0.0"
           imagePullPolicy: Always
           ports:
             - name: http

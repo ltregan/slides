@@ -92,7 +92,7 @@ include "highlights/_atpapps.html"
           </div>
           <div class="card col-1-2">
             <div class="mu-margin">Wallets added to each service helm chart:</div>
-            <pre><code class="hljs text">deploy/helm-chart/mushop/
+            <pre><code class="hljs text">deploy/complete/helm-chart/mushop/
 ├── charts
 │   ├── carts
 │   │   └── secrets
@@ -124,7 +124,7 @@ include "highlights/_atpapps.html"
         <hr>
         <div class="mu-medium">
           Traverse into the helm chart deployment directory:
-          <pre><code class="hljs text">cd deploy/helm-chart</code></pre>
+          <pre><code class="hljs text">cd deploy/complete/helm-chart</code></pre>
           <a href="/public/myvalues.yaml">Download</a> or copy an example values file into your workspace:
           <pre><code class="hljs text">cp mushop/values-dev.yaml ./myvalues.yaml</code></pre>
           Enter helm chart configuation for each service:
@@ -174,7 +174,7 @@ user:
         <div class="mu-medium">
           Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
           <pre><code class="hljs text">helm del --purge mushop</code></pre>
-          Install from the <code>deploy/helm-cart</code> directory:
+          Install from the <code>deploy/complete/helm-cart</code> directory:
           <pre><code class="hljs text">helm install mushop \
   --name mushop \
   --set skip.streaming=true \

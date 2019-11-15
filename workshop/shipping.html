@@ -424,7 +424,7 @@ CreateCursorResponse cursorResponse =
             <ol class="mu-medium mu-steps card col-1-2">
               <li>
                 Traverse into the helm chart:
-                <pre><code class="hljs text">cd deploy/helm-chart</code></pre>
+                <pre><code class="hljs text">cd deploy/complete/helm-chart</code></pre>
               </li>
               <li>
                 Enter <code>myvalues.yaml</code> accordingly:
@@ -447,7 +447,7 @@ secrets:
                 ⚠️ A copy of the User API private key must be added to the chart
                 as indicated, named according to the values entered earlier: 
               </div>
-              <pre><code class="hljs text">deploy/helm-chart/mushop/
+              <pre><code class="hljs text">deploy/complete/helm-chart/mushop/
 ├── charts
 ├── myvalues.yaml
 └── secrets
@@ -463,7 +463,7 @@ secrets:
           <div class="mu-medium">
             Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
             <pre><code class="hljs text">helm del --purge mushop</code></pre>
-            Install from the <code>deploy/helm-cart</code> directory:
+            Install from the <code>deploy/complete/helm-cart</code> directory:
             <pre><code class="hljs text">helm install mushop \
   --name mushop \
   -f myvalues.yaml</code></pre>

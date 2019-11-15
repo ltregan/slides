@@ -2,8 +2,8 @@
   <h2>Run <img data-src="/images/logo.png" alt="MuShop" /></h2>
   <div class="mu-sequence">
     Deploy in local Kubernetes cluster
-    <pre class="fragment"><code class="hljs sh">helm dependency update deploy/helm-chart/setup</code></pre>
-    <pre class="fragment"><code class="hljs sh">helm install deploy/helm-chart/mushop \
+    <pre class="fragment"><code class="hljs sh">helm dependency update deploy/complete/helm-chart/setup</code></pre>
+    <pre class="fragment"><code class="hljs sh">helm install deploy/complete/helm-chart/mushop \
   --name mushop \
   --namespace mushop \
   --set global.mock.service="all"</code></pre>
