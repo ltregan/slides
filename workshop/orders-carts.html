@@ -152,8 +152,8 @@ ALTER USER carts_user
     <h2>Prepare the application</h2>
     <div class="mu-small">
       <p>Copy all files from the credential package (wallet) to: </p>
-      <pre>mushop/deploy/helm-chart/mushop/orders/secrets</pre>
-      <pre>mushop/deploy/helm-chart/mushop/carts/secrets</pre>
+      <pre>mushop/deploy/complete/helm-chart/mushop/orders/secrets</pre>
+      <pre>mushop/deploy/complete/helm-chart/mushop/carts/secrets</pre>
       <ul>
         <li> <b>cwallet.sso</b> - Auto-login wallet file</li>
         <li> <b>ewallet.p12</b> - PKCS#12 wallet file</li>
@@ -202,7 +202,7 @@ docker images
 
           Make a copy of the values-dev.yaml file first:
         </p>
-        <pre><code class="hljs sh">cp deploy/helm-chart/mushop/values-dev.yaml deploy/helm-chart/mushop/local-orders-carts.yaml</code></pre>
+        <pre><code class="hljs sh">cp deploy/complete/helm-chart/mushop/values-dev.yaml deploy/complete/helm-chart/mushop/local-orders-carts.yaml</code></pre>
         <p class="mu-small mu-left"><strong>Note</strong>: if you have an existing version of Mushop deployed,
           you can remove it using:</p>
         <pre><code class="hljs sh">helm delete mushop --purge</code></pre>
@@ -266,7 +266,7 @@ spec:
           repository root:
         </p>
         <pre><code class="hljs sh">
-helm install -f deploy/helm-chart/mushop/values-devtest.yaml deploy/helm-chart/mushop --name mushop --namespace mushop
+helm install -f deploy/complete/helm-chart/mushop/values-dev.yaml deploy/complete/helm-chart/mushop --name mushop --namespace mushop
                 </code></pre>
         <p class="mu-small mu-left">Try creating an order or add items to the cart and check the tables on your ATP
           instance

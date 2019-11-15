@@ -171,7 +171,7 @@ spec:
     spec:
       containers:
         - name: api
-          image: "phx.ocir.io/intvravipati/mushop/api:2.0.0"
+          image: "iad.ocir.io/oracle/ateam/mushop-api:2.0.0"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
@@ -244,7 +244,7 @@ spec:
         
       containers:
         - name: catalogue
-          image: "phx.ocir.io/intvravipati/mushop/catalogue:1.2"
+          image: "iad.ocir.io/oracle/ateam/mushop-catalogue:1.2"
           imagePullPolicy: IfNotPresent
           command: ["/app"]
           args:
@@ -310,7 +310,7 @@ spec:
     spec:
       containers:
         - name: edge
-          image: "phx.ocir.io/intvravipati/mushop/edge-router:1"
+          image: "iad.ocir.io/oracle/ateam/mushop-edge-router:1"
           imagePullPolicy: IfNotPresent
           args:
           - --configfile=/config/traefik.toml
@@ -421,7 +421,7 @@ spec:
     spec:
       containers:
         - name: storefront
-          image: "phx.ocir.io/intvravipati/mushop/storefront:2.0.0"
+          image: "iad.ocir.io/oracle/ateam/mushop-storefront:2.0.0"
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
