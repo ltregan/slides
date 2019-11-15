@@ -7,10 +7,17 @@ if [[ -z "$OCIR" ]] ; then
     exit 1
 fi
 
+if [[ -n "$2" ]]; then
+    OCIR=$2
+fi
+
 NAMESPACE="mushop"
 SCRIPT_DIR=$(dirname "$0")
 CODE_DIR=$(cd $SCRIPT_DIR/..; pwd)
 CONTAINER=$(basename $CODE_DIR);
+
+echo "Will push to $OCIR"
+exit
 
 push() {
     DOCKER_PUSH=1;
