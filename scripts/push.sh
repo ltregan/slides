@@ -17,7 +17,6 @@ CODE_DIR=$(cd $SCRIPT_DIR/..; pwd)
 CONTAINER=$(basename $CODE_DIR);
 
 echo "Will push to $OCIR"
-exit
 
 push() {
     DOCKER_PUSH=1;
