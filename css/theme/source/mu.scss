@@ -13,54 +13,31 @@
 
 
 // Include theme-specific fonts
-@import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+// @import url(../../lib/font/source-sans-pro/source-sans-pro.css);
+@import url(../../lib/font/oracle-sans/oracle-sans.css);
 
 
 // Override theme settings (see ../template/settings.scss)
-$backgroundColor: #fff;
+$backgroundColor: #f1efed;
 
 $mainColor: #222;
 $headingColor: #222;
 
-$mainFontSize: 42px;
-$mainFont: 'Source Sans Pro', Helvetica, sans-serif;
-$headingFont: 'Source Sans Pro', Helvetica, sans-serif;
+$mainFontSize: 40px;
+$mainFont: "Oracle Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
+$headingFont: $mainFont;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: uppercase;
 $headingFontWeight: 600;
-$linkColor: #00758f;
+$linkColor: $o-color-blue;
 $linkColorHover: lighten( $linkColor, 15% );
 $selectionBackgroundColor: lighten( $linkColor, 25% );
 
-$heading1Size: 2.5em;
-$heading2Size: 1.6em;
+$heading1Size: 2.2em;
+$heading2Size: 1.5em;
 $heading3Size: 1.3em;
 $heading4Size: 1.0em;
-
-$o-color-slate: #8aadbf;
-$o-color-dark-slate: #324b5c;
-$o-color-grey: #939699;
-$o-color-light-grey: #dee0e0;
-$o-color-dark-grey: #4e5052;
-$o-color-text: #333;
-
-$o-color-red: #F80000;
-$o-color-burgundy: #942645;
-$o-color-green: #3a913f;
-$o-color-orange: #f29111;
-$o-color-blue: #00758f;
-
-$o-color-white: #FFFFFF;
-$o-color-black: #000000;
-$o-color-light: #FFFFFF;
-$o-color-field: #efefef;
-$o-color-tint: $o-color-light-grey;
-$o-color-dark: $o-color-dark-grey;
-$o-color-darkish: lighten($o-color-dark, 10%);
-$o-color-darker: darken($o-color-dark, 10%);
-$o-color-grey-alpha: rgba($o-color-grey, 0.15);
-$o-color-light-alpha: rgba($o-color-light-grey, 0.15);
 
 // ratios
 $ratio-1-1:                                     100%;
@@ -79,25 +56,25 @@ section.has-dark-background {
 
 // Background generator
 @mixin bodyBackground() {
-	@include radial-gradient( rgb(197, 197, 197), rgba(255,255,255,1), 25% );
+	@include radial-gradient($o-color-light, $o-color-white, 25% );
 }
 
-@mixin divider($gradient: linear-gradient(to right, $o-color-grey-alpha, $o-color-grey, $o-color-grey-alpha)) {
+@mixin divider($gradient: linear-gradient(to right, $o-color-light-alpha, rgba($o-color-brown, 0.5), $o-color-light-alpha)) {
 	background: $gradient;
 	height: 1px;
 	border: none;
 }
 
 @mixin shadow() {
-	box-shadow: 0 0 15px rgba(0, 0, 0, 0.25);
+	box-shadow: 0 0 10px rgba($o-color-dark, 0.25);
 }
 
 @mixin emphasis() {
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+	box-shadow: 0 0 10px rgba($o-color-dark, 0.5);
 }
 
 @mixin muted() {
-	opacity: 0.4;
+	opacity: 0.35;
 }
 
 @mixin fg($color: $o-color-red) {
@@ -175,7 +152,12 @@ a {
 	}
 	label {
 		font-weight: bold;
-	}
+  }
+  table {
+    th, td {
+      border-bottom-color: rgba($o-color-brown, 0.5);
+    }
+  }
 }
 
 // Margin
@@ -399,7 +381,10 @@ a.title-print {
 	}
 	&.mu-flex-center {
 		justify-content: center;
-	}
+  }
+  &.mu-flex-rtl {
+    flex-direction: row-reverse;
+  }
 	// vertical
 	&.mu-flex-stretch {
 		align-items: stretch;
@@ -473,7 +458,7 @@ a.title-print {
 	// cards
 	.card {
 		@include shadow();
-		@include bg($backgroundColor);
+		@include bg($o-color-white);
 		border: 1px solid $o-color-light-alpha !important;
 		border-radius: 5px;
 		box-sizing: border-box;
@@ -489,6 +474,7 @@ a.title-print {
 		&:hover {
 			@include emphasis();
 			img { 
+        background: none;
 				box-shadow: none;
 			}
 		}
@@ -574,9 +560,10 @@ a.title-print {
 
 // Blurbs
 .mu-blurb {
-	$connect-color: $o-color-burgundy;
+	$connect-color: $o-color-red;
 	$connect-size: 75px;
-	$dot-size: 10px;
+  $dot-size: 10px;
+  $line-size: 2px;
 
 	position: absolute;
 	left: $dot-size;
@@ -584,8 +571,19 @@ a.title-print {
 	padding-top: $connect-size;
 	padding-left: $dot-size;
 	text-align: left;
-	border-left: 1px solid $connect-color;
-	font-size: 0.8em;
+  border-left: $line-size solid $connect-color;
+  box-sizing: border-box;
+  font-size: 0.8em;
+  
+  &::after {
+		content: "";
+    display: block;
+    position: absolute;
+    background: $connect-color;
+    height: $line-size;
+    width: $dot-size - 2;
+    bottom: 0; left: -1px;
+  }
 
 	&::before {
 		content: "";
@@ -595,7 +593,7 @@ a.title-print {
 		width: $dot-size;
 		@include _crossbrowser(border-radius, $dot-size);
 		position: absolute;
-		top: 0; left: -($dot-size / 2);
+		top: 0; left: -(($dot-size + $line-size) / 2);
 	}
 
 	.mu-blurb-invert & {
@@ -606,7 +604,11 @@ a.title-print {
 		&::before {
 			top: auto;
 			bottom: 0;
-		}
+    }
+    &::after {
+			top: 0;
+			bottom: auto;
+    }
 	}
 
 	.no-blurb & {

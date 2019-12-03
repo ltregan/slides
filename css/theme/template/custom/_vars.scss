@@ -1,3 +1,30 @@
+// colors
+$o-color-slate: #8aadbf;
+$o-color-dark-slate: #324b5c;
+$o-color-grey: #939699;
+$o-color-light-grey: #dee0e0;
+$o-color-dark-grey: #4e5052;
+$o-color-text: #333;
+
+$o-color-red:      #E55844;
+$o-color-green:    #6A9D67;
+$o-color-blue:     #2d7480;
+$o-color-orange:   #bc6c37;
+$o-color-brown:    #3F3A36;
+$o-color-browner:  #383330;
+
+$o-color-light:    #f1f0eb;
+$o-color-white:    #FFFFFF;
+$o-color-dark:     #1A1816;
+$o-color-black:    #100f0e;
+
+$o-color-tint: $o-color-light-grey;
+$o-color-dark: $o-color-dark-grey;
+$o-color-darkish: lighten($o-color-dark, 10%);
+$o-color-darker: darken($o-color-dark, 10%);
+$o-color-grey-alpha: rgba($o-color-grey, 0.10);
+$o-color-light-alpha: rgba($o-color-light-grey, 0.15);
+
 // animation
 $base-transition-duration: 200ms;
 $base-transition: all $base-transition-duration ease-in-out;
