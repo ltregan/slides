@@ -29,48 +29,8 @@
 
       <!-- microservices -->
       <section id="microservices">
-        <section id="why-microservices">
-          <h2>Microservices</h2>
-          <img data-src="/images/tech/intro/logos.png" class="mu-muted">
-          <ul class="mu-small mu-flex mu-gutter">
-            <li class="card col-1-2">Enable us to build and run scalable apps in dynamic environments</li>
-            <li class="card col-1-2">Enable distributed system design that can be realized as resilient, manageable and
-              observable systems</li>
-          </ul>
-        </section>
-
-        <section id="petsvcattle" data-background="#fff">
-          <h2>Pets Vs. Cattle</h2>
-          <div class="fragment-set">
-            <div class="fragment mu-small">
-              <p class="mu-left">
-                <b>Pets</b>: Servers or server pairs that are treated as indispensable or unique
-                systems that
-                can never be down.
-                Typically they are manually built, managed, and “hand fed”.
-              </p>
-              <p class="mu-left">
-                <b>Cattle</b>: Arrays of more than two servers, that are built using automated
-                tools, and are
-                designed for failure, where no one, two, or even three servers are irreplaceable.
-                Typically,
-                during failure events no human intervention is required as the array exhibits
-                attributes
-                of “routing around failures” by restarting failed servers or replicating data.
-              </p>
-              <p>See
-                <a
-                  href="http://cloudscaling.com/blog/cloud-computing/the-history-of-pets-vs-cattle/">
-                  Pets vs. Cattle</a>
-              </p>
-            </div>
-            <div class="fragment">
-              <p class="mu-small">Persistent Infrastructure has a high overhead compared to Ephemeral Infrastructure</p>
-              <img data-src="/images/tech/intro/petsvcattle.gif" />
-            </div>
-          </div>
-
-        </section>
+        include "_aboutmicroservices.html"
+        include "_petsvcattle.html"
       </section>
 
       <!-- services -->

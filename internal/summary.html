@@ -11,7 +11,7 @@
     <h2>What is MuShop?</h2>
     <div class="fragment-set">
       <div class="fragment mu-margin-top">
-        include "../workshop/partials/_whatismushop.html"
+include "_whatismushop.html"
 
         <div class="mu-center">
           <img data-src="/images/logo.png" height="80" />
@@ -31,47 +31,7 @@
 
 <section>
   <!-- internal -->
-  <section id="goals">
-    <h2>Goals</h2>
-    <div class="mu-flex mu-wrap mu-flex-stretch mu-gutter mu-small mu-left">
-      <div class="card col-1-2">
-        Test bed for early OCI Service incubation
-        <ul class="mu-small">
-          <li>OCI Services are developed independently by OCI Engineering</li>
-          <li>Assemble a comprehensive use case</li>
-          <li>Validate end-user experience</li>
-        </ul>
-      </div>
-      <div class="card col-1-2">
-        Training tool on OCI Services
-        <ul class="mu-small">
-          <li>A-Team</li>
-          <li>Critical customers: hand-delivered; workshop can be customized</li>
-          <li>Field: Sales/Pre-Sales, Consulting, and Customer enablement</li>
-          <li>Public: Customers and Oracle developer community</li>
-        </ul>
-      </div>
-      <div class="card col-1-2">
-        Launchpad for time-to-market reference materials
-        <ul class="mu-small">
-          <li>
-            MuShop can be quickly adapted to reflect changes in the platform,
-            or showcase strategic OCI feature releases
-          </li>
-          <li>Establish familiar and easily deployable applications/example suite to get started</li>
-        </ul>
-      </div>
-      <div class="card col-1-2">
-        <!-- Present OCI as a viable option for Cloud Native workloads -->
-        Showcase OCI for Cloud Native workloads
-        <ul class="mu-small">
-          <li>Position Oracle within the <strong>enterprise</strong> cloud market</li>
-          <li>Modernized approach to enterprise application development</li>
-          <li>Choose <span class="fg-red">Oracle</span> <span class="mu-muted">over</span> AWS, Google, Azure, IBM</li>
-        </ul>
-      </div>
-    </div>
-  </section>
+  incluce "internal/_goals.html"
 
   <section id="background">
     <h2 class="mu-normal">Why <em>Mu</em> Shop?</h2>
@@ -82,47 +42,7 @@
       </div>
       <!-- competitive offerings -->
       <div class="col-2-3">
-        <table class="mu-table">
-          <thead>
-            <tr>
-              <th>Provider</th>
-              <th>Reference</th>
-              <th>Services</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td>Google Cloud</td>
-              <td><a href="https://github.com/GoogleCloudPlatform/microservices-demo" target="_blank">Hipster Shop</a></td>
-              <td class="mu-muted">GKE, Cloud Native</td>
-            </tr>
-            <tr>
-              <td>Azure</td>
-              <td><a href="https://github.com/microsoft/SmartHotel360" target="_blank">SmartHotel360</a></td>
-              <td class="mu-muted">AKS, Cloud Native</td>
-            </tr>
-            <tr>
-              <td>Weave Works</td>
-              <td><a href="https://github.com/microservices-demo/microservices-demo" target="_blank">Sock Shop</a></td>
-              <td class="mu-muted">Weave Net, K8s</td>
-            </tr>
-            <tr>
-              <td>Pivotal</td>
-              <td><a href="https://kb.vmtestdrive.com/hc/en-us/articles/360001143454-Pivotal-Container-Service-Deep-dive" target="_blank">Guest Book</a></td>
-              <td class="mu-muted">PKs</td>
-            </tr>
-            <tr>
-              <td>IBM</td>
-              <td><a href="https://github.com/ibm-cloud-architecture/refarch-cloudnative-kubernetes" target="_blank">BlueCompute</a></td>
-              <td class="mu-muted">IBM Cloud Private Cluster, K8s, Helm</td>
-            </tr>
-            <tr class="fragment">
-              <td class="fg-red"><strong>Oracle<strong></td>
-              <td><a class="fg-red" href="https://mushop.ateam.cloud" target="_blank">MuShop</a></td>
-              <td>OKE, WAF, ATP, OSB, OOS, OSS, K8s, Helm, Istio....</td>
-            </tr>
-          </tbody>
-        </table>
+        include "internal/_competition.html"
       </div>
     </div>
 
