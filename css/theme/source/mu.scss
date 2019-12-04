@@ -18,10 +18,10 @@
 
 
 // Override theme settings (see ../template/settings.scss)
-$backgroundColor: #f1efed;
+$backgroundColor: $o-color-light;
 
-$mainColor: #222;
-$headingColor: #222;
+$mainColor: $o-color-text;
+$headingColor: $o-color-browner;
 
 $mainFontSize: 40px;
 $mainFont: "Oracle Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", sans-serif;
@@ -29,10 +29,10 @@ $headingFont: $mainFont;
 $headingTextShadow: none;
 $headingLetterSpacing: normal;
 $headingTextTransform: uppercase;
-$headingFontWeight: 600;
+$headingFontWeight: 500;
 $linkColor: $o-color-blue;
 $linkColorHover: lighten( $linkColor, 15% );
-$selectionBackgroundColor: lighten( $linkColor, 25% );
+$selectionBackgroundColor: lighten( $o-color-orange, 25% );
 
 $heading1Size: 2.2em;
 $heading2Size: 1.5em;
@@ -124,6 +124,7 @@ a {
 }
 
 .reveal {
+  font-weight: 200;
 	section img {
 		background: none;
 		box-shadow: none;
@@ -206,7 +207,7 @@ section > h2 > img {
 }
 .mu-medium {
 	font-size: 0.8em;
-	line-height: 1.1;
+	line-height: 1.25;
 	pre {
 		font-size: 0.55em;
 	}
@@ -561,7 +562,7 @@ a.title-print {
 // Blurbs
 .mu-blurb {
 	$connect-color: $o-color-red;
-	$connect-size: 75px;
+	$connect-size: 60px;
   $dot-size: 10px;
   $line-size: 2px;
 
@@ -614,6 +615,16 @@ a.title-print {
 	.no-blurb & {
 		display: none !important;
 	}
+}
+
+// zoom
+.mu-zoom {
+  @include transition();
+  &:hover {
+    @include emphasis();
+    @include transform(scale(1.5));
+    z-index: 10;
+  }
 }
 
 // Switcher
@@ -770,7 +781,6 @@ a.title-print {
 }
 
 // watermark
-
 .mu-ateam-water {
 	position: fixed;
 	display: block;
@@ -787,6 +797,8 @@ a.title-print {
 	}
 	
 }
+
+// build
 .mu-build {
 	position: fixed;
 	bottom: 10px;
