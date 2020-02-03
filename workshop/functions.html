@@ -12,6 +12,7 @@
       <ul>
         <li class="fragment">Configure the Tenancy</li>
         <li class="fragment">Install Fn CLI</li>
+        <li class="fragment">Create OCIR Repository</li>
         <li class="fragment">Configure Fn CLI</li>
       </ul>
       <ul class="col-1-1">
@@ -60,7 +61,31 @@
           </p>
 
         </li>
-        <!-- Configure the Fn CLI-->
+        <!-- Create OCIR Repository-->
+        <li>
+          <div class="mu-flex mu-gutter">
+            <div class="mu-svc no-shrink">
+              <img data-src="/images/oci/container.svg" alt="OCIR">
+            </div>
+            <div>
+              When deploying the function, Fn CLI automatically builds and pushes the Docker image to the OCIR. For this to work, you need to have a repository created and be logged in to the registry (OCIR).
+             </div>
+          </div>
+          <hr />
+          <div class="mu-medium">
+            <ol>
+              <li>From the left sidebar in OCI Console, click <b>Developer Services</b> → <b>Registry (OCIR)</b>
+              </li>
+              <li>Click the <b>Create Repository</b> button</li>
+              <li>Enter <i>mushop-functions</i> for the repository name and click <b>Create Repository</b></li>
+              <li>From your terminal window, log in to the registry (replace the username, password, region-key and tenancy namespace with actual values):
+                <pre><code class="hljs sh">docker login --username [username] --password [password] [region-key].ocir.io/[tenancy-namespace]/mushop-functions </code></pre>
+              </li>
+            </ol>
+          </div>
+        </li>
+
+        <!-- Login to OCIR -->
         <li>
           <div class="mu-flex mu-gutter">
             <div class="mu-svc no-shrink">
