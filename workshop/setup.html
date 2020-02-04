@@ -112,8 +112,8 @@ helm repo add stable https://kubernetes-charts.storage.googleapis.com</code></pr
             Install cluster dependencies using <code>helm</code>:
             <pre><code class="hljs text">helm dependency update deploy/complete/helm-chart/setup</code></pre>
             <pre><code class="hljs text">helm install deploy/complete/helm-chart/setup \
---name mushop-setup \
---namespace mushop-setup</code></pre>
+--name mushop-utility \
+--namespace mushop-utilities</code></pre>
             <div>
               <blockquote class="mu-small">
                 ⚠️ It is possible that certain services may conflict with pre-existing installs.<br/>

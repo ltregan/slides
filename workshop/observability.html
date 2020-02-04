@@ -129,22 +129,22 @@
             </div>
           </div>
           <pre><code class="hljs text">helm list</code></pre>
-          <pre><code class="hljs text">NAME          REVISION        UPDATED                         STATUS          CHART                   APP VERSION     NAMESPACE
-mushop-setup  1               Sat Oct 12 06:12:45 2019        DEPLOYED        mushop-setup-0.0.1      1.0             mushop-setup      
-mushop        1               Sun Oct 13 20:23:28 2019        DEPLOYED        mushop-0.1.0            1.0             mushop </code></pre>
+          <pre><code class="hljs text">  NAME                    NAMESPACE               REVISION        UPDATED                                 STATUS          CHART                           APP VERSION   
+            mushop                  mushop                  1               2020-01-31 21:14:48.511917 -0600 CST    deployed        mushop-0.1.0                    1.0              
+            mushop-utility          mushop-utilities        1               2020-01-31 20:32:05.864769 -0600 CST    deployed        mushop-setup-0.0.1              1.0   </code></pre>
           
           Get the output from the setup installation:
-          <pre><code class="hljs text">helm status mushop-setup
+          <pre><code class="hljs text">helm status mushop-utility
 
 ## Grafana... </code></pre>
 
           Get the auto-generated admin password:         
-          <pre><code class="hljs text">kubectl get secret -n mushop-setup mushop-setup-grafana \
- -o jsonpath="{.data.admin-password}" | base64 --decode ; echo</code></pre>
+          <pre><code class="hljs text">kubectl get secret -n mushop-utilities mushop-utility-grafana \
+            -o jsonpath="{.data.admin-password}" | base64 --decode ; echo</code></pre>
 
           Connect to the <a href="http://localhost:3000" target="_blank">dashboard</a> with admin/&lt;password&gt;:
-          <pre><code class="hljs text">kubectl port-forward -n mushop-setup \
-  svc/mushop-setup-grafana 3000:80</code></pre>
+          <pre><code class="hljs text">kubectl port-forward -n mushop-utilities \
+  svc/mushop-utility-grafana 3000:80</code></pre>
         </li>
         <!-- add dashboards -->
         <li>
