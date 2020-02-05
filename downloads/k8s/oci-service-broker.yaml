@@ -3,4 +3,4 @@ kind: ClusterServiceBroker
 metadata:
   name: oci-service-broker
 spec:
-  url: http://mushop-osb.mushop-utilities:8080
+  url: http://oci-broker.mushop-utilities:8080

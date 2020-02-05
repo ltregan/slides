@@ -144,7 +144,7 @@
           Next, deploy the OCI service broker on your cluster. This is done with
           the Oracle OCI Service Broker helm chart.
           <hr>
-          <pre><code class="hljs text">helm install mushop-osb https://github.com/oracle/oci-service-broker/releases/download/v1.3.3/oci-service-broker-1.3.3.tgz \
+          <pre><code class="hljs text">helm install oci-broker https://github.com/oracle/oci-service-broker/releases/download/v1.3.3/oci-service-broker-1.3.3.tgz \
   --namespace mushop-utilities \
   --set ociCredentials.secretName=oci-service-broker \
   --set storage.etcd.useEmbedded=true \
@@ -177,7 +177,7 @@ kind: ClusterServiceBroker
 metadata:
   name: oci-service-broker
 spec:
-  url: http://mushop-osb.mushop-utilities:8080</code></pre>
+  url: http://oci-broker.mushop-utilities:8080</code></pre>
   
           <pre><code class="hljs text">kubectl create -f oci-service-broker.yaml</code></pre>
         </div>
@@ -187,7 +187,7 @@ spec:
         Verify that the Service Broker is available and ready:
         <pre><code class="hljs text">kubectl get clusterservicebrokers -o 'custom-columns=BROKER:.metadata.name,STATUS:.status.conditions[0].reason'</code></pre>
         <pre><code class="hljs text">BROKER              STATUS
-mushop-osb  FetchedCatalog</code></pre>
+oci-broker       FetchedCatalog</code></pre>
         Using the <code>svcat</code> CLI to see the status, service and plans available:
         <pre><code class="hljs text">svcat get brokers</code></pre>
         <pre><code class="hljs text">svcat get classes</code></pre>
