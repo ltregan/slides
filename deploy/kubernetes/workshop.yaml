@@ -15,11 +15,9 @@ spec:
         name: workshop
         layer: demo
     spec:
-      imagePullSecrets:
-        - name: ocirsecret
       containers:
       - name: workshop
-        image: phx.ocir.io/intvravipati/mushop/workshop:1
+        image: iad.ocir.io/ociateam/mushop/workshop:1
         imagePullPolicy: Always
         ports:
         - name: http
