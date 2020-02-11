@@ -46,7 +46,7 @@ include "highlights/_atpapps.html"
           </video>
         </div>
         <blockquote class="mu-medium">
-          📝 Be sure to make note of the <b>Admin Password</b> used when provisioning the ATP Instance
+          📝 Be sure to make note of the <b>ADMIN Password</b> used when provisioning the ATP Instance
         </blockquote>
       </li>
 
@@ -330,5 +330,52 @@ spec:
         </div>
       </li>
     </ul>
+  </div>
+</section>
+
+<section id="schemas">
+  <h2>ATP Schemas</h2>
+  <p class="mu-small">
+    Each service manages its own schema in the database, with specific grants by the <code>ADMIN</code>
+  </p>
+  <div class="mu-flex mu-gutter">
+    <div class="card col-1-3 mu-small">
+      <pre><code class="hljs sql">SELECT
+  table_name, owner
+FROM
+  all_tables
+WHERE
+  owner IN (
+    'CARTS_USER',
+    'CATALOGUE_USER',
+    'ORDERS_USER',
+    'USER_USER')
+ORDER BY
+  owner, table_name</code></pre>
+    </div>
+    <div class="card col-2-3 mu-small">
+      <pre><code class="hljs text">+---------------------+----------------+
+| TABLE_NAME          | OWNER          |
++---------------------+----------------+
+  CART                  CARTS_USER
+  CATEGORIES            CATALOGUE_USER
+  PRODUCTS              CATALOGUE_USER
+  PRODUCT_CATEGORY      CATALOGUE_USER
+  ADDRESS               ORDERS_USER
+  CARD                  ORDERS_USER
+  CART                  ORDERS_USER
+  CART_ITEMS            ORDERS_USER
+  CUSTOMER              ORDERS_USER
+  CUSTOMER_ADDRESSES    ORDERS_USER
+  CUSTOMER_CARDS        ORDERS_USER
+  CUSTOMER_ORDER        ORDERS_USER
+  CUSTOMER_ORDER_ITEMS  ORDERS_USER
+  ITEM                  ORDERS_USER
+  SHIPMENT              ORDERS_USER
+  user                  USER_USER
+  user_address          USER_USER
+  user_card             USER_USER
++---------------------+----------------+</code></pre>
+    </div>
   </div>
 </section>

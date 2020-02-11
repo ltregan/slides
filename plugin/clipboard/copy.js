@@ -6,7 +6,7 @@ var SnippetCopy = (function() {
   }
 
   function clipboard(link) {
-    var text = this.innerText;
+    var text = this.innerText.trim();
     if (isWin()) {
       // strip breaks
       text = text.replace(/\s\\\s*\n\s*/g, ' ');
