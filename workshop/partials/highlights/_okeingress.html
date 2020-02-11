@@ -31,10 +31,9 @@
       <div class="fragment">
         <div class="mu-sequence">
           <p>First an ingress controller is installed</p>
-          <pre><code class="hljs text">helm install \
---name nginx-ingress \
---namespace nginx-ingress \
-stable/nginx-ingress</code></pre>
+          <pre><code class="hljs text">helm repo add stable https://kubernetes-charts.storage.googleapis.com</code></pre>
+          <pre><code class="hljs text">helm install nginx-ingress stable/nginx-ingress \
+--namespace nginx-ingress</code></pre>
           <pre><code class="hljs text">kubectl get svc -n nginx-ingress</code></pre>
           <pre><code class="hljs text">NAME                       TYPE           CLUSTER-IP    EXTERNAL-IP      PORT(S)                      AGE
 nginx-ingress-controller   LoadBalancer   10.96.89.25   129.146.192.154   80:32491/TCP,443:31240/TCP   5m</code></pre>

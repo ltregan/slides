@@ -464,8 +464,7 @@ secrets:
             Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
             <pre><code class="hljs text">helm del mushop</code></pre>
             Install from the <code>deploy/complete/helm-cart</code> directory:
-            <pre><code class="hljs text">helm install mushop \
-  --name mushop \
+            <pre><code class="hljs text">helm install mushop mushop/ \
   -f myvalues.yaml</code></pre>
             <pre><code class="hljs text">kubectl get pod --watch</code></pre>
           </div>

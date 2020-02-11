@@ -21,10 +21,9 @@
   <li class="card col-1-3">
     Collection of self-paced, workshop-style exercises showcasing OCI features
     <div class="mu-margin-top">
-      <pre><code class="hljs text">helm install \
-  --name nginx-ingress \
-  --namespace nginx-ingress \
-  stable/nginx-ingress</code></pre>
+      <pre><code class="hljs text">helm install nginx-ingress \
+  stable/nginx-ingress \
+  --namespace nginx-ingress</code></pre>
       <pre><code class="hljs text">oci lb load-balancer list | jq '.data[]'</code></pre>
       <pre><code class="hljs text">kubectl create -f mushop.yaml</code></pre>
     </div>
