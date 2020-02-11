@@ -86,30 +86,32 @@
               umbrella chart during <a href="/workshop/setup.html#setup"><code>setup</code></a>.
               Verify that the chart was installed:
             </div>
-            <pre><code class="hljs text">kubectl get pod -A -l chart=catalog-0.2.1</code></pre>
+            <pre><code class="hljs text">kubectl get pod -A -l chart=catalog-0.3.0-beta.2</code></pre>
           </div>
-          <div class="col-1-1">
-            <div class="mu-margin">
-              If Service Catalog <em><b>is not</b></em> installed, please perform these steps:
-            </div>
-            Add the Kubernetes Service Catalog helm repository:
+          <div class="col-1-1 mu-medium">
+            ⚠️ If Service Catalog <em><b>is not</b></em> installed, please perform the following steps
+          </div>
+          <div class="card col-1-1">
             Create namespace for supporting services:
-            <pre><code class="hljs text">kubectl create namespace mushop-utilities</code></pre>
+            <pre class="mu-margin"><code class="hljs text">kubectl create namespace mushop-utilities</code></pre>
+            Add the Kubernetes Service Catalog helm repository:
             <pre class="mu-margin"><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com</code></pre>
             Install the Kubernetes Service Catalog helm chart:
             <pre><code class="hljs text">helm install catalog svc-cat/catalog \
   --namespace mushop-utilities </code></pre>
 
-            <blockquote class="mu-small">
-              ℹ️ Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
-              It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in
-              production environments, instead a separate etcd cluster should be setup and used by the OSB.
-              <hr>
-              The open source etcd operator project or a commercial offering may be used to setup a production quality etcd
-              cluster. The recommended setup can be found <a
-                href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup"
-                target="_blank">here</a>
-            </blockquote>
+            <div class="mu-small">
+              <blockquote class="mu-small">
+                ℹ️ Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
+                It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in
+                production environments, instead a separate etcd cluster should be setup and used by the OSB.
+                <hr>
+                The open source etcd operator project or a commercial offering may be used to setup a production quality etcd
+                cluster. The recommended setup can be found <a
+                  href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup"
+                  target="_blank">here</a>
+              </blockquote>
+            </div>
           </div>
         </div>
         <!-- <blockquote class="mu-medium no-margin">
@@ -293,7 +295,7 @@ spec:
           <ol>
             <li>
               Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
-              <pre><code class="hljs text">helm del --purge mushop</code></pre>
+              <pre><code class="hljs text">helm del mushop</code></pre>
             </li>
             <li>
               Create <code>catalogue-oadb-admin</code> secret:
@@ -436,7 +438,7 @@ spec:
         <ol>
           <li>
             Remove previous deployment:
-            <pre><code class="hljs text">helm delete --purge mushop</code></pre>
+            <pre><code class="hljs text">helm delete mushop</code></pre>
           </li>
           <li>
             Provision instance(s) and binding(s):
@@ -456,7 +458,7 @@ spec:
             Deploy MuShop again, now indicating the use of Service Broker ATP backing:
             <pre><code class="hljs text">helm install mushop -n mushop --namespace mushop \
   --set global.osb.atp=true \
-  --set skip.streaming=true</code></pre>
+  --set tags.streaming</code></pre>
           </li>
         </ol>
       </li>

@@ -168,6 +168,12 @@ a {
 .mu-margin-top {
 	margin-top: $blockMargin;
 }
+.mu-margin-small {
+  margin-bottom: $blockMargin / 4;
+}
+.mu-margin-small-top {
+	margin-top: $blockMargin / 4;
+}
 
 .no-margin {
 	.reveal section & {
@@ -732,9 +738,11 @@ a.title-print {
 .mu-ratio-2-1::before {
   padding-top: $ratio-2-1;
 }
+
 .mu-ratio-5-2::before {
   padding-top: $ratio-5-2;
 }
+
 .mu-ratio-3-1::before {
   padding-top: $ratio-3-1;
 }

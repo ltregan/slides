@@ -31,7 +31,7 @@ include "partials/_mushopTree.html"
               <code>&gt;</code> <a href="/downloads/k8s/streaming-secret.yaml">streaming-secret.yaml</a>
               <blockquote class="mu-small">
                 K8s secret for connecting to an OCI stream<br/>
-                <b>⚠️ NOTE:</b> Use with <code>--set skip.streaming=true</code> in mushop helm chart
+                <b>⚠️ NOTE:</b> Use with <code>--set tags.streaming=false</code> in mushop helm chart
               </blockquote>
               <pre><code class="hljs text">kubectl create -f streaming-secret.yaml --namespace mushop</code></pre>
             </div>

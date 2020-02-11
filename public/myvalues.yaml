@@ -1,53 +1,24 @@
+# Global service configurations
+global:
+  ociAuthSecret:         # OCI authentication credentials secret name
+  ossStreamSecret:       # OCI Streaming secret name
+  oosBucketSecret:       # Object storage bucket secret name (optional)
+  # ATP Secrets
+  oadbAdminSecret:       # Name of DB Admin secret created earlier
+  oadbWalletSecret:      # Name of wallet secret created earlier
+  oadbConnectionSecret:  # Name of connection secret created earlier
+
 ingress:
   enabled: true
 
-# carts service connection
-carts:
-  secrets:
-    oadbAdminPassword: ''
-    oadbWalletPassword: 'changeme'
-    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
-    oadbUser: mushop_cartsvc # runtime db schema user
-    oadbPassword: muSecret_Pass1 # create schema password
-
-# catalogue service connection
-catalogue:
-  secrets:
-    oadbAdminPassword: ''
-    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
-    oadbUser: mushop_cataloguesvc # runtime db schema user
-    oadbPassword: muSecret_Pass1 # create schema password
-
-# orders service connection
-orders:
-  secrets:
-    oadbAdminPassword: ''
-    oadbWalletPassword: 'changeme'
-    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
-    oadbUser: mushop_ordersvc # runtime db schema user
-    oadbPassword: muSecret_Pass1 # create schema password
-
-# user service connection
-user:
-  secrets:
-    oadbAdminPassword: ''
-    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
-    oadbUser: mushop_usersvc # runtime db schema user
-    oadbPassword: muSecret_Pass1 # create schema password
-
-# Depending on the scenario, certain resources might need to be skipped.
-# For example, --set skip.streaming=true to disable creating streaming secrets
-skip:
-  streaming: false
-
+api:
+  env:
+    mediaUrl:                 # URL for catalog image assets
+    newsletterSubscribeUrl:   # Newsletter subscription endpoint (https://[API_GATEWAY_URL]/newsletter/subscribe)
+ 
 secrets:
-  # oss connection information
   streams:
-    streamName:
-    tenantId: 
-    compartmentId: 
-    userId: 
-    region: 
-    fingerprint: 
-    passphrase: 
-    keyFile: secrets/oci_streams_api_key.pem
+    region:           # OCI region for stream instance
+    streamId:         # Stream OCID
+    streamName:       # Stream name (string)
+    compartmentId:    # Compartment ID where stream is provisioned
