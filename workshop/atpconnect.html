@@ -140,13 +140,11 @@ include "highlights/_atpapps.html"
           Enter helm chart configuation for each service:
           <pre><code class="hljs yaml mu-overflow"># Global service configurations
 global:
-  ociAuthSecret:         # OCI authentication credentials secret name
-  ossStreamSecret:       # Previously created streaming secret name
-  oosBucketSecret:       # Object storage bucket secret name (optional)
+  #...
   # ATP Secrets
-  oadbAdminSecret:      oadb-admin # Name of DB Admin secret created earlier
-  oadbWalletSecret:     oadb-wallet # Name of wallet secret created earlier
-  oadbConnectionSecret: oadb-connection # Name of connection secret created earlier
+  oadbAdminSecret: oadb-admin           # Name of DB Admin secret created separately
+  oadbWalletSecret: oadb-wallet         # Name of wallet secret created separately
+  oadbConnectionSecret: oadb-connection # Name of connection secret created separately
   
 #...</code></pre>
           <blockquote class="mu-medium no-margin">

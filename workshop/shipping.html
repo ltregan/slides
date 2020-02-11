@@ -420,40 +420,63 @@ CreateCursorResponse cursorResponse =
           Next create (or edit) a <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a> file to
           specifiy connection secrets for the stream:
           <hr>
-          <div class="mu-flex mu-gutter mu-flex-stretch">
-            <ol class="mu-medium mu-steps card col-1-2">
-              <li>
-                Traverse into the helm chart:
-                <pre><code class="hljs text">cd deploy/complete/helm-chart</code></pre>
-              </li>
-              <li>
-                Enter <code>myvalues.yaml</code> accordingly:
-                <pre><code class="hljs yaml">#...
+          <ol class="mu-medium">
+            <li>
+              First, create a secret called <code class="fg-red">oci-credentials</code> with API
+              credentials to connect services from within the cluster:
+              <pre><code class="hljs shell">kubectl create secret generic oci-credentials \
+  --namespace mushop \
+  --from-literal=tenancy=&lt;TENANCY_OCID&gt; \
+  --from-literal=user=&lt;USER_OCID&gt; \
+  --from-literal=region=&lt;USER_OCI_REGION&gt; \
+  --from-literal=fingerprint=&lt;PUBLIC_API_KEY_FINGERPRINT&gt; \
+  --from-literal=passphrase=&lt;PRIVATE_API_KEY_PASSPHRASE&gt; \
+  --from-file=privatekey=&lt;PATH_OF_PRIVATE_API_KEY&gt;</code></pre>
+            </li>
+            <li>
+              <div class="mu-flex mu-gutter mu-medium">
+                <div class="col-2-5">
+                  Create (or edit existing) a <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a> file:
+                  <pre><code class="hljs yaml"># Global service configurations
+global:
+  ociAuthSecret: oci-credentials  # OCI authentication credentials secret name
+# ...
+# ...
 secrets:
   # oss connection information
   streams:
-    streamName:     # Name of the stream created
-    tenantId:       # Tenancy OCID
-    compartmentId:  # Compartment OCID
-    userId:         # Stream User OCID
-    region:         # Region (eg us-phoenix-1)
-    fingerprint:    # Public API Key fingerprint (ex: 43:65:2c...)
-    passphrase:     # Optional API Key passphrase
-    keyFile: secrets/oci_streams_api_key.pem # Private Key in secrets/ folder</code></pre>
-              </li>
-            </ol>
-            <div class="card col-1-2 mu-medium">
-              <div class="mu-margin">
-                ⚠️ A copy of the User API private key must be added to the chart
-                as indicated, named according to the values entered earlier: 
+    region:           # OCI region for stream instance (eg us-phoenix-1)
+    streamId:         # Stream OCID
+    streamName:       # Stream name (string)
+    compartmentId:    # Compartment ID where stream is provisioned</code></pre>
+                  <blockquote class="mu-medium">
+                    ℹ️ The file will be interpreted as settings for the deployment
+                  </blockquote>
+                </div>
+                <div class="mu-valign no-wrap"><span class="mu-muted">- OR -</span></div>
+                <div class="col-1-2">
+                  Create a <code class="fg-red">oss-connection</code> secret:
+                  <pre><code class="hljs shell">kubectl create secret generic oss-connection \
+  --namespace mushop \
+  --from-literal=compartmentId='&lt;COMPARTMENT_OCID&gt;' \
+  --from-literal=region='&lt;REGION_NAME&gt;' \
+  --from-literal=streamId='&lt;STREAM_OCID&gt;' \
+  --from-literal=streamName='&lt;STREAM_NAME&gt;'</code></pre>
+                  Then edit <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a>:
+                  <pre><code class="hljs yaml mu-overflow"># Global service configurations
+global:
+  ociAuthSecret: oci-credentials  # OCI authentication credentials secret name
+  ossStreamSecret: oss-connection # OCI Streaming secret name
+  oosBucketSecret: oos-bucket     # Object storage bucket secret name (optional)
+  # ATP Secrets 
+  oadbAdminSecret: oadb-admin           # Name of DB Admin secret created separately
+  oadbWalletSecret: oadb-wallet         # Name of wallet secret created separately
+  oadbConnectionSecret: oadb-connection # Name of connection secret created separately
+#...</code></pre>
+                </div>
               </div>
-              <pre><code class="hljs text">deploy/complete/helm-chart/mushop/
-├── charts
-├── myvalues.yaml
-└── secrets
-    └── oci_streams_api_key.pem</code></pre>
-            </div>
-          </div>
+            </li>
+          </ol>
         </li>
 
         <!-- deploy -->
@@ -463,7 +486,7 @@ secrets:
           <div class="mu-medium">
             Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
             <pre><code class="hljs text">helm del mushop</code></pre>
-            Install from the <code>deploy/complete/helm-cart</code> directory:
+            Install from the <code class="fg-red">deploy/complete/helm-cart</code> directory:
             <pre><code class="hljs text">helm install mushop mushop/ \
   -f myvalues.yaml</code></pre>
             <pre><code class="hljs text">kubectl get pod --watch</code></pre>
