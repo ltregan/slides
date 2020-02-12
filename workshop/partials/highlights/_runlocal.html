@@ -4,7 +4,6 @@
     Deploy in local Kubernetes cluster
     <pre class="fragment"><code class="hljs sh">helm dependency update deploy/complete/helm-chart/setup</code></pre>
     <pre class="fragment"><code class="hljs sh">helm install mushop deploy/complete/helm-chart/mushop \
-  --namespace mushop \
   --set global.mock.service="all"</code></pre>
     <pre class="fragment"><code class="hljs text">kubectl get pod --watch -n mushop</code></pre>
     <div class="fragment">

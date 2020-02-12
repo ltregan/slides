@@ -443,7 +443,6 @@ spec:
           <li>
             Provision instance(s) and binding(s):
             <pre><code class="hljs text">helm install provision provision \
-  --namespace mushop \
   --set skip.clusterBroker=true</code></pre>
             <!-- <blockquote class="mu-small">
               ⚠️ <b>NOTE:</b> skip flags in this command correspond to the
@@ -458,7 +457,6 @@ spec:
           <li>
             Deploy MuShop again, now indicating the use of Service Broker ATP backing:
             <pre><code class="hljs text">helm install mushop mushop \
-  --namespace mushop \
   --set global.osb.atp=true \
   --set tags.streaming=false</code></pre>
           </li>

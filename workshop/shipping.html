@@ -425,7 +425,6 @@ CreateCursorResponse cursorResponse =
               Create a secret called <code class="fg-red">oci-credentials</code> with API
               credentials to connect services from within the cluster:
               <pre><code class="hljs sh">kubectl create secret generic oci-credentials \
-  --namespace mushop \
   --from-literal=tenancy=&lt;TENANCY_OCID&gt; \
   --from-literal=user=&lt;USER_OCID&gt; \
   --from-literal=region=&lt;USER_OCI_REGION&gt; \
@@ -436,7 +435,6 @@ CreateCursorResponse cursorResponse =
             <li>
               Create a <code class="fg-red">oss-connection</code> secret:
                   <pre><code class="hljs shell">kubectl create secret generic oss-connection \
-  --namespace mushop \
   --from-literal=compartmentId='&lt;COMPARTMENT_OCID&gt;' \
   --from-literal=region='&lt;REGION_NAME&gt;' \
   --from-literal=streamId='&lt;STREAM_OCID&gt;' \

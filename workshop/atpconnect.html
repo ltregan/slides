@@ -95,7 +95,6 @@ include "highlights/_atpapps.html"
           <li>
             Create <code class="fg-red">oadb-admin</code> secret containing the database administrator password:
             <pre><code class="hljs shell">kubectl create secret generic oadb-admin \
-  --namespace mushop \
   --from-literal=oadb_admin_pw='[DB_ADMIN_PASSWORD]'</code></pre>
 
             <blockquote class="mu-small">
@@ -106,7 +105,6 @@ include "highlights/_atpapps.html"
             Create <code class="fg-red">oadb-wallet</code> secret with the Wallet contents using the downloaded <code>Wallet_*.zip</code>
             The extracted directory is specified as the secret file path:
             <pre><code class="hljs shell">kubectl create secret generic oadb-wallet \
-  --namespace mushop \
   --from-file=[PATH_TO_EXTRACTED_WALLET_FOLDER]</code></pre>
             <blockquote class="mu-small">
               ℹ️ Each file will become a key name in the secret data.
@@ -116,7 +114,6 @@ include "highlights/_atpapps.html"
             Create <code class="fg-red">oadb-connection</code> secret with the <b>Wallet password</b> and
             the service <b>TNS name</b> to use for connections:
             <pre><code class="hljs shell">kubectl create secret generic oadb-connection \
-  --namespace mushop \
   --from-literal=oadb_wallet_pw='[DB_WALLET_PASSWORD]' \
   --from-literal=oadb_service='[DB_TNS_NAME]'</code></pre>
             <blockquote class="mu-small no-margin">
