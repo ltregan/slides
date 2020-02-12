@@ -91,31 +91,37 @@ section.has-dark-background {
 
 // Copier
 pre {
-	$copier-color: $o-color-white;
-	a.copier {
-		width: auto;
-		height: auto;
-		display: none;
-		cursor: pointer;
-		position: absolute;
-		top: 0;
-		right: 0;
-		bottom: auto;
-		left: auto;
-		font-size: 14px;
-		padding: 5px 10px;
-    background: #272822;
-		color: $copier-color;
-		border-bottom-left-radius: 4px;
-		border-left: 1px solid $copier-color !important;
-		border-bottom: 1px solid $copier-color !important;
-	}
-	&:hover {
-		a.copier {
-			color: $copier-color;
-			display: block;
-		}
-	}
+  $copier-color: $o-color-white;
+  
+  .copier {
+    text-decoration: none !important;
+    border: none !important;
+    display: none;
+    position: absolute;
+    top: $copier-stroke; right: $copier-stroke;
+    padding: 3 * $copier-stroke;
+    cursor: pointer;
+    span {
+      box-sizing: border-box;
+      display: block;
+      width: $copier-size;
+      height: $copier-size;
+      border: $copier-stroke solid $o-color-light;
+      + span {
+        position: absolute;
+        top: $copier-stroke;
+        right: $copier-stroke;
+        border-bottom: none;
+        border-left: none;
+      }
+    }
+    &:hover {
+      opacity: 0.8;
+    }
+  }
+  &:hover .copier {
+    display: block;
+  }
 }
 
 // Overrides
@@ -416,6 +422,7 @@ a.title-print {
 	// gutter
 	&.mu-gutter {
 		margin-left: -$blockMargin !important;
+		margin-bottom: -$blockMargin !important;
 		> * {
 			margin-left: $blockMargin;
 			margin-bottom: $blockMargin;

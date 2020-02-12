@@ -4,21 +4,25 @@ global:
   ossStreamSecret: oss-connection # OCI Streaming secret name
   oosBucketSecret: oos-bucket     # Object storage bucket secret name (optional)
   # ATP Secrets
-  oadbAdminSecret: oadb-admin           # Name of DB Admin secret created separately
-  oadbWalletSecret: oadb-wallet         # Name of wallet secret created separately
-  oadbConnectionSecret: oadb-connection # Name of connection secret created separately
-
-ingress:
-  enabled: true
+  oadbAdminSecret: oadb-admin           # Name of ATP Admin secret created separately
+  oadbWalletSecret: oadb-wallet         # Name of ATP Wallet secret created separately
+  oadbConnectionSecret: oadb-connection # Name of ATP Connection secret created separately
 
 api:
   env:
     mediaUrl:                 # URL for catalog image assets
     newsletterSubscribeUrl:   # Newsletter subscription endpoint (https://[API_GATEWAY_URL]/newsletter/subscribe)
- 
+
+# These options may be used instead of global.ossStreamSecret and global.oosBucketSecret, if desired
 secrets:
   streams:
     region:           # OCI region for stream instance (eg us-phoenix-1)
     streamId:         # Stream OCID
     streamName:       # Stream name (string)
     compartmentId:    # Compartment ID where stream is provisioned
+  
+  bucket:
+    region:     # OCI region for bucket (eg us-phoenix-1)
+    name:       # Bucket name (string)      
+    namespace:  # Object Storage namespace (string)
+    par:        # Pre-authenticated bucket request (URL)

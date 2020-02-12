@@ -29,3 +29,7 @@ $o-color-light-alpha: rgba($o-color-light-grey, 0.15);
 $base-transition-duration: 200ms;
 $base-transition: all $base-transition-duration ease-in-out;
 $base-animation-duration: 200ms;
+
+// CLIPBOARD
+$copier-size: 12px;
+$copier-stroke: 2px;

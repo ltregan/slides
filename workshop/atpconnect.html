@@ -25,7 +25,7 @@ include "highlights/_atpapps.html"
     <ul>
       <li class="fragment">Provision ATP</li>
       <li class="fragment">Download Wallet</li>
-      <li class="fragment">Configure Secrets</li>
+      <li class="fragment">Create Secrets</li>
       <li class="fragment">Configure Chart</li>
       <li class="fragment">Deploy</li>
       <li class="fragment">Under the Hood</li>
@@ -133,12 +133,17 @@ include "highlights/_atpapps.html"
         specifiy connection information for the ATP-backed microservices:
         <hr>
         <div class="mu-medium">
-          Traverse into the helm chart deployment directory:
-          <pre><code class="hljs text">cd deploy/complete/helm-chart</code></pre>
-          <a href="/public/myvalues.yaml">Download</a> or copy an example values file into your workspace:
-          <pre><code class="hljs text">cp mushop/values-dev.yaml ./myvalues.yaml</code></pre>
-          Enter helm chart configuation for each service:
-          <pre><code class="hljs yaml mu-overflow"># Global service configurations
+          <ol class="mu-steps">
+            <li>
+              Traverse into the helm chart deployment directory:
+              <pre><code class="hljs text">cd deploy/complete/helm-chart</code></pre>
+            </li>
+            <li>
+              include "_myvalues.html"
+            </li>
+            <li>
+              Enter helm chart configuation for each service:
+              <pre><code class="hljs yaml mu-overflow"># Global service configurations
 global:
   #...
   # ATP Secrets
@@ -147,9 +152,11 @@ global:
   oadbConnectionSecret: oadb-connection # Name of connection secret created separately
   
 #...</code></pre>
-          <blockquote class="mu-medium no-margin">
-            ℹ️ <b>NOTE:</b> Secrets for the remaining services may be omitted
-          </blockquote>
+              <blockquote class="mu-medium no-margin">
+                ℹ️ <b>NOTE:</b> Secrets for the remaining services may be omitted
+              </blockquote>
+        </li>
+        </ol>
         </div>
       </li>
       <li>
@@ -158,13 +165,20 @@ global:
         <div class="mu-medium">
           Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
           <pre><code class="hljs text">helm del mushop</code></pre>
+
           Install from the <code class="fg-red">deploy/complete/helm-cart</code> directory:
           <pre><code class="hljs shell">helm install mushop mushop \
   --set tags.streaming=false \
   -f myvalues.yaml</code></pre>
-          <pre><code class="hljs text">kubectl get pod --watch</code></pre>
+          <blockquote class="mu-small">
+            ℹ️ If streaming has also been configured, omit the <code>--set tags.streaming=false</code>
+            flag to deploy with all services:
+          </blockquote>
+          <pre><code class="hljs shell">helm install mushop mushop \
+  -f myvalues.yaml</code></pre>
           <hr>
-          <p>You will notice several pods with an <code class="fg-red">-init-</code> component
+          <pre><code class="hljs text">kubectl get pod --watch</code></pre>
+          <p>👀 You will notice several pods with an <code class="fg-red">-init-</code> component
           in their name. These are pods corresponding to Kubernetes Job definitions,
           where each is performing DB schema initializations.</p>
           View the logs of an init pod like so <span class="mu-muted">(name will vary)</span>:
@@ -322,7 +336,7 @@ spec:
 
           <blockquote class="mu-small">
             Note that the service runtime is connecting with the <code class="fg-red">oadb-wallet</code>
-            and <code class="fg-red">oadb-connection</code> secrets created manually.
+            and <code class="fg-red">oadb-connection</code> secrets configured separatley.
           </blockquote>
         </div>
         </div>

@@ -33,8 +33,9 @@ var SnippetCopy = (function() {
       for (var i=0; i < iter.length; i++) {
         var code = iter[i];
         var copy = document.createElement('a');
+        copy.innerHTML = '<span></span><span></span>';
+        copy.setAttribute('title', 'Copy');
         copy.classList = 'copier';
-        copy.innerHTML = text;
         copy.addEventListener('click', clipboard.bind(code, copy));
         code.parentNode.appendChild(copy);
       }

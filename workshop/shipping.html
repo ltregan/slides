@@ -417,14 +417,14 @@ CreateCursorResponse cursorResponse =
 
         <!-- configure app -->
         <li>
-          Next create (or edit) a <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a> file to
-          specifiy connection secrets for the stream:
+          Configure OSS connection information to be used within the cluster by creating
+          secrets, and setting values for the helm chart
           <hr>
           <ol class="mu-medium">
             <li>
-              First, create a secret called <code class="fg-red">oci-credentials</code> with API
+              Create a secret called <code class="fg-red">oci-credentials</code> with API
               credentials to connect services from within the cluster:
-              <pre><code class="hljs shell">kubectl create secret generic oci-credentials \
+              <pre><code class="hljs sh">kubectl create secret generic oci-credentials \
   --namespace mushop \
   --from-literal=tenancy=&lt;TENANCY_OCID&gt; \
   --from-literal=user=&lt;USER_OCID&gt; \
@@ -434,47 +434,24 @@ CreateCursorResponse cursorResponse =
   --from-file=privatekey=&lt;PATH_OF_PRIVATE_API_KEY&gt;</code></pre>
             </li>
             <li>
-              <div class="mu-flex mu-gutter mu-medium">
-                <div class="col-2-5">
-                  Create (or edit existing) a <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a> file:
-                  <pre><code class="hljs yaml"># Global service configurations
-global:
-  ociAuthSecret: oci-credentials  # OCI authentication credentials secret name
-# ...
-# ...
-secrets:
-  # oss connection information
-  streams:
-    region:           # OCI region for stream instance (eg us-phoenix-1)
-    streamId:         # Stream OCID
-    streamName:       # Stream name (string)
-    compartmentId:    # Compartment ID where stream is provisioned</code></pre>
-                  <blockquote class="mu-medium">
-                    ℹ️ The file will be interpreted as settings for the deployment
-                  </blockquote>
-                </div>
-                <div class="mu-valign no-wrap"><span class="mu-muted">- OR -</span></div>
-                <div class="col-1-2">
-                  Create a <code class="fg-red">oss-connection</code> secret:
+              Create a <code class="fg-red">oss-connection</code> secret:
                   <pre><code class="hljs shell">kubectl create secret generic oss-connection \
   --namespace mushop \
   --from-literal=compartmentId='&lt;COMPARTMENT_OCID&gt;' \
   --from-literal=region='&lt;REGION_NAME&gt;' \
   --from-literal=streamId='&lt;STREAM_OCID&gt;' \
   --from-literal=streamName='&lt;STREAM_NAME&gt;'</code></pre>
-                  Then edit <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a>:
+            </li>
+            <li>
+              include "_myvalues.html"
+            </li>
+            <li>
+              Then configure <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a>:
                   <pre><code class="hljs yaml mu-overflow"># Global service configurations
 global:
   ociAuthSecret: oci-credentials  # OCI authentication credentials secret name
   ossStreamSecret: oss-connection # OCI Streaming secret name
-  oosBucketSecret: oos-bucket     # Object storage bucket secret name (optional)
-  # ATP Secrets 
-  oadbAdminSecret: oadb-admin           # Name of DB Admin secret created separately
-  oadbWalletSecret: oadb-wallet         # Name of wallet secret created separately
-  oadbConnectionSecret: oadb-connection # Name of connection secret created separately
-#...</code></pre>
-                </div>
-              </div>
+  #...</code></pre>
             </li>
           </ol>
         </li>
@@ -534,8 +511,8 @@ global:
     "name": "shipment 500" 
   }'</code></pre>
               <blockquote class="mu-medium">
-                👀 Watch the terminals and observe messages being created by 
-                <code>shipping</code>,then and consumed in the <code>stream</code>
+                👀 Watch the terminals and observe messages being produced by 
+                <code>shipping</code>, then consumed in the <code>stream</code>
               </blockquote>
 
               <blockquote class="mu-medium">
