@@ -445,7 +445,8 @@ spec:
             <pre><code class="hljs text">helm install provision provision \
   --set skip.clusterBroker=true \
   --set global.osb.oss=false \
-  --set global.osb.objectstorage=false</code></pre>
+  --set global.osb.objectstorage=false \
+  --set global.osb.compartmentId=&lt;COMPARTMENT_OCID&gt;</code></pre>
             <!-- <blockquote class="mu-small">
               ⚠️ <b>NOTE:</b> skip flags in this command correspond to the
               <b><code>oci-service-broker</code></b> secret and
