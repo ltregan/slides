@@ -443,7 +443,9 @@ spec:
           <li>
             Provision instance(s) and binding(s):
             <pre><code class="hljs text">helm install provision provision \
-  --set skip.clusterBroker=true</code></pre>
+  --set skip.clusterBroker=true \
+  --set global.osb.oss=false \
+  --set global.osb.objectstorage=false</code></pre>
             <!-- <blockquote class="mu-small">
               ⚠️ <b>NOTE:</b> skip flags in this command correspond to the
               <b><code>oci-service-broker</code></b> secret and
