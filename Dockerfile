@@ -27,6 +27,8 @@ RUN rm -rf /tmp/node_modules
 WORKDIR /usr/src/app
 COPY . .
 
+ARG version
+ENV VERSION ${version}
 ENV NODE_ENV "production"
 RUN npm run build
 RUN rm -rf node_modules test

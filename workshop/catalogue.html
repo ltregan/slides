@@ -86,30 +86,32 @@
               umbrella chart during <a href="/workshop/setup.html#setup"><code>setup</code></a>.
               Verify that the chart was installed:
             </div>
-            <pre><code class="hljs text">kubectl get pod -A -l chart=catalog-0.2.1</code></pre>
+            <pre><code class="hljs text">kubectl get pod -A -l chart=catalog-0.3.0-beta.2</code></pre>
           </div>
-          <div class="col-1-1">
-            <div class="mu-margin">
-              If Service Catalog <em><b>is not</b></em> installed, please perform these steps:
-            </div>
-            Add the Kubernetes Service Catalog helm repository:
+          <div class="col-1-1 mu-medium">
+            ⚠️ If Service Catalog <em><b>is not</b></em> installed, please perform the following steps
+          </div>
+          <div class="card col-1-1">
             Create namespace for supporting services:
-            <pre><code class="hljs text">kubectl create namespace mushop-utilities</code></pre>
+            <pre class="mu-margin"><code class="hljs text">kubectl create namespace mushop-utilities</code></pre>
+            Add the Kubernetes Service Catalog helm repository:
             <pre class="mu-margin"><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com</code></pre>
             Install the Kubernetes Service Catalog helm chart:
             <pre><code class="hljs text">helm install catalog svc-cat/catalog \
   --namespace mushop-utilities </code></pre>
 
-            <blockquote class="mu-small">
-              ℹ️ Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
-              It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in
-              production environments, instead a separate etcd cluster should be setup and used by the OSB.
-              <hr>
-              The open source etcd operator project or a commercial offering may be used to setup a production quality etcd
-              cluster. The recommended setup can be found <a
-                href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup"
-                target="_blank">here</a>
-            </blockquote>
+            <div class="mu-small">
+              <blockquote class="mu-small">
+                ℹ️ Please note that the above command will deploy the OCI Service Broker using an embedded etcd instance.
+                It is not recommended to deploy the OCI Service Broker using an embedded etcd instance and tls disabled in
+                production environments, instead a separate etcd cluster should be setup and used by the OSB.
+                <hr>
+                The open source etcd operator project or a commercial offering may be used to setup a production quality etcd
+                cluster. The recommended setup can be found <a
+                  href="https://github.com/oracle/oci-service-broker/blob/master/charts/oci-service-broker/docs/installation.md#recommended-setup"
+                  target="_blank">here</a>
+              </blockquote>
+            </div>
           </div>
         </div>
         <!-- <blockquote class="mu-medium no-margin">
@@ -124,7 +126,7 @@
           manage services and resources.
           <hr>
           Create a secret containing these values:
-          <pre><code class="hljs shell">kubectl create secret generic oci-service-broker \
+          <pre><code class="hljs shell">kubectl create secret generic oci-credentials \
   --namespace mushop-utilities \
   --from-literal=tenancy=&lt;TENANCY_OCID&gt; \
   --from-literal=user=&lt;USER_OCID&gt; \
@@ -146,12 +148,12 @@
           <hr>
           <pre><code class="hljs text">helm install oci-broker https://github.com/oracle/oci-service-broker/releases/download/v1.3.3/oci-service-broker-1.3.3.tgz \
   --namespace mushop-utilities \
-  --set ociCredentials.secretName=oci-service-broker \
+  --set ociCredentials.secretName=oci-credentials \
   --set storage.etcd.useEmbedded=true \
   --set tls.enabled=false</code></pre>
   
           <blockquote class="mu-medium">
-            ⚠️ Note the <b><code>secretName=oci-service-broker</code></b> secret created before.
+            ⚠️ Note the <b><code>secretName=oci-credentials</code></b> secret created before.
           </blockquote>
         </div>
       </li>
@@ -186,18 +188,18 @@ spec:
       <li>
         Verify that the Service Broker is available and ready:
         <pre><code class="hljs text">kubectl get clusterservicebrokers -o 'custom-columns=BROKER:.metadata.name,STATUS:.status.conditions[0].reason'</code></pre>
-        <pre><code class="hljs text">BROKER              STATUS
-oci-broker       FetchedCatalog</code></pre>
+        <pre><code class="hljs text">BROKER                STATUS
+oci-service-broker    FetchedCatalog</code></pre>
         Using the <code>svcat</code> CLI to see the status, service and plans available:
         <pre><code class="hljs text">svcat get brokers</code></pre>
         <pre><code class="hljs text">svcat get classes</code></pre>
         <pre><code class="hljs text">svcat get plans</code></pre>
-        <pre><code class="hljs text">    NAME     NAMESPACE          CLASS                       DESCRIPTION            
+        <pre><code class="hljs text">    NAME     NAMESPACE          CLASS                       DESCRIPTION
 +----------+-----------+----------------------+-------------------------------------+
-  standard               atp-service            OCI Autonomous Transaction Processing                      
-  archive                object-store-service   An Archive type Object Storage  
-  standard               object-store-service   A Standard type Object Storage  
-  standard               adw-service            OCI Autonomous Data Warehouse   
+  standard               atp-service            OCI Autonomous Transaction Processing
+  archive                object-store-service   An Archive type Object Storage
+  standard               object-store-service   A Standard type Object Storage
+  standard               adw-service            OCI Autonomous Data Warehouse
   standard               oss-service            Oracle Streaming Service</code></pre>
       </li>
     </ul>
@@ -293,7 +295,7 @@ spec:
           <ol>
             <li>
               Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
-              <pre><code class="hljs text">helm del --purge mushop</code></pre>
+              <pre><code class="hljs text">helm del mushop</code></pre>
             </li>
             <li>
               Create <code>catalogue-oadb-admin</code> secret:
@@ -432,16 +434,19 @@ spec:
             </ul>
           </div>
         </div>
-
+        <div class="mu-margin"></div>
         <ol>
           <li>
-            Remove previous deployment:
-            <pre><code class="hljs text">helm delete --purge mushop</code></pre>
+            Remove previous deployment (if applicable):
+            <pre><code class="hljs text">helm delete mushop</code></pre>
           </li>
           <li>
             Provision instance(s) and binding(s):
-            <pre><code class="hljs text">helm install provision -n mushop-provision --namespace mushop \
-  --set skip.ociCredentials=true --set skip.clusterBroker=true</code></pre>
+            <pre><code class="hljs text">helm install provision provision \
+  --set skip.clusterBroker=true \
+  --set global.osb.oss=false \
+  --set global.osb.objectstorage=false \
+  --set global.osb.compartmentId=&lt;COMPARTMENT_OCID&gt;</code></pre>
             <!-- <blockquote class="mu-small">
               ⚠️ <b>NOTE:</b> skip flags in this command correspond to the
               <b><code>oci-service-broker</code></b> secret and
@@ -454,9 +459,9 @@ spec:
           </li>
           <li>
             Deploy MuShop again, now indicating the use of Service Broker ATP backing:
-            <pre><code class="hljs text">helm install mushop -n mushop --namespace mushop \
+            <pre><code class="hljs text">helm install mushop mushop \
   --set global.osb.atp=true \
-  --set skip.streaming=true</code></pre>
+  --set tags.streaming=false</code></pre>
           </li>
         </ol>
       </li>

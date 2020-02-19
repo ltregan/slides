@@ -109,6 +109,10 @@ include "_mushopTree.html"
 helm repo add stable https://kubernetes-charts.storage.googleapis.com</code></pre>
           </li>
           <li>
+            Create a <code>namespace</code> for MuShop utilities:
+            <pre><code class="hljs text">kubectl create namespace mushop-utilities</code></pre>
+          </li>
+          <li>
             Install cluster dependencies using <code>helm</code>:
             <pre><code class="hljs text">helm dependency update deploy/complete/helm-chart/setup</code></pre>
             <pre><code class="hljs text">helm install mushop-utils deploy/complete/helm-chart/setup \

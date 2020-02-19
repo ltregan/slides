@@ -44,7 +44,7 @@
             details...</a></p>
         <video width="640" height="440" controls>
           <source
-            src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/99gv74HvqmDifWRXLHWrJb0t4o-1wpHd2gu8oeznwHw/n/intvravipati/b/demo-assets/o/dem-ord-atp_cred_download.mp4"
+            src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/mCCFwe46erkBYZWv6fkiRBR7jFDxFXogi4GTT1uuMlQ/n/ociateam/b/mushop-content/o/dem-ord-atp_cred_download.mp4"
             type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
         </video>
       </div>
@@ -55,7 +55,7 @@
               details...</a></p>
           <video width="640" height="440" controls>
             <source
-              src="https://objectstorage.us-phoenix-1.oraclecloud.com/p/ZE4jyH2UrRHl619An16qt0kqYkbmeY04t9aFbyleRu8/n/intvravipati/b/demo-assets/o/sqldeveloper-web.mp4"
+              src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/kYzgvtJnZKYmmlCOGyM-iyENnUzBdPRmFspsmsPNeQM/n/ociateam/b/mushop-content/o/sqldeveloper-web.mp4"
               type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
           </video>
 
@@ -205,7 +205,7 @@ docker images
         <pre><code class="hljs sh">cp deploy/complete/helm-chart/mushop/values-dev.yaml deploy/complete/helm-chart/mushop/local-orders-carts.yaml</code></pre>
         <p class="mu-small mu-left"><strong>Note</strong>: if you have an existing version of Mushop deployed,
           you can remove it using:</p>
-        <pre><code class="hljs sh">helm delete mushop --purge</code></pre>
+        <pre><code class="hljs sh">helm delete mushop</code></pre>
 
       </div>
       <div class="fragment fade-in">
@@ -266,7 +266,7 @@ spec:
           repository root:
         </p>
         <pre><code class="hljs sh">
-helm install -f deploy/complete/helm-chart/mushop/values-dev.yaml deploy/complete/helm-chart/mushop --name mushop --namespace mushop
+helm install mushop -f deploy/complete/helm-chart/mushop/values-dev.yaml deploy/complete/helm-chart/mushop
                 </code></pre>
         <p class="mu-small mu-left">Try creating an order or add items to the cart and check the tables on your ATP
           instance

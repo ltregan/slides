@@ -11,7 +11,9 @@
     OKE or Cluster with Ingress Controller
     <hr/>
     <div>
-      Find the <code>EXTERNAL-IP</code> assigned to the ingress controller:
+      <div class="mu-margin-small">
+        Find the <code>EXTERNAL-IP</code> assigned to the ingress controller:
+      </div>
       <pre><code class="hljs text">kubectl get svc \
   mushop-utils-nginx-ingress-controller \
   --namespace mushop-utilities</code></pre>
@@ -21,10 +23,11 @@
   <div class="card col-1-1">
     Alternatively
     <hr/>
-    Proxy to the MuShop app on <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>
-    (or a port of your choice)
+    <div class="mu-margin-small">
+      Proxy to the MuShop app on <a href="http://localhost:8000" target="_blank">http://localhost:8000</a>
+      (or a port of your choice)
+    </div>
     <pre><code class="hljs text">kubectl port-forward \
-  svc/edge 8000:80 \
-  --namespace mushop</code></pre>
+  svc/edge 8000:80</code></pre>
   </div>
 </div>

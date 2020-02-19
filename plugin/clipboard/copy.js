@@ -6,7 +6,7 @@ var SnippetCopy = (function() {
   }
 
   function clipboard(link) {
-    var text = this.innerText;
+    var text = this.innerText.trim();
     if (isWin()) {
       // strip breaks
       text = text.replace(/\s\\\s*\n\s*/g, ' ');
@@ -33,8 +33,9 @@ var SnippetCopy = (function() {
       for (var i=0; i < iter.length; i++) {
         var code = iter[i];
         var copy = document.createElement('a');
+        copy.innerHTML = '<span></span><span></span>';
+        copy.setAttribute('title', 'Copy');
         copy.classList = 'copier';
-        copy.innerHTML = text;
         copy.addEventListener('click', clipboard.bind(code, copy));
         code.parentNode.appendChild(copy);
       }

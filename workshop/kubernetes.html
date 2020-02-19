@@ -354,10 +354,9 @@ spec:
           <hr />
           <p>
             ⚠️ <b>NOTE:</b> Ensure <a href="/workshop/setup.html#setup" target="_blank">setup</a>
-            steps were completed, and prior installations are removed
+            steps were completed, and any prior installations are removed
           </p>
-          <pre><code class="hljs sh">helm install deploy/complete/helm-chart/mushop \
-  --name mushop \
+          <pre><code class="hljs sh">helm install mushop deploy/complete/helm-chart/mushop \
   --set global.mock.service="all"</code></pre>
           <div class="mu-small mu-margin"><pre><code class="hljs text">########################################
     __  __        _____ _                 
@@ -371,9 +370,8 @@ spec:
 ########################################</code></pre>
           </div>
           <pre><code class="hljs text">kubectl get pod --watch</code></pre>
-          <blockquote class="mu-small">
+          <blockquote class="mu-medium">
             ⏲️ It may take a few moments to download all the application images.
-            It is also normal for some pods to show errors in mock mode.
           </blockquote>
         </li>
         <!-- launch -->
@@ -388,8 +386,7 @@ include "_openmushop.html"
           using the <b><code>template</code></b> command:
           <hr>
           <pre><code class="hljs text">mkdir ./out</code></pre>
-          <pre><code class="hljs text">helm template deploy/complete/helm-chart/mushop \
-  --name mushop \
+          <pre><code class="hljs text">helm template mushop deploy/complete/helm-chart/mushop \
   --set global.mock.service="all" \
   --output-dir ./out</code></pre>
           Explore the files, and see each output. Example:

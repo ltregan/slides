@@ -1,53 +1,28 @@
-ingress:
-  enabled: true
+# Global service configurations
+global:
+  ociAuthSecret: oci-credentials  # OCI authentication credentials secret name
+  ossStreamSecret: oss-connection # OCI Streaming secret name
+  oosBucketSecret: oos-bucket     # Object storage bucket secret name (optional)
+  # ATP Secrets
+  oadbAdminSecret: oadb-admin           # Name of ATP Admin secret created separately
+  oadbWalletSecret: oadb-wallet         # Name of ATP Wallet secret created separately
+  oadbConnectionSecret: oadb-connection # Name of ATP Connection secret created separately
 
-# carts service connection
-carts:
-  secrets:
-    oadbAdminPassword: ''
-    oadbWalletPassword: 'changeme'
-    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
-    oadbUser: mushop_cartsvc # runtime db schema user
-    oadbPassword: muSecret_Pass1 # create schema password
+api:
+  env:
+    mediaUrl:                 # URL for catalog image assets
+    newsletterSubscribeUrl:   # Newsletter subscription endpoint (https://[API_GATEWAY_URL]/newsletter/subscribe)
 
-# catalogue service connection
-catalogue:
-  secrets:
-    oadbAdminPassword: ''
-    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
-    oadbUser: mushop_cataloguesvc # runtime db schema user
-    oadbPassword: muSecret_Pass1 # create schema password
-
-# orders service connection
-orders:
-  secrets:
-    oadbAdminPassword: ''
-    oadbWalletPassword: 'changeme'
-    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
-    oadbUser: mushop_ordersvc # runtime db schema user
-    oadbPassword: muSecret_Pass1 # create schema password
-
-# user service connection
-user:
-  secrets:
-    oadbAdminPassword: ''
-    oadbService: '_tp' # TNS Name, ie mymushopdb_tp
-    oadbUser: mushop_usersvc # runtime db schema user
-    oadbPassword: muSecret_Pass1 # create schema password
-
-# Depending on the scenario, certain resources might need to be skipped.
-# For example, --set skip.streaming=true to disable creating streaming secrets
-skip:
-  streaming: false
-
+# These options may be used instead of global.ossStreamSecret and global.oosBucketSecret, if desired
 secrets:
-  # oss connection information
   streams:
-    streamName:
-    tenantId: 
-    compartmentId: 
-    userId: 
-    region: 
-    fingerprint: 
-    passphrase: 
-    keyFile: secrets/oci_streams_api_key.pem
+    region:           # OCI region for stream instance (eg us-phoenix-1)
+    streamId:         # Stream OCID
+    streamName:       # Stream name (string)
+    compartmentId:    # Compartment ID where stream is provisioned
+  
+  bucket:
+    region:     # OCI region for bucket (eg us-phoenix-1)
+    name:       # Bucket name (string)      
+    namespace:  # Object Storage namespace (string)
+    par:        # Pre-authenticated bucket request (URL)

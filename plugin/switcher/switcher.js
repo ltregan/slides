@@ -57,14 +57,18 @@ var Switcher = (function() {
     setActive(tabs, panes, activeIndex);
   }
 
+  var debounce;
   function setActive(tabs, panes, index) {
-    index = index > -1 ? index : 0;
-    [tabs, panes].forEach(function(group) {
-      group.forEach(function(el, i) {
-        i !== index && el.classList.remove('active');
+    debounce = debounce || setTimeout(function() {
+      index = index > -1 ? index : 0;
+      [tabs, panes].forEach(function(group) {
+        group.forEach(function(el, i) {
+          i !== index && el.classList.remove('active');
+        });
+        return group[index] && group[index].classList.add('active');
       });
-      return group[index] && group[index].classList.add('active');
-    });
+      debounce = null;
+    }, 10);
   }
 
   return {

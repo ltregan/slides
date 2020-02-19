@@ -1,5 +1,6 @@
 const fs = require('fs');
 const sass = require('node-sass');
+const env = require('process').env;
 
 module.exports = grunt => {
 
@@ -7,12 +8,13 @@ module.exports = grunt => {
 
 	let port = grunt.option('port') || 8000;
 	let root = grunt.option('root') || '.';
-	const pkg = grunt.file.readJSON('package.json');
+  const pkg = grunt.file.readJSON('package.json');
+  const ver = env.VERSION || pkg.version;
 
 	if (!Array.isArray(root)) root = [root];
 
 	fs.writeFileSync('_build.html', `
-		<div><span>Version:</span> ${pkg.version}</div>
+		<div><span>Version:</span> ${ver}</div>
 		<div><span>Build:</span> ${new Date().toISOString().split('.').shift()}Z</div>
 	`);
 
