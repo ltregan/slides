@@ -15,7 +15,8 @@ module.exports = grunt => {
 
 	fs.writeFileSync('_build.html', `
 		<div><span>Version:</span> ${ver}</div>
-		<div><span>Build:</span> ${new Date().toISOString().split('.').shift()}Z</div>
+    <div><span>Build:</span> ${new Date().toISOString().split('.').shift()}Z</div>
+    <div>© ${new Date().getFullYear()}, Oracle and/or its affiliates. All rights reserved.
 	`);
 
 	// Project configuration

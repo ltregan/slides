@@ -822,9 +822,10 @@ a.title-print {
 	bottom: 10px;
 	left: 10px;
 	font-family: $mainFont;
-	text-transform: uppercase;
-	font-size: 0.8em;
+  font-size: 0.8em;
+  line-height: 1.2;
 	span {
+	  text-transform: uppercase;
 		display: inline-block;
     font-weight: bold;
     width: 4rem;
