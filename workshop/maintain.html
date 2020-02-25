@@ -1,0 +1,84 @@
+<!-- title -->
+<section id="home">
+    <h1>Cloud Native OCI</h1>
+    <h2>Cluster Maintenance &amp; Upgrades</h2>
+    include "partials/_titleSlide.html"
+  </section>
+  
+  <section id="background"
+    data-background-image="/images/oci/telemetry.svg"
+    data-background-size="100px"
+    data-background-position="20px 20px">
+    <h2>Background</h2>
+    <blockquote class="mu-small mu-margin">
+      OKE provides a choice of kubernetes versions to use and as new versions are released, you can upgrade your master nodes and node pools independently.
+      Versions of Kubernetes on the master and nodes allow for variations as permitted by Kubernetes. 
+    </blockquote>
+  
+    <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
+      <div class="card col-1-3">
+        Node Statistics and 
+        <hr>
+        <ul class="mu-medium">
+          <li>Node Conditions</li>
+          <li>Eviction Signals & Policy</li>
+          <li>Observing Nodes</li>
+        </ul>
+        <div class="mu-blurb fragment mu-small">
+          Observe nodes, and understand node conditions and eviction policies.
+        </div>
+      </div>
+      <div class="card col-1-3">
+        Upgrading the Master Nodes 
+        <hr>
+        <ul class="mu-medium">
+          <li>Automated In-Place Upgrade</li>
+        </ul>
+        <div class="mu-blurb fragment mu-small">
+          How an in-place zero down-time upgrade of the master nodes are done on OKE. 
+        </div>
+      </div>
+      <div class="card col-1-3">
+        Upgrading Node Pools
+        <hr>
+        <ul class="mu-medium">
+          <li>Out-of-place upgrade</li>
+          <li>Cordoning & Draining Nodes</li>
+        </ul>
+        <div class="mu-blurb fragment mu-small">
+          How the node pool is upgraded to a new version of kubernetes or to run a different OS image.
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <section id="oci">
+    include "_ocimonitoring.html"
+  
+    <section
+      data-background-image="/images/tech/k8s.icon.png"
+      data-background-size="100px"
+      data-background-position="20px 20px">
+      <h2>Kubernetes Cluster</h2>
+      <div class="mu-ratio mu-ratio-16-9">
+        <div class="mu-overflow">
+          <a class="mu-small" href="https://grafana.com/grafana/dashboards/6417" target="_blank">
+            <img class="no-margin" data-src="/images/grafana/grafana.cluster.png" />
+          </a>
+        </div>
+      </div>
+      <!-- <hr> -->
+    </section>
+    <section
+      data-background-image="/images/logo.png"
+      data-background-size="150px"
+      data-background-position="20px 20px">
+      <h2>K8S Pods (MuShop)</h2>
+      <div class="mu-ratio mu-ratio-16-9">
+        <div class="mu-overflow">
+          <a class="mu-small" href="https://grafana.com/grafana/dashboards/6336" target="_blank">
+            <img class="no-margin" data-src="/images/grafana/grafana.pods.png" />
+          </a>
+        </div>
+      </div>
+    </section>
