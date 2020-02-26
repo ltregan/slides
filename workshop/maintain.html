@@ -3,82 +3,243 @@
     <h1>Cloud Native OCI</h1>
     <h2>Cluster Maintenance &amp; Upgrades</h2>
     include "partials/_titleSlide.html"
-  </section>
-  
-  <section id="background"
-    data-background-image="/images/oci/telemetry.svg"
-    data-background-size="100px"
+</section>
+
+<section id="maintain-intro" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
     data-background-position="20px 20px">
     <h2>Background</h2>
     <blockquote class="mu-small mu-margin">
-      OKE provides a choice of kubernetes versions to use and as new versions are released, you can upgrade your master nodes and node pools independently.
-      Versions of Kubernetes on the master and nodes allow for variations as permitted by Kubernetes. 
+        <ul>
+            <li> OKE provides a choice of kubernetes versions to use and as new versions are released, you can upgrade
+                your master nodes and node pools independently.
+            </li>
+            <li> Versions of Kubernetes on the master and nodes allow for variations as permitted by Kubernetes.
+            </li>
+        </ul>
     </blockquote>
-  
+
     <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
-      <div class="card col-1-3">
-        Node Statistics and 
-        <hr>
-        <ul class="mu-medium">
-          <li>Node Conditions</li>
-          <li>Eviction Signals & Policy</li>
-          <li>Observing Nodes</li>
-        </ul>
-        <div class="mu-blurb fragment mu-small">
-          Observe nodes, and understand node conditions and eviction policies.
+        <div class="card col-1-3">
+            Node Statistics
+            <hr>
+            <ul class="mu-medium">
+                <li>Node Conditions</li>
+                <li>Eviction Signals & Policy</li>
+                <li>Observing Nodes</li>
+            </ul>
+            <div class="mu-blurb fragment mu-small">
+                Observe nodes, and understand node conditions and eviction policies.
+            </div>
         </div>
-      </div>
-      <div class="card col-1-3">
-        Upgrading the Master Nodes 
-        <hr>
-        <ul class="mu-medium">
-          <li>Automated In-Place Upgrade</li>
-        </ul>
-        <div class="mu-blurb fragment mu-small">
-          How an in-place zero down-time upgrade of the master nodes are done on OKE. 
+        <div class="card col-1-3">
+            Upgrading Master Nodes
+            <hr>
+            <ul class="mu-medium">
+                <li>Automated In-Place Upgrade</li>
+            </ul>
+            <div class="mu-blurb fragment mu-small">
+                How an in-place zero down-time upgrade of the master nodes are done on OKE.
+            </div>
         </div>
-      </div>
-      <div class="card col-1-3">
-        Upgrading Node Pools
-        <hr>
-        <ul class="mu-medium">
-          <li>Out-of-place upgrade</li>
-          <li>Cordoning & Draining Nodes</li>
-        </ul>
-        <div class="mu-blurb fragment mu-small">
-          How the node pool is upgraded to a new version of kubernetes or to run a different OS image.
+        <div class="card col-1-3">
+            Upgrading Node Pools
+            <hr>
+            <ul class="mu-medium">
+                <li>Out-of-place upgrade</li>
+                <li>Cordoning & Draining Nodes</li>
+            </ul>
+            <div class="mu-blurb fragment mu-small">
+                How the node pool is upgraded to a new version of kubernetes or to run a different OS image.
+            </div>
         </div>
-      </div>
     </div>
-  </section>
-  
-  <section id="oci">
-    include "_ocimonitoring.html"
-  
-    <section
-      data-background-image="/images/tech/k8s.icon.png"
-      data-background-size="100px"
-      data-background-position="20px 20px">
-      <h2>Kubernetes Cluster</h2>
-      <div class="mu-ratio mu-ratio-16-9">
-        <div class="mu-overflow">
-          <a class="mu-small" href="https://grafana.com/grafana/dashboards/6417" target="_blank">
-            <img class="no-margin" data-src="/images/grafana/grafana.cluster.png" />
-          </a>
-        </div>
-      </div>
-      <!-- <hr> -->
-    </section>
-    <section
-      data-background-image="/images/logo.png"
-      data-background-size="150px"
-      data-background-position="20px 20px">
-      <h2>K8S Pods (MuShop)</h2>
-      <div class="mu-ratio mu-ratio-16-9">
-        <div class="mu-overflow">
-          <a class="mu-small" href="https://grafana.com/grafana/dashboards/6336" target="_blank">
-            <img class="no-margin" data-src="/images/grafana/grafana.pods.png" />
-          </a>
-        </div>
-      </div>
-    </section>
+</section>
+
+<section id="maintain-nodestats" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
+    data-background-position="20px 20px">
+    <h2>Node Status</h2>
+    <div class="mu-small">
+        <ul>
+            <li>
+                A <a href="https://kubernetes.io/docs/concepts/architecture/nodes/" target="_blank"> node </a> or a
+                minion in Kubernetes is a worker node that is managed by the master through the <a
+                    href="https://kubernetes.io/docs/reference/command-line-tools-reference/kubelet/" target="_blank">
+                    kubelet</a>.
+            </li>
+            <li>
+                Kubelet is an agent that runs on the node to ensure healthy operation of the pods on the node and
+                reports stats on the node.
+            </li>
+        </ul>
+
+        To take a quick peek at the node status. Run the command
+    </div>
+
+
+    <pre><code class="hljs shell">kubectl describe nodes</code></pre>
+    <pre><code class="hljs shell">
+Name:               10.0.10.9
+Roles:              node
+Labels:             beta.kubernetes.io/instance-type=VM.Standard1.4
+                    beta.kubernetes.io/os=linux
+                    displayName=oke-cydczjumfsw-n2ggndcmjtd-soczn56brva-0
+                    failure-domain.beta.kubernetes.io/zone=PHX-AD-2
+                    hostname=oke-cydczjumfsw-n2ggndcmjtd-soczn56brva-0
+Annotations:        alpha.kubernetes.io/provided-node-ip: 10.0.10.9
+                    volumes.kubernetes.io/controller-managed-attach-detach: true
+CreationTimestamp:  Wed, 12 Feb 2020 12:34:29 -0800
+Taints:             none
+Unschedulable:      false
+Conditions:
+    Type             Status  LastHeartbeatTime                 LastTransitionTime                Reason                       Message
+    ----             ------  -----------------                 ------------------                ------                       -------
+    MemoryPressure   False   Tue, 25 Feb 2020 21:09:50 -0800   Wed, 12 Feb 2020 12:34:29 -0800   KubeletHasSufficientMemory   kubelet has sufficient memory available
+    DiskPressure     False   Tue, 25 Feb 2020 21:09:50 -0800   Wed, 12 Feb 2020 12:34:29 -0800   KubeletHasNoDiskPressure     kubelet has no disk pressure
+    PIDPressure      False   Tue, 25 Feb 2020 21:09:50 -0800   Wed, 12 Feb 2020 12:34:29 -0800   KubeletHasSufficientPID      kubelet has sufficient PID available
+    Ready            True    Tue, 25 Feb 2020 21:09:50 -0800   Wed, 12 Feb 2020 12:34:39 -0800   KubeletReady                 kubelet is posting ready status
+Addresses:
+    InternalIP:  10.0.10.9
+Capacity:
+    cpu:                8
+    ephemeral-storage:  40223552Ki
+    hugepages-1Gi:      0
+    hugepages-2Mi:      0
+    memory:             28532212Ki
+    pods:               110
+Allocatable:
+    cpu:                8
+    ephemeral-storage:  37070025462
+    hugepages-1Gi:      0
+    hugepages-2Mi:      0
+    memory:             28429812Ki
+    pods:               110
+System Info:
+    Machine ID:                 c08f95ce89b64194bb05e5db16c92408
+    Kernel Version:             4.14.35-1902.10.4.el7uek.x86_64
+    OS Image:                   Oracle Linux Server 7.7
+    Container Runtime Version:  docker://18.9.8
+    Kubelet Version:            v1.13.5
+    Kube-Proxy Version:         v1.13.5
+PodCIDR:                     10.244.1.0/24
+ProviderID:                  ocid1.instance.oc1.phx.anyhqljsc3adhhqc6lxypsuv323q25bbrflolcfro5hl2enz53tm23bssglq
+Non-terminated Pods:         (16 in total)
+    Namespace                  Name                                                           CPU Requests  CPU Limits  Memory Requests  Memory Limits  AGE
+    ---------                  ----                                                           ------------  ----------  ---------------  -------------  ---
+    kube-system                coredns-5c8f898f54-vtdxz                                       100m (1%)     0 (0%)      70Mi (0%)        170Mi (0%)     13d
+    kube-system                kube-flannel-ds-z6bmk                                          100m (1%)     1 (12%)     50Mi (0%)        500Mi (1%)     13d
+    kube-system                kube-proxy-6cx7g                                               0 (0%)        0 (0%)      0 (0%)           0 (0%)         13d
+    mushop-setup               mushop-setup-prometheus-kube-state-metrics-6c8755ccfb-4fr2b    0 (0%)        0 (0%)      0 (0%)           0 (0%)         13d
+    mushop-setup               mushop-setup-prometheus-node-exporter-8n8pl                    0 (0%)        0 (0%)      0 (0%)           0 (0%)         13d
+    mushop                     mushop-osb-oci-service-broker-6fbbf6c767-g45tr                 0 (0%)        0 (0%)      0 (0%)           0 (0%)         13d
+    mushop                     mushop-test-api-6b645d6948-j9vqj                               100m (1%)     300m (3%)   100Mi (0%)       300Mi (1%)     5d23h
+    mushop                     mushop-test-catalogue-65ff5cf66b-6s8wx                         100m (1%)     200m (2%)   64Mi (0%)        128Mi (0%)     5d23h
+    mushop                     mushop-test-payment-5f56c45c96-xtmwg                           99m (1%)      100m (1%)   100Mi (0%)       100Mi (0%)     5d23h
+    mushop                     mushop-test-storefront-54989b54c5-dlscr                        100m (1%)     300m (3%)   100Mi (0%)       300Mi (1%)     5d23h
+Allocated resources:
+    (Total limits may be over 100 percent, i.e., overcommitted.)
+    Resource           Requests    Limits
+    --------           --------    ------
+    cpu                649m (8%)   2400m (30%)
+    memory             548Mi (1%)  1754Mi (6%)
+    ephemeral-storage  0 (0%)      0 (0%)
+Events:              none
+        </code></pre>
+
+
+</section>
+
+<section id="maintain-nodeconditions" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
+    data-background-position="20px 20px">
+    <h2>Node Conditions</h2>
+    <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
+        <ul>
+            <li class="card">
+                A <a href="https://kubernetes.io/docs/concepts/architecture/nodes/" target="_blank"> node </a> tries to
+                preserve stability when available compute resources are low.
+            </li>
+            <li class="card">
+                Kubelet can reclaim the resources on a node when the node resources hit eviction thresholds. Pods are
+                evicted from the node.
+            </li>
+            <li class="card">
+                If the evicted Pod is managed by a Deployment, the Deployment will create
+                another Pod to be scheduled by Kubernetes.
+            </li>
+        </ul>
+
+    </div>
+</section>
+
+<section id="maintain-nodeconditions2" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
+    data-background-position="20px 20px">
+    <h2>Node Conditions</h2>
+    <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
+        <ul>
+            <li class="card">
+                When eviction thresholds are met, the kubelet will report a condition that the node is under pressure.
+                These include conditions like <code class="fg-red">MemoryPressure</code>, <code class="fg-red">DiskPressure</code> or <code class="fg-red">Ready</code>.
+            </li>
+            <li class="card">
+                The scheduler always considers the Node conditions when scheduling pods to a Node.
+            </li>
+            <li class="card">
+                Eviction order for Pods are determined by
+                <ul>
+                <li>
+                    Usage of the starved resource exceeds requests
+                </li>
+                <li>
+                    <a href="https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/">Priority</a>
+                </li>
+                <li>
+                    Consumption of the starved compute resource relative to the Pods’ scheduling requests
+                </li>
+                </ul>  
+            </li>
+            
+        </ul>
+
+    </div>
+</section>
+
+<section id="maintain-nodeconditions2" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
+    data-background-position="20px 20px">
+    <h2>Upgrading your Cluster</h2>
+    <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
+        <ul>
+            <li class="card">
+                OKE manages the cluster control plane, and the master nodes are highly available.
+            </li>
+            <li class="card">
+                Updating the cluster is an <b>in-place</b> operation and incurs no downtime for the workloads on the cluster.
+            </li>
+            <li class="card">
+                Updates allow for the standard kubernetes variance in the versions
+                <ul>
+                    <li>
+                        Master can be ahead of the the node pool versions by up-to two minor versions
+                    </li>
+                    <li>
+                        Master cannot be behind any of the node pool versions
+                    </li>
+                </ul>
+            </li>
+            <li class="card">
+                Cluster upgrade can be done through the API or any of the SDKs/clients .
+                <ul>
+                <li>
+                    <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengupgradingk8smasternode.htm">Using the console</a>
+                </li>
+                <li>
+                    <a href="https://docs.cloud.oracle.com/en-us/iaas/tools/oci-cli/2.9.4/oci_cli_docs/cmdref/ce/cluster/update.html">Using the CLI</a>
+                </li>
+                <li>
+                    Using the <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengupgradingk8smasternode.htm"> UpdateCluster</a> API
+                </li>
+                </ul>  
+            </li>
+            
+        </ul>
+
+    </div>
+</section>
