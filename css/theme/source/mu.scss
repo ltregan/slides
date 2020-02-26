@@ -341,6 +341,14 @@ a.title-print {
 	}
 }
 
+// Diagrams
+// @see https://mermaid-js.github.io/mermaid/#/flowchart
+.mermaid {
+  visibility: hidden;
+  &[data-processed] {
+    visibility: visible;
+  }
+}
 
 // width elements
 .col-1-1 {
