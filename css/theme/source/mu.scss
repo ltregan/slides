@@ -640,6 +640,10 @@ a.title-print {
     @include emphasis();
     @include transform(scale(1.5));
     z-index: 10;
+    &.mu-zoom-bg {
+      background: $o-color-white;
+      padding:  $blockMargin;
+    }
   }
 }
 

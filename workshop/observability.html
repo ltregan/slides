@@ -184,15 +184,15 @@ mushop-utils            mushop-utilities        1               2020-01-31 20:32
         </li>
         <!-- hpa -->
         <li>
-          Now that dashboards have been imported, let's deploy a load-simulation
-          pod to our runtime.
+          Now that dashboards have been imported, let's deploy load-simulation
+          pods to the cluster.
           <blockquote class="mu-small">
             ℹ️ This also showcases the
             <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" target="_blank">Horizontal Pod Autoscaling</a>
             configurations deployed with the MuShop application
           </blockquote>
           <hr>
-          Return to the <code>mushop</code> source code downloaded earlier:
+          Return to the <code>mushop</code> source code directory:
           <pre><code class="hljs sh"># mushop&gt;</code></pre>
           🔥 Deploy the load simulation pods:
           <pre><code class="hljs sh">kubectl create -f src/load/load-dep.yaml</code></pre>

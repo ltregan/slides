@@ -1,0 +1,74 @@
+<div class="mu-ratio mu-ratio-4-3">
+  <div class="mu-overflow">
+    MuShop provides an umbrella helm chart called <code class="fg-orange">setup</code>, which includes several
+    <em>recommended</em> installations on the cluster. These installations represent
+    common 3rd party services, which integrate with Oracle Cloud Infrastructure
+    or enable certain application features.
+    <hr>
+    <table class="mu-small">
+      <thead>
+        <tr>
+          <th>Chart</th>
+          <th>Purpose</th>
+          <th>Option</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><a href="https://github.com/helm/charts/blob/master/stable/prometheus/README.md" target="_blank">Prometheus</a></td>
+          <td>Service metrics aggregation</td>
+          <td><code>prometheus.enabled</code></td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/helm/charts/blob/master/stable/grafana/README.md" target="_blank">Grafana</a></td>
+          <td>Infrastructure/service visualization dashboards</td>
+          <td><code>grafana.enabled</code></td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/helm/charts/blob/master/stable/metrics-server/README.md" target="_blank">Metrics Server</a></td>
+          <td>Support for Horizontal Pod Autoscaling</td>
+          <td><code>metrics-server.enabled</code></td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/helm/charts/blob/master/stable/nginx-ingress/README.md" target="_blank">Nginx Ingress</a></td>
+          <td>Ingress controller and public Load Balancer</td>
+          <td><code>nginx-ingress.enabled</code></td>
+        </tr>
+        <tr>
+          <td><a href="https://github.com/kubernetes-sigs/service-catalog/blob/master/charts/catalog/README.md" target="_blank">Service Catalog</a></td>
+          <td>Service Catalog chart utilized by Oracle Service Broker</td>
+          <td><code>catalog.enabled</code></td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="mu-margin"></div>
+    <ol>
+      <li>
+        Check <code class="fg-orange">kubectl</code> context:
+        <pre><code class="hljs sh">kubectl config current-context</code></pre>
+      </li>
+      <li>
+        Add required <code class="fg-orange">helm</code> repositories:
+        <pre><code class="hljs text">helm repo add svc-cat https://svc-catalog-charts.storage.googleapis.com
+helm repo add stable https://kubernetes-charts.storage.googleapis.com</code></pre>
+      </li>
+      <li>
+        Create a <code class="fg-orange">namespace</code> for MuShop utilities:
+        <pre><code class="hljs text">kubectl create namespace mushop-utilities</code></pre>
+      </li>
+      <li>
+        Install cluster dependencies using <code class="fg-orange">helm</code>:
+        <pre><code class="hljs text">helm dependency update deploy/complete/helm-chart/setup</code></pre>
+        <pre><code class="hljs text">helm install mushop-utils deploy/complete/helm-chart/setup \
+  --namespace mushop-utilities</code></pre>
+        <div>
+          <blockquote class="mu-small">
+            ⚠️ It is possible that certain services may conflict with pre-existing installs.<br />
+            If so, try setting <code>--set &lt;chart&gt;.enabled=false</code> for any
+            conflicting charts.
+          </blockquote>
+        </div>
+      </li>
+    </ol>
+  </div>
+</div>

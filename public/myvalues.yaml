@@ -8,6 +8,13 @@ global:
   oadbWalletSecret: oadb-wallet         # Name of ATP Wallet secret created separately
   oadbConnectionSecret: oadb-connection # Name of ATP Connection secret created separately
 
+# Configure ingress to support host-specific routing, tls, etc. Example:
+# 
+# ingress:
+#   hosts:
+#     - yourname.mushop.com
+
+# API environment configurations
 api:
   env:
     mediaUrl:                 # URL for catalog image assets (https://objectstorage.[REGION].oraclecloud.com/n/[NAMESPACE]/b/[BUCKET_NAME]/o/)

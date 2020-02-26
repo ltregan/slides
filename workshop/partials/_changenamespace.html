@@ -1,0 +1,21 @@
+Change the default <code class="fg-orange">kubectl</code> namespace to avoid having to add <br><code class="fg-orange">--namespace &lt;name&gt;</code>
+to every command:
+<blockquote class="mu-small">
+  <b>TIP:</b> use <a href="https://github.com/ahmetb/kubectx" target="_blank">kubens</a>
+  to switch namespace easily &amp; often from the command line
+</blockquote>
+<div class="mu-flex mu-flex-stretch mu-gutter mu-medium">
+  <div class="card col-1-2">
+    Use "mushop":
+    <pre><code class="hljs text">kubectl create namespace mushop</code></pre>
+    <pre><code class="hljs text">kubectl config set-context \
+  --current --namespace=mushop</code></pre>
+  </div>
+  <div class="mu-muted no-wrap mu-valign">OR</div>
+  <div class="card col-1-2">
+    Use "your name":
+    <pre><code class="hljs text">kubectl create namespace &lt;your_name&gt;</code></pre>
+    <pre><code class="hljs text">kubectl config set-context \
+  --current --namespace=&lt;your_name&gt;</code></pre>
+  </div>
+</div>
