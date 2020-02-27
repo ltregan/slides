@@ -1,0 +1,319 @@
+<!-- title -->
+<section id="home">
+  <h1>Cloud Native OCI</h1>
+  <h2>Support Materials</h2>
+  include "_titleSlide.html"
+</section>
+
+<section id="toc">
+  <h2>TOC</h2>
+  Follow the topic links below for more information:
+  <ul>
+    <li><a href="#sourcecode">Source Code</a></li>
+    <li><a href="#kubernetes">OKE Cluster</a></li>
+    <li><a href="#provisioning">OCI Provisioning</a></li>
+    <li><a href="#deployment">MuShop Deployment</a></li>
+  </ul>
+</section>
+
+<section id="sourcecode">
+  <h2>MuShop Source Code</h2>
+  
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">Clone Repository</li>
+      <li class="fragment">Project Structure</li>
+    </ul>
+    <ul class="col-1-1">
+      <!-- cloning -->
+      <li>
+        <div class="mu-flex mu-gutter mu-medium">
+          <div class="card col-1-2">
+            Use this command to clone the repo into a folder named <code class="fg-red">mushop</code>:
+            <div class="mu-margin-top">
+              <pre><code class="hljs text">git clone \
+  https://github.com/oracle-quickstart/oci-cloudnative.git \
+  mushop</code></pre>
+            </div>
+          </div>
+          <a class="card col-1-2" href="https://github.com/oracle-quickstart/oci-cloudnative" target="_blank">
+            <div class="mu-flex mu-flex-middle mu-gutter mu-wrap">
+              <div class="col-1-2 mu-normal mu-left">Source Code</div>
+              <div class="col-1-2 mu-svc"><img class="no-margin" data-src="/images/tech/github.svg" /></div>
+            </div>
+            <div class="mu-small mu-left">
+              https://github.com/oracle-quickstart/oci-cloudnative
+            </div>
+          </a>
+        </div>
+      </li>
+      <!-- structure -->
+      <li>
+        The source code will look something like the following:
+        <div class="mu-small mu-margin-top">
+include "_mushopTree.html"
+        </div>
+        <ul>
+          <li><code class="fg-orange">./deploy</code>: Collection of application deployment resources</li>
+          <li><code class="fg-orange">./src</code>: MuShop individual service code, Dockerfile, etc.</li>
+        </ul>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="kubernetes">
+  <h2>Kubernetes</h2>
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">OKE Kubeconfig</li>
+      <li class="fragment">K8s Namespace</li>
+      <li class="fragment">Cluster Setup</li>
+    </ul>
+    <ul class="col-1-1">
+      <!-- kubeconfig -->
+      <li>
+        <div class="mu-margin">
+          Connection to an OKE cluster <b>requires</b> the <code class="fg-orange">oci</code> command line
+          interface. Follow these instructions to connect to an OKE cluster:
+        </div>
+        <blockquote class="mu-small">
+          <b>TIP:</b> Use the <a target="_blankd" href="https://docs.cloud.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellgettingstarted.htm">
+          OCI Cloud Shell</a> with pre-installed <code class="fg-orange">oci</code> and <code class="fg-orange">kubectl</code>
+        </blockquote>
+        <blockquote class="mu-small">
+          <b>TIP:</b> Use <a href="https://github.com/ahmetb/kubectx" target="_blank">kubectx</a>
+          to switch context easily &amp; often from the command line
+        </blockquote>
+        <hr>
+
+        <ol class="mu-steps">
+          <li>Install the <a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a></li>
+          <li>
+            Verify CLI is configured correctly <span class="mu-muted">(Object Storage namespace)</span>:
+            <pre><code class="hljs text">oci os ns get</code></pre>
+          </li>
+          <li>
+            From the OKE Cluster detail page, click <button class="oui-button oui-button-default">Access Kubeconfig</button>.
+            Copy the command that resembles the following:
+            <pre><code class="hljs sh">oci ce cluster create-kubeconfig \
+  --cluster-id ocid1.cluster.oc1.iad.aaaaaaaaabbbbbbbbdddddddd...xxx \
+  --file $HOME/.kube/config --region us-ashburn-1 --token-version 2.0.0</code></pre>
+          </li>
+          <li>
+            Check <code class="fg-orange">kubectl</code> context:
+            <pre><code class="hljs sh">kubectl config current-context
+# cluster-c4daylfgvrg</code></pre>
+          </li>
+        </ol>
+      </li>
+      <!-- k8s namespace -->
+      <li>
+include "_changenamespace.html"
+      </li>
+      <!-- cluster setup -->
+      <li>
+include "_setupchart.html"
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="provisioning">
+  <h2>Provisioning Services</h2>
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">ATP Database</li>
+      <li class="fragment">Streaming</li>
+      <li class="fragment">Object Storage</li>
+    </ul>
+    <ul class="col-1-1">
+      <!-- atp -->
+      <li>
+        Provision an Autonomous Transaction Processing (ATP) database.
+        The default options will work well, as will an <b>Always Free</b> shape if available.
+        <br>
+include "_atpsecrets.html"
+      </li>
+      <!-- stream -->
+      <li>
+        Provision a Streaming instance from the OCI Console, and make note of the created Stream
+        <code class="fg-orange">OCID</code> value. Then create an <code class="fg-orange">oss-connection</code>
+        secret containing the Stream connection details.
+        <hr>
+        <pre><code class="hljs sh">kubectl create secret generic oss-connection \
+  --from-literal=streamId='&lt;STREAM_OCID&gt;' \
+  --from-literal=messageEndpoint='&lt;MESSAGE_ENDPOINT_URL&gt;'</code></pre>
+      </li>
+      <!-- bucket -->
+      <li>
+        Provision a <b>Public</b> Object Storage Bucket, and create a
+        Pre-Authenticated Request for the bucket. With the information,
+        create a secret called <code class="fg-orange">oos-bucket</code> as follows:
+        <hr>
+        <pre><code class="hljs sh">kubectl create secret generic oos-bucket \
+  --from-literal=region='&lt;BUCKET_REGION&gt;' \
+  --from-literal=name='&lt;BUCKET_NAME&gt;' \
+  --from-literal=namespace='&lt;OBJECT_STORAGE_NAMESPACE&gt;' \
+  --from-literal=parUrl='&lt;PRE_AUTHENTICATED_REQUEST_URL&gt;'</code></pre>
+        <blockquote class="mu-small">
+          Object Storage Namespace may be found with the CLI <code>oci os ns get</code> or from the
+          <a href="https://console.us-ashburn-1.oraclecloud.com/a/tenancy" target="_blank" rel="noopener noreferrer">tenancy information page</a>.
+        </blockquote>
+      </li>
+    </ul>
+  </div>
+</section>
+
+<section id="deployment">
+  <h2>MuShop Deployments</h2>
+  <div class="mu-flex mu-small switcher">
+    <ul>
+      <li class="fragment">MuShop Ingress</li>
+      <li class="fragment">Secrets</li>
+      <li class="fragment">Helm Charts</li>
+      <li class="fragment">Helm Values</li>
+      <li class="fragment">Deployments</li>
+    </ul>
+    <ul class="col-1-1">
+      <!-- ingress -->
+      <li>
+        <div class="mu-ratio mu-ratio-4-3">
+          <div class="mu-overflow">
+            <p class="no-margin">
+              Part of the <a href="#kubernetes">cluster setup</a> includes the installation of an nginx ingress controller.
+              This resource exposes an OCI <b>load balancer</b>, with a <b>public ip address</b> mapped to the OKE cluster.
+            </p>
+
+            <p>
+              By default, the <code class="fg-orange">mushop</code> helm chart creates an Ingress resource, routing
+              <b>ALL</b> traffic on that ip address to the <code class="fg-orange">svc/edge</code> component.
+              This is OK for simple scenarios, however it may be desired to <b>differentiate</b> ingress traffic, using host
+              names on the <b>same ip address</b>. <span class="mu-muted">(for example multiple applications on the cluster)</span>
+            </p>
+            <hr>
+            <p>
+              <b>TLDR;</b> Configure the <code class="fg-orange">mushop</code> helm chart ingress values in cases where
+              traffic must be differentiated from one service to another:
+            </p>
+            <ol class="mu-steps mu-medium">
+              <li>
+                Locate the <code class="fg-orange">EXTERNAL-IP</code> assigned to the ingress controller:
+                <pre><code class="hljs text">kubectl get svc \
+  mushop-utils-nginx-ingress-controller \
+  --namespace mushop-utilities</code></pre>
+                <pre><code class="hljs text">NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)                      AGE
+mushop-utils-nginx-ingress-controller   LoadBalancer   10.96.150.230   129.xxx.xxx.xxx   80:30195/TCP,443:31059/TCP   1d</code></pre>
+              </li>
+              <li>
+                Create an <code class="fg-orange">/etc/hosts</code> entry on your computer with this ip address:
+                <pre><code class="hljs text"># MuShop ingress load balancer
+# EXTERNAL-IP            MuShop DNS name
+129.xxx.xxx.xxx          yourname.mushop.com</code></pre>
+                <blockquote class="mu-small">
+                  Windows users follow a process as described <a href="https://www.onmsft.com/how-to/how-to-modify-your-hosts-file-in-windows-10-and-why-you-might-want-to" target="_blank" rel="noopener noreferrer">here</a>
+                </blockquote>
+              </li>
+              <li>
+                Configure <code class="fg-orange">myvalues.yaml</code>:
+                <pre><code class="hljs yaml"># Configure ingress...
+ingress:
+  hosts:
+    - yourname.mushop.com</code></pre>
+              </li>
+            </ol>
+
+            
+          </div>
+        </div>
+      </li>
+      <!-- secrets -->
+      <li>
+        The application also uses IAM credentials to connect cloud services from within the cluster.
+        Create a secret containing these configurations:
+        <hr>
+        <pre><code class="hljs sh">kubectl create secret generic oci-credentials \
+  --from-literal=tenancy='&lt;TENANCY_OCID&gt'; \
+  --from-literal=user='&lt;USER_OCID&gt;' \
+  --from-literal=region='&lt;USER_OCI_REGION&gt;' \
+  --from-literal=fingerprint='&lt;PUBLIC_API_KEY_FINGERPRINT&gt;' \
+  --from-literal=passphrase='&lt;PRIVATE_API_KEY_PASSPHRASE&gt;' \
+  --from-file=privatekey='&lt;PATH_OF_PRIVATE_API_KEY&gt;'</code></pre>
+        <blockquote class="mu-small">
+          ⚠️ <b>NOTE:</b> The passphrase entry is <b>required</b>. If you do not have passphrase for your key, just leave empty.
+        </blockquote>
+            
+        Verify this secret and those created by <a href="#provisioning">provisioning</a>:
+        <pre><code class="hljs sh">kubectl get secrets</code></pre>
+        <pre><code class="hljs text">NAME              TYPE      DATA   AGE
+oadb-admin        Opaque    1      3m
+oadb-connection   Opaque    2      3m
+oadb-wallet       Opaque    7      3m
+oci-credentials   Opaque    6      3m
+oos-bucket        Opaque    4      3m
+oss-connection    Opaque    2      3m</code></pre>
+      </li>
+      <!-- helm charts -->
+      <li>
+        <p class="no-margin">
+          Deploying the complete MuShop application with backing services from Oracle Cloud
+          Infrastructure involves the use of the following helm charts:
+        </p>
+        <pre><code class="hljs bash">deploy/complete/helm-chart/
+├── mushop      # Deploys the MuShop application runtime
+├── provision   # Provisions OCI resources integrated with Service Broker
+└── setup       # Installs umbrella chart dependencies on the cluster</code></pre>
+      </li>
+      <!-- helm values -->
+      <li>
+        Create (or edit) a <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a> file to
+        specifiy all the helm chart deployment configurations:
+        <blockquote class="mu-small">
+          <b>TIP:</b> Save this file to <code class="fg-orange">deploy/complete/helm-chart/myvalues.yaml</code> within the project
+          source code.
+        </blockquote>
+
+        <div class="mu-small">
+          <pre><code class="hljs yaml">
+include "public/myvalues.yaml"
+          </code></pre>
+        </div>
+      </li>
+      <!-- deployments -->
+      <li>
+        <p class="no-margin">
+          The <code class="fg-orange">mushop</code> helm chart is used to demonstrate
+          each of the various deployment configurations. 
+        </p>
+        <p>
+          Deploy with helm from within the charts source directory:
+          <pre><code class="hljs sh">cd deploy/complete/helm-chart</code></pre>
+        </p>
+
+        <div class="mu-flex mu-gutter mu-wrap">
+          <div class="card">
+            Mock mode:
+            <pre><code class="hljs sh">helm install mushop ./mushop \
+  --set global.mock.service="all"</code></pre>
+          </div>
+          <div class="card">
+            Using a <a href="/public/myvalues.yaml"><code>myvalues.yaml</code></a> file:
+            <pre><code class="hljs sh">helm install mushop ./mushop \
+  -f myvalues.yaml</code></pre>
+          </div>
+          <div class="card col-1-1">
+            Consuming service instances provisioned by Service Broker:
+            <pre><code class="hljs sh">helm install mushop ./mushop \
+  --set global.osb.atp=true \
+  --set global.osb.oss=true \
+  --set global.osb.objectstorage=true \
+  -f myvalues.yaml</code></pre>
+            <blockquote class="mu-medium">
+              ⚠️ <b>NOTE:</b> Requires prior configuration and install of <code class="fg-orange">provision</code> chart
+            </blockquote>
+          </div>
+        </div>
+      </li>
+    </ul>
+  </div>
+</section>

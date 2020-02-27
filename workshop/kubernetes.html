@@ -335,16 +335,7 @@ spec:
         </li>
         <!-- namespace -->
         <li>
-          Change your default namespace to your name to avoid having to add
-          <code>--namespace &lt;name&gt;</code> to every kubectl command.
-          <hr />
-          <pre><code class="hljs text">kubectl create namespace mushop</code></pre>
-          <pre><code class="hljs text">kubectl config set-context \
-  --current --namespace=mushop</code></pre>
-          <blockquote class="mu-small">
-            <b>TIP:</b> use <a href="https://github.com/ahmetb/kubectx" target="_blank">kubens</a>
-            to switch namespace easily &amp; often from the command line
-          </blockquote>
+include "_changenamespace.html"
         </li>
         <!-- deploy -->
         <li>

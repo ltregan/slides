@@ -8,18 +8,23 @@ global:
   oadbWalletSecret: oadb-wallet         # Name of ATP Wallet secret created separately
   oadbConnectionSecret: oadb-connection # Name of ATP Connection secret created separately
 
+# Configure ingress to support host-specific routing, tls, etc. Example:
+# 
+# ingress:
+#   hosts:
+#     - yourname.mushop.com
+
+# API environment configurations
 api:
   env:
-    mediaUrl:                 # URL for catalog image assets
+    mediaUrl:                 # URL for catalog image assets (https://objectstorage.[REGION].oraclecloud.com/n/[NAMESPACE]/b/[BUCKET_NAME]/o/)
     newsletterSubscribeUrl:   # Newsletter subscription endpoint (https://[API_GATEWAY_URL]/newsletter/subscribe)
 
 # These options may be used instead of global.ossStreamSecret and global.oosBucketSecret, if desired
 secrets:
   streams:
-    region:           # OCI region for stream instance (eg us-phoenix-1)
-    streamId:         # Stream OCID
-    streamName:       # Stream name (string)
-    compartmentId:    # Compartment ID where stream is provisioned
+    streamId:           # Stream OCID
+    messageEndpoint:    # Stream messsage endpoint URL
   
   bucket:
     region:     # OCI region for bucket (eg us-phoenix-1)

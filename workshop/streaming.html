@@ -3,7 +3,7 @@
   <!-- landing -->
   <section id="home">
     <h1>Cloud Native OCI</h1>
-    <h2>Shipping and Streaming</h2>
+    <h2>Streaming service</h2>
     include "partials/_titleSlide.html"
   </section>
 
@@ -12,8 +12,9 @@
     <h2>Table of Contents</h2>
     <ul class="plain">
       <!-- add a line for each <section id="slideId">...</section>  -->
-      <li><a href="#oss_intro">Home</a></li>
-      <li><a href="#lab">Lab Overview</a></li>
+      <li><a href="#oss_intro">Background</a></li>
+      <li><a href="#usecase">Use Case</a></li>
+      <li><a href="#lab">Lab</a></li>
     </ul>
   </section>
 </section>
@@ -144,37 +145,7 @@
       </ul>
     </div>
   </section>
-  <section>
-    <h2>Mushop Use Case</h2>
-
-    <div class="mu-flex mu-flex-middle mu-margin">
-      <div class="mu-svc fragment fade-in">
-        <img data-src="/images/tech/java.png" /> Order
-      </div>
-      <div class="mu-flex-connector arrow fragment fade-in"></div>
-      <div class="mu-svc fragment fade-in">
-        <img data-src="/images/tech/java.png" /> Shipping
-      </div>
-      <div class="mu-flex-connector arrow fragment fade-in">producer</div>
-      <div class="mu-svc fragment fade-in">
-        <img data-src="/images/tech/streaming.svg" /> OSS
-      </div>
-      <div class="mu-flex-connector arrow-left fragment fade-in">consumer</div>
-      <div class="mu-svc fragment fade-in">
-        <img data-src="/images/tech/java.png" /> Stream
-      </div>
-      <div class="mu-flex-connector arrow fragment fade-in"></div>
-      <div class="mu-svc fragment fade-in">
-        <img data-src="/images/streams/shipping-2.png" /> Fulfillment
-      </div>
-    </div>
-
-    <aside class="notes" data-markdown>
-      We have two services as part of MuShop using the streaming service. First, we have the <b><code>shipping</code></b>
-      service: once an order is created, shipping service puts a message with order information on to the stream. Then,
-      we have stream consumer that simply reads those messages from a stream as they come in.
-    </aside>
-  </section>
+  
   <section>
     <h2>Connecting to OSS</h2>
     <div class="mu-flex mu-gutter">
@@ -219,54 +190,53 @@
       </div>
       <div class="card col-1-2 fragment mu-medium">
         Sample Kubernetes deployment configurations:
-        <pre class="mu-ratio mu-ratio-1-1"><code class="hljs yaml"># Source: mushop/charts/shipping/templates/shipping-deployment.yaml
+        <pre class="mu-ratio mu-ratio-1-1"><code class="hljs yaml"># Source: mushop/charts/events/templates/events-deployment.yaml
 env:
-  # access configurations
-  - name: STREAM_NAME
+  # API credentials
+  - name: TENANCY
     valueFrom:
       secretKeyRef:
-        name: mushop-oss-connection
-        key: streamName
+        name: oci-credentials
+        key: tenancy
+  - name: REGION
+    valueFrom:
+      secretKeyRef:
+        name: oci-credentials
+        key: region
+        optional: true
+  - name: USER_ID
+    valueFrom:
+      secretKeyRef:
+        name: oci-credentials
+        key: user
+  - name: PRIVATE_KEY
+    valueFrom:
+      secretKeyRef:
+        name: oci-credentials
+        key: privatekey
+  - name: FINGERPRINT
+    valueFrom:
+      secretKeyRef:
+        name: oci-credentials
+        key: fingerprint
+  - name: PASSPHRASE
+    valueFrom:
+      secretKeyRef:
+        name: oci-credentials
+        key: passphrase
+        optional: true
+  # Stream connection
   - name: STREAM_ID
     valueFrom:
       secretKeyRef:
-        name: mushop-oss-connection
+        name: oss-connection
         key: streamId
-  - name: OCI_TENANT_ID
+  - name: MESSAGES_ENDPOINT
     valueFrom:
       secretKeyRef:
-        name: streaming-secret
-        key: oci_tenant_id
-  - name: OCI_USER_ID
-    valueFrom:
-      secretKeyRef:
-        name: streaming-secret
-        key: oci_user_id
-  - name: OCI_FINGERPRINT
-    valueFrom:
-      secretKeyRef:
-        name: streaming-secret
-        key: oci_fingerprint
-  - name: OCI_PASS_PHRASE
-    valueFrom:
-      secretKeyRef:
-        name: streaming-secret
-        key: oci_pass_phrase
-  - name: OCI_API_KEY
-    valueFrom:
-      secretKeyRef:
-        name: streaming-secret
-        key: oci_api_key
-  - name: OCI_REGION
-    valueFrom:
-      secretKeyRef:
-        name: streaming-secret
-        key: oci_region
-  - name: OCI_COMPARTMENT_ID
-    valueFrom:
-      secretKeyRef:
-        name: streaming-secret
-        key: oci_compartment_id</code></pre>
+        name: oss-connection
+        key: messageEndpoint
+        optional: true</code></pre>
       </div>
     </div>
   </section>
@@ -381,6 +351,38 @@ CreateCursorResponse cursorResponse =
 
 </section> <!-- end of lecture-->
 
+<section id="usecase">
+  <section>
+    <h2>Mushop Use Case</h2>
+
+    <div class="mu-flex mu-flex-middle mu-margin">
+      <div class="mu-svc fragment fade-in">
+        <img data-src="/images/tech/nodejs.png" /> API
+      </div>
+      <div class="mu-flex-connector arrow fragment fade-in"></div>
+      <div class="mu-svc fragment fade-in">
+        <img data-src="/images/tech/go.png" /> Events
+      </div>
+      <div class="mu-flex-connector arrow fragment fade-in">producer</div>
+      <div class="mu-svc fragment fade-in">
+        <img data-src="/images/oci/streaming.svg" /> OSS
+      </div>
+      <div class="mu-flex-connector arrow-left fragment fade-in">consumer</div>
+      <div class="mu-svc fragment fade-in">
+        <img data-src="/images/tech/bucket.svg" /> Bucket
+      </div>
+    </div>
+
+    <aside class="notes" data-markdown>
+      There are two services as part of MuShop using the streaming service. First, there is the <b><code>events</code></b>
+      service: customer behavior is captured as stream messages (conversion funnel) at each phase of the shopping experience.
+      These messages may then be consumed by an archive storage bucket, data warehouse, etc.
+    </aside>
+  </section>
+
+
+</section>
+
 <!-- Lab -->
 <section id="lab">
   <section>
@@ -392,7 +394,6 @@ CreateCursorResponse cursorResponse =
         <li class="fragment">Configure</li>
         <li class="fragment">Deploy</li>
         <li class="fragment">Verify</li>
-        <li class="fragment">Outputs</li>
       </ul>
       <ul class="col-1-1">
         <li>
@@ -422,23 +423,21 @@ CreateCursorResponse cursorResponse =
           <hr>
           <ol class="mu-medium">
             <li>
-              Create a secret called <code class="fg-red">oci-credentials</code> with API
+              Create a secret called <code class="fg-orange">oci-credentials</code> with API
               credentials to connect services from within the cluster:
               <pre><code class="hljs sh">kubectl create secret generic oci-credentials \
-  --from-literal=tenancy=&lt;TENANCY_OCID&gt; \
-  --from-literal=user=&lt;USER_OCID&gt; \
-  --from-literal=region=&lt;USER_OCI_REGION&gt; \
-  --from-literal=fingerprint=&lt;PUBLIC_API_KEY_FINGERPRINT&gt; \
-  --from-literal=passphrase=&lt;PRIVATE_API_KEY_PASSPHRASE&gt; \
-  --from-file=privatekey=&lt;PATH_OF_PRIVATE_API_KEY&gt;</code></pre>
+  --from-literal=tenancy='&lt;TENANCY_OCID&gt'; \
+  --from-literal=user='&lt;USER_OCID&gt;' \
+  --from-literal=region='&lt;USER_OCI_REGION&gt;' \
+  --from-literal=fingerprint='&lt;PUBLIC_API_KEY_FINGERPRINT&gt;' \
+  --from-literal=passphrase='&lt;PRIVATE_API_KEY_PASSPHRASE&gt;' \
+  --from-file=privatekey='&lt;PATH_OF_PRIVATE_API_KEY&gt;'</code></pre>
             </li>
             <li>
-              Create a <code class="fg-red">oss-connection</code> secret:
-                  <pre><code class="hljs shell">kubectl create secret generic oss-connection \
-  --from-literal=compartmentId='&lt;COMPARTMENT_OCID&gt;' \
-  --from-literal=region='&lt;REGION_NAME&gt;' \
+              Create an <code class="fg-orange">oss-connection</code> secret:
+              <pre><code class="hljs sh">kubectl create secret generic oss-connection \
   --from-literal=streamId='&lt;STREAM_OCID&gt;' \
-  --from-literal=streamName='&lt;STREAM_NAME&gt;'</code></pre>
+  --from-literal=messageEndpoint='&lt;MESSAGE_ENDPOINT_URL&gt;'</code></pre>
             </li>
             <li>
               include "_myvalues.html"
@@ -470,47 +469,46 @@ global:
 
         <!-- verify -->
         <li>
-          Verify the streaming flow by sending a test message to the shipping
+          Verify the streaming flow by sending a test message to the events tracking
           service
           <hr>
           <div class="mu-flex mu-flex-stretch mu-medium">
             <div class="col-1-2">
               <div class="mu-flex mu-gutter mu-wrap">
                 <div class="card col-1-1">
-                  To tail the application logs first you need to find the <code>shipping</code> and <code>stream</code> pod names:
+                  To tail the application logs first you need to find the <code>events</code> pod name:
                   <pre><code class="hljs text">kubectl get po</code></pre>
                 </div>
                 <div class="card col-1-1">
-                  <code>&gt;</code> Terminal 1: Tail <code>shipping</code> logs:
-                  <pre class="no-margin"><code class="hljs text">kubectl logs -f mushop-shipping-d475m</code></pre>
+                  <code>&gt;</code> Terminal 1: Tail <code>events</code> logs:
+                  <pre class="no-margin"><code class="hljs text">kubectl logs -f --tail 10 mushop-events-gx8wj</code></pre>
                   <span class="mu-muted">(name will vary)</span>
                 </div>
                 <div class="card col-1-1">
-                  <code>&gt;</code> Terminal 2: Tail <code>stream</code> logs:
-                  <pre class="no-margin"><code class="hljs text">kubectl logs -f mushop-stream-d475m</code></pre>
-                  <span class="mu-muted">(name will vary)</span>
+                  <code>&gt;</code> Terminal 2: Expose the <code>events</code> service:
+                  <pre><code class="hljs text">kubectl port-forward svc/mushop-events 8000:80</code></pre>
                 </div>
               </div>
             </div>
 
             <div class="mu-flex-connector arrow mu-valign"></div>
             <div class="card col-1-2">
-              Expose the <code>shipping</code> service:
-              <pre><code class="hljs text">kubectl port-forward svc/shipping 8000:80</code></pre>
-              
-              <code>&gt;</code> Terminal 3: Send a test message to the shipping
+              <code>&gt;</code> Terminal 3: Send a test message to the tracking
               microservice:
               <pre><code class="hljs sh">curl -X POST \
-  http://localhost:8000/shipping \
+  http://localhost:8000/events \
   -H 'Content-Type: application/json' \
-  -H 'cache-control: no-cache' \
-  -d '{ 
-    "id": "123-45-8876",
-    "name": "shipment 500" 
+  -d '{
+    "source": "test",
+    "track": "abc1234",
+    "events": [{
+      "type": "any",
+      "detail": "hello"
+    }]
   }'</code></pre>
               <blockquote class="mu-medium">
                 👀 Watch the terminals and observe messages being produced by 
-                <code>shipping</code>, then consumed in the <code>stream</code>
+                <code>events</code>
               </blockquote>
 
               <blockquote class="mu-medium">
@@ -519,21 +517,6 @@ global:
               </blockquote>
             </div>
           </div>
-        </li>
-
-        <li>
-          Sample outputs from shipping and stream services
-          <hr>
-          Shipping service output:
-          <pre><code class="hljs text">{"name":"shipment 500","id":"123-45-8876"}
-Created a list with one message
-Publishing 1 messages to stream ocid1.stream.oc1.phx.aaaaaaaaa5acbmqg4t3ul6dyy3kbcihsxpw66tvpyxw7j7kesmdz3i6cc45a.
-Published message to partition 0, offset 192</code></pre>
-
-          Stream service output:
-          <pre><code class="hljs text">Received shipment task: shipment 500
-Shipment{id='123-45-8876', name='shipment 500'}
-Received shipment task: shipment 500</code></pre>
         </li>
       </ul>
     </div>
@@ -546,14 +529,14 @@ Received shipment task: shipment 500</code></pre>
       access the OCI console.
     </p>
     <div class="fragment-set">
-      <div class="mu-flex mu-gutter fragment">
-        <div><img class="plain" width="100%" data-src="/images/streams/console1.png" alt="Analytics - Streaming" /></div>
-        <div><img class="plain" width="100%" data-src="/images/streams/console2.png"
-            alt="Analytics - Streaming - Overview" /></div>
+      <div class="fragment mu-flex mu-gutter">
+        <div class="col-1-3"><img data-src="/images/streams/console1.png" alt="Analytics - Streaming" /></div>
+        <div class="col-2-3"><img data-src="/images/streams/console2.png" alt="Analytics - Streaming - Overview" /></div>
       </div>
-      <div class="fragment">
-      <img class="plain" width="100%" data-src="/images/streams/console3.png"
-        alt="Anaylics - Streaming - Stream Details" />
+      <div class="fragment mu-ratio mu-ratio-2-1">
+        <div class="mu-overflow">
+          <img data-src="/images/streams/console3.png" alt="Anaylics - Streaming - Stream Details" />
+        </div>
       </div>
     </div>
   </section>

@@ -118,29 +118,31 @@
       </ul>
       <ul class="col-1-1">
         <li>
-          <div class="mu-flex mu-gutter">
-            <div class="mu-svc no-shrink">
-              <img data-src="/images/tech/grafana.png" alt="grafana">
-            </div>
-            <div class="mu-medium">
-              👍 Good news! We already installed Prometheus/Grafana as part of the
-              umbrella chart during <a href="/workshop/setup.html#setup"><code>setup</code></a>.
-              Now let's revisit the charts and connect to some Grafana dashboards!
+          <div class="mu-margin">
+            <div class="mu-flex mu-gutter">
+              <div class="mu-svc no-shrink">
+                <img data-src="/images/tech/grafana.png" alt="grafana">
+              </div>
+              <div class="mu-medium">
+                👍 Good news! We already installed Prometheus/Grafana as part of the
+                umbrella chart during <a href="/workshop/setup.html#setup"><code>setup</code></a>.
+                Now let's revisit the charts and connect to some Grafana dashboards!
+              </div>
             </div>
           </div>
-          <pre><code class="hljs text">helm list</code></pre>
-          <pre><code class="hljs text">  NAME                    NAMESPACE               REVISION        UPDATED                                 STATUS          CHART                           APP VERSION   
-            mushop                  mushop                  1               2020-01-31 21:14:48.511917 -0600 CST    deployed        mushop-0.1.0                    1.0              
-            mushop-utils            mushop-utilities        1               2020-01-31 20:32:05.864769 -0600 CST    deployed        mushop-setup-0.0.1              1.0   </code></pre>
-          
+          <pre><code class="hljs text">helm list --all-namespaces</code></pre>
+          <pre><code class="hljs text">NAME                    NAMESPACE               REVISION        UPDATED                                 STATUS          CHART                           APP VERSION   
+mushop                  mushop                  1               2020-01-31 21:14:48.511917 -0600 CST    deployed        mushop-0.1.0                    1.0              
+mushop-utils            mushop-utilities        1               2020-01-31 20:32:05.864769 -0600 CST    deployed        mushop-setup-0.0.1              1.0   </code></pre>
+
           Get the output from the setup installation:
-          <pre><code class="hljs text">helm status mushop-utils
+          <pre><code class="hljs text">helm status mushop-utils -n mushop-utilities
 
 ## Grafana... </code></pre>
 
           Get the auto-generated admin password:         
           <pre><code class="hljs text">kubectl get secret -n mushop-utilities mushop-utils-grafana \
-            -o jsonpath="{.data.admin-password}" | base64 --decode ; echo</code></pre>
+  -o jsonpath="{.data.admin-password}" | base64 --decode ; echo</code></pre>
 
           Connect to the <a href="http://localhost:3000" target="_blank">dashboard</a> with admin/&lt;password&gt;:
           <pre><code class="hljs text">kubectl port-forward -n mushop-utilities \
@@ -182,15 +184,15 @@
         </li>
         <!-- hpa -->
         <li>
-          Now that dashboards have been imported, let's deploy a load-simulation
-          pod to our runtime.
+          Now that dashboards have been imported, let's deploy load-simulation
+          pods to the cluster.
           <blockquote class="mu-small">
             ℹ️ This also showcases the
             <a href="https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/" target="_blank">Horizontal Pod Autoscaling</a>
             configurations deployed with the MuShop application
           </blockquote>
           <hr>
-          Return to the <code>mushop</code> source code downloaded earlier:
+          Return to the <code>mushop</code> source code directory:
           <pre><code class="hljs sh"># mushop&gt;</code></pre>
           🔥 Deploy the load simulation pods:
           <pre><code class="hljs sh">kubectl create -f src/load/load-dep.yaml</code></pre>
