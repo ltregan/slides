@@ -177,7 +177,8 @@ Events:              none
         <ul>
             <li class="card">
                 When eviction thresholds are met, the kubelet will report a condition that the node is under pressure.
-                These include conditions like <code class="fg-red">MemoryPressure</code>, <code class="fg-red">DiskPressure</code> or <code class="fg-red">Ready</code>.
+                These include conditions like <code class="fg-red">MemoryPressure</code>, <code
+                    class="fg-red">DiskPressure</code> or <code class="fg-red">Ready</code>.
             </li>
             <li class="card">
                 The scheduler always considers the Node conditions when scheduling pods to a Node.
@@ -185,24 +186,25 @@ Events:              none
             <li class="card">
                 Eviction order for Pods are determined by
                 <ul>
-                <li>
-                    Usage of the starved resource exceeds requests
-                </li>
-                <li>
-                    <a href="https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/">Priority</a>
-                </li>
-                <li>
-                    Consumption of the starved compute resource relative to the Pods’ scheduling requests
-                </li>
-                </ul>  
+                    <li>
+                        Usage of the starved resource exceeds requests
+                    </li>
+                    <li>
+                        <a
+                            href="https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/">Priority</a>
+                    </li>
+                    <li>
+                        Consumption of the starved compute resource relative to the Pods’ scheduling requests
+                    </li>
+                </ul>
             </li>
-            
+
         </ul>
 
     </div>
 </section>
 
-<section id="maintain-nodeconditions2" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
+<section id="maintain-upgradingmaster" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
     data-background-position="20px 20px">
     <h2>Upgrading your Cluster</h2>
     <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
@@ -211,7 +213,8 @@ Events:              none
                 OKE manages the cluster control plane, and the master nodes are highly available.
             </li>
             <li class="card">
-                Updating the cluster is an <b>in-place</b> operation and incurs no downtime for the workloads on the cluster.
+                Updating the cluster is an <b>in-place</b> operation and incurs no downtime for the workloads on the
+                cluster.
             </li>
             <li class="card">
                 Updates allow for the standard kubernetes variance in the versions
@@ -227,19 +230,96 @@ Events:              none
             <li class="card">
                 Cluster upgrade can be done through the API or any of the SDKs/clients .
                 <ul>
-                <li>
-                    <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengupgradingk8smasternode.htm">Using the console</a>
-                </li>
-                <li>
-                    <a href="https://docs.cloud.oracle.com/en-us/iaas/tools/oci-cli/2.9.4/oci_cli_docs/cmdref/ce/cluster/update.html">Using the CLI</a>
-                </li>
-                <li>
-                    Using the <a href="https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengupgradingk8smasternode.htm"> UpdateCluster</a> API
-                </li>
-                </ul>  
+                    <li>
+                        <a
+                            href="https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengupgradingk8smasternode.htm">Using
+                            the console</a>
+                    </li>
+                    <li>
+                        <a
+                            href="https://docs.cloud.oracle.com/en-us/iaas/tools/oci-cli/2.9.4/oci_cli_docs/cmdref/ce/cluster/update.html">Using
+                            the CLI</a>
+                    </li>
+                    <li>
+                        Using the <a
+                            href="https://docs.cloud.oracle.com/en-us/iaas/Content/ContEng/Tasks/contengupgradingk8smasternode.htm">
+                            UpdateCluster</a> API
+                    </li>
+                </ul>
             </li>
-            
+
         </ul>
 
+    </div>
+</section>
+
+<section id="maintain-upgradingnodepool" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
+    data-background-position="20px 20px">
+    <h2>Upgrading your Node Pools</h2>
+    <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
+        <ul>
+            <li class="card">
+                Node Pools are managed by the user and upgrade is out-of-place.
+            </li>
+            <li class="card">
+                This applies to upgrades to the node pools only. Node pools can be scaled in-place.
+            </li>
+            <li class="card">
+                To upgrade the node pool we must
+                <ul>
+                    <li>
+                        <code class="fg-red">Cordon</code> nodes in the existing pool to ensure no new pods are
+                        scheduled on the node.
+                    </li>
+                    <li>
+                        Create a new Node Pool with the desired changes.
+                    </li>
+                    <li>
+                        <code class="fg-red">Drain</code> the existing node pool. The scheduler will create new pods on
+                        the new Node Pool
+                    </li>
+                    <li>
+                        <code class="fg-red">Uncordon</code> the Node Pool or delete it.
+                    </li>
+                    <li>
+                        If <a
+                            href="https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#step-one-attach-label-to-the-node">Node
+                            selectors</a> are in use, then the node labels should also be applied to the new Nodes.
+                    </li>
+                    <li>
+                        Use <a
+                            href="https://kubernetes.io/docs/concepts/workloads/pods/disruptions/">PodDisruptionBudgets</a>
+                        to ensure that enough replicas are available throughout the upgrade process.
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+
+    </div>
+</section>
+
+<section id="maintain-upgradingnodepool2" data-background-image="/images/oci/telemetry.svg" data-background-size="100px"
+    data-background-position="20px 20px">
+    <h2>Upgrading your Node Pools</h2>
+    <div class="mu-flex mu-gutter mu-flex-stretch mu-margin mu-small">
+
+        <ul>
+            <li class="card">Create a new Node Pool, that runs a newer version of kubernetes, or a different OS image.
+            </li>
+            <li class="card">
+                <pre><code class="hljs shell">kubectl cordon [node]</code></pre>
+                Cordons the specified node. A selector can be passed in as well.
+            </li>
+            <li class="card">
+                <pre><code class="hljs shell">kubectl drain [node]</code></pre>
+                Drains the node by safely evicting the pods on the node. Pod disruption budgets are respected.
+            </li>
+            <li class="card">
+                <pre><code class="hljs shell">kubectl uncordon [node]</code></pre>
+                Puts the node back in service. Applicable if the node were to undergo some maintenance. For upgrades,
+                the node can be terminated at this stage.
+            </li>
+        </ul>
     </div>
 </section>
