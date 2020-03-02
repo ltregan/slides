@@ -72,7 +72,8 @@ module.exports = grunt => {
 					'images/**',
 					'plugin/**',
 					'css/**/*.css', '!css/theme/**',
-					'favicon.ico'
+					'favicon.ico',
+					'markdown/**'
 				],
 				dest: 'build',
 			},
