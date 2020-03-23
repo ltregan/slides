@@ -34,6 +34,8 @@
               <pre><code class="hljs text">git clone \
   https://github.com/oracle-quickstart/oci-cloudnative.git \
   mushop</code></pre>
+              Change working directory:
+              <pre><code class="hljs text">cd mushop</code></pre>
             </div>
           </div>
           <a class="card col-1-2" href="https://github.com/oracle-quickstart/oci-cloudnative" target="_blank">
@@ -63,12 +65,13 @@ include "_mushopTree.html"
 </section>
 
 <section id="kubernetes">
-  <h2>Kubernetes</h2>
+  <h2>OKE Cluster</h2>
   <div class="mu-flex mu-small switcher">
     <ul>
       <li class="fragment">OKE Kubeconfig</li>
       <li class="fragment">K8s Namespace</li>
       <li class="fragment">Cluster Setup</li>
+      <li class="fragment">Hostname Ingress</li>
     </ul>
     <ul class="col-1-1">
       <!-- kubeconfig -->
@@ -114,6 +117,10 @@ include "_changenamespace.html"
       <!-- cluster setup -->
       <li>
 include "_setupchart.html"
+      </li>
+      <!-- ingress -->
+      <li>
+include "_ingress.html"
       </li>
     </ul>
   </div>
@@ -169,64 +176,14 @@ include "_atpsecrets.html"
   <h2>MuShop Deployments</h2>
   <div class="mu-flex mu-small switcher">
     <ul>
-      <li class="fragment">MuShop Ingress</li>
       <li class="fragment">Secrets</li>
       <li class="fragment">Helm Charts</li>
       <li class="fragment">Helm Values</li>
       <li class="fragment">Deployments</li>
+      <li class="fragment">Accessing MuShop</li>
+      <li class="fragment">Hostname Ingress</li>
     </ul>
     <ul class="col-1-1">
-      <!-- ingress -->
-      <li>
-        <div class="mu-ratio mu-ratio-4-3">
-          <div class="mu-overflow">
-            <p class="no-margin">
-              Part of the <a href="#kubernetes">cluster setup</a> includes the installation of an nginx ingress controller.
-              This resource exposes an OCI <b>load balancer</b>, with a <b>public ip address</b> mapped to the OKE cluster.
-            </p>
-
-            <p>
-              By default, the <code class="fg-orange">mushop</code> helm chart creates an Ingress resource, routing
-              <b>ALL</b> traffic on that ip address to the <code class="fg-orange">svc/edge</code> component.
-              This is OK for simple scenarios, however it may be desired to <b>differentiate</b> ingress traffic, using host
-              names on the <b>same ip address</b>. <span class="mu-muted">(for example multiple applications on the cluster)</span>
-            </p>
-            <hr>
-            <p>
-              <b>TLDR;</b> Configure the <code class="fg-orange">mushop</code> helm chart ingress values in cases where
-              traffic must be differentiated from one service to another:
-            </p>
-            <ol class="mu-steps mu-medium">
-              <li>
-                Locate the <code class="fg-orange">EXTERNAL-IP</code> assigned to the ingress controller:
-                <pre><code class="hljs text">kubectl get svc \
-  mushop-utils-nginx-ingress-controller \
-  --namespace mushop-utilities</code></pre>
-                <pre><code class="hljs text">NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)                      AGE
-mushop-utils-nginx-ingress-controller   LoadBalancer   10.96.150.230   129.xxx.xxx.xxx   80:30195/TCP,443:31059/TCP   1d</code></pre>
-              </li>
-              <li>
-                Create an <code class="fg-orange">/etc/hosts</code> entry on your computer with this ip address:
-                <pre><code class="hljs text"># MuShop ingress load balancer
-# EXTERNAL-IP            MuShop DNS name
-129.xxx.xxx.xxx          yourname.mushop.com</code></pre>
-                <blockquote class="mu-small">
-                  Windows users follow a process as described <a href="https://www.onmsft.com/how-to/how-to-modify-your-hosts-file-in-windows-10-and-why-you-might-want-to" target="_blank" rel="noopener noreferrer">here</a>
-                </blockquote>
-              </li>
-              <li>
-                Configure <code class="fg-orange">myvalues.yaml</code>:
-                <pre><code class="hljs yaml"># Configure ingress...
-ingress:
-  hosts:
-    - yourname.mushop.com</code></pre>
-              </li>
-            </ol>
-
-            
-          </div>
-        </div>
-      </li>
       <!-- secrets -->
       <li>
         The application also uses IAM credentials to connect cloud services from within the cluster.
@@ -313,6 +270,17 @@ include "public/myvalues.yaml"
             </blockquote>
           </div>
         </div>
+      </li>
+      <!-- opening mushop -->
+      <li>
+include "_openmushop.html"
+        <div class="card col-1-1 mu-small mu-margin-top">
+          ⚠️ <b>NOTE:</b> For shared clusters, and host-based ingress <button class="oui-button oui-button-primary" onclick="Reveal.nextFragment();">Click here</button>
+        </div>
+      </li>
+      <!-- ingress -->
+      <li>
+include "_ingress.html"
       </li>
     </ul>
   </div>
