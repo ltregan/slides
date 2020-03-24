@@ -13,7 +13,9 @@
     <ul class="plain">
       <!-- add a line for each <section id="slideId">...</section>  -->
       <li><a href="#home">Home</a></li>
-      <li><a href="#lab">Lab Overview</a></li>
+      <li><a href="#k8s_intro">Kubernetes Overview</a></li>
+      <li><a href="#lab">Lab</a></li>
+      <li><a href="#more-exercises">More Exercises</a></li>
     </ul>
   </section>
 </section>
@@ -152,18 +154,26 @@ spec:
   <section id="lab">
     <h2>Lab Overview</h2>
     <ul>
-      <li>Set Kubernetes context</li>
-      <li>Change default namespace</li>
+      <li>Get Source Code</li>
+      <li>Cluster Setup</li>
       <li>Create a deployment with Helm</li>
       <li>Verify</li>
     </ul>
+  </section>
+
+  <section id="sourcecode">
+include "_sourceCode.html"
+  </section>
+
+  <section id="setup">
+include "_okeSetup.html"
   </section>
 
   <section id="exercise">
     <h2>Deploy MuShop</h2>
     <div class="mu-flex mu-small switcher">
       <ul>
-        <li class="fragment">Set K8s Context</li>
+        <li class="fragment">Setting K8s Context</li>
         <li class="fragment">Change Namespace</li>
         <li class="fragment">Deploy with Helm</li>
         <li class="fragment">Open App</li>
@@ -203,12 +213,26 @@ include "_changenamespace.html"
           mocked, yet the application is fully functional
           <hr />
           <p>
-            ⚠️ <b>NOTE:</b> Ensure <a href="/workshop/setup.html#setup" target="_blank">setup</a>
+            ⚠️ <b>NOTE:</b> Ensure <a href="#setup" target="_blank">setup</a>
             steps were completed, and any prior installations are removed
           </p>
-          <pre><code class="hljs sh">helm install mushop deploy/complete/helm-chart/mushop \
+          <div class="mu-flex mu-flex-stretch mu-gutter mu-small">
+            <div class="card col-1-2">
+              <b>Without</b> a hostname:
+              <pre><code class="hljs sh">helm install mushop \
+  deploy/complete/helm-chart/mushop \
   --set global.mock.service="all"</code></pre>
-          <div class="mu-small mu-margin"><pre><code class="hljs text">########################################
+            </div>
+            <div class="mu-muted no-wrap mu-valign">OR</div>
+            <div class="card col-1-2">
+              <b>With</b> a hostname:
+              <pre><code class="hljs sh">helm install mushop \
+  deploy/complete/helm-chart/mushop \
+  --set global.mock.service="all" \
+  --set ingress.hosts[0]="yourname.mushop.com"</code></pre>
+            </div>
+          </div>
+          <div class="mu-small mu-margin mu-margin-top"><pre><code class="hljs text">########################################
     __  __        _____ _                 
   |  \/  |      / ____| |                
   | \  / |_   _| (___ | |__   ___  _ __  
@@ -323,7 +347,7 @@ spec:
 </section>
 
 <!-- Kubernetes exercises -->
-<section data-markdown="/markdown/k8s-exercises.md"
+<section id="more-exercises" data-markdown="/markdown/k8s-exercises.md"
        data-separator-notes="^Note:"
        data-charset="iso-8859-15">
 </section>
