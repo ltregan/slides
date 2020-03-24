@@ -1,0 +1,59 @@
+<h2>OKE Cluster Setup</h2>
+<div class="mu-flex mu-small switcher">
+  <ul>
+    <li class="fragment">OKE Kubeconfig</li>
+    <li class="fragment">K8s Namespace</li>
+    <li class="fragment">Cluster Setup</li>
+    <li class="fragment">Hostname Ingress</li>
+  </ul>
+  <ul class="col-1-1">
+    <!-- kubeconfig -->
+    <li>
+      <div class="mu-margin">
+        Connection to an OKE cluster <b>requires</b> the <code class="fg-orange">oci</code> command line
+        interface. Follow these instructions to connect to an OKE cluster:
+      </div>
+      <blockquote class="mu-small">
+        <b>TIP:</b> Use the <a target="_blank" href="https://docs.cloud.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellgettingstarted.htm">
+        OCI Cloud Shell</a> with pre-installed <code class="fg-orange">oci</code> and <code class="fg-orange">kubectl</code>
+      </blockquote>
+      <blockquote class="mu-small">
+        <b>TIP:</b> Use <a href="https://github.com/ahmetb/kubectx" target="_blank">kubectx</a>
+        to switch context easily &amp; often from the command line
+      </blockquote>
+      <hr>
+
+      <ol class="mu-steps">
+        <li>Install the <a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a></li>
+        <li>
+          Verify CLI is configured correctly <span class="mu-muted">(Object Storage namespace)</span>:
+          <pre><code class="hljs text">oci os ns get</code></pre>
+        </li>
+        <li>
+          From the OKE Cluster detail page, click <button class="oui-button oui-button-default">Access Kubeconfig</button>.
+          Copy the command that resembles the following:
+          <pre><code class="hljs sh">oci ce cluster create-kubeconfig \
+  --cluster-id ocid1.cluster.oc1.iad.aaaaaaaaabbbbbbbbdddddddd...xxx \
+  --file $HOME/.kube/config --region us-ashburn-1 --token-version 2.0.0</code></pre>
+        </li>
+        <li>
+          Check <code class="fg-orange">kubectl</code> context:
+          <pre><code class="hljs sh">kubectl config current-context
+# cluster-c4daylfgvrg</code></pre>
+        </li>
+      </ol>
+    </li>
+    <!-- k8s namespace -->
+    <li>
+include "_changenamespace.html"
+    </li>
+    <!-- cluster setup -->
+    <li>
+include "_setupchart.html"
+    </li>
+    <!-- ingress -->
+    <li>
+include "_ingress.html"
+    </li>
+  </ul>
+</div>

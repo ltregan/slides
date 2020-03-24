@@ -17,113 +17,11 @@
 </section>
 
 <section id="sourcecode">
-  <h2>MuShop Source Code</h2>
-  
-  <div class="mu-flex mu-small switcher">
-    <ul>
-      <li class="fragment">Clone Repository</li>
-      <li class="fragment">Project Structure</li>
-    </ul>
-    <ul class="col-1-1">
-      <!-- cloning -->
-      <li>
-        <div class="mu-flex mu-gutter mu-medium">
-          <div class="card col-1-2">
-            Use this command to clone the repo into a folder named <code class="fg-red">mushop</code>:
-            <div class="mu-margin-top">
-              <pre><code class="hljs text">git clone \
-  https://github.com/oracle-quickstart/oci-cloudnative.git \
-  mushop</code></pre>
-              Change working directory:
-              <pre><code class="hljs text">cd mushop</code></pre>
-            </div>
-          </div>
-          <a class="card col-1-2" href="https://github.com/oracle-quickstart/oci-cloudnative" target="_blank">
-            <div class="mu-flex mu-flex-middle mu-gutter mu-wrap">
-              <div class="col-1-2 mu-normal mu-left">Source Code</div>
-              <div class="col-1-2 mu-svc"><img class="no-margin" data-src="/images/tech/github.svg" /></div>
-            </div>
-            <div class="mu-small mu-left">
-              https://github.com/oracle-quickstart/oci-cloudnative
-            </div>
-          </a>
-        </div>
-      </li>
-      <!-- structure -->
-      <li>
-        The source code will look something like the following:
-        <div class="mu-small mu-margin-top">
-include "_mushopTree.html"
-        </div>
-        <ul>
-          <li><code class="fg-orange">./deploy</code>: Collection of application deployment resources</li>
-          <li><code class="fg-orange">./src</code>: MuShop individual service code, Dockerfile, etc.</li>
-        </ul>
-      </li>
-    </ul>
-  </div>
+include "_sourceCode.html"
 </section>
 
 <section id="kubernetes">
-  <h2>OKE Cluster</h2>
-  <div class="mu-flex mu-small switcher">
-    <ul>
-      <li class="fragment">OKE Kubeconfig</li>
-      <li class="fragment">K8s Namespace</li>
-      <li class="fragment">Cluster Setup</li>
-      <li class="fragment">Hostname Ingress</li>
-    </ul>
-    <ul class="col-1-1">
-      <!-- kubeconfig -->
-      <li>
-        <div class="mu-margin">
-          Connection to an OKE cluster <b>requires</b> the <code class="fg-orange">oci</code> command line
-          interface. Follow these instructions to connect to an OKE cluster:
-        </div>
-        <blockquote class="mu-small">
-          <b>TIP:</b> Use the <a target="_blankd" href="https://docs.cloud.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellgettingstarted.htm">
-          OCI Cloud Shell</a> with pre-installed <code class="fg-orange">oci</code> and <code class="fg-orange">kubectl</code>
-        </blockquote>
-        <blockquote class="mu-small">
-          <b>TIP:</b> Use <a href="https://github.com/ahmetb/kubectx" target="_blank">kubectx</a>
-          to switch context easily &amp; often from the command line
-        </blockquote>
-        <hr>
-
-        <ol class="mu-steps">
-          <li>Install the <a href="https://docs.cloud.oracle.com/iaas/Content/API/SDKDocs/cliinstall.htm" target="_blank">OCI Command Line</a></li>
-          <li>
-            Verify CLI is configured correctly <span class="mu-muted">(Object Storage namespace)</span>:
-            <pre><code class="hljs text">oci os ns get</code></pre>
-          </li>
-          <li>
-            From the OKE Cluster detail page, click <button class="oui-button oui-button-default">Access Kubeconfig</button>.
-            Copy the command that resembles the following:
-            <pre><code class="hljs sh">oci ce cluster create-kubeconfig \
-  --cluster-id ocid1.cluster.oc1.iad.aaaaaaaaabbbbbbbbdddddddd...xxx \
-  --file $HOME/.kube/config --region us-ashburn-1 --token-version 2.0.0</code></pre>
-          </li>
-          <li>
-            Check <code class="fg-orange">kubectl</code> context:
-            <pre><code class="hljs sh">kubectl config current-context
-# cluster-c4daylfgvrg</code></pre>
-          </li>
-        </ol>
-      </li>
-      <!-- k8s namespace -->
-      <li>
-include "_changenamespace.html"
-      </li>
-      <!-- cluster setup -->
-      <li>
-include "_setupchart.html"
-      </li>
-      <!-- ingress -->
-      <li>
-include "_ingress.html"
-      </li>
-    </ul>
-  </div>
+include "_okeSetup.html"
 </section>
 
 <section id="provisioning">
