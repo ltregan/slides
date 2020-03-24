@@ -208,7 +208,6 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: httpbin
-  namespace: default
   labels:
     app: httpbin
 spec:
@@ -247,4 +246,26 @@ kubectl get deploy
 
 ```bash
 kubectl delete -f k8s.yaml
+```
+
+---
+
+## Clean up
+
+1. Run `helm ls` to get the name of the Helm release:
+
+```bash
+helm ls
+```
+
+1. Delete the Helm release:
+
+```bash
+helm del [release-name]
+```
+
+1. List the pods to ensure they are removed:
+
+```bash
+kubectl get pods
 ```
