@@ -17,6 +17,8 @@
   </div>
 </section>
 
+
+include "_secrets.html"
 include "highlights/_atpapps.html"
 
 <section id="lab">
@@ -32,33 +34,67 @@ include "highlights/_atpapps.html"
     </ul>
     <ul class="col-1-1">
       <li>
-        <div class="mu-flex mu-flex-between">
-          <span>Create your Oracle ATP Database instance:</span>  
-          <a class="oui-button oui-button-default" target="_blank" href="https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/tutorial-getting-started-autonomous-db/">
+
+        <div class="mu-flex mu-flex-between mu-margin">
+          <span>Create your Oracle ATP Database instance</span>
+          <a class="oui-button oui-button-default" target="_blank"
+            href="https://docs.oracle.com/en/cloud/paas/autonomous-data-warehouse-cloud/tutorial-getting-started-autonomous-db/">
             ℹ️ Documentation
           </a>
         </div>
-        <div class="mu-ratio mu-ratio-4-3 col-2-3">
-          <video controls>
-            <source
-              data-src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/mqTA-pGoqzadxusq7RKinE22XXKf9-KyM2IReNLyf-E/n/ociateam/b/mushop-content/o/dem-ord-create_atp.mp4"
-              type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
-          </video>
+
+        <div class="mu-flex mu-gutter mu-medium">
+          <div class="col-1-2">
+            <div class="mu-ratio mu-ratio-4-3">
+              <video controls>
+                <source
+                  data-src="https://objectstorage.us-ashburn-1.oraclecloud.com/p/mqTA-pGoqzadxusq7RKinE22XXKf9-KyM2IReNLyf-E/n/ociateam/b/mushop-content/o/dem-ord-create_atp.mp4"
+                  type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+              </video>
+            </div>
+          </div>
+          <div class="card col-1-2">
+            <div class="mu-margin">Using the Cloud Shell:</div>
+            <pre><code class="hljs bash">
+export compartment_id="_compartment_id_"
+                            </code></pre>
+            <pre><code class="hljs bash">
+oci db autonomous-database create \
+--cpu-core-count=1 \
+--data-storage-size-in-tbs=1 \
+--db-name=OCIWorkshop \
+--display-name=OCIWorkshop \
+--compartment-id=${compartment_id} \
+--admin-password=_password_
+                            </code></pre>
+          </div>
         </div>
-        <blockquote class="mu-medium">
+
+        <blockquote class="mu-small">
           📝 Be sure to make note of the <b>ADMIN Password</b> used when provisioning the ATP Instance
         </blockquote>
+        <aside class="notes">
+          To connect applications to a real database, we can use ATP. <br>
+          While its possible to run databases in containers, a managed service like ATP makes owning and operating the DB much more easier <br>
+          There are many patterns for using databases with micro services, like database per service, shared and SAGA pattern. <br> 
+          Here we use a shared database, for simplicity, although in the real world this has the potential to be an SPOF. <br>
+          Solutions like RAC can avoid these problems.
+
+          To create the database you can use the console or the CLI. 
+          Ensure that you export the compartment_id of the compartment you want to use for the database and change the other parameters as required.
+        </aside>
       </li>
 
       <li>
 
         <div class="mu-flex mu-flex-between mu-margin">
-          <span>Download the database connection (Wallet):</span>  
-          <a class="oui-button oui-button-default" target="_blank" href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-download-wallet.html#GUID-B06202D2-0597-41AA-9481-3B174F75D4B1">
+          <span>Download the database connection (Wallet):</span>
+          <a class="oui-button oui-button-default" target="_blank"
+            href="https://docs.oracle.com/en/cloud/paas/atp-cloud/atpug/connect-download-wallet.html#GUID-B06202D2-0597-41AA-9481-3B174F75D4B1">
             ℹ️ Documentation
           </a>
         </div>
-        
+
         <div class="mu-flex mu-gutter mu-medium">
           <div class="col-1-2">
             <div class="mu-ratio mu-ratio-4-3">
@@ -71,24 +107,44 @@ include "highlights/_atpapps.html"
           </div>
           <div class="card col-1-2">
             <div class="mu-margin">DB Connection (Wallet) folder contents:</div>
-            <pre><code class="hljs text">~/Downloads/Wallet_mymushopdb
-├── cwallet.sso
-├── ewallet.p12
-├── keystore.jks
-├── ojdbc.properties
-├── sqlnet.ora
-├── tnsnames.ora
-└── truststore.jks</code></pre>
+            <pre><code class="hljs text">
+oci db autonomous-database list \
+--query "data[*].{name:\"db-name\", OCID:id, State:\"lifecycle-state\"}" \
+--output table \
+--compartment-id=${compartment_id}
+
+            </code></pre>
+
+            <pre><code class="hljs text">
+oci db autonomous-database generate-wallet \
+--autonomous-database-id=_ATP_OCID_ \
+--file=wallet.zip \
+--password=_password_
+            </code></pre>
+          
+            <pre><code class="hljs text">
+unzip wallet.zip -d wallet
+ls -ltr wallet
+cat wallet/tnsnames.ora
+            </code></pre>
           </div>
+          
         </div>
-
-        <blockquote class="mu-medium">
-          📝 Be sure to make note of the <b>Wallet Password</b> used and connection <b>TNS Name</b> when downloading the Wallet
+        <blockquote class="mu-small">
+          📝 Be sure to make note of the <b>Wallet Password</b> used and connection <b>TNS Name</b> when downloading the
+          Wallet
         </blockquote>
+        <aside class="notes">
+          Connections to the autonomous-database and encrypted, 
+          the wallet provides the keys required in a wallet file. 
+          The wallet itself is protected by a password. 
+          Client applications use the connection information included in the download package, 
+          like tnsnames.ora, and security information included in the keystore files or the wallet files to 
+          establish a secure connection to the DB. 
+        </aside>
       </li>
-
       <li>
-include "_atpsecrets.html"
+        include "_atpsecrets.html"
       </li>
 
       <li>
@@ -118,8 +174,8 @@ global:
               <blockquote class="mu-medium no-margin">
                 ℹ️ <b>NOTE:</b> Secrets for the remaining services may be omitted
               </blockquote>
-        </li>
-        </ol>
+            </li>
+          </ol>
         </div>
       </li>
       <li>
@@ -142,8 +198,8 @@ global:
           <hr>
           <pre><code class="hljs text">kubectl get pod --watch</code></pre>
           <p>👀 You will notice several pods with an <code class="fg-red">-init-</code> component
-          in their name. These are pods corresponding to Kubernetes Job definitions,
-          where each is performing DB schema initializations.</p>
+            in their name. These are pods corresponding to Kubernetes Job definitions,
+            where each is performing DB schema initializations.</p>
           View the logs of an init pod like so <span class="mu-muted">(name will vary)</span>:
           <pre><code class="hljs text">kubectl logs mushop-carts-init-1-d475m</code></pre>
           <blockquote class=>
@@ -297,11 +353,11 @@ spec:
           secretName: oadb-wallet
           defaultMode: 256</code></pre>
 
-          <blockquote class="mu-small">
-            Note that the service runtime is connecting with the <code class="fg-red">oadb-wallet</code>
-            and <code class="fg-red">oadb-connection</code> secrets configured separatley.
-          </blockquote>
-        </div>
+            <blockquote class="mu-small">
+              Note that the service runtime is connecting with the <code class="fg-red">oadb-wallet</code>
+              and <code class="fg-red">oadb-connection</code> secrets configured separatley.
+            </blockquote>
+          </div>
         </div>
       </li>
     </ul>
