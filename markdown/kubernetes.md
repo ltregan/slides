@@ -357,7 +357,7 @@ kubectl get pods --all-namespaces
 
 ## Exercises (2/3)
 
-1. Create a file called `pod.yaml`:
+1. Create a file called [`pod.yaml`](/public/k8s/pod.yaml):
 
 ```bash
 apiVersion: v1
@@ -477,7 +477,7 @@ also note how we aren't provided the pod name directly. This is because replicas
 
 Note:
 
-1. Create a `rs.yaml` file:
+1. Create a [`rs.yaml`](/public/k8s/rs.yaml) file:
 
 ```
 apiVersion: apps/v1
@@ -543,7 +543,7 @@ kubectl delete rs helloworld
 
 ## Exercises (1/4)
 
-1. Create a `rs.yaml` file:
+1. Create a [`rs.yaml`](/public/k8s/rs.yaml) file:
 
 ```bash
 apiVersion: apps/v1
@@ -714,7 +714,7 @@ Service keeps a list of endpoints (pod IPs) and directs requests to them. These 
 
 Note:
 
-1. Add the following to `k8s.yaml` file:
+1. Add the following to `deploy.yaml` file:
 
 ```bash
 apiVersion: apps/v1
@@ -767,7 +767,7 @@ kubectl delete -f k8s.yaml
 
 ## Exercises (1/2)
 
-1. Add the following to `k8s.yaml` file:
+1. Add the following to [`deploy.yaml`](/public/k8s/deploy.yaml) file:
 
 ```bash
 apiVersion: apps/v1
@@ -796,10 +796,10 @@ spec:
 
 ## Exercises (2/2)
 
-1. Create the resources using `k8s.yaml` file:
+1. Create the resources using `deploy.yaml` file:
 
 ```bash
-kubectl create -f k8s.yaml
+kubectl create -f deploy.yaml
 ```
 
 2. List the deployments:
@@ -823,7 +823,7 @@ kubectl get rs
 5. Delete the created deployment:
 
 ```bash
-kubectl delete -f k8s.yaml
+kubectl delete -f deploy.yaml
 ```
 
 ---
@@ -900,7 +900,7 @@ How do you expose multiple services to the outside world then? Do you create mul
 
 Note:
 
-1. Add the following to `k8s.yaml` file:
+1. Add the following to `deploy.yaml` file:
 
 ```bash
 apiVersion: apps/v1
@@ -925,10 +925,10 @@ spec:
         name: httpbin
 ```
 
-2. Create the resources using `k8s.yaml` file:
+2. Create the resources using `deploy.yaml` file:
 
 ```bash
-kubectl create -f k8s.yaml
+kubectl create -f deploy.yaml
 ```
 
 3. List the pods:
@@ -973,7 +973,7 @@ kubectl describe svc helloworld
 
 ## Exercises (1/3)
 
-1. Add the following to `k8s.yaml` file:
+1. Add the following to `deploy.yaml` file:
 
 ```bash
 apiVersion: apps/v1
@@ -998,10 +998,10 @@ spec:
         name: httpbin
 ```
 
-2. Create the resources using `k8s.yaml` file:
+2. Create the resources using `deploy.yaml` file:
 
 ```bash
-kubectl create -f k8s.yaml
+kubectl create -f deploy.yaml
 ```
 
 ---
@@ -1024,7 +1024,7 @@ kubectl get pods -o wide
 
 ## Exercises (2/2)
 
-1. Create a Service (`svc.yaml`):
+1. Create a Service [`svc.yaml`](/public/k8s/svc.yaml):
 
 ```bash
 kind: Service
@@ -1321,7 +1321,7 @@ kubectl expose deployment httpbin --port=3000 --target-port=80
 
 ## Exercises - Ingress (2/3)
 
-1. Create an ingress resource (`ingress.yaml`):
+1. Create an ingress resource [`ingress.yaml`](/public/k8s/ingress.yaml) and replace `[yourname]` value.
 ```
 apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
