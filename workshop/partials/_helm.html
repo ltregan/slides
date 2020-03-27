@@ -1,0 +1,129 @@
+<section id="k8s-helm">
+  <h2>Helm</h2>
+  <div class="fragment-set mu-medium">
+    <div class="fragment fade-out">
+      <p>Helm is the best way to find, share, and use software built for Kubernetes.</p>
+    </div>
+    <div class="fragment">
+      <div class="mu-sequence mu-margin">
+        <div class="mu-medium mu-margin">
+          Why use Helm.
+        </div>
+        <div class="mu-small">
+          <ul>
+            <li>Create new charts from scratch</li>
+            <li>Package charts into chart archive (tgz) files</li>
+            <li>Interact with chart repositories where charts are stored</li>
+            <li>Install and uninstall charts into an existing Kubernetes cluster</li>
+            <li>Manage the release cycle of charts that have been installed with Helm</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="fragment">
+      <div class="mu-sequence mu-margin">
+        <div class="mu-medium mu-margin">
+          Concepts in Helm
+        </div>
+        <div class="mu-small">
+          <ol>
+            <li>The <code class="fg-orange"><em>chart</em></code> is a bundle of information necessary, like templates
+              for kubernetes manifests, to create an instance of a
+              Kubernetes application.</li>
+            <li>The <code class="fg-orange"><em>config</em></code> contains configuration information that can be merged
+              into a
+              packaged chart to create a releasable object.</li>
+            <li>A <code class="fg-orange"><em>release</em></code> is a running instance of a <code
+                class="fg-orange"><em>chart</em></code>, combined with a specific
+              <code class="fg-orange"><em>config</em></code>.</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+
+
+
+    <div class="fragment">
+      <div class="mu-sequence mu-margin">
+        <div class="mu-medium mu-margin">
+          Creating a Helm chart
+        </div>
+        <div class="mu-small">
+          <pre><code class="hljs sh">
+helm create mychart
+          </code></pre>
+        </div>
+        <div class="mu-medium mu-margin">
+          Examine the files created by helm for your starter helm chart.
+        </div>
+        <div class="mu-small">
+          <pre><code class="hljs sh">
+cd mychart
+ls -ltr
+ls -ltr templates
+cat templates/deployment.yaml
+cat values.yaml 
+          </code></pre>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="fragment">
+      <div class="mu-sequence mu-small">
+        <div class=" mu-margin">
+          The default chart is real and usable, it sets up an nginx deployment. Lets install it.
+        </div>
+        <pre><code class="hljs sh">
+cd ..
+helm install mychart ./mychart/ --set service.port=$RANDOM
+        </code></pre>
+        <div class=" mu-margin">
+          The chart is installed, using the configuration provided in the <code class="fg-orange">values.yaml</code>
+          that was included in the chart.
+          <ul>
+            <li>
+              A single value - <code class="fg-orange">service.port</code> has been overridden using the <code
+                class="fg-orange"> --set</code> flag.
+            </li>
+            <li>
+              A separate yaml file containing just the overrides can be provided as well, using the <code
+                class="fg-orange"> -f</code> flag.
+            </li>
+          </ul>
+        </div>
+
+        <pre><code class="hljs sh">
+helm list 
+        </code></pre>
+        <div class=" mu-margin">
+          The release is running nginx, but uses ClusterIP, meaning the service is only available within the cluster.
+          Can we test it ?
+        </div>
+        <pre><code class="hljs sh">
+helm status mychart
+        </code></pre>
+        <div class=" mu-margin">
+          Get the service IP and port
+        </div>
+        <pre><code class="hljs sh">
+kubectl get svc
+        </code></pre>
+        <div class=" mu-margin">
+          How can we connect to this IP that is only valid within the cluster ? Perhaps if we had a shell that was inside the cluster ? Running as another pod ?
+        </div>
+        <pre><code class="hljs sh">
+kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh
+        </code></pre>
+        <div class=" mu-margin">
+          We create a second pod, thats in the the same cluster, and is hence visible to the other pods. From within this pod, the CLusterIPs are visible.  
+        </div>
+        <pre><code class="hljs sh">
+wget -O- _service_ip_:_service_port
+        </code></pre>
+      </div>
+    </div>
+  </div>
+</section>
