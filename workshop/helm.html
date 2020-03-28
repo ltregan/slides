@@ -1,15 +1,16 @@
 <section id="k8s-helm">
   <h2>Helm</h2>
-  <div class="fragment-set mu-medium">
     <div class="fragment fade-out">
       <p>Helm is one the best ways to find, share, and use software built for Kubernetes.</p>
     </div>
+</section>
+
+<section id="k8s-helm">
+  <h2>Why use Helm.</h2>
     <div class="fragment">
       <div class="mu-sequence mu-margin">
-        <div class="mu-medium mu-margin">
-          Why use Helm.
-        </div>
-        <div class="mu-small">
+        
+        <div class="mu-medium">
           <ul>
             <li>Create new charts from scratch</li>
             <li>Package charts into chart archive (tgz) files</li>
@@ -20,14 +21,14 @@
         </div>
       </div>
     </div>
+</section>
 
-
+<section id="k8s-helm2">
+  <h2>Concepts in Helm</h2>
     <div class="fragment">
       <div class="mu-sequence mu-margin">
-        <div class="mu-medium mu-margin">
-          Concepts in Helm
-        </div>
-        <div class="mu-small">
+        
+        <div class="mu-medium">
           <ol>
             <li>The <code class="fg-orange"><em>chart</em></code> is a bundle of information necessary, like templates
               for kubernetes manifests, to create an instance of a
@@ -42,14 +43,14 @@
         </div>
       </div>
     </div>
+</section>
 
 
-
+<section id="k8s-helm3">
+  <h2>Creating a Helm chart</h2>
     <div class="fragment">
       <div class="mu-sequence mu-margin">
-        <div class="mu-medium mu-margin">
-          Creating a Helm chart
-        </div>
+        
         <div class="mu-small">
           <pre><code class="hljs sh">
 helm create mychart
@@ -69,8 +70,10 @@ cat values.yaml
         </div>
       </div>
     </div>
+</section>
 
-
+<section id="k8s-helm4">
+  <h2>Installing a Helm chart</h2>
     <div class="fragment">
       <div class="mu-sequence mu-small">
         <div class=" mu-margin">
@@ -94,36 +97,52 @@ helm install mychart ./mychart/ --set service.port=$RANDOM
             </li>
           </ul>
         </div>
-
-        <pre><code class="hljs sh">
-helm list 
-        </code></pre>
-        <div class=" mu-margin">
-          The release is running nginx, but uses ClusterIP, meaning the service is only available within the cluster.
-          Can we test it ?
-        </div>
-        <pre><code class="hljs sh">
-helm status mychart
-        </code></pre>
-        <div class=" mu-margin">
-          Get the service IP and port
-        </div>
-        <pre><code class="hljs sh">
-kubectl get svc
-        </code></pre>
-        <div class=" mu-margin">
-          How can we connect to this IP that is only valid within the cluster ? Perhaps if we had a shell that was inside the cluster ? Running as another pod ?
-        </div>
-        <pre><code class="hljs sh">
-kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh
-        </code></pre>
-        <div class=" mu-margin">
-          We create a second pod, thats in the the same cluster, and is hence visible to the other pods. From within this pod, the CLusterIPs are visible.  
-        </div>
-        <pre><code class="hljs sh">
-wget -O- _service_ip_:_service_port
-        </code></pre>
-      </div>
     </div>
   </div>
 </section>
+
+<section id="k8s-helm5">
+  <h2>Using Helm charts</h2>
+  <div class="fragment">
+    <div class="mu-sequence mu-small">
+  <pre><code class="hljs sh">
+    helm list 
+            </code></pre>
+            <div class=" mu-margin">
+              The release is running nginx, but uses ClusterIP, meaning the service is only available within the cluster.
+              Can we test it ?
+            </div>
+            <pre><code class="hljs sh">
+helm status mychart
+            </code></pre>
+            <div class=" mu-margin">
+              Get the service IP and port
+            </div>
+            <pre><code class="hljs sh">
+kubectl get svc
+            </code></pre>
+            </div>
+            </div>
+
+</section>
+
+
+<section id="k8s-helm6">
+  <h2>Using Helm charts</h2>
+  <div class="fragment">
+    <div class="mu-sequence mu-small">
+      <div class=" mu-margin">
+        How can we connect to this IP that is only valid within the cluster ? Perhaps if we had a shell that was inside the cluster ? Running as another pod ?
+      </div>
+      <pre><code class="hljs sh">
+kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh
+      </code></pre>
+      <div class=" mu-margin">
+        We create a second pod, thats in the the same cluster, and is hence visible to the other pods. From within this pod, the ClusterIPs are visible.  
+      </div>
+      <pre><code class="hljs sh">
+wget -O- _service_ip_:_service_port
+      </code></pre>
+    </div>
+  </div>
+  </section>
