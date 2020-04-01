@@ -1383,3 +1383,11 @@ data:
 -   Referenced as files in a volume, mounted from a secret
 -   Base64 encoded
 -   Types: generic, Docker registry, TLS
+
+---
+
+## Cleanup
+
+- Delete your namespace: `kubectl delete ns [yournamespace]`
+- Delete the Nginx Ingress: `helm del nginx-ingress`
+- Open `/etc/hosts` file and remove the entry you added
