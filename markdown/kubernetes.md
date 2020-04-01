@@ -1386,6 +1386,121 @@ data:
 
 ---
 
+## Exercises - Secrets (1/3)
+
+Create a secret with some keys.
+
+```
+kubectl create secret generic mysecret --from-literal=username=administrator --from-literal=password=topsecret
+```
+
+This example creates a secret using the `create` command and specifies literal values.
+
+---
+
+## Exercises - Secrets (2/3)
+
+Use the command below to list your secrets. 
+
+How would you get more details for a specific secret ?
+
+```
+kubectl get secrets
+```
+
+---
+
+## Exercises - Secrets (3/3)
+
+You can create secrets from 
+- Literals
+- Files
+- Entire directories. 
+
+Since a kubernetes secret is a kubernetes object,
+it can be represented in a manifest and applied like other objects. 
+
+Use the command below to explore the syntax more.
+
+```
+kubectl create secret generic --help
+```
+
+---
+
+## Working with Secrets
+
+To use a secret, a Pod needs to reference the secret. 
+Lets create a pod manifest that does this. Download [`secrets.yaml`](/public/k8s/secrets.yaml)
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: mypod
+spec:
+  containers:
+  - name: mypod
+    image: nginx
+    ports:
+    - containerPort: 80
+    env:
+      - name: SECRET_USERNAME
+        valueFrom:
+          secretKeyRef:
+            name: mysecret
+            key: username
+    volumeMounts:
+    - name: foo
+      mountPath: "/etc/foo"
+      readOnly: true
+  volumes:
+  - name: foo
+    secret:
+      secretName: mysecret
+      items:
+      - key: username
+      - key: password
+        path: my-password/secret-password
+
+```
+
+Note:
+
+- The secret is referenced as an environment variable `SECRET_USERNAME`.
+- The secret contains two keys, but only one is exposed though the environment.
+- The secret is also mounted as a volume.
+- The secrets are available as files in the mounted volume.
+- Individual keys from the secret can be exposed, their paths re-mapped (under the mountPath) and specific file permission can be set.
+
+---
+
+## Exercises - Using Secrets (1/2)
+
+To see the secrets are made available to a pod, deploy the pod.
+```
+kubectl apply -f pod.yaml
+```
+
+Now we can exec in to the container by starting a shell. 
+```
+kubectl exec -t -i mypod bash
+```
+
+---
+
+## Exercises - Using Secrets (2/2)
+
+Inside the container, we can examine the secrets that were provided as environment variables as well as volumes.
+
+```
+echo $SECRET_USERNAME
+cat /etc/foo/username
+```
+Where is the password available ?
+
+---
+
 ## Cleanup
 
 **Everyone**
@@ -1393,4 +1508,5 @@ data:
 - Open `/etc/hosts` file and remove the entry you added
 
 **One person**
+- Delete the Nginx Ingress: `helm del nginx-ingress`
 - Delete the Nginx Ingress: `helm del nginx-ingress`
