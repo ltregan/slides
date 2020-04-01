@@ -1283,7 +1283,7 @@ Pick someone from the group to install the Nginx controller - that person should
 
 ## Exercises - Ingress Controller
 
-Only one person needs to run the following command:
+**Only one person** needs to run the following command:
 
 ```
 helm install nginx-ingress stable/nginx-ingress
@@ -1388,6 +1388,9 @@ data:
 
 ## Cleanup
 
+**Everyone**
 - Delete your namespace: `kubectl delete ns [yournamespace]`
-- Delete the Nginx Ingress: `helm del nginx-ingress`
 - Open `/etc/hosts` file and remove the entry you added
+
+**One person**
+- Delete the Nginx Ingress: `helm del nginx-ingress`
