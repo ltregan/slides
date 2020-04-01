@@ -1,15 +1,20 @@
+
+<section id="home">
+  <h1>Cloud Native OCI</h1>
+  <h2>Helm</h2>
+include "partials/_titleSlide.html"
+</section>
+
 <section id="k8s-helm">
   <h2>Helm</h2>
-    <div class="fragment fade-out">
+    <div class="fade-out">
       <p>Helm is one the best ways to find, share, and use software built for Kubernetes.</p>
     </div>
 </section>
 
-<section id="k8s-helm">
+<section id="k8s-helm-why">
   <h2>Why use Helm.</h2>
-    <div class="fragment">
       <div class="mu-sequence mu-margin">
-        
         <div class="mu-medium">
           <ul>
             <li>Create new charts from scratch</li>
@@ -20,12 +25,10 @@
           </ul>
         </div>
       </div>
-    </div>
 </section>
 
-<section id="k8s-helm2">
+<section id="k8s-helm-concepts">
   <h2>Concepts in Helm</h2>
-    <div class="fragment">
       <div class="mu-sequence mu-margin">
         
         <div class="mu-medium">
@@ -42,13 +45,11 @@
           </ol>
         </div>
       </div>
-    </div>
 </section>
 
 
-<section id="k8s-helm3">
+<section id="k8s-helm-creating">
   <h2>Creating a Helm chart</h2>
-    <div class="fragment">
       <div class="mu-sequence mu-margin">
         
         <div class="mu-small">
@@ -69,12 +70,10 @@ cat values.yaml
           </code></pre>
         </div>
       </div>
-    </div>
 </section>
 
-<section id="k8s-helm4">
+<section id="k8s-helm-installing">
   <h2>Installing a Helm chart</h2>
-    <div class="fragment">
       <div class="mu-sequence mu-small">
         <div class=" mu-margin">
           The default chart is real and usable, it sets up an nginx deployment. Lets install it.
@@ -98,12 +97,10 @@ helm install mychart ./mychart/ --set service.port=$RANDOM
           </ul>
         </div>
     </div>
-  </div>
 </section>
 
-<section id="k8s-helm5">
+<section id="k8s-helm-using">
   <h2>Using Helm charts</h2>
-  <div class="fragment">
     <div class="mu-sequence mu-small">
   <pre><code class="hljs sh">
     helm list 
@@ -122,12 +119,11 @@ helm status mychart
 kubectl get svc
             </code></pre>
             </div>
-            </div>
 
 </section>
 
 
-<section id="k8s-helm6">
+<!-- <section id="k8s-helm6">
   <h2>Using Helm charts</h2>
   <div class="fragment">
     <div class="mu-sequence mu-small">
@@ -145,4 +141,4 @@ wget -O- _service_ip_:_service_port
       </code></pre>
     </div>
   </div>
-  </section>
+  </section> -->
