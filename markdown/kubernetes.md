@@ -1386,7 +1386,7 @@ data:
 
 ---
 
-## Creating Secrets
+## Exercises - Secrets (1/3)
 
 Create a secret with some keys.
 
@@ -1398,7 +1398,7 @@ This example creates a secret using the `create` command and specifies literal v
 
 ---
 
-## Secrets (contd.)
+## Exercises - Secrets (2/3)
 
 Use the command below to list your secrets. 
 
@@ -1410,7 +1410,7 @@ kubectl get secrets
 
 ---
 
-## Secrets (contd.)
+## Exercises - Secrets (3/3)
 
 You can create secrets from 
 - Literals
@@ -1431,10 +1431,9 @@ kubectl create secret generic --help
 ## Working with Secrets
 
 To use a secret, a Pod needs to reference the secret. 
-Lets create a pod manifest that does this.
+Lets create a pod manifest that does this. Download [`secrets.yaml`](/public/k8s/secrets.yaml)
 
 ```
-cat << EOF >pod.yaml
 apiVersion: v1
 kind: Pod
 metadata:
@@ -1463,7 +1462,7 @@ spec:
       - key: username
       - key: password
         path: my-password/secret-password
-EOF
+
 ```
 
 Note:
@@ -1476,7 +1475,7 @@ Note:
 
 ---
 
-## Working with Secrets
+## Exercises - Using Secrets (1/2)
 
 To see the secrets are made available to a pod, deploy the pod.
 ```
@@ -1490,8 +1489,7 @@ kubectl exec -t -i mypod bash
 
 ---
 
-## Working with Secrets
-
+## Exercises - Using Secrets (2/2)
 
 Inside the container, we can examine the secrets that were provided as environment variables as well as volumes.
 
