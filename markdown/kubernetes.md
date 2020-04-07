@@ -188,7 +188,7 @@ kubectl config set-context \
 
 ## Exercises (1/2)
 
-1. Open [Cloud Shell](https://docs.cloud.oracle.com/en-us/iaas/Content/API/Concepts/cloudshellgettingstarted.htm)
+1. Open [Cloud Shell](https://console.us-ashburn-1.oraclecloud.com/?cloudshell=true)
 
 2. Verify CLI is configured correctly:
 

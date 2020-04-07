@@ -1,8 +1,8 @@
 <!-- title -->
 <section id="home">
   <h1>Cloud Native OCI</h1>
-  <h2>Developer Setup</h2>
-  include "partials/_titleSlide.html"
+  <h2>Deploying MuShop</h2>
+include "partials/_titleSlide.html"
 </section>
 
 <section id="options">
@@ -59,53 +59,23 @@
     </ul>
   </section>
   <section id="sourcecode">
-    include "_sourceCode.html"
+include "_sourceCode.html"
   </section>
 
   <section id="setup">
-    include "_okeSetup.html"
+include "_okeSetup.html"
   </section>
 
   <section id="exercise">
     <h2>Deploy MuShop</h2>
     <div class="mu-flex mu-small switcher">
       <ul>
-        <li class="fragment">Setting K8s Context</li>
-        <li class="fragment">Change Namespace</li>
+        
         <li class="fragment">Deploy with Helm</li>
         <li class="fragment">Open App</li>
         <li class="fragment">Under the Hood</li>
       </ul>
       <ul class="col-1-1">
-        <!-- context -->
-        <li>
-          If available, you may wish to perform these tasks in
-          an OKE cluster instead of a local cluster. <span class="mu-muted">OPTIONAL</span>
-          <hr />
-          <div class="mu-flex mu-gutter mu-flex-stretch">
-            <div class="col-1-2">
-              <p>Use Docker Desktop UI:</p>
-              <img class="no-margin"
-                   data-src="/images/k8s/switch_context2.png"
-                   alt="k8s switch" />
-            </div>
-            <div class="mu-valign mu-muted no-wrap">- OR -</div>
-            <div class="col-1-2">
-              <p>Use the command line:</p>
-              <pre><code class="hljs text">kubectl config get-contexts</code></pre>
-              <pre><code class="hljs text">kubectl config use-context &lt;name&gt;</code></pre>
-              <blockquote class="mu-small">
-                <b>TIP:</b> use <a href="https://github.com/ahmetb/kubectx"
-                   target="_blank">kubectx</a>
-                to switch context easily &amp; often from the command line
-              </blockquote>
-            </div>
-          </div>
-        </li>
-        <!-- namespace -->
-        <li>
-          include "_changenamespace.html"
-        </li>
         <!-- deploy -->
         <li>
           Remembering that <code>helm</code> provides a way of packaging and deploying <em>configurable</em>
@@ -155,7 +125,10 @@ deploy/complete/helm-chart/mushop \
           After inspecting the resources created with <code>helm install</code>,
           go ahead and launch the application in your browser.
           <hr />
-          include "_openmushop.html"
+include "_openmushop.html"
+          <div class="card col-1-1 mu-small mu-margin-top">
+            ⚠️ <b>NOTE:</b> For shared clusters, and host-based ingress, use the hostname you setup earlier.
+          </div>
         </li>
         <li>
           To get a beter look at all the installed Kubernetes manifests by
@@ -248,78 +221,6 @@ template:
 </section>
 
 <!-- exercise -->
-<section id="setup" data-background-image="/images/logo.png" data-background-size="150px"
-  data-background-position="20px 20px">
-  <h2>Develop MuShop</h2>
-
-  <div class="mu-flex mu-small switcher">
-    <ul>
-      <li class="fragment">Get Source Code</li>
-      <li class="fragment">Prepare Cluster</li>
-      <li class="fragment">Install MuShop</li>
-      <li class="fragment">Launch App</li>
-    </ul>
-    <ul class="col-1-1">
-      <li>
-
-        <div class="mu-flex mu-flex-stretch mu-gutter">
-          <div class="card col-1-2">
-            <code>&gt;</code> Clone with <code>git</code>
-            <ol class="mu-small mu-steps">
-              <li>Open <a href="https://github.com/oracle-quickstart/oci-cloudnative" target="blank">repo</a></li>
-              <li>
-                Click <a class="oui-button oui-button-primary">Clone or download</a>
-              </li>
-            </ol>
-            <div class="mu-medium mu-margin-top">
-              <pre><code class="hljs text">git clone https://github.com/oracle-quickstart/oci-cloudnative.git mushop
-cd mushop</code></pre>
-              <blockquote class="mu-small">
-                (Or clone with SSH)
-              </blockquote>
-            </div>
-          </div>
-          <div class="mu-muted no-wrap mu-valign">- OR -</div>
-          <div class="card col-1-2">
-            <code>&gt;</code> <a href="https://github.com/oracle-quickstart/oci-cloudnative/archive/develop.zip">Download</a>
-            <blockquote class="mu-small">
-              Extract contents to a folder available on your disk
-            </blockquote>
-          </div>
-        </div>
-        <div class="mu-small mu-margin-top">
-include "_mushopTree.html"
-        </div>
-      </li>
-      <li>
-include "_setupchart.html"
-      </li>
-      <!-- deploy -->
-      <li>
-        MuShop application supports a simplified deployment called <em>"mock mode"</em>
-        with only minimum service requirements.
-        <hr />
-        <div class="mu-margin">
-          💻 Download <a href="/public/mushop.setup.yaml">mushop.setup.yaml</a>
-        </div>
-        <pre><code class="hljs sh">kubectl create -f mushop.setup.yaml</code></pre>
-        <pre><code class="hljs text">kubectl get pod --watch</code></pre>
-        <blockquote class="mu-medium">
-          ⏲️ It may take a few moments to download all the application images.
-          It is also normal for some to show errors in mock mode.
-        </blockquote>
-      </li>
-      <!-- launch -->
-      <li>
-include "_openmushop.html"
-        <blockquote class="mu-medium">
-          ℹ️ To completely remove the application, use the following command:
-          <pre><code class="hljs sh">kubectl delete -f mushop.setup.yaml</code></pre>
-        </blockquote>
-      </li>
-    </ul>
-  </div>
-</section>
 
 <section id="ready">
   <h2>😎 Ready!</h2>
