@@ -190,10 +190,10 @@ spec:
         <pre><code class="hljs text">kubectl get clusterservicebrokers -o 'custom-columns=BROKER:.metadata.name,STATUS:.status.conditions[0].reason'</code></pre>
         <pre><code class="hljs text">BROKER                STATUS
 oci-service-broker    FetchedCatalog</code></pre>
-        Using the <code>svcat</code> CLI to see the status, service and plans available:
-        <pre><code class="hljs text">svcat get brokers</code></pre>
-        <pre><code class="hljs text">svcat get classes</code></pre>
-        <pre><code class="hljs text">svcat get plans</code></pre>
+        Review the status, service and plans available:
+        <pre><code class="hljs text">kubectl get clusterservicebrokers</code></pre>
+        <pre><code class="hljs text">kubectl get clusterserviceclasses -o=custom-columns=CLASS:.spec.externalName,DESCRIPTION:.spec.description,CLASS\ ID:.metadata.name</code></pre>
+        <pre><code class="hljs text">kubectl get clusterserviceplans -o=custom-columns=PLAN:.spec.externalName,DESCRIPTION:.spec.description,CLASS\ ID:.spec.clusterServiceClassRef.name</code></pre>
         <pre><code class="hljs text">    NAME     NAMESPACE          CLASS                       DESCRIPTION
 +----------+-----------+----------------------+-------------------------------------+
   standard               atp-service            OCI Autonomous Transaction Processing
@@ -204,6 +204,20 @@ oci-service-broker    FetchedCatalog</code></pre>
       </li>
     </ul>
   </div>
+  <aside class="notes">
+    <small style="font-size: .6em">Service Catalog is a Kubernetes extension API that enables applications running on a Kubernetes cluster
+    to use Oracle Cloud services, such as ATP. Service Catalog communicates with Service Broker to get a 
+    list of available services and plans, which can then be provisioned as service instances.</small>
+    <br><br>
+    <small style="font-size: .6em">Information about a service instance is stored in the ServiceInstance and ServiceBinding resources.
+    Once a service instance has been provisioned, the access credentials are shared with the application
+    through Kubernetes Secrets.</small>
+    <br><br>
+    Commands using the optional svcat cli:<br>
+      - svcat get brokers<br>
+      - svcat get classes<br>
+      - svcat get plans
+  </aside>
 </section>
 
 <section id="lab">
@@ -295,7 +309,7 @@ spec:
           <ol>
             <li>
               Remove a previous deployment <span class="mu-muted">(if applicable)</span>:
-              <pre><code class="hljs text">helm del mushop</code></pre>
+              <pre><code class="hljs text">helm delete mushop</code></pre>
             </li>
             <li>
               Create <code>catalogue-oadb-admin</code> secret:
