@@ -70,10 +70,10 @@ include "_okeSetup.html"
     <h2>Deploy MuShop</h2>
     <div class="mu-flex mu-small switcher">
       <ul>
-        
         <li class="fragment">Deploy with Helm</li>
         <li class="fragment">Open App</li>
         <li class="fragment">Under the Hood</li>
+        <li class="fragment">Clean Up</li>
       </ul>
       <ul class="col-1-1">
         <!-- deploy -->
@@ -89,14 +89,14 @@ include "_okeSetup.html"
           </p>
           <div class="mu-flex mu-flex-stretch mu-gutter mu-small">
             <div class="card col-1-2">
-              <b>Without</b> a hostname:
+              <b>WITHOUT</b> a hostname:
               <pre><code class="hljs sh">helm install mushop \
 deploy/complete/helm-chart/mushop \
 --set global.mock.service="all"</code></pre>
             </div>
             <div class="mu-muted no-wrap mu-valign">OR</div>
             <div class="card col-1-2">
-              <b>With</b> a hostname:
+              <b>WITH</b> a hostname:
               <pre><code class="hljs sh">helm install mushop \
 deploy/complete/helm-chart/mushop \
 --set global.mock.service="all" \
@@ -215,6 +215,23 @@ template:
           runAsUser: 10001</code></pre>
           </div>
         </li>
+        <li>
+          <ol>
+            <li>
+              Use <code class="fg-orange">helm</code> to list the releases in the namespace:
+              <pre><code class="hljs sh">helm list</code></pre>
+              <div class="mu-small">
+                <blockquote>Expect output like the following:</blockquote>
+                <pre><code class="hljs text">NAME    NAMESPACE       REVISION        UPDATED                                 STATUS          CHART       APP VERSION
+mushop  mushop          1               2020-05-06 14:40:37.615416 -0600 MDT    deployed        mushop-0.1.01.0</code></pre>
+              </div>
+            </li>
+            <li>
+              Finally, delete the <code class="fg-orange">mushop</code> release:
+              <pre><code class="hljs sh">helm delete mushop</code></pre>
+            </li>
+          </ol>
+        </li>
       </ul>
     </div>
   </section>
@@ -223,5 +240,5 @@ template:
 <!-- exercise -->
 
 <section id="ready">
-  <h2>😎 Ready!</h2>
+  <h2>👍 Good Job!</h2>
 </section>
