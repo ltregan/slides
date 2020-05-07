@@ -1,125 +1,180 @@
-
 <section id="home">
   <h1>Cloud Native OCI</h1>
   <h2>Helm</h2>
-include "partials/_titleSlide.html"
+  include "partials/_titleSlide.html"
 </section>
 
 <section id="k8s-helm">
   <h2>Helm</h2>
-    <div class="fade-out">
-      <p>Helm is one the best ways to find, share, and use software built for Kubernetes.</p>
-    </div>
+  <div class="fade-out">
+    <p>Helm is one the best ways to find, share, and use software built for Kubernetes.</p>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Helm is a tool that streamlines installing and managing Kubernetes applications. Think of it like
+        apt/yum/homebrew for Kubernetes.
+      </li>
+    </ul>
+  </aside>
 </section>
 
 <section id="k8s-helm-why">
   <h2>Why use Helm.</h2>
-      <div class="mu-sequence mu-margin">
-        <div class="mu-medium">
+  <div class="mu-sequence mu-margin">
+    <div class="mu-medium">
+      <ul>
+        <li>Create new charts from scratch</li>
+        <li>Package charts into chart archive (tgz) files</li>
+        <li>Interact with chart repositories where charts are stored</li>
+        <li>Install and uninstall charts into an existing Kubernetes cluster</li>
+        <li>Manage the release cycle of charts that have been installed with Helm</li>
+      </ul>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <li>Helm uses a packaging format called charts. A chart is a collection of files that describe a related set of
+        Kubernetes resources. A single chart might be used to deploy something simple, like a memcached pod, or
+        something complex, like a full web app stack with HTTP servers, databases, caches, and so on.
+      </li>
+      <ul>
+        <li>Helm renders your templates and communicates with the Kubernetes API</li>
+        <li>Helm runs on your laptop, CI/CD, or wherever you want it to run.</li>
+        <li>Charts are Helm packages that contain at least two things:
           <ul>
-            <li>Create new charts from scratch</li>
-            <li>Package charts into chart archive (tgz) files</li>
-            <li>Interact with chart repositories where charts are stored</li>
-            <li>Install and uninstall charts into an existing Kubernetes cluster</li>
-            <li>Manage the release cycle of charts that have been installed with Helm</li>
+            <li>A description of the package (<code>Chart.yaml</code>)</li>
+            <li>One or more templates, which contain Kubernetes manifest files</li>
           </ul>
-        </div>
-      </div>
+        </li>
+        <li>Charts can be stored on disk, or fetched from remote chart repositories
+          (like Debian or RedHat packages)</li>
+      </ul>
+
+    </ul>
+  </aside>
 </section>
 
 <section id="k8s-helm-concepts">
   <h2>Concepts in Helm</h2>
-      <div class="mu-sequence mu-margin">
-        
-        <div class="mu-medium">
-          <ol>
-            <li>The <code class="fg-orange"><em>chart</em></code> is a bundle of information necessary, like templates
-              for kubernetes manifests, to create an instance of a
-              Kubernetes application.</li>
-            <li>The <code class="fg-orange"><em>config</em></code> contains configuration information that can be merged
-              into a
-              packaged chart to create a releasable object.</li>
-            <li>A <code class="fg-orange"><em>release</em></code> is a running instance of a <code
-                class="fg-orange"><em>chart</em></code>, combined with a specific
-              <code class="fg-orange"><em>config</em></code>.</li>
-          </ol>
-        </div>
-      </div>
+  <div class="mu-sequence mu-margin">
+
+    <div class="mu-medium">
+      <ol>
+        <li>The <code class="fg-orange"><em>chart</em></code> is a bundle of information necessary, like templates
+          for kubernetes manifests, to create an instance of a
+          Kubernetes application.</li>
+        <li>The <code class="fg-orange"><em>config</em></code> contains configuration information that can be merged
+          into a
+          packaged chart to create a releasable object.</li>
+        <li>A <code class="fg-orange"><em>release</em></code> is a running instance of a <code
+            class="fg-orange"><em>chart</em></code>, combined with a specific
+          <code class="fg-orange"><em>config</em></code>.</li>
+      </ol>
+    </div>
+  </div>
+  <aside class="notes">
+    <ul>
+      <p>
+        <ul>
+          <li>Charts are created as files laid out in a particular directory tree, then they can be packaged into versioned
+            archives to be deployed.</li>
+            <li>Every chart must have a version number.</li>
+            <li>A version must follow the SemVer 2 standard.</li>
+        </ul>
+        </p>
+    </ul>
+  </aside>
 </section>
 
 
 <section id="k8s-helm-creating">
   <h2>Creating a Helm chart</h2>
-      <div class="mu-sequence mu-margin">
-        
-        <div class="mu-small">
-          <pre><code class="hljs sh">
+  <div class="mu-sequence mu-margin">
+
+    <div class="mu-small">
+      <pre><code class="hljs sh">
 helm create mychart
           </code></pre>
-        </div>
-        <div class="mu-medium mu-margin">
-          Examine the files created by helm for your starter helm chart.
-        </div>
-        <div class="mu-small">
-          <pre><code class="hljs sh">
+    </div>
+    <div class="mu-medium mu-margin">
+      Examine the files created by helm for your starter helm chart.
+    </div>
+    <div class="mu-small">
+      <pre><code class="hljs sh">
 cd mychart
 ls -ltr
 ls -ltr templates
 cat templates/deployment.yaml
 cat values.yaml 
           </code></pre>
-        </div>
-      </div>
+    </div>
+  </div>
 </section>
 
 <section id="k8s-helm-installing">
   <h2>Installing a Helm chart</h2>
-      <div class="mu-sequence mu-small">
-        <div class=" mu-margin">
-          The default chart is real and usable, it sets up an nginx deployment. Lets install it.
-        </div>
-        <pre><code class="hljs sh">
+  <div class="mu-sequence mu-small">
+    <div class=" mu-margin">
+      The default chart is real and usable, it sets up an nginx deployment. Lets install it.
+    </div>
+    <pre><code class="hljs sh">
 cd ..
 helm install mychart ./mychart/ --set service.port=$RANDOM
         </code></pre>
-        <div class=" mu-margin">
-          The chart is installed, using the configuration provided in the <code class="fg-orange">values.yaml</code>
-          that was included in the chart.
-          <ul>
-            <li>
-              A single value - <code class="fg-orange">service.port</code> has been overridden using the <code
-                class="fg-orange"> --set</code> flag.
-            </li>
-            <li>
-              A separate yaml file containing just the overrides can be provided as well, using the <code
-                class="fg-orange"> -f</code> flag.
-            </li>
-          </ul>
-        </div>
+    <div class=" mu-margin">
+      The chart is installed, using the configuration provided in the <code class="fg-orange">values.yaml</code>
+      that was included in the chart.
+      <ul>
+        <li>
+          A single value - <code class="fg-orange">service.port</code> has been overridden using the <code
+            class="fg-orange"> --set</code> flag.
+        </li>
+        <li>
+          A separate yaml file containing just the overrides can be provided as well, using the <code
+            class="fg-orange"> -f</code> flag.
+        </li>
+      </ul>
     </div>
+  </div>
 </section>
 
 <section id="k8s-helm-using">
   <h2>Using Helm charts</h2>
-    <div class="mu-sequence mu-small">
-  <pre><code class="hljs sh">
+  <div class="mu-sequence mu-small">
+    <pre><code class="hljs sh">
     helm list 
             </code></pre>
-            <div class=" mu-margin">
-              The release is running nginx, but uses ClusterIP, meaning the service is only available within the cluster.
-              Can we test it ?
-            </div>
-            <pre><code class="hljs sh">
+    <div class=" mu-margin">
+      The release is running nginx, but uses ClusterIP, meaning the service is only available within the cluster.
+      Can we test it ?
+    </div>
+    <pre><code class="hljs sh">
 helm status mychart
             </code></pre>
-            <div class=" mu-margin">
-              Get the service IP and port
-            </div>
-            <pre><code class="hljs sh">
+    <div class=" mu-margin">
+      Get the service IP and port
+    </div>
+    <pre>
+      <code class="hljs sh">
 kubectl get svc
-            </code></pre>
-            </div>
+      </code>
+    </pre>
+  </div>
+  <aside class="notes">
+    <ul>
+      <p>How can we connect to this IP that is only valid within the cluster ? Perhaps if we had a shell that was inside
+        the cluster ? Running as another pod ?</p>
+      <pre><code class="hljs sh">
+kubectl run -i --rm --tty debug --image=busybox --restart=Never -- sh
+      </code></pre>
+      <p>We create a second pod, thats in the the same cluster, and is hence visible to the other pods. From within this
+        pod, the ClusterIPs are visible.</p>
+      <pre><code class="hljs sh">
+wget -O- [service_ip]:[service_port]
+      </code></pre>
 
+    </ul>
+  </aside>
 </section>
 
 
