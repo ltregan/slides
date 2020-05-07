@@ -21,10 +21,10 @@
       <li>
         Locate the <code class="fg-orange">EXTERNAL-IP</code> assigned to the ingress controller:
         <pre><code class="hljs text">kubectl get svc \
-  mushop-utils-nginx-ingress-controller \
+  mushop-utils-ingress-nginx-controller \
   --namespace mushop-utilities</code></pre>
         <pre><code class="hljs text">NAME                                    TYPE           CLUSTER-IP      EXTERNAL-IP       PORT(S)                      AGE
-mushop-utils-nginx-ingress-controller   LoadBalancer   10.96.150.230   129.xxx.xxx.xxx   80:30195/TCP,443:31059/TCP   1d</code></pre>
+mushop-utils-ingress-nginx-controller   LoadBalancer   10.96.150.230   129.xxx.xxx.xxx   80:30195/TCP,443:31059/TCP   1d</code></pre>
       </li>
       <li>
         Create an <code class="fg-orange">/etc/hosts</code> entry on your computer with this ip address:
