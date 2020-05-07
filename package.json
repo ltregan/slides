@@ -1,6 +1,6 @@
 {
   "name": "mushop-slides",
-  "version": "1.6.6",
+  "version": "1.6.7",
   "description": "The HTML Presentation Framework",
   "scripts": {
     "test": "grunt test",
