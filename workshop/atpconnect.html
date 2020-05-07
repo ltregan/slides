@@ -54,7 +54,7 @@ include "highlights/_atpapps.html"
           <div class="card col-1-2">
             <div class="mu-margin">Using the Cloud Shell:</div>
             <pre><code class="hljs bash">
-export compartment_id="_compartment_id_"
+export compartment_id="&lt;COMPARTMENT_ID&gt;"
                             </code></pre>
             <pre><code class="hljs bash">
 oci db autonomous-database create \
@@ -63,7 +63,7 @@ oci db autonomous-database create \
 --db-name=OCIWorkshop \
 --display-name=OCIWorkshop \
 --compartment-id=${compartment_id} \
---admin-password=_password_
+--admin-password= &lt;PASSWORD&gt;
                             </code></pre>
           </div>
         </div>
@@ -80,6 +80,8 @@ oci db autonomous-database create \
 
           To create the database you can use the console or the CLI. 
           Ensure that you export the compartment_id of the compartment you want to use for the database and change the other parameters as required.
+          In a shared environment, a single database will suffice. Individual attendees installing MuShop using the helm chart in their own namespaces
+           will get their own set of schemas in the shared database, prefixed with the k8s namespace. 
         </aside>
       </li>
 
@@ -114,10 +116,7 @@ oci db autonomous-database list \
             </code></pre>
 
             <pre><code class="hljs text">
-oci db autonomous-database generate-wallet \
---autonomous-database-id=_ATP_OCID_ \
---file=wallet.zip \
---password=_password_
+oci db autonomous-database generate-wallet --file=wallet.zip --autonomous-database-id= &lt;ATP_OCID&gt; --password=&lt;PASSWORD&gt;
             </code></pre>
           
             <pre><code class="hljs text">
